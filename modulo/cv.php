@@ -130,28 +130,52 @@ cv::$defcv['paso2_otros_estudios.nombre_curso'] = uiForm::$textoSimple;
 cv::$defcv['paso2_otros_estudios.fecha_finalizacion']= uiForm::$fecha;
 cv::$defcv['paso2_otros_estudios.fecha_finalizacion']['flags'] = 'Y';
 
-/* paso3_cargos */
-/*
-cv::$defcv['paso3_cargos.ID_paso3_empresa'];
-cv::$defcv['paso3_cargos.ID_puesto_desempenado'];
-cv::$defcv['paso3_cargos.puesto_desempenado_detalle'];
-cv::$defcv['paso3_cargos.actualmente'];
-cv::$defcv['paso3_cargos.fecha_inicio'];
-cv::$defcv['paso3_cargos.fecha_final'];
-cv::$defcv['paso3_cargos.funciones'];
-*/
 
 /* paso3_empresa */
-/*
-cv::$defcv['paso3_empresa.ID_pais'];
-cv::$defcv['paso3_empresa.ID_empresa'];
-cv::$defcv['paso3_empresa.ID_actividad_economica'];
-cv::$defcv['paso3_empresa.nombre_empresa'];
-*/
+
+cv::$defcv['paso3_empresa.ID_pais']['tipo'] = uiForm::$comboboxPaises;
+cv::$defcv['paso3_empresa.ID_pais']['texto'] = 'País:';
+
+cv::$defcv['paso3_empresa.nombre_empresa']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso3_empresa.nombre_empresa']['texto'] = 'Empresa:';
+
+cv::$defcv['paso3_empresa.ID_actividad_economica']['tipo'] = uiForm::$comboboxComplejo;
+cv::$defcv['paso3_empresa.ID_actividad_economica']['datos']['tabla'] = 'datos_actividad_economica';
+cv::$defcv['paso3_empresa.ID_actividad_economica']['datos']['clave'] = 'ID_actividad_economica';
+cv::$defcv['paso3_empresa.ID_actividad_economica']['datos']['valor'] = 'actividad_economica';
+cv::$defcv['paso3_empresa.ID_actividad_economica']['texto'] = 'Actividad económica de la empresa:';
+
+/* paso3_cargos */
+ 
+cv::$defcv['paso3_cargos.ID_puesto_desempenado']['tipo'] = uiForm::$comboboxComplejo;
+cv::$defcv['paso3_cargos.ID_puesto_desempenado']['datos']['tabla'] = 'datos_puesto_desempenado';
+cv::$defcv['paso3_cargos.ID_puesto_desempenado']['datos']['clave'] = 'ID_puesto_desempenado';
+cv::$defcv['paso3_cargos.ID_puesto_desempenado']['datos']['valor'] = 'puesto_desempenado';
+cv::$defcv['paso3_cargos.ID_puesto_desempenado']['texto'] = 'Puesto desempeñado';
+cv::$defcv['paso3_cargos.ID_puesto_desempenado']['subtexto'] = 'Seleccione en la siguiente lista el puesto que mas se asemeje.';
+
+cv::$defcv['paso3_cargos.puesto_desempenado_detalle']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso3_cargos.puesto_desempenado_detalle']['texto'] = 'Puesto exacto desempeñado';
+cv::$defcv['paso3_cargos.puesto_desempenado_detalle']['subtexto'] = 'Escriba acá el puesto exacto desempeñado';
+
+cv::$defcv['paso3_cargos.actualmente']['tipo'] = uiForm::$cheque;
+cv::$defcv['paso3_cargos.actualmente']['texto'] = 'Se desempeña actualmente en este puesto de trabajo';
+
+cv::$defcv['paso3_cargos.fecha_inicio']['tipo'] = uiForm::$fecha;
+cv::$defcv['paso3_cargos.fecha_inicio']['flags'] = 'YM';
+cv::$defcv['paso3_cargos.fecha_inicio']['texto'] = 'Fecha desde';
+
+cv::$defcv['paso3_cargos.fecha_final']['tipo'] = uiForm::$fecha;
+cv::$defcv['paso3_cargos.fecha_final']['flags'] = 'YM';
+cv::$defcv['paso3_cargos.fecha_final']['texto'] = 'Fecha hasta';
+
+cv::$defcv['paso3_cargos.funciones']['tipo'] = uiForm::$memo;
+cv::$defcv['paso3_cargos.funciones']['texto'] = 'Descripción de funciones desempeñadas en este cargo';
+
 /* paso4_expectativa_laboral */
 /*
 cv::$defcv['paso4_expectativa_laboral.ID_area_interes'];
-*/
+/*
 
 /* paso5_referencias */
 /*

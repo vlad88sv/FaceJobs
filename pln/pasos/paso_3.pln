@@ -1,13 +1,13 @@
 ==3:Ingresa toda la información que consideres importante acerca de tu experiencia laboral==
-paso3_cargos.ID_paso3_empresa
-paso3_cargos.ID_puesto_desempenado
-paso3_cargos.puesto_desempenado_detalle
-paso3_cargos.actualmente
-paso3_cargos.fecha_inicio
-paso3_cargos.fecha_final
-paso3_cargos.funciones
+[grupo:paso3_empresa]
+[campo]paso3_empresa.ID_pais[/campo]
+[campo]paso3_empresa.nombre_empresa[/campo]
+[campo]paso3_empresa.ID_actividad_economica[/campo]
 
-paso3_empresa.ID_pais
-paso3_empresa.ID_empresa
-paso3_empresa.ID_actividad_economica
-paso3_empresa.nombre_empresa
+[campo]paso3_cargos.ID_puesto_desempenado[/campo]
+[campo]paso3_cargos.puesto_desempenado_detalle[/campo]
+[campo]paso3_cargos.actualmente[/campo]
+[campo]paso3_cargos.fecha_inicio[/campo]
+[campo]paso3_cargos.fecha_final[/campo]
+[campo]paso3_cargos.funciones[/campo]
+[/grupo]
