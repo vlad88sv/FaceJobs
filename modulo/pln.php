@@ -120,7 +120,7 @@ class pln
                 break;
             
             case uiForm::$textoSimple:
-                $retorno .= '<input type="text" name="'.$campo.'" id="'.$campo.'" value="$$reemplazar::'.$campo.'$$" />';
+                $retorno .= '<input type="text" name="'.$campo.'" id="'.$campo.'" maxlength="'.(isset(cv::$defcv[$campo]['longitud']) ? cv::$defcv[$campo]['longitud'] : '500').'" value="$$reemplazar::'.$campo.'$$" />';
                 break;
             
             case uiForm::$comboboxSimple;
