@@ -2,7 +2,7 @@
 [grupo:paso1_personal]
 [titulo:1]Carga una foto para que forme parte de tu curriculum[/titulo]
 [campo]paso1_personal.foto_hash[/campo]
-[titulo]2:Llena los siguientes datos[/titulo]
+[titulo:2]Llena los siguientes datos[/titulo]
 [subtitulo]En el paso 8 podras seleccionar que datos personales prefieres que sean privados[/subtitulo]
 [campo]paso1_personal.nombres[/campo]
 [campo]paso1_personal.apellidos[/campo]

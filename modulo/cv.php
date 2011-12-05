@@ -17,7 +17,7 @@ cv::$defcv['paso1_personal.apellidos']['longitud'] = 250;
 cv::$defcv['paso1_personal.apellidos']['texto'] = 'Apellidos:';
 
 cv::$defcv['paso1_personal.estado_civil']['tipo'] = uiForm::$comboboxSimple;
-cv::$defcv['paso1_personal.estado_civil']['valores'] = array('casado','soltero','divorciado','viudo','union libre');
+cv::$defcv['paso1_personal.estado_civil']['valores'] = array('casado' => 'Casado','soltero' => 'Soltero','divorciado' => 'Divorciado','viudo' => 'Viudo','union libre' => 'Unión libre');
 cv::$defcv['paso1_personal.estado_civil']['texto'] = 'Estado civil:';
 
 cv::$defcv['paso1_personal.fecha_nacimiento']['tipo'] = uiForm::$fecha;
@@ -25,7 +25,7 @@ cv::$defcv['paso1_personal.fecha_nacimiento']['flags'] = 'DMY';
 cv::$defcv['paso1_personal.fecha_nacimiento']['texto'] = 'Fecha de nacimiento:';
 
 cv::$defcv['paso1_personal.sexo']['tipo'] = uiForm::$comboboxSimple;
-cv::$defcv['paso1_personal.sexo']['valores'] = array('masculino','femenino');
+cv::$defcv['paso1_personal.sexo']['valores'] = array('masculino' => 'Masculino','femenino' => 'Femenino');
 cv::$defcv['paso1_personal.sexo']['texto'] = 'Sexo:';
 
 cv::$defcv['paso1_personal.telefono_contacto']['tipo'] = uiForm::$telefono;
