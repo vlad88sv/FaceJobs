@@ -1,3 +1,9 @@
 ==4:Expectativa laboral==
-paso4_expectativa_laboral.ID_area_interes
-paso0.ID_expectativa_salarial
+[grupo:paso4_expectativa_laboral]
+[titulo:1]Ingresa las áreas de interés en que te gustaría desempeñarte. Puedes agregar un máximo de 10.[/titulo]
+[lazo]paso4_expectativa_laboral[/lazo]
+[/grupo]
+[grupo:expectativa_salarial]
+[titulo:2]Selecciona el rango de tu expectativa salarial[/titulo]
+[campo]paso0.ID_expectativa_salarial[/campo]
+[/grupo]
