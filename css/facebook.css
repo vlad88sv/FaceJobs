@@ -1,0 +1,10 @@
+html,body{margin:0;padding:0;border:0;width:100%;height:100%;}
+body{background:#fff;font-size:100%;font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-size:13px;text-align:center;margin:auto;}
+
+#cabecera{height:96px;text-align:left;position:relative;}
+#bandera{position:absolute;right:5px;top:5px;}
+#bandera #imagen{text-align:right;}
+#cabera_pais{color:#535353;font-style:italic;text-align:left;}
+#contenedor{width:760px;margin:auto;}
+
+.boton{display: block; text-decoration: none; font-size: 16px; color: #FFF; width: 181px; height: 32px; line-height: 32px; background: url('../img/fondo_boton.gif') #720202 no-repeat;}

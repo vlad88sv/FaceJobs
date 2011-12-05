@@ -1,0 +1,24 @@
+ErrorDocument 404 /index.php?peticion=error
+
+RewriteEngine on
+RewriteBase /
+
+<ifModule mod_gzip.c>
+  mod_gzip_on Yes
+  mod_gzip_dechunk Yes
+</ifModule>
+<ifModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 2 year"
+</ifModule>
+<ifModule mod_headers.c>
+    Header set Cache-Control "private"
+    Header unset Last-Modified
+    Header unset ETag
+</ifModule>
+FileETag None
+
+RewriteEngine on
+RewriteRule ^(paypal|ajax|gotofacebook|carga)$ $1.php [L,QSA]
+
+RewriteRule ^(inicio|buscar|mensajes|empresas|estadisticas|faqs|ayuda|paso)\.html$ index.php?peticion=$1 [L,QSA]

@@ -1,0 +1,28 @@
+==2:Ingresa toda la información que consideres importante acerca de tu educación==
+[grupo:paso2_educacion_secundaria]
+[titulo:1]Educación secundaria[/titulo]
+[campo]paso2_educacion_secundaria.ID_pais[/campo]
+[campo]paso2_educacion_secundaria.institucion[/campo]
+[campo]paso2_educacion_secundaria.ano_finalizacion[/campo]
+[campo]paso2_educacion_secundaria.incompleto[/campo]
+[campo]paso2_educacion_secundaria.titulo[/campo]
+[/grupo]
+
+[grupo:paso2_educacion_superior]
+[titulo:2]Educación superior[/titulo]
+[subtitulo]Ingresa todos tus estudios de Educación Superior pulsando en el botón agregar cada ves que desees.[/subtitulo]
+[lazo]paso2_educacion_superior[/lazo]
+[/grupo]
+
+[grupo:paso2_idiomas]
+[titulo:3]Idiomas[/titulo]
+[subtitulo]Ingresa todos los idiomas de los que tengas algún conocimiento, pulsando el botón agregar cada ves que desees.[/subtitulo]
+[campo]paso0.ID_idioma_nativo[/campo]
+[lazo]paso2_idiomas[/lazo]
+[/grupo]
+
+[grupo:paso2_otros_estudios]
+[titulo:4]Otros estudios[/titulo]
+[subtitulo]Ingresa acá otros cursos o estudios complementarios que no sean de educación secundaria ni de educación superior. Ej. talleres, seminarios, congresos, simposiums, diplomados. Puedes agregar tantos como desees presionando el botón Agregar[/subtitulo]
+[lazo]paso2_otros_estudios[/lazo]
+[/grupo]

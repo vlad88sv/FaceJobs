@@ -1,0 +1,25 @@
+#contenedor_intro_parte_1 {width:100%;table-layout:fixed;border-collapse:collapse;}
+#intro_parte_1a {width:50%;}
+#intro_parte_1b {width:50%;text-align:justify;color:#535353;font-size:15px;font-weight:lighter;}
+#contenedor_intro_parte_1,#contenedor_intro_parte_2 td {vertical-align:top;}
+
+#contenedor_intro_parte_1 .registros td img {vertical-align:middle;}
+
+.registrate{color:#591b1a;text-decoration:none;font-size:16px;display:block;}
+
+h1 {font-size:12px;font-weight:bold;text-align:left;}
+#contenedor_intro_parte_2 ul {margin:0;padding:0;}
+#contenedor_intro_parte_2 ul li {text-align: left;list-style-type: none;margin-top:2px;}
+#contenedor_intro_parte_2 ul li:before {content: "-";}
+#contenedor_intro_parte_2 {width:100%;}
+
+#contenedor_intro_parte_2 a {text-decoration: underline;display:block;text-align:right;}
+
+#beneficios div {width:404px;background:url("../img/fondo_beneficios.gif") repeat-y #882a29;color:#FFF;border-radius:10px;padding:5px;}
+#beneficios a {color:#FFF;}
+
+#FAQ {width:293px;}
+#FAQ div {background:url("../img/fondo_FAQ.gif") repeat-y #abaaaa;color:#262626;padding:1px;margin:2px;border-radius:5px;}
+#FAQ a {color:#262626;}
+
+#terminos_y_condiciones{background-color:#ccc;color:#111;margin:0 25px; height:300px;overflow-y: auto;padding: 1em;}

@@ -1,0 +1,20 @@
+#nav{display: inline-block;top:0;width:100%;font-size:12px;height:20px;line-height:20px;z-index:597;padding:0;text-align:justify;background:#882a29 url('../img/menu_fondo.gif') repeat-x;}
+#nav li{float:left;height:20px;line-height:normal;color:#FFF;white-space:nowrap;}
+#nav li.hover,#nav li:hover{cursor:default;position:relative;z-index:599;}
+#nav li a{color:#FFF;text-decoration:none;display:block;padding:5px 10px;font-weight:bold;}
+#nav li a:hover{color:#DDD;}
+#nav li.ultimo{border-right:4px solid #FFF;}
+#nav li.lidestacado{font-weight:bolder;}
+#nav li.busqueda{float:right;}
+#nav li.busqueda form{line-height:29px;}
+
+#nav li ul{background-color:#FFF;border:1px solid #999;padding:7px 0;left:0;position:absolute;top:100%;visibility:hidden;width:160px;z-index:598;}
+#nav li:hover ul, #nav li.hover ul{visibility:visible;}
+#nav li ul li{border-bottom:1px dashed #CCC;border-top:1px dashed #CCC;font-family:arial;font-size:9pt;font-style:normal;font-variant:normal;font-weight:400;display:block;float:none;}
+#nav li ul li:hover,#nav li ul li.hover{background-color:#9ed08b;}
+#nav li ul li a{color:#666;width:100%;padding-left:1em;}
+#nav li ul li a:hover{color:#639;}
+
+#nav,#nav li ul{list-style:none !important;margin:0;border:none;}
+#nav li.hover,#nav li:hover,.lidestacado{background-color:#EC454E;}
+

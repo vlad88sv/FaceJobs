@@ -1,0 +1,23 @@
+#pasos {width: 100%;background-color: #FFF;float: left;clear: both;margin-bottom: 35px; margin-top: 17px;}
+.paso {float: left;margin-right: 20px;}
+.paso .titulo {color: #111;width: 100%;text-align: center;}
+.paso .numero {background: url('../img/fondo_paso.gif') no-repeat center; width:40px; height:40px; line-height: 40px; width: 64px; text-align: center;}
+.paso .numero a {color:#5b0504; font-size: 20px; text-decoration: none; display: block;}
+.paso .resaltado {background-image: url('../img/fondo_paso_resaltado.gif');}
+.paso .texto {color: #666; width: 64px; height: 34px;line-height: 90%;}
+.paso .porcentaje {color:#5b0504; width: 50px; height: 16px; border: 1px solid #111;margin: 0 auto;}
+.paso .porcentaje .barra {background-color: #ccc;float: left; height:16px;}
+.paso .porcentaje .valor {float: left;text-align: center;width: 50px;}
+#contenido {border:2px #CCC solid; border-radius:10px;color:#666;padding-left:50px;padding-right:12px;padding-top:15px;padding-bottom:15px;}
+#TituloGeneral{text-align:left;margin-left:15px;}
+.grupo {border-bottom:1px #ccc solid;padding-bottom:15px;margin-bottom:15px;text-align: left;}
+.titulo {color:#666;text-align:left;font-size:14px;}
+.numeroTitulo {background-color:#5b0504;color:#FFF;padding:2px 4px;}
+.subtitulo {padding-left: 25px; color:#5b0504;}
+.tituloCampo:before {content:"►";font-size:14px;color:#5b0504;}
+.tituloCampo{padding-left:10px;}
+.campo {}
+.vista {}
+.lazo {}
+.lazoCampos {border:1px #CCC solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:15px;padding-bottom:15px;}
+.lazoVista {border:1px #aaa solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:15px;padding-bottom:15px;background-color:#EEE;margin-bottom: 5px;}
