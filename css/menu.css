@@ -1,4 +1,4 @@
-#nav{display: inline-block;top:0;width:100%;font-size:12px;height:20px;line-height:20px;z-index:597;padding:0;text-align:justify;background:#882a29 url('../img/menu_fondo.gif') repeat-x;}
+#nav{display: inline-block;top:0;width:100%;font-size:11px;height:20px;line-height:20px;z-index:597;padding:0;text-align:justify;background:#882a29 url('../img/menu_fondo.gif') repeat-x;}
 #nav li{float:left;height:20px;line-height:normal;color:#FFF;white-space:nowrap;}
 #nav li.hover,#nav li:hover{cursor:default;position:relative;z-index:599;}
 #nav li a{color:#FFF;text-decoration:none;display:block;padding:5px 10px;font-weight:bold;}
