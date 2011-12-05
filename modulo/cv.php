@@ -151,31 +151,35 @@ cv::$defcv['paso3_cargos.ID_puesto_desempenado']['tipo'] = uiForm::$comboboxComp
 cv::$defcv['paso3_cargos.ID_puesto_desempenado']['datos']['tabla'] = 'datos_puesto_desempenado';
 cv::$defcv['paso3_cargos.ID_puesto_desempenado']['datos']['clave'] = 'ID_puesto_desempenado';
 cv::$defcv['paso3_cargos.ID_puesto_desempenado']['datos']['valor'] = 'puesto_desempenado';
-cv::$defcv['paso3_cargos.ID_puesto_desempenado']['texto'] = 'Puesto desempeñado';
+cv::$defcv['paso3_cargos.ID_puesto_desempenado']['texto'] = 'Puesto desempeñado:';
 cv::$defcv['paso3_cargos.ID_puesto_desempenado']['subtexto'] = 'Seleccione en la siguiente lista el puesto que mas se asemeje.';
 
 cv::$defcv['paso3_cargos.puesto_desempenado_detalle']['tipo'] = uiForm::$textoSimple;
-cv::$defcv['paso3_cargos.puesto_desempenado_detalle']['texto'] = 'Puesto exacto desempeñado';
+cv::$defcv['paso3_cargos.puesto_desempenado_detalle']['texto'] = 'Puesto exacto desempeñado:';
 cv::$defcv['paso3_cargos.puesto_desempenado_detalle']['subtexto'] = 'Escriba acá el puesto exacto desempeñado';
 
 cv::$defcv['paso3_cargos.actualmente']['tipo'] = uiForm::$cheque;
-cv::$defcv['paso3_cargos.actualmente']['texto'] = 'Se desempeña actualmente en este puesto de trabajo';
+cv::$defcv['paso3_cargos.actualmente']['texto'] = 'Se desempeña actualmente en este puesto de trabajo:';
 
 cv::$defcv['paso3_cargos.fecha_inicio']['tipo'] = uiForm::$fecha;
 cv::$defcv['paso3_cargos.fecha_inicio']['flags'] = 'YM';
-cv::$defcv['paso3_cargos.fecha_inicio']['texto'] = 'Fecha desde';
+cv::$defcv['paso3_cargos.fecha_inicio']['texto'] = 'Fecha desde:';
 
 cv::$defcv['paso3_cargos.fecha_final']['tipo'] = uiForm::$fecha;
 cv::$defcv['paso3_cargos.fecha_final']['flags'] = 'YM';
-cv::$defcv['paso3_cargos.fecha_final']['texto'] = 'Fecha hasta';
+cv::$defcv['paso3_cargos.fecha_final']['texto'] = 'Fecha hasta:';
 
 cv::$defcv['paso3_cargos.funciones']['tipo'] = uiForm::$memo;
-cv::$defcv['paso3_cargos.funciones']['texto'] = 'Descripción de funciones desempeñadas en este cargo';
+cv::$defcv['paso3_cargos.funciones']['texto'] = 'Descripción de funciones desempeñadas en este cargo:';
 
 /* paso4_expectativa_laboral */
-/*
-cv::$defcv['paso4_expectativa_laboral.ID_area_interes'];
-/*
+
+cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['tipo'] = uiForm::$comboboxComplejo;
+cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['datos']['tabla'] = 'datos_area_interes';
+cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['datos']['clave'] = 'ID_area_interes';
+cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['datos']['valor'] = 'area_interes';
+cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['texto'] = 'Área de interés:';
+
 
 /* paso5_referencias */
 /*
@@ -203,7 +207,9 @@ cv::$defcv['paso0.ID_idioma_nativo']['datos']['tabla'] = 'datos_idiomas';
 cv::$defcv['paso0.ID_idioma_nativo']['datos']['clave'] = 'ID_idioma';
 cv::$defcv['paso0.ID_idioma_nativo']['datos']['valor'] = 'idioma';
 
-/*cv::$defcv['paso0.ID_expectativa_salarial'];*/
+cv::$defcv['paso0.ID_expectativa_salarial']['tipo'] = uiForm::$comboboxSimple;
+cv::$defcv['paso0.ID_expectativa_salarial']['texto'] = 'Selecciona el rango de tu expectativa salarial';
+cv::$defcv['paso0.ID_expectativa_salarial']['valores'] = array(0 => 'USD \$100 - USD \$250','USD \$250 - USD \$500','USD \$500 - USD \$750','USD \$750 - USD \$1000','USD \$1000 - USD \$1500','USD \$1500 - USD \$2000','USD \$2000 - USD \$3000','> USD \$3000');
 /*cv::$defcv['paso0.video_hash'];*/
 
 cv::$deflazo['paso2_educacion_superior']['vista']['sql'] = '';
@@ -222,6 +228,8 @@ cv::$deflazo['paso2_educacion_superior']['campos'][] = 'paso2_educacion_superior
 cv::$deflazo['paso2_educacion_superior']['campos'][] = 'paso2_educacion_superior.fecha_desde';
 cv::$deflazo['paso2_educacion_superior']['campos'][] = 'paso2_educacion_superior.fecha_hasta';
 
+
+cv::$deflazo['paso4_expectativa_laboral']['campos'][] = 'paso4_expectativa_laboral.ID_area_interes';
 class cv
 {
     public static $defcv = array();
