@@ -12,6 +12,7 @@ class uiForm
     public static $sino = 8;
     public static $cheque = 9;
     public static $radio = 10;
+    public static $memo = 11;
 }
 
 class ui

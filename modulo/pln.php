@@ -164,6 +164,10 @@ class pln
             case uiForm::$radio:
                 $retorno .= '<input type="radio" name="'.$campo.'" id="'.$campo.'" selected="$$reemplazar::'.$campo.'$$" /> Opciones';
                 break;
+            
+            case uiForm::$memo:
+                $retorno .= '<textarea name="'.$campo.'" id="'.$campo.'">$$reemplazar::'.$campo.'$$"></textarea>';
+                break;
         }
         
         if(!isset(cv::$defcv[$campo]['enLinea']))
