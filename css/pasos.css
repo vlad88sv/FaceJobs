@@ -21,7 +21,7 @@
 .vista {}
 .lazo {}
 .lazoCampos {border:1px #CCC solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:15px;padding-bottom:15px;}
-.lazoVista {border:1px #aaa solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:15px;padding-bottom:15px;background-color:#EEE;margin-bottom: 5px;}
+.lazoVista {border:1px #aaa solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:15px;padding-bottom:15px;background-color:#EEE;margin-bottom: 5px;margin-top: 10px;}
 
 input[type=text] {border-radius: 10px;padding: 1px;background-color: #DDD; width: 250px; }
 #paso3_cargos_funciones{width: 500px; height: 300px;margin: auto;display: block;border-radius: 10px;}
