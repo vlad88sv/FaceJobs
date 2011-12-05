@@ -124,7 +124,13 @@ class pln
                 break;
             
             case uiForm::$comboboxSimple;
-                $retorno .= '<select name="'.$campo.'" id="'.$campo.'"></select>';
+                $options = '';
+                if(is_array(cv::$defcv[$campo]['valores']))
+                {
+                    foreach (cv::$defcv[$campo]['valores'] as $valor => $texto)
+                        $options .= '<option value="'.$valor.'">'.$texto.'</option>'."\n";
+                }
+                $retorno .= '<select name="'.$campo.'" id="'.$campo.'">'."\n".$options.'</select>';
                 break;
                 
             case uiForm::$comboboxComplejo:
