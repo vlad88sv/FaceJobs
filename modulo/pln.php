@@ -105,6 +105,9 @@ class pln
         if (!isset(cv::$defcv[$campo]))
             return false;
         
+        
+        $campoEsc = preg_replace('/\./','_',$campo);
+        
         if(isset(cv::$defcv[$campo]['tipo']))
            $tipo = cv::$defcv[$campo]['tipo'];
         else
@@ -116,11 +119,11 @@ class pln
         switch ($tipo)
         {
             case uiForm::$cargarImagenOWebCam:
-                $retorno .= '<div><img src="$$reemplazar::'.$campo.'$$" /><input type="file" name="'.$campo.'" id="'.$campo.'" /></div>';
+                $retorno .= '<div><img src="$$reemplazar::'.$campoEsc.'$$" /><input type="file" name="'.$campoEsc.'" id="'.$campoEsc.'" /></div>';
                 break;
             
             case uiForm::$textoSimple:
-                $retorno .= '<input type="text" name="'.$campo.'" id="'.$campo.'" maxlength="'.(isset(cv::$defcv[$campo]['longitud']) ? cv::$defcv[$campo]['longitud'] : '500').'" value="$$reemplazar::'.$campo.'$$" />';
+                $retorno .= '<input type="text" name="'.$campoEsc.'" id="'.$campoEsc.'" maxlength="'.(isset(cv::$defcv[$campo]['longitud']) ? cv::$defcv[$campo]['longitud'] : '500').'" value="$$reemplazar::'.$campoEsc.'$$" />';
                 break;
             
             case uiForm::$comboboxSimple;
@@ -130,43 +133,43 @@ class pln
                     foreach (cv::$defcv[$campo]['valores'] as $valor => $texto)
                         $options .= '<option value="'.$valor.'">'.$texto.'</option>'."\n";
                 }
-                $retorno .= '<select name="'.$campo.'" id="'.$campo.'">'."\n".$options.'</select>';
+                $retorno .= '<select name="'.$campoEsc.'" id="'.$campoEsc.'">'."\n".$options.'</select>';
                 break;
                 
             case uiForm::$comboboxComplejo:
-                $retorno .= '<select name="'.$campo.'" id="'.$campo.'"></select>';
+                $retorno .= '<select name="'.$campoEsc.'" id="'.$campoEsc.'"></select>';
                 break;
 
             case uiForm::$comboboxPaises:
-                $retorno .= '<select name="'.$campo.'" id="'.$campo.'"></select>';
+                $retorno .= '<select name="'.$campoEsc.'" id="'.$campoEsc.'"></select>';
                 break;
 
             case uiForm::$fecha:
-                $retorno .= '<input type="text" name="'.$campo.'" id="'.$campo.'" value="$$reemplazar::'.$campo.'$$" />';
+                $retorno .= '<input type="text" name="'.$campoEsc.'" id="'.$campoEsc.'" value="$$reemplazar::'.$campoEsc.'$$" />';
                 break;
 
             case uiForm::$telefono:
-                $retorno .= '<input type="text" name="'.$campo.'" id="'.$campo.'" value="$$reemplazar::'.$campo.'$$" />';
+                $retorno .= '<input type="text" name="'.$campoEsc.'" id="'.$campoEsc.'" value="$$reemplazar::'.$campoEsc.'$$" />';
                 break;
                 
             case uiForm::$correo:
-                $retorno .= '<input type="text" name="'.$campo.'" id="'.$campo.'" value="$$reemplazar::'.$campo.'$$" />';
+                $retorno .= '<input type="text" name="'.$campoEsc.'" id="'.$campoEsc.'" value="$$reemplazar::'.$campoEsc.'$$" />';
                 break;
 
             case uiForm::$sino:
-                $retorno .= '<input type="radio" name="'.$campo.'" id="'.$campo.'" selected="$$reemplazar::'.$campo.'$$" /> Si <input type="radio" name="'.$campo.'" id="'.$campo.'" selected="$$reemplazar::'.$campo.'$$" /> No ';
+                $retorno .= '<input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" selected="$$reemplazar::'.$campoEsc.'$$" /> Si <input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" selected="$$reemplazar::'.$campoEsc.'$$" /> No ';
                 break;
             
             case uiForm::$cheque:
-                $retorno .= '<input type="checkbox" name="'.$campo.'" id="'.$campo.'" checked="$$reemplazar::'.$campo.'$$" />';
+                $retorno .= '<input type="checkbox" name="'.$campoEsc.'" id="'.$campoEsc.'" checked="$$reemplazar::'.$campoEsc.'$$" />';
                 break;
             
             case uiForm::$radio:
-                $retorno .= '<input type="radio" name="'.$campo.'" id="'.$campo.'" selected="$$reemplazar::'.$campo.'$$" /> Opciones';
+                $retorno .= '<input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" selected="$$reemplazar::'.$campoEsc.'$$" /> Opciones';
                 break;
             
             case uiForm::$memo:
-                $retorno .= '<textarea name="'.$campo.'" id="'.$campo.'">$$reemplazar::'.$campo.'$$"></textarea>';
+                $retorno .= '<br /><textarea name="'.$campoEsc.'" id="'.$campoEsc.'">$$reemplazar::'.$campoEsc.'$$"></textarea>';
                 break;
         }
 
