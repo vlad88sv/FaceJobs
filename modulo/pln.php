@@ -169,6 +169,9 @@ class pln
                 $retorno .= '<textarea name="'.$campo.'" id="'.$campo.'">$$reemplazar::'.$campo.'$$"></textarea>';
                 break;
         }
+
+        if(isset(cv::$defcv[$campo]['subtexto']))
+            $retorno .= '<br /><span class="subtituloCampo">'.cv::$defcv[$campo]['subtexto'].'</span>';
         
         if(!isset(cv::$defcv[$campo]['enLinea']))
             $retorno .= '<br />'."\n";
