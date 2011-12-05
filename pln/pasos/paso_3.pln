@@ -1,5 +1,6 @@
 ==3:Ingresa toda la información que consideres importante acerca de tu experiencia laboral==
 [grupo:paso3_empresa]
+[titulo:1]Ingresa todas tus experiencias laborales[/titulo]
 [campo]paso3_empresa.ID_pais[/campo]
 [campo]paso3_empresa.nombre_empresa[/campo]
 [campo]paso3_empresa.ID_actividad_economica[/campo]
