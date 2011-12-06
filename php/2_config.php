@@ -53,6 +53,9 @@ general::$config['db_clave'] = 'face.jobs';
 general::$config['db_bd'] = 'face.jobs';
 general::$config['db_host'] = '127.0.0.1';
 
+/* Criptografía */
+general::$config['salt'] = 'vlad88sv';
+
 define('PROY_NOMBRE','FaceJobs');
 define('PROY_URL',preg_replace(array("/\/?$/","/www./"),"","http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']))."/");
 define('PROY_URL_AMIGABLE',"www.".preg_replace(array("/\/?$/","/www./"),"",$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']))."/");
