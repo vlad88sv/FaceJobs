@@ -1,8 +1,12 @@
 <?php
 class usuario
 {
-    public static $tipoVisitante = 0;
-    public static $info = array('tipo' => 0);
+    public static $tipoVisitante = 'visitante';
+    public static $tipoCandidato = 'candidato';
+    public static $tipoEmpresa = 'empresa';
+    public static $tipoAdministrador = 'administrador';
+    
+    public static $info = array('tipo' => 'visitante');
 
     public static function guardar()
     {
