@@ -17,6 +17,10 @@ $pasos[8]['titulo'] = 'Privacidad';
 $pasos[8]['porcentaje'] = 0;
 $pasos[9]['titulo'] = 'Visualización';
 $pasos[9]['porcentaje'] = 0;
+
+$p = @$_GET['p'];
+if (!is_numeric($p) || $p < 1 || $p > 9)
+    $p = 1;
 ?>
 <div id="pasos">
     <?php
@@ -28,7 +32,7 @@ $pasos[9]['porcentaje'] = 0;
             echo 'PASO';
             echo '</div>';
             
-            echo '<div class="numero '.(@$_GET['p'] == $paso ? 'resaltado' : '').'">';
+            echo '<div class="numero '.($paso == $p ? 'resaltado' : '').'">';
                 echo '<a href="'.PROY_URL.'paso.html?p='.$paso.'">'.$paso.'</a>';
             echo '</div>';
             
