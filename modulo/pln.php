@@ -2,6 +2,7 @@
 class pln
 {
     public $pln;
+    public $campos = array();
     public function procesar($plantilla)
     {
         /* Plan:
@@ -24,12 +25,15 @@ class pln
         $this->procesarLazos();
         $this->procesarCampos();
         
+        // Finalmente reemplazamos los valores con los del usuario
+        $this->reemplazarValores();
     }
     
     // ==0:ABC==
     private function procesarTituloGeneral()
     {
         $this->pln = preg_replace('/==([0-9]*?)\:(.*)==(.*)/s','<div id="TituloGeneral"><span class="numeroGeneral">Paso $1</span> $2</div>'."\n".'<div id="contenido">'."\n".'$3'."\n".'</div> <!-- Contenido !-->'."\n",$this->pln);
+        $this->pln = preg_replace('/==(.*)==(.*)/s','<div id="TituloGeneral">$1</div>'."\n".'<div id="contenido">'."\n".'$2'."\n".'</div> <!-- Contenido !-->'."\n",$this->pln);
     }
     
     private function procesarGrupos()
@@ -41,7 +45,6 @@ class pln
     {
         $this->pln = preg_replace('/\[titulo\:([0-9]*?)](.*?)\[\/titulo\]/s','<div class="titulo"><span class="numeroTitulo">$1</span> $2</div>',$this->pln);
         $this->pln = preg_replace('/\[titulo](.*?)\[\/titulo\]/s','<div class="titulo">$1</div>',$this->pln);
-        
     }
     
     private function procesarSubTitulos()
@@ -70,7 +73,7 @@ class pln
             $campos = array();
             foreach(cv::$deflazo[$lazo]['campos'] as $campo)
             {
-                $retornoCampos .= $this->procesarCampo($campo);
+                $retornoCampos .= $this->procesarCampo($campo,true);
             }
             
             $retornoVista = '<div class="lazoVista">'.$retornoVista.'</div>';            
@@ -100,12 +103,11 @@ class pln
         }
     }
     
-    private function procesarCampo($campo)
+    private function procesarCampo($campo,$esLazo = false)
     {
         $retorno = "";
         if (!isset(cv::$defcv[$campo]))
             return false;
-        
         
         $campoEsc = preg_replace('/\./','_',$campo);
         
@@ -158,11 +160,11 @@ class pln
                 break;
 
             case uiForm::$sino:
-                $retorno .= '<input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" selected="$$reemplazar::'.$campoEsc.'$$" /> Si <input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" selected="$$reemplazar::'.$campoEsc.'$$" /> No ';
+                $retorno .= '<input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" /> Si <input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" selected="$$reemplazar::'.$campoEsc.'$$" /> No ';
                 break;
             
             case uiForm::$cheque:
-                $retorno .= '<input type="checkbox" name="'.$campoEsc.'" id="'.$campoEsc.'" checked="$$reemplazar::'.$campoEsc.'$$" />';
+                $retorno .= '<input type="checkbox" name="'.$campoEsc.'" id="'.$campoEsc.'" />';
                 break;
             
             case uiForm::$radio:
@@ -175,19 +177,98 @@ class pln
                 break;
 
             case uiForm::$memo:
-                $retorno .= '<br /><textarea name="'.$campoEsc.'" id="'.$campoEsc.'">$$reemplazar::'.$campoEsc.'$$"></textarea>';
+                $retorno .= '<br /><textarea name="'.$campoEsc.'" id="'.$campoEsc.'">$$reemplazar::'.$campoEsc.'$$</textarea>';
                 break;
         }
-
+        
         if(isset(cv::$defcv[$campo]['subtexto']))
             $retorno .= '<br /><span class="subtituloCampo">'.cv::$defcv[$campo]['subtexto'].'</span>';
         
         if(!isset(cv::$defcv[$campo]['enLinea']))
             $retorno .= '<br />'."\n";
+            
         
-        return $retorno;    
+        if(!$esLazo)
+        {
+            $partes = null;
+            
+            if (preg_match('/(.*)\.(.*)/',$campo,$partes))
+            {
+                $this->campos[$partes[1]][]= $partes[2];
+            }
+        }
+        return $retorno;
     }    
     
+    private function reemplazarValores()
+    {
+        
+        foreach($this->campos as $tabla => $campos)
+        {
+           $c = 'SELECT '.join(', ',$this->campos[$tabla]).' FROM ' . $tabla.' WHERE ID_cuenta='.usuario::$info['ID_cuenta'];
+           
+           //echo $c.'<br />';
+           
+           $r = db::consultar($c);           
+           if (!$r) continue;
+           
+           $f = mysql_fetch_assoc($r);
+           if (!$f) continue;
+        
+           foreach($campos as $campo)
+           {
+            $this->EstablecerCampo($tabla.'.'.$campo,$f[$campo]);
+           }
+        }
+        
+        $this->pln = preg_replace('/\$\$reemplazar\:\:.*?\$\$/','',$this->pln);
+    }    
+    
+    private function EstablecerCampo($campo,$valor)
+    {
+        
+        if (!isset(cv::$defcv[$campo]))
+            return false;
+     
+        $campoEsc = preg_replace('/\./','_',$campo);
+     
+        if(isset(cv::$defcv[$campo]['tipo']))
+           $tipo = cv::$defcv[$campo]['tipo'];
+        else
+            $tipo = uiForm::$textoSimple;
+        
+        switch ($tipo)
+        {
+            
+            case uiForm::$cargarImagenOWebCam:
+            case uiForm::$textoSimple:
+            case uiForm::$correo:
+            case uiForm::$memo:
+                $this->pln = preg_replace('/\$\$reemplazar\:\:'.$campoEsc.'\$\$/',$valor,$this->pln);
+                break;
+            
+            case uiForm::$comboboxSimple;
+
+            case uiForm::$comboboxComplejo:
+            case uiForm::$comboboxPaises:
+                break;
+
+            case uiForm::$fecha:
+                break;
+
+            case uiForm::$telefono:
+                break;
+
+            case uiForm::$sino:
+                break;
+            
+            case uiForm::$cheque:
+                break;
+            
+            case uiForm::$radio:
+                break;
+        }
+    }    
 }
 
 ?>
