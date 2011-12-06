@@ -27,8 +27,8 @@ public static function iniciar_sesion()
       $datos['link'] = $cache['link'];
       $datos['email'] = $cache['email'];
       $datos['fecha_registro'] = time();
+      $datos['tipo'] = usuario::$tipoCandidato;
       db::insertar('cuentas', $datos);
-      error_log('nuevo usuario');
     }
     usuario::cargar($user);
     self::$iniciado = true;
