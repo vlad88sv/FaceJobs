@@ -58,7 +58,8 @@ class pln
         {
             if (!isset(cv::$deflazo[$lazo]))
                 continue;
-
+            
+            $retorno =  "";
             $retornoCampos = "";
             $retornoVista = "";
             
