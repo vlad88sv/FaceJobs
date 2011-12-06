@@ -20,6 +20,7 @@ else
         case 'inicio':
         case '':
             body::agregarAlContenido ('inicio',true);
+            break;
         case 'error':        
         default:
             body::agregarAlContenido ('404',true);    
