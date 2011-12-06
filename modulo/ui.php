@@ -22,4 +22,56 @@ class ui
         return 'img/'.$archivo;
     }
 }
+
+class imagenes
+{
+    public static function crear_imagen($origen,$destino,$ancho,$alto)
+    {    
+        if(@($ancho*$alto) > 562500)
+            die('La imagen solicitada excede el límite de este servicio');
+    
+        $origen = 'pool/img/'.$origen;
+        $destino = 'pool/img/m/'.$destino;
+        
+        if (!file_exists($destino))
+        {
+           general::requerirModulo(array('phmagick'));
+           $phMagick = new phMagick ($origen, $destino);
+           $phMagick->resize($ancho,$alto,false);
+        }
+    
+        header("Accept-Ranges: bytes",true);
+        header("Content-Length: ".filesize($destino),true);
+        header("Keep-Alive: timeout=15, max=100",true);
+        header("Connection: Keep-Alive",true);
+        header("Content-Type: image/jpeg",true);
+        
+        readfile($destino);
+    }
+  
+    public static function crop_imagen($origen,$destino,$ancho)
+    {    
+        if(@($ancho*$alto) > 562500)
+            die('La imagen solicitada excede el límite de este servicio');
+    
+        $origen = 'pool/img/'.$origen;
+        $destino = 'pool/img/c/'.$destino;
+        
+        if (!file_exists($destino))
+        {
+           general::requerirModulo(array('phmagick'));
+           $phMagick = new phMagick ($origen, $destino);
+           $phMagick->resizeExactly($ancho,$ancho);
+        }
+    
+        header("Accept-Ranges: bytes",true);
+        header("Content-Length: ".filesize($destino),true);
+        header("Keep-Alive: timeout=15, max=100",true);
+        header("Connection: Keep-Alive",true);
+        header("Content-Type: image/jpeg",true);
+    
+        readfile($destino);
+        
+    }
+}
 ?>
