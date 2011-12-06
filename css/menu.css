@@ -3,10 +3,7 @@
 #nav li.hover,#nav li:hover{cursor:default;position:relative;z-index:599;}
 #nav li a{color:#FFF;text-decoration:none;display:block;padding:5px 10px;font-weight:bold;}
 #nav li a:hover{color:#DDD;}
-#nav li.ultimo{border-right:4px solid #FFF;}
-#nav li.lidestacado{font-weight:bolder;}
-#nav li.busqueda{float:right;}
-#nav li.busqueda form{line-height:29px;}
+#nav li.seleccionado a{font-size:12px;}
 
 #nav li ul{background-color:#FFF;border:1px solid #999;padding:7px 0;left:0;position:absolute;top:100%;visibility:hidden;width:160px;z-index:598;}
 #nav li:hover ul, #nav li.hover ul{visibility:visible;}
