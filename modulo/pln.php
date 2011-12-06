@@ -166,7 +166,15 @@ class pln
                 break;
             
             case uiForm::$radio:
-                $retorno .= '<input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" selected="$$reemplazar::'.$campoEsc.'$$" /> Opciones';
+                $options = '';
+                if(is_array(cv::$defcv[$campo]['valores']))
+                {
+                    foreach (cv::$defcv[$campo]['valores'] as $valor => $texto)
+                        $retorno .= '<input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" /> ' . $texto;
+                }
+                break;
+
+                
                 break;
             
             case uiForm::$memo:
