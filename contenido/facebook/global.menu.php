@@ -32,7 +32,6 @@ $menu['faqs']['titulo'] = 'Preguntas frecuentes';
 <?php
 foreach ($menu as $enlace => $datos)
 {
-    print_r($datos);
     if (empty($datos['nivel']) || !is_array($datos['nivel']) || in_array(usuario::$info['tipo'],$datos['nivel']))
         echo '<li'.(@$_GET['peticion'] == $enlace ? ' class="seleccionado"' : '').'><a id="menu_'.$enlace.'"  title="'._($datos['titulo']).'" href="'.PROY_URL.$enlace.'.html">'._($datos['texto']).'</a></li>';
 }
