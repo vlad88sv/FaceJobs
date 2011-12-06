@@ -3,15 +3,14 @@ general::registrarEstiloCSS('menu','menu');
 
 $menu['inicio']['texto'] = 'Inicio';
 $menu['inicio']['titulo'] = 'Iniciar en '.PROY_NOMBRE;
-$menu['inicio']['nivel'] = array(usuario::$tipoVisitante,usuario::$tipoCandidato, usuario::$tipoEmpresa, usuario::$tipoAdministrador);
 
 $menu['buscar']['texto'] = 'Ofertas de trabajo';
 $menu['buscar']['titulo'] = 'Ver las ofertas de trabajo';
 $menu['buscar']['nivel'] = array(usuario::$tipoCandidato, usuario::$tipoAdministrador);
 
 $menu['mensajes']['texto'] = 'Mensajes';
-$menu['empresas']['titulo'] = 'Centro de mensajes';
-$menu['empresas']['nivel'] = array(usuario::$tipoCandidato, usuario::$tipoEmpresa, usuario::$tipoAdministrador);
+$menu['mensajes']['titulo'] = 'Centro de mensajes';
+$menu['mensajes']['nivel'] = array(usuario::$tipoCandidato, usuario::$tipoEmpresa, usuario::$tipoAdministrador);
 
 $menu['empresas']['texto'] = 'Empresas';
 $menu['empresas']['titulo'] = 'Listado de empresas';
@@ -23,18 +22,18 @@ $menu['estadisticas']['nivel'] = array(usuario::$tipoCandidato, usuario::$tipoEm
 
 $menu['tds']['texto'] = 'TDS';
 $menu['tds']['titulo'] = 'Terminos y condiciones';
-$menu['tds']['nivel'] = array(usuario::$tipoVisitante,usuario::$tipoCandidato, usuario::$tipoEmpresa, usuario::$tipoAdministrador);
 
 $menu['faqs']['texto'] = "FAQ's";
 $menu['faqs']['titulo'] = 'Preguntas frecuentes';
-$menu['faqs']['nivel'] = array(usuario::$tipoVisitante,usuario::$tipoCandidato, usuario::$tipoEmpresa, usuario::$tipoAdministrador);
+
 ?>
 <ul id="nav" class="dropdown dropdown-horizontal">
 
 <?php
 foreach ($menu as $enlace => $datos)
 {
-    if (in_array(usuario::$info['tipo'],$datos['nivel']))
+    print_r($datos);
+    if (empty($datos['nivel']) || !is_array($datos['nivel']) || in_array(usuario::$info['tipo'],$datos['nivel']))
         echo '<li'.(@$_GET['peticion'] == $enlace ? ' class="seleccionado"' : '').'><a id="menu_'.$enlace.'"  title="'._($datos['titulo']).'" href="'.PROY_URL.$enlace.'.html">'._($datos['texto']).'</a></li>';
 }
 ?>
