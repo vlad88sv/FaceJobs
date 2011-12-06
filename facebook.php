@@ -69,5 +69,9 @@ else
     <?php echo body::$contenido; ?>
     <?php echo body::$final; ?>
     </div>
+    <script>
+        FB.Canvas.setAutoGrow();
+        FB.Canvas.setDoneLoading();
+    </script>
 </body>
 </html>
