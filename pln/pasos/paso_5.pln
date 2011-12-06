@@ -1,6 +1,9 @@
 ==5:Referencias==
-paso5_referencias.empresa
-paso5_referencias.nombre
-paso5_referencias.cargo
-paso5_referencias.telefono
-paso5_referencias.tipo
+[grupo:referencias_laborales]
+[titulo:1]Referencias laborales. Acá podrás ingresar referencias unicamente de personas que trabajen en alguna de las empresas en las que tu has trabajado.[/titulo]
+[lazo]paso5_referencias_laboral[/lazo]
+[/grupo]
+[grupo:referencias_personales]
+[titulo:2]Referencias personales. Acá podrás ingresar referencias personales.[/titulo]
+[lazo]paso5_referencias_personal[/lazo]
+[/grupo]

@@ -115,21 +115,26 @@ cv::$defcv['paso2_idiomas.ID_idioma']['tipo'] = uiForm::$comboboxComplejo;
 cv::$defcv['paso2_idiomas.ID_idioma']['datos']['tabla'] = 'datos_idiomas';
 cv::$defcv['paso2_idiomas.ID_idioma']['datos']['clave'] = 'ID_idioma';
 cv::$defcv['paso2_idiomas.ID_idioma']['datos']['valor'] = 'idioma';
-
+cv::$defcv['paso2_idiomas.ID_idioma']['texto'] = 'Idioma:';
 
 cv::$defcv['paso2_idiomas.nivel']['tipo'] = uiForm::$radio;
 cv::$defcv['paso2_idiomas.nivel']['valores'] = array('basico', 'intermedio', 'avanzado');
+cv::$defcv['paso2_idiomas.nivel']['texto'] = 'Fecha de finalización:';
+
 /* paso2_otros_estudios */
 
 cv::$defcv['paso2_otros_estudios.ID_pais']['tipo'] = uiForm::$comboboxPaises;
+cv::$defcv['paso2_otros_estudios.ID_pais']['texto'] = 'País:';
 
-cv::$defcv['paso2_otros_estudios.institucion'] = uiForm::$textoSimple;
+cv::$defcv['paso2_otros_estudios.institucion']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso2_otros_estudios.institucion']['texto'] = 'Institución:';
 
-cv::$defcv['paso2_otros_estudios.nombre_curso'] = uiForm::$textoSimple;
+cv::$defcv['paso2_otros_estudios.nombre_curso']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso2_otros_estudios.nombre_curso']['texto'] = 'Nombre del curso:';
 
-cv::$defcv['paso2_otros_estudios.fecha_finalizacion']= uiForm::$fecha;
+cv::$defcv['paso2_otros_estudios.fecha_finalizacion']['tipo'] = uiForm::$fecha;
 cv::$defcv['paso2_otros_estudios.fecha_finalizacion']['flags'] = 'Y';
-
+cv::$defcv['paso2_otros_estudios.fecha_finalizacion']['texto'] = 'Fecha de finalización';
 
 /* paso3_empresa */
 
@@ -181,24 +186,60 @@ cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['datos']['valor'] = 'are
 cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['texto'] = 'Área de interés:';
 
 
-/* paso5_referencias */
-/*
-cv::$defcv['paso5_referencias.empresa'];
-cv::$defcv['paso5_referencias.nombre'];
-cv::$defcv['paso5_referencias.cargo'];
-cv::$defcv['paso5_referencias.telefono'];
-cv::$defcv['paso5_referencias.tipo'];
-*/
+/* paso5_referencias_personal */
+
+cv::$defcv['paso5_referencias_personal.empresa']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso5_referencias_personal.empresa']['texto'] = 'Empresa:';
+cv::$defcv['paso5_referencias_personal.empresa']['subtexto'] = 'Nombre comercial de la empresa en la que labora este contacto.';
+
+cv::$defcv['paso5_referencias_personal.nombre']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso5_referencias_personal.nombre']['texto'] = 'Nombre:';
+cv::$defcv['paso5_referencias_personal.nombre']['subtexto'] = 'Nombre completo de la persona que ingresarás como referencia personal';
+
+cv::$defcv['paso5_referencias_personal.cargo']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso5_referencias_personal.cargo']['texto'] = 'Cargo:';
+cv::$defcv['paso5_referencias_personal.cargo']['subtexto'] = 'Cargo que desempeña la persona que ingresarás como referencia personal';
+
+cv::$defcv['paso5_referencias_personal.telefono']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso5_referencias_personal.telefono']['texto'] = 'Teléfono:';
+cv::$defcv['paso5_referencias_personal.telefono']['subtexto'] = 'Teléfono del lugar de trabajo de esta referencia personal';
+
+/* paso5_referencias_laboral */
+
+cv::$defcv['paso5_referencias_laboral.ID_empresa']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso5_referencias_laboral.empresa']['texto'] = 'Empresa:';
+cv::$defcv['paso5_referencias_laboral.empresa']['subtexto'] = 'Selecciona la empresa la que laboró con este contacto de referencia laboral. Para ingresar una referencia de personas que no han trabajado con Ud., ingresela en Referencias laborales.';
+
+
+cv::$defcv['paso5_referencias_laboral.nombre']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso5_referencias_laboral.nombre']['texto'] = 'Nombre:';
+cv::$defcv['paso5_referencias_laboral.nombre']['subtexto'] = 'Nombre completo de la persona que ingresarás como referencia laboral';
+
+cv::$defcv['paso5_referencias_laboral.cargo']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso5_referencias_laboral.cargo']['texto'] = 'Cargo:';
+cv::$defcv['paso5_referencias_laboral.cargo']['subtexto'] = 'Cargo que desempeña la persona que ingresarás como referencia laboral';
+
+cv::$defcv['paso5_referencias_laboral.telefono']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso5_referencias_laboral.telefono']['texto'] = 'Teléfono:';
+cv::$defcv['paso5_referencias_laboral.telefono']['subtexto'] = 'Teléfono del lugar de trabajo de esta referencia laboral';
+
 /* paso6_info_adicional */
-/*
-cv::$defcv['paso6_info_adicional.categoria'];
-cv::$defcv['paso6_info_adicional.informacion'];
-*/
+
+cv::$defcv['paso6_info_adicional.categoria']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso6_info_adicional.categoria']['texto'] = 'Nombre de categoria:';
+cv::$defcv['paso6_info_adicional.categoria']['longitud'] = 25;
+
+cv::$defcv['paso6_info_adicional.informacion']['tipo'] = uiForm::$memo;
+
 /* paso7_privacidad */
-/*
-cv::$defcv['paso7_privacidad.ocultar_telefono'];
-cv::$defcv['paso7_privacidad.ocultar_domicilio'];
-*/
+
+cv::$defcv['paso8_privacidad.ocultar_telefono']['tipo'] = uiForm::$radio;
+cv::$defcv['paso8_privacidad.ocultar_telefono']['valores'] = array('publico' => 'Público', 'privado' => 'Privado');
+cv::$defcv['paso8_privacidad.ocultar_telefono']['texto'] = 'Teléfono de contacto';
+
+cv::$defcv['paso8_privacidad.ocultar_domicilio']['tipo'] = uiForm::$radio;
+cv::$defcv['paso8_privacidad.ocultar_domicilio']['valores'] = array('publico' => 'Público', 'privado' => 'Privado');
+cv::$defcv['paso8_privacidad.ocultar_domicilio']['texto'] = 'Dirección de domicilio';
 
 /* paso0 */
 
@@ -228,8 +269,28 @@ cv::$deflazo['paso2_educacion_superior']['campos'][] = 'paso2_educacion_superior
 cv::$deflazo['paso2_educacion_superior']['campos'][] = 'paso2_educacion_superior.fecha_desde';
 cv::$deflazo['paso2_educacion_superior']['campos'][] = 'paso2_educacion_superior.fecha_hasta';
 
+cv::$deflazo['paso2_idiomas']['campos'][] = 'paso2_idiomas.ID_idioma';
+cv::$deflazo['paso2_idiomas']['campos'][] = 'paso2_idiomas.nivel';
+
+cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.ID_pais';
+cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.institucion';
+cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.nombre_curso';
+cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.fecha_finalizacion';
 
 cv::$deflazo['paso4_expectativa_laboral']['campos'][] = 'paso4_expectativa_laboral.ID_area_interes';
+
+cv::$deflazo['paso5_referencias_laboral']['campos'][] = 'paso5_referencias_laboral.ID_empresa';
+cv::$deflazo['paso5_referencias_laboral']['campos'][] = 'paso5_referencias_laboral.nombre';
+cv::$deflazo['paso5_referencias_laboral']['campos'][] = 'paso5_referencias_laboral.cargo';
+cv::$deflazo['paso5_referencias_laboral']['campos'][] = 'paso5_referencias_laboral.telefono';
+
+cv::$deflazo['paso5_referencias_personal']['campos'][] = 'paso5_referencias_personal.empresa';
+cv::$deflazo['paso5_referencias_personal']['campos'][] = 'paso5_referencias_personal.nombre';
+cv::$deflazo['paso5_referencias_personal']['campos'][] = 'paso5_referencias_personal.cargo';
+cv::$deflazo['paso5_referencias_personal']['campos'][] = 'paso5_referencias_personal.telefono';
+
+cv::$deflazo['paso6_info_adicional']['campos'][] = 'paso6_info_adicional.categoria';
+cv::$deflazo['paso6_info_adicional']['campos'][] = 'paso6_info_adicional.informacion';
 class cv
 {
     public static $defcv = array();

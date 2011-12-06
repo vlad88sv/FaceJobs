@@ -1,3 +1,6 @@
 ==8:Privacidad==
-paso8_privacidad.ocultar_telefono
-paso8_privacidad.ocultar_domicilio
+[grupo:paso8_privacidad]
+[titulo:1]Selecciona que elementos ocultar por defecto a las empresas. De forma individual, las empresas podrán solicitarte acceso a estos datos, petición a la cúal tendrás que aceptar o rechazar según estimes conveniente[/titulo]
+[campo]paso8_privacidad.ocultar_telefono[/campo]
+[campo]paso8_privacidad.ocultar_domicilio[/campo]
+[/grupo]

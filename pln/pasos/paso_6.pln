@@ -1,3 +1,6 @@
 ==6:Información adicional==
-paso6_info_adicional.categoria
-paso6_info_adicional.informacion
+[grupo:paso6_info_adicional]
+[titulo:1]Añade información adicional que considere relevante y que no haya sido ingresa en otros pasos.[/titulo]
+[subtitulo]<a href="#">Ver ejemplos</a>[/subtitulo]
+[lazo]paso6_info_adicional[/lazo]
+[/grupo]
