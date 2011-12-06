@@ -16,12 +16,13 @@ else
         case 'faqs':
             body::agregarAlContenido ('faqs',true);
             break;
-        case 'error':
-            body::agregarAlContenido ('404',true);
-            break;
         case 'paso':
-        default:
+        case 'inicio':
+        case '':
             body::agregarAlContenido ('inicio',true);
+        case 'error':        
+        default:
+            body::agregarAlContenido ('404',true);    
     }
 }
 ?>
