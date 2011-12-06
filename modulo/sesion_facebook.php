@@ -28,6 +28,7 @@ public static function iniciar_sesion()
       $datos['email'] = $cache['email'];
       $datos['fecha_registro'] = time();
       $datos['tipo'] = usuario::$tipoCandidato;
+      $datos['hash'] = sha1(general::$config['salt'].microtime(true));
       db::insertar('cuentas', $datos);
     }
     usuario::cargar($user);
