@@ -61,6 +61,7 @@ general::registrarModulo('ui','ui.php');
 general::registrarModulo('plantilla','pln.php');
 general::registrarModulo('controlador_pasos','controlador_pasos.php');
 general::registrarModulo('cv','cv.php');
+general::registrarModulo('phmagick','phmagick/phmagick.php');
 general::registrarScriptJS('jquery','jquery-1.6.2');
 
 ?>
