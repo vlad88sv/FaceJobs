@@ -174,9 +174,6 @@ class pln
                 }
                 break;
 
-                
-                break;
-            
             case uiForm::$memo:
                 $retorno .= '<br /><textarea name="'.$campoEsc.'" id="'.$campoEsc.'">$$reemplazar::'.$campoEsc.'$$"></textarea>';
                 break;
