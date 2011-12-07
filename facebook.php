@@ -71,7 +71,9 @@ if (!sesion::iniciado())
     <div id="contenedor">
     <?php echo body::$inicio; ?>
     <?php echo body::$contenido; ?>
-    <?php echo body::$final; ?>
+    <div id="final">
+        <?php echo body::$final; ?>
+    </div>
     </div>
     <script>
         FB.Canvas.setAutoGrow();

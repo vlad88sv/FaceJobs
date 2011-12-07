@@ -1,3 +1,9 @@
+#controlador_pasos {position: relative; margin-top: 10px; width: 100%; height: 45px;clear: both;}
+#controlador_pasos #paso_anterior {position: absolute; left:0;}
+#controlador_pasos #paso_siguiente {position: absolute; right:0;}
+#controlador_pasos img {vertical-align: middle;}
+#controlador_pasos a {color:#AAA; font-size: 20px; text-decoration: none; display: block;}
+
 #pasos {width: 100%;background-color: #FFF;float: left;clear: both;margin-bottom: 35px; margin-top: 17px;}
 .paso {float: left;margin-right: 20px;}
 .paso .titulo {color: #111;width: 100%;text-align: center;}
@@ -24,5 +30,5 @@
 .lazoCampos {border:1px #CCC solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:15px;padding-bottom:15px;}
 .lazoVista {border:1px #aaa solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:15px;padding-bottom:15px;background-color:#EEE;margin-bottom: 5px;margin-top: 10px;}
 
-input[type=text] {border-radius: 10px;padding: 1px;background-color: #DDD; width: 250px; }
+input[type=text] {border-radius: 8px;padding: 1px 2px;background-color: #DDD; width: 250px; border: 1px #666 solid;}
 #paso3_cargos_funciones,#paso6_info_adicional_informacion{width: 500px; height: 300px;margin: auto;display: block;border-radius: 10px;}

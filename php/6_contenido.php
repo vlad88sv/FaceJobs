@@ -113,6 +113,11 @@ class body
     public static function agregarAlFinal($contenido, $procesar)
     {
         self::agregar($contenido,'final', $procesar);
-    }    
+    }
+    
+    public static function agregarContenidoAlFinal($contenido)
+    {
+        self::$final .= $contenido;
+    }
 }
 ?>

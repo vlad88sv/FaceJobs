@@ -22,9 +22,11 @@ $menu['estadisticas']['nivel'] = array(usuario::$tipoCandidato, usuario::$tipoEm
 
 $menu['tds']['texto'] = 'TDS';
 $menu['tds']['titulo'] = 'Terminos y condiciones';
+$menu['tds']['pie'] = true;
 
 $menu['faqs']['texto'] = "FAQ's";
 $menu['faqs']['titulo'] = 'Preguntas frecuentes';
+$menu['faqs']['pie'] = true;
 
 ?>
 <ul id="nav" class="dropdown dropdown-horizontal">
@@ -33,7 +35,12 @@ $menu['faqs']['titulo'] = 'Preguntas frecuentes';
 foreach ($menu as $enlace => $datos)
 {
     if (empty($datos['nivel']) || !is_array($datos['nivel']) || in_array(usuario::$info['tipo'],$datos['nivel']))
-        echo '<li'.(@$_GET['peticion'] == $enlace ? ' class="seleccionado"' : '').'><a id="menu_'.$enlace.'"  title="'._($datos['titulo']).'" href="'.PROY_URL.$enlace.'.html">'._($datos['texto']).'</a></li>';
+    {
+        if (empty($datos['pie']))
+            echo '<li'.(@$_GET['peticion'] == $enlace ? ' class="seleccionado"' : '').'><a id="menu_'.$enlace.'"  title="'._($datos['titulo']).'" href="'.PROY_URL.$enlace.'.html">'._($datos['texto']).'</a></li>';
+        else
+            body::agregarContenidoAlFinal('<a id="menu_'.$enlace.'"  title="'._($datos['titulo']).'" href="'.PROY_URL.$enlace.'.html">'._($datos['texto']).'</a>');
+    }
 }
 ?>
 <li><a href="javascript:void(0)" onclick="FB.ui({ method: 'apprequests', message: 'La mejor bolsa de trabajo de $$PAIS$$', display:'iframe'});">Contar a los amigos</a></li>

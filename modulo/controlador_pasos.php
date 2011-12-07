@@ -33,6 +33,12 @@ $plantilla = new pln();
 $plantilla->procesar('pasos/paso_'.$paso);
 
 body::agregarContenidoAlContenido($plantilla->pln);
+body::agregarContenidoAlContenido('<div id="controlador_pasos">');
+if ($paso > 1)
+    body::agregarContenidoAlContenido('<div id="paso_anterior"><a href="'.PROY_URL.'paso.html?p='.(max(($paso-1),1)).'"><img src="img/paso_anterior.png" />Anterior</a></div>');
+if ($paso < 9)
+    body::agregarContenidoAlContenido('<div id="paso_siguiente"><a href="'.PROY_URL.'paso.html?p='.(min(($paso+1),9)).'">Siguiente<img src="img/paso_siguiente.png"  /></a></div>');
+body::agregarContenidoAlContenido('</div>');
 
 head::agregarContenido(
 '<script>

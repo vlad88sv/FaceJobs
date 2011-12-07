@@ -207,8 +207,8 @@ cv::$defcv['paso5_referencias_personal.telefono']['subtexto'] = 'Teléfono del l
 /* paso5_referencias_laboral */
 
 cv::$defcv['paso5_referencias_laboral.ID_empresa']['tipo'] = uiForm::$textoSimple;
-cv::$defcv['paso5_referencias_laboral.empresa']['texto'] = 'Empresa:';
-cv::$defcv['paso5_referencias_laboral.empresa']['subtexto'] = 'Selecciona la empresa la que laboró con este contacto de referencia laboral. Para ingresar una referencia de personas que no han trabajado con Ud., ingresela en Referencias laborales.';
+cv::$defcv['paso5_referencias_laboral.ID_empresa']['texto'] = 'Empresa:';
+cv::$defcv['paso5_referencias_laboral.ID_empresa']['subtexto'] = 'Selecciona la empresa en la cual laboró con este contacto de referencia laboral';
 
 
 cv::$defcv['paso5_referencias_laboral.nombre']['tipo'] = uiForm::$textoSimple;

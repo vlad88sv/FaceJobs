@@ -6,6 +6,8 @@ body{background:#fff;font-size:100%;font-family:"lucida grande",tahoma,verdana,a
 #bandera #imagen{text-align:right;}
 #cabera_pais{color:#535353;font-style:italic;text-align:left;}
 #contenedor{width:760px;margin:auto;}
+#final{width:100%; margin-top: 5px;border-top: 1px #CCC solid;}
+#final a {color:#5b0504; font-size: 11px; text-decoration: none; margin: 0 10px;}
 
 .guardando{margin-left: 10px;}
 .boton{display: block; text-decoration: none; font-size: 16px; color: #FFF; width: 181px; height: 32px; line-height: 32px; background: url('../img/fondo_boton.gif') #720202 no-repeat;}
