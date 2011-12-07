@@ -1,6 +1,7 @@
 <?php
 /* Frontend de Facebook. */
 sesion::iniciar_sesion();
+general::registrarScriptJS('jQuery','jquery-1.6.2');
 general::registrarEstiloCSS('facebook','facebook');
 body::agregarAlInicio('cabecera',true);
 body::agregarAlInicio('global.menu',true);
@@ -41,7 +42,8 @@ if (!sesion::iniciado())
     <meta property="og:image" content="<?php echo PROY_URL; ?>img/logo.png"/>
     <link href="favicon.ico" rel="icon" type="image/x-icon" />
     <?php echo head::obtenerEstilosCSS(); ?>
-    <?php echo head::obtenerScriptsJS(); ?>    
+    <?php echo head::obtenerScriptsJS(); ?>
+    <?php echo head::$extra; ?>    
     <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', '<?php echo general::$config['google-UA']; ?>']);

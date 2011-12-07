@@ -3,7 +3,13 @@
 class head
 {
     public static $titulo;
+    public static $extra;
     
+    public static function agregarContenido($contenido)
+    {
+        self::$extra .= $contenido;
+    }
+
     public static function obtenerScriptsJS()
     {
         $buffer = "";

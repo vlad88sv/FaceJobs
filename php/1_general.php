@@ -7,6 +7,7 @@ class general
     public static $config = array();
     public static $arrJS = array();
     public static $arrCSS = array();
+    public static $extra = '';
 
 
 public static function registrarScriptJS($nombreScriptJS, $nombreInclude)

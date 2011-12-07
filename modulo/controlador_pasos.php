@@ -33,4 +33,36 @@ $plantilla = new pln();
 $plantilla->procesar('pasos/paso_'.$paso);
 
 body::agregarContenidoAlContenido($plantilla->pln);
+
+head::agregarContenido(
+'<script>
+$(function() {
+
+$("input:text.auto, select.auto").change(function(){$(this).addClass("sucio");})
+
+$("input:text.auto, select.auto").focusout(function() {
+  if ($(this).hasClass("sucio"))
+  {
+    $(this).after(\'<img class="guardando g_\'+$(this).attr("id")+\'" src="img/ajax.gif" />\');
+    $.post(\'ajax\',{campo:$(this).attr("rel"), valor:$(this).val()},function() {$(".guardando").remove()},"html");
+    $(this).removeClass("sucio");
+  }
+});
+
+$("input:radio.auto").click(function() {
+    $(this).after(\'<img class="guardando g_\'+$(this).attr("id")+\'" src="img/ajax.gif" />\');
+    $.post(\'ajax\',{campo:$(this).attr("rel"), valor:$(this).val()},function() {$(".guardando").remove()},"html");
+    $(this).removeClass("sucio");
+});
+
+$("input:checkbox.auto").click(function() {
+    $(this).after(\'<img class="guardando g_\'+$(this).attr("id")+\'" src="img/ajax.gif" />\');
+    $.post(\'ajax\',{campo:$(this).attr("rel"), valor:($(this).attr("checked") ? "1" : "0")},function() {$(".guardando").remove()},"html");
+    $(this).removeClass("sucio");
+    
+});
+
+});
+</script>'
+);
 ?>
