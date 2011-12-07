@@ -134,9 +134,9 @@ class pln
                 if(is_array(cv::$defcv[$campo]['valores']))
                 {
                     foreach (cv::$defcv[$campo]['valores'] as $valor => $texto)
-                        $options .= '<option value="'.$valor.'">'.$texto.'</option>'."\n";
+                        $options .= '<option value="'.$valor.'">'.$texto.'</option>';
                 }
-                $retorno .= '<select name="'.$campoEsc.'" id="'.$campoEsc.'">'."\n".$options.'</select>';
+                $retorno .= '<select name="'.$campoEsc.'" id="'.$campoEsc.'">'.$options.'</select>';
                 break;
                 
             case uiForm::$comboboxComplejo:
@@ -160,7 +160,7 @@ class pln
                 break;
 
             case uiForm::$sino:
-                $retorno .= '<input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" /> Si <input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" selected="$$reemplazar::'.$campoEsc.'$$" /> No ';
+                $retorno .= '<input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" value="1" /> Si <input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" value="0" /> No ';
                 break;
             
             case uiForm::$cheque:
@@ -239,20 +239,22 @@ class pln
         
         switch ($tipo)
         {
-            
             case uiForm::$cargarImagenOWebCam:
+                $this->pln = preg_replace('/\$\$reemplazar\:\:'.$campoEsc.'\$\$/',ui::ObtenerImagen($valor),$this->pln);
+                break;
             case uiForm::$textoSimple:
             case uiForm::$correo:
             case uiForm::$memo:
                 $this->pln = preg_replace('/\$\$reemplazar\:\:'.$campoEsc.'\$\$/',$valor,$this->pln);
                 break;
-            
-            case uiForm::$comboboxSimple;
 
+            case uiForm::$comboboxSimple:
             case uiForm::$comboboxComplejo:
             case uiForm::$comboboxPaises:
+                echo '<pre>'.$campoEsc.'</pre>';
+                $this->pln = preg_replace('/(id="'.$campoEsc.'".*value="'.$valor.'")/','$1 selected="selected"',$this->pln,1);
                 break;
-
+                
             case uiForm::$fecha:
                 break;
 
@@ -260,13 +262,11 @@ class pln
                 break;
 
             case uiForm::$sino:
-                break;
-            
+            case uiForm::$radio:                        
             case uiForm::$cheque:
+                $this->pln = preg_replace('/(id="'.$campoEsc.'"\ value="'.$valor.'")/s','$1 checked="checked"',$this->pln,1);
                 break;
-            
-            case uiForm::$radio:
-                break;
+
         }
     }    
 }
