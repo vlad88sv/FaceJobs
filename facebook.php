@@ -5,9 +5,9 @@ general::registrarEstiloCSS('facebook','facebook');
 body::agregarAlInicio('cabecera',true);
 body::agregarAlInicio('global.menu',true);
 if (!sesion::iniciado())
-    body::agregarAlContenido ('sesion.iniciar',true);
-else
 {
+    body::agregarAlContenido ('sesion.iniciar',true);
+} else {
     switch ($_GET['peticion'])
     {
         case 'tds':
