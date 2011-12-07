@@ -84,6 +84,25 @@ class db
         $id = mysql_insert_id (self::$link);
         return $id;        
     }
+
+    public static function insertualizar($tabla, $datos)
+    {       
+        $campos = $valores = $update = NULL;
+        foreach ($datos as $clave => $valor)
+        {
+            $arr_campos[]   = mysql_real_escape_string($clave, self::$link);
+            $arr_valores[]  = mysql_real_escape_string($valor, self::$link);
+        }
+        $campos = implode (",", $arr_campos);
+        $valores = "'".implode ("','", $arr_valores)."'";
+        foreach($arr_campos as $campo)        
+            $arr_update[] = $campo.'=VALUES('.$campo.')';
+        $update = implode (",", $arr_update);
+        $c = "INSERT INTO $tabla ($campos) VALUES ($valores) ON DUPLICATE KEY UPDATE $update";
+        $resultado = self::consultar($c);
+        $id = mysql_insert_id (self::$link);
+        return $id;        
+    }
     
     public static function obtenerPorIndice($tabla, $llave, array $valores, $limite)
     {
