@@ -19,7 +19,12 @@ class ui
 {
     public static function ObtenerImagen($archivo)
     {
-        return 'img/'.$archivo;
+        $ruta = 'img/'.$archivo;
+        
+        if (!file_exists($ruta))
+            $ruta = 'imagen_sinfoto';
+            
+        return $ruta;
     }
 }
 
