@@ -172,7 +172,7 @@ class pln
                 if(is_array(cv::$defcv[$campo]['valores']))
                 {
                     foreach (cv::$defcv[$campo]['valores'] as $valor => $texto)
-                        $retorno .= '<input type="radio" $$identificacion$$ /> ' . $texto;
+                        $retorno .= '<input type="radio" $$identificacion$$ value="'.$valor.'"/> ' . $texto;
                 }
                 break;
 
