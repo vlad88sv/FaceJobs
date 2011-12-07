@@ -122,11 +122,11 @@ class pln
         switch ($tipo)
         {
             case uiForm::$cargarImagenOWebCam:
-                $retorno .= '<div><img src="$$reemplazar::'.$campoEsc.'$$" /><input type="file" name="'.$campoEsc.'" id="'.$campoEsc.'" /></div>';
+                $retorno .= '<div><img src="$$reemplazar::'.$campoEsc.'$$" /><input type="file" $$identificacion$$ /></div>';
                 break;
             
             case uiForm::$textoSimple:
-                $retorno .= '<input type="text" name="'.$campoEsc.'" id="'.$campoEsc.'" maxlength="'.(isset(cv::$defcv[$campo]['longitud']) ? cv::$defcv[$campo]['longitud'] : '500').'" value="$$reemplazar::'.$campoEsc.'$$" />';
+                $retorno .= '<input type="text" $$identificacion$$ maxlength="'.(isset(cv::$defcv[$campo]['longitud']) ? cv::$defcv[$campo]['longitud'] : '500').'" value="$$reemplazar::'.$campoEsc.'$$" />';
                 break;
             
             case uiForm::$comboboxSimple;
@@ -136,35 +136,35 @@ class pln
                     foreach (cv::$defcv[$campo]['valores'] as $valor => $texto)
                         $options .= '<option value="'.$valor.'">'.$texto.'</option>';
                 }
-                $retorno .= '<select name="'.$campoEsc.'" id="'.$campoEsc.'">'.$options.'</select>';
+                $retorno .= '<select $$identificacion$$>'.$options.'</select>';
                 break;
                 
             case uiForm::$comboboxComplejo:
-                $retorno .= '<select name="'.$campoEsc.'" id="'.$campoEsc.'"></select>';
+                $retorno .= '<select $$identificacion$$></select>';
                 break;
 
             case uiForm::$comboboxPaises:
-                $retorno .= '<select name="'.$campoEsc.'" id="'.$campoEsc.'"></select>';
+                $retorno .= '<select $$identificacion$$></select>';
                 break;
 
             case uiForm::$fecha:
-                $retorno .= '<input type="text" name="'.$campoEsc.'" id="'.$campoEsc.'" value="$$reemplazar::'.$campoEsc.'$$" />';
+                $retorno .= '<input type="text" $$identificacion$$ value="$$reemplazar::'.$campoEsc.'$$" />';
                 break;
 
             case uiForm::$telefono:
-                $retorno .= '<input type="text" name="'.$campoEsc.'" id="'.$campoEsc.'" value="$$reemplazar::'.$campoEsc.'$$" />';
+                $retorno .= '<input type="text" $$identificacion$$ value="$$reemplazar::'.$campoEsc.'$$" />';
                 break;
                 
             case uiForm::$correo:
-                $retorno .= '<input type="text" name="'.$campoEsc.'" id="'.$campoEsc.'" value="$$reemplazar::'.$campoEsc.'$$" />';
+                $retorno .= '<input type="text" $$identificacion$$ value="$$reemplazar::'.$campoEsc.'$$" />';
                 break;
 
             case uiForm::$sino:
-                $retorno .= '<input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" value="1" /> Si <input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" value="0" /> No ';
+                $retorno .= '<input type="radio" $$identificacion$$ value="1" /> Si <input type="radio" $$identificacion$$ value="0" /> No ';
                 break;
             
             case uiForm::$cheque:
-                $retorno .= '<input type="checkbox" name="'.$campoEsc.'" id="'.$campoEsc.'" />';
+                $retorno .= '<input type="checkbox" $$identificacion$$ />';
                 break;
             
             case uiForm::$radio:
@@ -172,14 +172,16 @@ class pln
                 if(is_array(cv::$defcv[$campo]['valores']))
                 {
                     foreach (cv::$defcv[$campo]['valores'] as $valor => $texto)
-                        $retorno .= '<input type="radio" name="'.$campoEsc.'" id="'.$campoEsc.'" /> ' . $texto;
+                        $retorno .= '<input type="radio" $$identificacion$$ /> ' . $texto;
                 }
                 break;
 
             case uiForm::$memo:
-                $retorno .= '<br /><textarea name="'.$campoEsc.'" id="'.$campoEsc.'">$$reemplazar::'.$campoEsc.'$$</textarea>';
+                $retorno .= '<br /><textarea $$identificacion$$>$$reemplazar::'.$campoEsc.'$$</textarea>';
                 break;
         }
+
+        $retorno = preg_replace('/\$\$identificacion\$\$/',($esLazo ? '' : 'class="auto" ').'name="'.$campoEsc.'" id="'.$campoEsc.'"',$retorno);
         
         if(isset(cv::$defcv[$campo]['subtexto']))
             $retorno .= '<br /><span class="subtituloCampo">'.cv::$defcv[$campo]['subtexto'].'</span>';
@@ -251,7 +253,6 @@ class pln
             case uiForm::$comboboxSimple:
             case uiForm::$comboboxComplejo:
             case uiForm::$comboboxPaises:
-                echo '<pre>'.$campoEsc.'</pre>';
                 $this->pln = preg_replace('/(id="'.$campoEsc.'".*value="'.$valor.'")/','$1 selected="selected"',$this->pln,1);
                 break;
                 
