@@ -31,4 +31,6 @@ RewriteRule ^imagen_([0-9]+)_([0-9]+)_([a-za-z0-9]{40}|sinfoto)(\.jpg){0,1}$ ima
 
 RewriteRule ^(paypal|ajax|gotofacebook|carga)$ $1.php [L,QSA]
 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(inicio|buscar|mensajes|empresas|estadisticas|faqs|ayuda|paso)\.html$ index.php?peticion=$1 [L,QSA]
