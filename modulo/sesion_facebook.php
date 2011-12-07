@@ -33,6 +33,8 @@ public static function iniciar_sesion()
     }
     usuario::cargar($user);
     self::$iniciado = true;
+  }  else {
+    self::$iniciado = false;
   }
 }
 
