@@ -5,7 +5,7 @@ general::registrarEstiloCSS('facebook.sesion.iniciar','facebook.sesion.iniciar')
 <table id="contenedor_intro_parte_1">
   <tr>
     <td id="intro_parte_1a">
-      <img src="<?php echo ui::ObtenerImagen('gente_exitosa.jpg'); ?>" />
+      <img src="<?php echo PROY_URL; ?>img/gente_exitosa.jpg" />
     </td>
     
     <td id="intro_parte_1b">
@@ -18,10 +18,10 @@ general::registrarEstiloCSS('facebook.sesion.iniciar','facebook.sesion.iniciar')
   
   <tr class="registros">
     <td>
-      <a href="javascript:return false" class="registrate" onClick="top.location = 'https://www.facebook.com/dialog/oauth?client_id=<?php echo general::$config['appId']; ?>&redirect_uri=<?php echo PROY_URL; ?>gotofacebook&scope=email,user_about_me'"><img src="img/boton_normal.jpg" />&nbsp;<?php echo _('INGRESAR CURRICULUM'); ?></a>
+      <a href="javascript:return false" class="registrate" onClick="top.location = 'https://www.facebook.com/dialog/oauth?client_id=<?php echo general::$config['appId']; ?>&redirect_uri=<?php echo PROY_URL; ?>gotofacebook&scope=email,user_about_me'"><img src="<?php echo PROY_URL; ?>img/boton_normal.jpg" />&nbsp;<?php echo _('INGRESAR CURRICULUM'); ?></a>
     </td>
     <td>
-      <a href="javascript:return false" class="registrate" onClick="top.location = 'https://www.facebook.com/dialog/oauth?client_id=<?php echo general::$config['appId']; ?>&redirect_uri=<?php echo PROY_URL; ?>gotofacebook&scope=email,user_about_me'"><img src="img/boton_normal.jpg" />&nbsp;<?php echo _('BUSCAR CANDIDATOS'); ?></a>
+      <a href="javascript:return false" class="registrate" onClick="top.location = 'https://www.facebook.com/dialog/oauth?client_id=<?php echo general::$config['appId']; ?>&redirect_uri=<?php echo PROY_URL; ?>gotofacebook&scope=email,user_about_me'"><img src="<?php echo PROY_URL; ?>img/boton_normal.jpg" />&nbsp;<?php echo _('BUSCAR CANDIDATOS'); ?></a>
     </td>
   </tr>
   </table>
