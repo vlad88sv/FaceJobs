@@ -12,7 +12,7 @@
 [campo]paso1_personal.sexo[/campo]
 [campo]paso1_personal.telefono_contacto[/campo]
 [campo]paso1_personal.ID_nacionalidad[/campo]
-[campo]paso1_personal.ID_ciudad_de_domicilio[/campo]
+[campo]paso1_personal.ciudad_de_domicilio[/campo]
 [campo]paso1_personal.direccion_domicilio[/campo]
 [campo]paso1_personal.correo_electronico[/campo]
 [campo]paso1_personal.licencia_conducir[/campo]
