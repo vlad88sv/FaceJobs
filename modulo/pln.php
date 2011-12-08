@@ -76,8 +76,8 @@ class pln
                 $retornoCampos .= $this->procesarCampo($campo,true);
             }
             
-            $retornoVista = '<div class="lazoVista">'.$retornoVista.'</div>';            
-            $retornoCampos = '<div class="lazoCampos">'.$retornoCampos.'</div>';
+            $retornoVista = '<div class="lazoVista">'.$retornoVista.'</div>';
+            $retornoCampos = '<div class="lazoCampos">'.$retornoCampos.'<div class="lazoControles"><div class="boton">Guardar</div> <div class="boton">Cancelar</div></div></div>';
             
             $retorno .= $retornoVista.$retornoCampos;
             
@@ -140,9 +140,17 @@ class pln
                 break;
                 
             case uiForm::$comboboxComplejo:
-                $retorno .= '<select $$identificacion$$></select>';
+                $options = '';
+                if(is_array(cv::$defcv[$campo]['datos']) && isset(cv::$defcv[$campo]['datos']['tabla']) && isset(cv::$defcv[$campo]['datos']['clave']) && isset(cv::$defcv[$campo]['datos']['valor']))
+                {
+                    $c = 'SELECT '.cv::$defcv[$campo]['datos']['clave'].' AS "clave", '.cv::$defcv[$campo]['datos']['valor'].' AS "valor" FROM '.cv::$defcv[$campo]['datos']['tabla'];
+                    $r = db::consultar($c);
+                    while ($f = mysql_fetch_assoc($r))
+                        $options .= '<option value="'.$f['clave'].'">'.$f['valor'].'</option>';
+                }
+                $retorno .= '<select $$identificacion$$>'.$options.'</select>';
                 break;
-
+            
             case uiForm::$comboboxPaises:
                 $retorno .= '<select $$identificacion$$></select>';
                 break;
