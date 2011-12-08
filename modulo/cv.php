@@ -35,8 +35,8 @@ cv::$defcv['paso1_personal.telefono_contacto']['texto'] = 'Teléfono de contacto
 cv::$defcv['paso1_personal.ID_nacionalidad']['tipo'] = uiForm::$comboboxPaises;
 cv::$defcv['paso1_personal.ID_nacionalidad']['texto'] = 'Nacionalidad:';
 
-cv::$defcv['paso1_personal.ID_ciudad_de_domicilio']['tipo'] = uiForm::$comboboxPaises;
-cv::$defcv['paso1_personal.ID_ciudad_de_domicilio']['texto'] = 'Ciudad de domicilio:';
+cv::$defcv['paso1_personal.ciudad_de_domicilio']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso1_personal.ciudad_de_domicilio']['texto'] = 'Ciudad de domicilio:';
 
 cv::$defcv['paso1_personal.direccion_domicilio']['tipo'] = uiForm::$textoSimple;
 cv::$defcv['paso1_personal.direccion_domicilio']['longitud'] = 250;
@@ -75,6 +75,7 @@ cv::$defcv['paso2_educacion_secundaria.incompleto']['texto'] = 'Incompleto:';
 cv::$defcv['paso2_educacion_secundaria.titulo']['tipo'] = uiForm::$textoSimple;
 cv::$defcv['paso2_educacion_secundaria.titulo']['longitud'] = 250;
 cv::$defcv['paso2_educacion_secundaria.titulo']['texto'] = 'Titulo:';
+
 /******* paso2_educacion_superior **********/
 
 cv::$defcv['paso2_educacion_superior.ID_pais']['tipo'] = uiForm::$comboboxPaises;
@@ -99,27 +100,27 @@ cv::$defcv['paso2_educacion_superior.titulo_obtenido']['texto'] = 'Titulo obteni
 
 cv::$defcv['paso2_educacion_superior.nivel_alcanzado']['tipo'] = uiForm::$comboboxSimple;
 cv::$defcv['paso2_educacion_superior.nivel_alcanzado']['valores'] = array('activo','abandonado','egresado','graduado','doctorado','PhD');
-cv::$defcv['paso2_educacion_superior.nivel_alcanzado']['texto'] = 'Nivel alcanzado';
+cv::$defcv['paso2_educacion_superior.nivel_alcanzado']['texto'] = 'Nivel alcanzado:';
 
 cv::$defcv['paso2_educacion_superior.fecha_desde']['tipo'] = uiForm::$fecha;
 cv::$defcv['paso2_educacion_superior.fecha_desde']['flags'] = 'Y';
-cv::$defcv['paso2_educacion_superior.fecha_desde']['texto'] = 'Desde';
+cv::$defcv['paso2_educacion_superior.fecha_desde']['texto'] = 'Fecha desde:';
+//cv::$defcv['paso2_educacion_superior.fecha_desde']['enLinea'] = true;
 
 cv::$defcv['paso2_educacion_superior.fecha_hasta']['tipo'] = uiForm::$fecha;
 cv::$defcv['paso2_educacion_superior.fecha_hasta']['flags'] = 'Y';
-cv::$defcv['paso2_educacion_superior.fecha_hasta']['texto'] = 'Hasta';
+cv::$defcv['paso2_educacion_superior.fecha_hasta']['texto'] = 'Fecha hasta:';
 
 /* paso2_idiomas */
 
 cv::$defcv['paso2_idiomas.ID_idioma']['tipo'] = uiForm::$comboboxComplejo;
-cv::$defcv['paso2_idiomas.ID_idioma']['datos']['tabla'] = 'datos_idiomas';
+cv::$defcv['paso2_idiomas.ID_idioma']['datos']['tabla'] = 'datos_idioma';
 cv::$defcv['paso2_idiomas.ID_idioma']['datos']['clave'] = 'ID_idioma';
 cv::$defcv['paso2_idiomas.ID_idioma']['datos']['valor'] = 'idioma';
 cv::$defcv['paso2_idiomas.ID_idioma']['texto'] = 'Idioma:';
 
 cv::$defcv['paso2_idiomas.nivel']['tipo'] = uiForm::$radio;
-cv::$defcv['paso2_idiomas.nivel']['valores'] = array('basico', 'intermedio', 'avanzado');
-cv::$defcv['paso2_idiomas.nivel']['texto'] = 'Fecha de finalización:';
+cv::$defcv['paso2_idiomas.nivel']['valores'] = array('basico' => 'Básico', 'intermedio' => 'Intermedio', 'avanzado' => 'Avanzado');
 
 /* paso2_otros_estudios */
 
@@ -244,9 +245,10 @@ cv::$defcv['paso8_privacidad.ocultar_domicilio']['texto'] = 'Dirección de domic
 /* paso0 */
 
 cv::$defcv['paso0.ID_idioma_nativo']['tipo'] = uiForm::$comboboxComplejo;
-cv::$defcv['paso0.ID_idioma_nativo']['datos']['tabla'] = 'datos_idiomas';
+cv::$defcv['paso0.ID_idioma_nativo']['datos']['tabla'] = 'datos_idioma';
 cv::$defcv['paso0.ID_idioma_nativo']['datos']['clave'] = 'ID_idioma';
 cv::$defcv['paso0.ID_idioma_nativo']['datos']['valor'] = 'idioma';
+cv::$defcv['paso0.ID_idioma_nativo']['texto'] = 'Idioma nativo';
 
 cv::$defcv['paso0.ID_expectativa_salarial']['tipo'] = uiForm::$comboboxSimple;
 cv::$defcv['paso0.ID_expectativa_salarial']['texto'] = 'Selecciona el rango de tu expectativa salarial';

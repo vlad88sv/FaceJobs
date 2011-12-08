@@ -77,9 +77,15 @@ class pln
             }
             
             $retornoVista = '<div class="lazoVista">'.$retornoVista.'</div>';
-            $retornoCampos = '<div class="lazoCampos">'.$retornoCampos.'<div class="lazoControles"><div class="boton">Guardar</div> <div class="boton">Cancelar</div></div></div>';
-            
-            $retorno .= $retornoVista.$retornoCampos;
+            $retornoCampos = '<div class="lazoCampos">'.$retornoCampos;
+            $retornoCampos .= '
+            <div class="lazoControles">
+	            <div class="boton"><a href="#" class="autoLazo" rel="'.$lazo.'">Guardar</a></div>
+	            <div class="boton"><a href="#" class="reset" rel="'.$lazo.'">Cancelar</a></div>            
+            </div>
+            ';
+            $retornoCampos .= '</div>';
+            $retorno .= '<form id="lazo_'.$lazo.'" method="post">'.$retornoVista.$retornoCampos.'</form>';
             
             $this->pln = preg_replace( '/\[lazo\]'.$lazo.'\[\/lazo\]/', $retorno, $this->pln );
         }
@@ -130,7 +136,7 @@ class pln
                 break;
             
             case uiForm::$comboboxSimple;
-                $options = '';
+                $options = '<option value="">Seleccione</option>';
                 if(is_array(cv::$defcv[$campo]['valores']))
                 {
                     foreach (cv::$defcv[$campo]['valores'] as $valor => $texto)
@@ -139,8 +145,13 @@ class pln
                 $retorno .= '<select $$identificacion$$>'.$options.'</select>';
                 break;
                 
+            case uiForm::$comboboxPaises:
+                cv::$defcv[$campo]['datos']['tabla'] = 'datos_pais';
+                cv::$defcv[$campo]['datos']['clave'] = 'ID_pais';
+                cv::$defcv[$campo]['datos']['valor'] = 'pais';
+                
             case uiForm::$comboboxComplejo:
-                $options = '';
+                $options = '<option value="">Seleccione</option>';
                 if(is_array(cv::$defcv[$campo]['datos']) && isset(cv::$defcv[$campo]['datos']['tabla']) && isset(cv::$defcv[$campo]['datos']['clave']) && isset(cv::$defcv[$campo]['datos']['valor']))
                 {
                     $c = 'SELECT '.cv::$defcv[$campo]['datos']['clave'].' AS "clave", '.cv::$defcv[$campo]['datos']['valor'].' AS "valor" FROM '.cv::$defcv[$campo]['datos']['tabla'];
@@ -151,10 +162,6 @@ class pln
                 $retorno .= '<select $$identificacion$$>'.$options.'</select>';
                 break;
             
-            case uiForm::$comboboxPaises:
-                $retorno .= '<select $$identificacion$$></select>';
-                break;
-
             case uiForm::$fecha:
                 $retorno .= '<input type="text" $$identificacion$$ value="$$reemplazar::'.$campoEsc.'$$" />';
                 break;
@@ -189,7 +196,7 @@ class pln
                 break;
         }
 
-        $retorno = preg_replace('/\$\$identificacion\$\$/',($esLazo ? '' : 'class="auto" ').'rel="'.$campo.'" name="'.$campoEsc.'" id="'.$campoEsc.'"',$retorno);
+        $retorno = preg_replace('/\$\$identificacion\$\$/',($esLazo ? '' : 'class="auto" ').'rel="'.$campo.'" name="'.$campo.'" id="'.$campoEsc.'"',$retorno);
         
         if(isset(cv::$defcv[$campo]['subtexto']))
             $retorno .= '<br /><span class="subtituloCampo">'.cv::$defcv[$campo]['subtexto'].'</span>';

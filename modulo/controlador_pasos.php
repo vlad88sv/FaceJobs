@@ -44,9 +44,15 @@ head::agregarContenido(
 '<script>
 $(function() {
 
-$("input:text.auto, select.auto").change(function(){$(this).addClass("sucio");})
+$("select.auto").change(function() {
+    $(this).after(\'<img class="guardando g_\'+$(this).attr("id")+\'" src="img/ajax.gif" />\');
+    $.post(\'ajax\',{campo:$(this).attr("rel"), valor:$(this).val()},function() {$(".guardando").remove()},"html");
+    $(this).removeClass("sucio");
+});
 
-$("input:text.auto, select.auto").focusout(function() {
+$("input:text.auto").change(function(){$(this).addClass("sucio");})
+
+$("input:text.auto").focusout(function() {
   if ($(this).hasClass("sucio"))
   {
     $(this).after(\'<img class="guardando g_\'+$(this).attr("id")+\'" src="img/ajax.gif" />\');
@@ -66,6 +72,18 @@ $("input:checkbox.auto").click(function() {
     $.post(\'ajax\',{campo:$(this).attr("rel"), valor:($(this).attr("checked") ? "1" : "0")},function() {$(".guardando").remove()},"html");
     $(this).removeClass("sucio");
     
+});
+
+$(".autoLazo").click(function() {
+	event.preventDefault();
+	$("#lazo_"+$(this).attr("rel")+ " .lazoCampos").prepend(\'<div class="guardando_form" style="text-align:center;"><img src="img/ajax.gif" /> Guardando...</div>\');
+	$.post(\'ajax\',{serial:$("#lazo_"+$(this).attr("rel")).serialize()},function() {$(".guardando_form").remove();},"html");
+	$("#lazo_"+$(this).attr("rel"))[0].reset();
+});
+
+$(".reset").click(function() {
+	event.preventDefault();
+	$("#lazo_"+$(this).attr("rel"))[0].reset();
 });
 
 });

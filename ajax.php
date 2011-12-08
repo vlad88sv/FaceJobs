@@ -28,6 +28,28 @@ if (!sesion::iniciado())
         $DATOS[$partes[2]] = $_POST['valor'];
     
         db::insertualizar($partes[1],$DATOS);
+		unset($DATOS);
     }
+  }
+  
+  if (isset($_POST['serial']))
+  {
+  	// jQuery.unserialize()
+    $op = array();
+    $pairs = explode("&", $_POST['serial']);
+    foreach ($pairs as $pair) {
+        list($k, $v) = array_map("urldecode", explode("=", $pair)); 
+        preg_match('/(.*)\.(.*)/',$k,$partes);
+        $op[$partes[1]][$partes[2]] = $v; 
+    }
+	// jQuery.unserialize() //**************
+
+	// Guardemos
+	foreach ($op AS $tabla => $DATOS)
+	{
+		$DATOS['ID_cuenta'] = usuario::$info['ID_cuenta'];
+		db::reemplazar($tabla, $DATOS);
+	}
+	// Guardemos //**************
   }
 ?>
