@@ -62,6 +62,6 @@ define('PROY_URL_AMIGABLE',"www.".preg_replace(array("/\/?$/","/www./"),"",$_SER
 define('PROY_URL_ACTUAL_DINAMICA',web::URLactual(false));
 define('PROY_URL_ACTUAL',web::URLactual(true));
 define('PROY_URL_ACTUAL_AMIGABLE',web::URLactual(true,true));
-define('FACEBOX_APP_URL','http://apps.facebook.com/goforjobs/');
+define('FACEBOX_APP_URL','http://apps.facebook.com/facejobs_org/');
 
 ?>
