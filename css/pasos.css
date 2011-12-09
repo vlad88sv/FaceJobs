@@ -31,7 +31,7 @@
 .lazoVista {border:1px #aaa solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:15px;padding-bottom:15px;background-color:#EEE;margin-bottom: 5px;margin-top: 10px;}
 .lazoControles {text-align: right !important;}
 .lazoControles .boton {display: inline-block !important; border: 1px solid #666;border-radius: 5px;text-align: center;width: 85px !important; height: 25px !important;line-height: 25px;}
-.lazoControles .boton a {color: #F7F7F7 !important;text-decoration: none;}
+.lazoControles .boton a {color: #F7F7F7 !important;text-decoration: none;display: block;}
 
 input[type=text] {border-radius: 8px;padding: 1px 4px;background-color: #DDD; width: 250px; border: 1px #666 solid;}
 #paso3_cargos_funciones,#paso6_info_adicional_informacion{width: 500px; height: 300px;margin: auto;display: block;border-radius: 10px;}

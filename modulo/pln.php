@@ -76,7 +76,7 @@ class pln
                 $retornoCampos .= $this->procesarCampo($campo,true);
             }
             
-            $retornoVista = '<div class="lazoVista">'.$retornoVista.'</div>';
+            $retornoVista = '<div class="contenedorLazoVista" id="vista_'.$lazo.'" rel="'.$lazo.'"></div>';
             $retornoCampos = '<div class="lazoCampos">'.$retornoCampos;
             $retornoCampos .= '
             <div class="lazoControles">

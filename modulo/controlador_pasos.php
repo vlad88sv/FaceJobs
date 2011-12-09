@@ -77,13 +77,25 @@ $("input:checkbox.auto").click(function() {
 $(".autoLazo").click(function() {
 	event.preventDefault();
 	$("#lazo_"+$(this).attr("rel")+ " .lazoCampos").prepend(\'<div class="guardando_form" style="text-align:center;"><img src="img/ajax.gif" /> Guardando...</div>\');
-	$.post(\'ajax\',{serial:$("#lazo_"+$(this).attr("rel")).serialize()},function() {$(".guardando_form").remove();},"html");
+	$.post(\'ajax\',{serial:$("#lazo_"+$(this).attr("rel")).serialize()},$.proxy(function() {
+		$(".guardando_form").remove();
+		cargarContenedorLazoVista($(this).attr("rel"));
+	},this),"html");
 	$("#lazo_"+$(this).attr("rel"))[0].reset();
 });
 
 $(".reset").click(function() {
 	event.preventDefault();
 	$("#lazo_"+$(this).attr("rel"))[0].reset();
+});
+
+function cargarContenedorLazoVista(id)
+{
+	$("#vista_"+id).load("ajax", {VistaLazo:id});
+}
+
+$(".contenedorLazoVista").each(function(){
+	cargarContenedorLazoVista($(this).attr("rel"));
 });
 
 });

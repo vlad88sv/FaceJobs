@@ -52,4 +52,21 @@ if (!sesion::iniciado())
 	}
 	// Guardemos //**************
   }
+  
+  if (isset($_POST['VistaLazo']))
+  {
+  	general::requerirModulo(array('ui','cv'));
+	
+	if (!is_array(cv::$deflazo[$_POST['VistaLazo']]['campos']))
+		return;
+	
+  	$c = 'SELECT '.implode(',',cv::$deflazo[$_POST['VistaLazo']]['campos']).' FROM '.$_POST['VistaLazo'];
+  	$r = db::consultar($c);
+  	while ($f = mysql_fetch_assoc($r) )
+	{
+		echo '<pre>';
+		print_r($f);
+		echo '</pre>';
+	}
+  }
 ?>
