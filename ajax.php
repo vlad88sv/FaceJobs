@@ -60,7 +60,43 @@ if (!sesion::iniciado())
 	if (!is_array(cv::$deflazo[$_POST['VistaLazo']]['campos']))
 		return;
 	
-  	$c = 'SELECT '.implode(',',cv::$deflazo[$_POST['VistaLazo']]['campos']).' FROM '.$_POST['VistaLazo'];
+	foreach(cv::$deflazo[$_POST['VistaLazo']]['campos'] as $campo)
+	{
+		if (!isset(cv::$defcv[$campo]))
+			continue;
+		
+		if (!preg_match('/(.*)\.(.*)/',$campo,$partes))
+            continue;  
+		
+		$campos[] = $partes[2];
+		
+		if (cv::$defcv[$campo]['tipo'] == uiForm::$comboboxPaises)
+		{ 
+			cv::$defcv[$campo]['datos']['tabla'] = 'datos_pais';
+            cv::$defcv[$campo]['datos']['clave'] = 'ID_pais';
+            cv::$defcv[$campo]['datos']['valor'] = 'pais';
+		}
+		
+		if(is_array(cv::$defcv[$campo]['datos']) && isset(cv::$defcv[$campo]['datos']['tabla']) && isset(cv::$defcv[$campo]['datos']['clave']) && isset(cv::$defcv[$campo]['datos']['valor']))
+        {
+            $campos[] = '(SELECT '.cv::$defcv[$campo]['datos']['valor'].' FROM '.cv::$defcv[$campo]['datos']['tabla'].' AS t2 WHERE t2.'.cv::$defcv[$campo]['datos']['clave'].' = t1.'.$partes[2].') AS '.$partes[2].'_valor';
+        }
+		
+		if(isset(cv::$defcv[$campo]['valores']))
+		{
+			$tmpCampo = '(CASE '.$partes[2];
+			
+			foreach (cv::$defcv[$campo]['valores'] as $key => $value) {
+				$tmpCampo .= ' WHEN "'.$key.'" THEN "'.$value.'"';
+			}
+			
+			$campos[] = $tmpCampo.' END) AS '.$partes[2].'_valor';
+		}
+	}
+	
+  	$c = 'SELECT '.implode(',',$campos).' FROM '.$_POST['VistaLazo'] .' AS t1';
+	
+	echo "<pre>$c</pre>";
   	$r = db::consultar($c);
   	while ($f = mysql_fetch_assoc($r) )
 	{
