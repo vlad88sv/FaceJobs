@@ -52,6 +52,13 @@ if (!sesion::iniciado())
 	}
 	// Guardemos //**************
   }
+
+  if (isset($_POST['VistaLazo']) && isset($_POST['borrar']))
+  {
+  	$c = 'DELETE FROM '.$_POST['VistaLazo'].' WHERE ID_cuenta="'.usuario::$info['ID_cuenta'].'" AND ID_'.$_POST['VistaLazo'].'="'.$_POST['borrar'].'"';
+	$r = db::consultar($c);
+  	// No retornar, que pase a if (isset($_POST['VistaLazo'])) para mandar el contenido actualizado
+  }
   
   if (isset($_POST['VistaLazo']))
   {
@@ -94,15 +101,33 @@ if (!sesion::iniciado())
 		}
 	}
 	
-  	$c = 'SELECT '.implode(',',$campos).' FROM '.$_POST['VistaLazo'] .' AS t1';
+  	$c = 'SELECT ID_'.$_POST['VistaLazo'].', '.implode(',',$campos).' FROM '.$_POST['VistaLazo'] .' AS t1';
 	
-	echo "<pre>$c</pre>";
+	//echo "<pre>$c</pre>";
   	$r = db::consultar($c);
   	while ($f = mysql_fetch_assoc($r) )
 	{
-		echo '<pre>';
-		print_r($f);
-		echo '</pre>';
+		echo '<div class="lazoVista '.@cv::$deflazo[$_POST['VistaLazo']]['vista']['class'].'">';
+		echo '<span class="lazoVistaBolita">•</span>';
+		echo '<span class="lazoVistaControles"><a rel="'.$f['ID_'.$_POST['VistaLazo']].'" class="lazoVistaControlesEditar" href="#"><img src="img/boton_editar.gif" /></a><br /><a rel="'.$f['ID_'.$_POST['VistaLazo']].'" class="lazoVistaControlesEliminar" href="#"><img src="img/boton_borrar.gif" /></a></span>';
+		echo '<table><tr>';
+		if (isset(cv::$deflazo[$_POST['VistaLazo']]['vista']))
+		{
+			foreach(cv::$deflazo[$_POST['VistaLazo']]['vista'] as $columna => $filas)
+			{
+				echo '<td><table>';
+					foreach ($filas as $fila => $contenido) {
+						foreach ($f as $campo => $valor) {
+							$contenido = preg_replace('/\$\$'.$campo.'\$\$/', $valor, $contenido);
+						}
+						echo '<tr><td>'.$contenido.'</td></tr>';
+					}
+				echo '</table></td>';
+			}
+		}
+		echo '</tr></table>';
+		echo '</div>';
 	}
+	echo '<br style="clear:both;" />';
   }
 ?>

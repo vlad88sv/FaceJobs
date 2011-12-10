@@ -98,6 +98,15 @@ $(".contenedorLazoVista").each(function(){
 	cargarContenedorLazoVista($(this).attr("rel"));
 });
 
+
+$(".lazoVistaControlesEliminar").live("click",function(){
+	event.preventDefault();
+	var EliminarID = $(this).attr("rel");
+	var Lazo = $(this).parents(".contenedorLazoVista").attr("rel");
+	$(this).parents(".contenedorLazoVista").load("ajax", {VistaLazo:Lazo,borrar:EliminarID});
+	
+});
+
 });
 </script>'
 );

@@ -98,8 +98,10 @@ cv::$defcv['paso2_educacion_superior.completo']['texto'] = 'Completo';
 cv::$defcv['paso2_educacion_superior.titulo_obtenido']['tipo'] = uiForm::$textoSimple;
 cv::$defcv['paso2_educacion_superior.titulo_obtenido']['texto'] = 'Titulo obtenido:';
 
-cv::$defcv['paso2_educacion_superior.nivel_alcanzado']['tipo'] = uiForm::$comboboxSimple;
-cv::$defcv['paso2_educacion_superior.nivel_alcanzado']['valores'] = array('activo','abandonado','egresado','graduado','doctorado','PhD');
+cv::$defcv['paso2_educacion_superior.nivel_alcanzado']['tipo'] = uiForm::$comboboxComplejo;
+cv::$defcv['paso2_educacion_superior.nivel_alcanzado']['datos']['tabla'] = 'datos_nivel_estudio';
+cv::$defcv['paso2_educacion_superior.nivel_alcanzado']['datos']['clave'] = 'ID_nivel_estudio';
+cv::$defcv['paso2_educacion_superior.nivel_alcanzado']['datos']['valor'] = 'nivel_estudio';
 cv::$defcv['paso2_educacion_superior.nivel_alcanzado']['texto'] = 'Nivel alcanzado:';
 
 cv::$defcv['paso2_educacion_superior.fecha_desde']['tipo'] = uiForm::$fecha;
@@ -256,11 +258,11 @@ cv::$defcv['paso0.ID_expectativa_salarial']['valores'] = array(0 => 'USD \$100 -
 /*cv::$defcv['paso0.video_hash'];*/
 
 cv::$deflazo['paso2_educacion_superior']['vista']['sql'] = '';
-cv::$deflazo['paso2_educacion_superior']['vista'][0][0] = '$$fecha_agrupada$$';
-cv::$deflazo['paso2_educacion_superior']['vista'][1][0] = '<img src="$$imgBandera$$" />';
-cv::$deflazo['paso2_educacion_superior']['vista'][2][0] = '$$institucion$$';
-cv::$deflazo['paso2_educacion_superior']['vista'][2][1] = '$$ID_area_estudio$$';
-cv::$deflazo['paso2_educacion_superior']['vista'][2][2] = '<span class="vista_titulo_obtenido">$$titulo_obtenido$$</span> <span class="vista_nivel_alcanzado">$$nivel_alcanzado$$</span>';
+cv::$deflazo['paso2_educacion_superior']['vista'][0][0] = '<span class="ocre">$$fecha_desde$$ - $$fecha_hasta$$</span>';
+cv::$deflazo['paso2_educacion_superior']['vista'][0][1] = '<span class="gris">$$ID_pais_valor$$</span>';
+cv::$deflazo['paso2_educacion_superior']['vista'][1][0] = '<span class="ocre">$$institucion$$</span>';
+cv::$deflazo['paso2_educacion_superior']['vista'][1][1] = '<span class="gris">$$ID_area_estudio_valor$$</span>';
+cv::$deflazo['paso2_educacion_superior']['vista'][1][2] = '<span class="gris">$$titulo_obtenido$$</span> [<span class="ocre">$$nivel_alcanzado_valor$$</span>]';
 
 cv::$deflazo['paso2_educacion_superior']['campos'][] = 'paso2_educacion_superior.ID_pais';
 cv::$deflazo['paso2_educacion_superior']['campos'][] = 'paso2_educacion_superior.institucion';
@@ -271,8 +273,17 @@ cv::$deflazo['paso2_educacion_superior']['campos'][] = 'paso2_educacion_superior
 cv::$deflazo['paso2_educacion_superior']['campos'][] = 'paso2_educacion_superior.fecha_desde';
 cv::$deflazo['paso2_educacion_superior']['campos'][] = 'paso2_educacion_superior.fecha_hasta';
 
+cv::$deflazo['paso2_idiomas']['vista']['class'] = 'lazoVistaPeque';
+cv::$deflazo['paso2_idiomas']['vista'][0][0] = '<span class="gris">$$ID_idioma_valor$$</span>';
+cv::$deflazo['paso2_idiomas']['vista'][0][1] = '<span class="ocre">$$nivel_valor$$</span>';
+
 cv::$deflazo['paso2_idiomas']['campos'][] = 'paso2_idiomas.ID_idioma';
 cv::$deflazo['paso2_idiomas']['campos'][] = 'paso2_idiomas.nivel';
+
+cv::$deflazo['paso2_otros_estudios']['vista'][0][0] = '<span class="ocre">$$fecha_finalizacion$$</span>';
+cv::$deflazo['paso2_otros_estudios']['vista'][0][1] = '$$ID_pais_valor$$';
+cv::$deflazo['paso2_otros_estudios']['vista'][1][0] = '<span class="ocre">$$institucion$$</span>';
+cv::$deflazo['paso2_otros_estudios']['vista'][1][1] = '$$nombre_curso$$';
 
 cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.ID_pais';
 cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.institucion';
