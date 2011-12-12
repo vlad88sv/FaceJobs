@@ -183,10 +183,11 @@ cv::$defcv['paso3_cargos.funciones']['texto'] = 'Descripción de funciones desem
 /* paso4_expectativa_laboral */
 
 cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['tipo'] = uiForm::$comboboxComplejo;
-cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['datos']['tabla'] = 'datos_area_interes';
-cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['datos']['clave'] = 'ID_area_interes';
-cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['datos']['valor'] = 'area_interes';
+cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['datos']['tabla'] = 'datos_area_estudio';
+cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['datos']['clave'] = 'ID_area_estudio';
+cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['datos']['valor'] = 'area_estudio';
 cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['texto'] = 'Área de interés:';
+
 
 
 /* paso5_referencias_personal */
@@ -290,6 +291,8 @@ cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.institu
 cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.nombre_curso';
 cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.fecha_finalizacion';
 
+cv::$deflazo['paso4_expectativa_laboral']['vista']['class'] = 'lazoVistaPeque';
+cv::$deflazo['paso4_expectativa_laboral']['vista'][0][0] = '<span class="ocre">$$ID_area_interes_valor$$</span>';
 cv::$deflazo['paso4_expectativa_laboral']['campos'][] = 'paso4_expectativa_laboral.ID_area_interes';
 
 cv::$deflazo['paso5_referencias_laboral']['campos'][] = 'paso5_referencias_laboral.ID_empresa';
@@ -297,11 +300,22 @@ cv::$deflazo['paso5_referencias_laboral']['campos'][] = 'paso5_referencias_labor
 cv::$deflazo['paso5_referencias_laboral']['campos'][] = 'paso5_referencias_laboral.cargo';
 cv::$deflazo['paso5_referencias_laboral']['campos'][] = 'paso5_referencias_laboral.telefono';
 
+cv::$deflazo['paso5_referencias_personal']['vista'][0][1] = 'Nombre:';
+cv::$deflazo['paso5_referencias_personal']['vista'][0][2] = 'Teléfono:';
+cv::$deflazo['paso5_referencias_personal']['vista'][0][3] = 'Cargo:';
+cv::$deflazo['paso5_referencias_personal']['vista'][0][4] = 'Empresa:';
+cv::$deflazo['paso5_referencias_personal']['vista'][1][1] = '<span class="negro">$$nombre$$</span>';
+cv::$deflazo['paso5_referencias_personal']['vista'][1][2] = '<span class="negro">$$telefono$$</span>';
+cv::$deflazo['paso5_referencias_personal']['vista'][1][3] = '<span class="negro">$$cargo$$</span>';
+cv::$deflazo['paso5_referencias_personal']['vista'][1][4] = '<span class="negro">$$empresa$$</span>';
+
 cv::$deflazo['paso5_referencias_personal']['campos'][] = 'paso5_referencias_personal.empresa';
 cv::$deflazo['paso5_referencias_personal']['campos'][] = 'paso5_referencias_personal.nombre';
 cv::$deflazo['paso5_referencias_personal']['campos'][] = 'paso5_referencias_personal.cargo';
 cv::$deflazo['paso5_referencias_personal']['campos'][] = 'paso5_referencias_personal.telefono';
 
+cv::$deflazo['paso6_info_adicional']['vista']['class'] = 'lazoVistaPeque';
+cv::$deflazo['paso6_info_adicional']['vista'][0][0] = '$$categoria$$';
 cv::$deflazo['paso6_info_adicional']['campos'][] = 'paso6_info_adicional.categoria';
 cv::$deflazo['paso6_info_adicional']['campos'][] = 'paso6_info_adicional.informacion';
 class cv
