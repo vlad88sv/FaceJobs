@@ -90,7 +90,7 @@ if (!sesion::iniciado())
             cv::$defcv[$campo]['datos']['valor'] = 'pais';
 		}
 		
-		if(is_array(cv::$defcv[$campo]['datos']) && isset(cv::$defcv[$campo]['datos']['tabla']) && isset(cv::$defcv[$campo]['datos']['clave']) && isset(cv::$defcv[$campo]['datos']['valor']))
+		if(isset(cv::$defcv[$campo]['datos']) && is_array(cv::$defcv[$campo]['datos']) && isset(cv::$defcv[$campo]['datos']['tabla']) && isset(cv::$defcv[$campo]['datos']['clave']) && isset(cv::$defcv[$campo]['datos']['valor']))
         {
         	$filtros = '';
 			if (@is_array(cv::$defcv[$campo]['datos']['filtros']))
