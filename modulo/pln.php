@@ -128,7 +128,7 @@ class pln
         switch ($tipo)
         {
             case uiForm::$cargarImagenOWebCam:
-                $retorno .= '<div><img src="$$reemplazar::'.$campoEsc.'$$" /><input type="file" $$identificacion$$ /></div>';
+                $retorno .= '<img $$identificacion$$ src="$$reemplazar::'.$campoEsc.'$$" /> <div rel="'.$campoEsc.'" class="cargar-archivo">Cargar foto</div>';
                 break;
             
             case uiForm::$textoSimple:

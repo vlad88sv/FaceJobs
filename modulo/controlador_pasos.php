@@ -28,6 +28,8 @@ general::requerirModulo(array('plantilla'));
 
 general::registrarEstiloCSS('pasos','pasos');
 
+general::registrarScriptJS('fileuploader','fileuploader');
+
 $plantilla = new pln();
 
 $plantilla->procesar('pasos/paso_'.$paso);
@@ -39,14 +41,14 @@ if ($paso > 1)
 if ($paso < 9)
     body::agregarContenidoAlContenido('<div id="paso_siguiente"><a href="'.PROY_URL.'paso.html?p='.(min(($paso+1),9)).'">Siguiente<img src="img/paso_siguiente.png"  /></a></div>');
 body::agregarContenidoAlContenido('</div>');
-
-head::agregarContenido(
-'<script>
+ob_start();
+?>
+<script>
 $(function() {
 
 $("select.auto").change(function() {
-    $(this).after(\'<img class="guardando g_\'+$(this).attr("id")+\'" src="img/ajax.gif" />\');
-    $.post(\'ajax\',{campo:$(this).attr("rel"), valor:$(this).val()},function() {$(".guardando").remove()},"html");
+    $(this).after('<img class="guardando g_'+$(this).attr("id")+'" src="img/ajax.gif" />');
+    $.post('ajax',{campo:$(this).attr("rel"), valor:$(this).val()},function() {$(".guardando").remove()},"html");
     $(this).removeClass("sucio");
 });
 
@@ -55,29 +57,29 @@ $("input:text.auto").change(function(){$(this).addClass("sucio");})
 $("input:text.auto").focusout(function() {
   if ($(this).hasClass("sucio"))
   {
-    $(this).after(\'<img class="guardando g_\'+$(this).attr("id")+\'" src="img/ajax.gif" />\');
-    $.post(\'ajax\',{campo:$(this).attr("rel"), valor:$(this).val()},function() {$(".guardando").remove()},"html");
+    $(this).after('<img class="guardando g_'+$(this).attr("id")+'" src="img/ajax.gif" />');
+    $.post('ajax',{campo:$(this).attr("rel"), valor:$(this).val()},function() {$(".guardando").remove()},"html");
     $(this).removeClass("sucio");
   }
 });
 
 $("input:radio.auto").click(function() {
-    $(this).after(\'<img class="guardando g_\'+$(this).attr("id")+\'" src="img/ajax.gif" />\');
-    $.post(\'ajax\',{campo:$(this).attr("rel"), valor:$(this).val()},function() {$(".guardando").remove()},"html");
+    $(this).after('<img class="guardando g_'+$(this).attr("id")+'" src="img/ajax.gif" />');
+    $.post('ajax',{campo:$(this).attr("rel"), valor:$(this).val()},function() {$(".guardando").remove()},"html");
     $(this).removeClass("sucio");
 });
 
 $("input:checkbox.auto").click(function() {
-    $(this).after(\'<img class="guardando g_\'+$(this).attr("id")+\'" src="img/ajax.gif" />\');
-    $.post(\'ajax\',{campo:$(this).attr("rel"), valor:($(this).attr("checked") ? "1" : "0")},function() {$(".guardando").remove()},"html");
+    $(this).after('<img class="guardando g_'+$(this).attr("id")+'" src="img/ajax.gif" />');
+    $.post('ajax',{campo:$(this).attr("rel"), valor:($(this).attr("checked") ? "1" : "0")},function() {$(".guardando").remove()},"html");
     $(this).removeClass("sucio");
     
 });
 
 $(".autoLazo").click(function() {
 	event.preventDefault();
-	$("#lazo_"+$(this).attr("rel")+ " .lazoCampos").prepend(\'<div class="guardando_form" style="text-align:center;"><img src="img/ajax.gif" /> Guardando...</div>\');
-	$.post(\'ajax\',{serial:$("#lazo_"+$(this).attr("rel")).serialize()},$.proxy(function() {
+	$("#lazo_"+$(this).attr("rel")+ " .lazoCampos").prepend('<div class="guardando_form" style="text-align:center;"><img src="img/ajax.gif" /> Guardando...</div>');
+	$.post('ajax',{serial:$("#lazo_"+$(this).attr("rel")).serialize()},$.proxy(function() {
 		$(".guardando_form").remove();
 		cargarContenedorLazoVista($(this).attr("vista"));
 	},this),"html");
@@ -104,10 +106,23 @@ $(".lazoVistaControlesEliminar").live("click",function(){
 	var EliminarID = $(this).attr("rel");
 	var Lazo = $(this).parents(".contenedorLazoVista").attr("rel");
 	$(this).parents(".contenedorLazoVista").load("ajax", {VistaLazo:Lazo,borrar:EliminarID});
-	
 });
 
+$(".cargar-archivo").each(function(){
+    new qq.FileUploaderBasic({
+        button: $(this)[0],
+        identificador: this,
+        action: '<?php echo PROY_URL; ?>carga',
+        showMessage: function(message){ alert(message); },
+        debug: false,
+        allowedExtensions: ['jpg', 'png', 'jpeg', 'gif'],
+        onSubmit: function(id, fileName){$('#'+$(this.identificador).attr('rel')).attr('src','img/ajax2.gif');},
+        onProgress: function(id, fileName, loaded, total){},
+        onComplete: function(id, fileName, responseJSON){$('#'+$(this.identificador).attr('rel')).attr('src','crop_110_110_'+responseJSON.hash+'.jpg');}
+    });
+
 });
-</script>'
-);
-?>
+
+}); //Document.Ready()
+</script>
+<?php head::agregarContenido(ob_get_clean()); ?>
