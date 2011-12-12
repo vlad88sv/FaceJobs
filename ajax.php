@@ -100,6 +100,14 @@ if (!sesion::iniciado())
 			$campos[] = $tmpCampo.' END) AS '.$partes[2].'_valor';
 		}
 	}
+
+	if (is_array(@cv::$deflazo[$_POST['VistaLazo']]['vistaCamposExtra']))
+	{
+		foreach(cv::$deflazo[$_POST['VistaLazo']]['vistaCamposExtra'] as $campo)
+		{
+			$campos[] = $campo;	
+		}
+	}
 	
   	$c = 'SELECT ID_'.$_POST['VistaLazo'].', '.implode(',',$campos).' FROM '.$_POST['VistaLazo'] .' AS t1';
 	
