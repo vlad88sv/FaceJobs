@@ -109,7 +109,7 @@ if (!sesion::iniciado())
 	{
 		echo '<div class="lazoVista '.@cv::$deflazo[$_POST['VistaLazo']]['vista']['class'].'">';
 		echo '<span class="lazoVistaBolita">•</span>';
-		echo '<span class="lazoVistaControles"><a rel="'.$f['ID_'.$_POST['VistaLazo']].'" class="lazoVistaControlesEditar" href="#"><img src="img/boton_editar.gif" /></a><br /><a rel="'.$f['ID_'.$_POST['VistaLazo']].'" class="lazoVistaControlesEliminar" href="#"><img src="img/boton_borrar.gif" /></a></span>';
+		echo '<span class="lazoVistaControles"><a rel="'.$f['ID_'.$_POST['VistaLazo']].'" class="lazoVistaControlesEditar" href="#"><img src="img/boton_editar.gif" /></a><a rel="'.$f['ID_'.$_POST['VistaLazo']].'" class="lazoVistaControlesEliminar" href="#"><img src="img/boton_borrar.gif" /></a></span>';
 		echo '<table><tr>';
 		if (isset(cv::$deflazo[$_POST['VistaLazo']]['vista']))
 		{
