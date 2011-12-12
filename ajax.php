@@ -64,7 +64,7 @@ if (!sesion::iniciado())
   {
   	general::requerirModulo(array('ui','cv'));
 	
-	if (!is_array(cv::$deflazo[$_POST['VistaLazo']]['campos']))
+	if (!is_array(cv::$deflazo[$_POST['VistaLazo']]['campos']) || !is_array((cv::$deflazo[$_POST['VistaLazo']]['vista'])))
 		return;
 	
 	foreach(cv::$deflazo[$_POST['VistaLazo']]['campos'] as $campo)
