@@ -264,7 +264,7 @@ cv::$defcv['paso0.ID_expectativa_salarial']['valores'] = array(0 => 'USD \$100 -
 
 cv::$deflazo['paso2_educacion_superior']['vistaCamposExtra'][] = 'CONCAT(`fecha_desde`, " - ", IF(completo,`fecha_hasta`,"Actualidad")) AS "fecha_compuesta"';
 cv::$deflazo['paso2_educacion_superior']['vista'][0][0] = '<span class="ocre">$$fecha_compuesta$$</span>';
-cv::$deflazo['paso2_educacion_superior']['vista'][0][1] = '<span class="gris">$$ID_pais_valor$$</span>';
+cv::$deflazo['paso2_educacion_superior']['vista'][0][1] = '<span class="negro">$$ID_pais_valor$$</span>';
 cv::$deflazo['paso2_educacion_superior']['vista'][1][0] = '<span class="ocre">$$institucion$$</span>';
 cv::$deflazo['paso2_educacion_superior']['vista'][1][1] = '<span class="gris">$$ID_area_estudio_valor$$</span>';
 cv::$deflazo['paso2_educacion_superior']['vista'][1][2] = '<span class="gris">$$titulo_obtenido$$</span> [<span class="ocre">$$nivel_alcanzado_valor$$</span>]';
@@ -286,7 +286,7 @@ cv::$deflazo['paso2_idiomas']['campos'][] = 'paso2_idiomas.ID_idioma';
 cv::$deflazo['paso2_idiomas']['campos'][] = 'paso2_idiomas.nivel';
 
 cv::$deflazo['paso2_otros_estudios']['vista'][0][0] = '<span class="ocre">$$fecha_finalizacion$$</span>';
-cv::$deflazo['paso2_otros_estudios']['vista'][0][1] = '$$ID_pais_valor$$';
+cv::$deflazo['paso2_otros_estudios']['vista'][0][1] = '<span class="negro">$$ID_pais_valor$$</span>';
 cv::$deflazo['paso2_otros_estudios']['vista'][1][0] = '<span class="ocre">$$institucion$$</span>';
 cv::$deflazo['paso2_otros_estudios']['vista'][1][1] = '$$nombre_curso$$';
 
@@ -296,7 +296,7 @@ cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.nombre_
 cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.fecha_finalizacion';
 
 cv::$deflazo['paso3_empresa']['vistaUniones'][] = 'paso3_cargos';
-cv::$deflazo['paso3_empresa']['vistaCamposExtra'][] = '(SELECT CONCAT(`fecha_inicio`, " - ", IF(actualmente,"Actualidad",`fecha_final`)) FROM paso3_cargos as p3c WHERE p3c.ID_paso3_empresa=t1.ID_paso3_empresa GROUP BY ID_paso3_empresa LIMIT 1) AS "fecha_compuesta"';
+cv::$deflazo['paso3_empresa']['vistaCamposExtra'][] = '(SELECT CONCAT(DATE_FORMAT(`fecha_inicio`,"%b/%Y"), " - ", IF(actualmente,"actualidad",DATE_FORMAT(`fecha_final`,"%b/%Y"))) FROM paso3_cargos as p3c WHERE p3c.ID_paso3_empresa=t1.ID_paso3_empresa GROUP BY ID_paso3_empresa LIMIT 1) AS "fecha_compuesta"';
 cv::$deflazo['paso3_empresa']['vista'][0][0] = '<span class="ocre">$$fecha_compuesta$$</span>';
 cv::$deflazo['paso3_empresa']['vista'][1][0] = '<span class="negro">$$ID_pais_valor$$</span>';
 cv::$deflazo['paso3_empresa']['vista'][2][0] = '<span class="ocre">$$nombre_empresa$$</span>';
@@ -308,7 +308,7 @@ cv::$deflazo['paso3_empresa']['campos'][] = 'paso3_empresa.ID_actividad_economic
 
 cv::$deflazo['paso3_cargos']['vistaVirtual'] = true;
 cv::$deflazo['paso3_cargos']['vistaVirtualRemota'] = 'paso3_empresa';
-cv::$deflazo['paso3_cargos']['vistaCamposExtra'][] = 'CONCAT(`fecha_inicio`, " - ", IF(actualmente,"Actualidad",`fecha_final`)) AS "fecha_compuesta"';
+cv::$deflazo['paso3_cargos']['vistaCamposExtra'][] = 'CONCAT(DATE_FORMAT(`fecha_inicio`,"%b/%Y"), " - ", IF(actualmente,"actualidad",DATE_FORMAT(`fecha_final`,"%b/%Y"))) AS "fecha_compuesta"';
 cv::$deflazo['paso3_cargos']['vista'][0][0] = '<span class="ocre">$$fecha_compuesta$$</span>';
 cv::$deflazo['paso3_cargos']['vista'][1][0] = '<span class="gris">Puesto desempeñado:</span>';
 cv::$deflazo['paso3_cargos']['vista'][2][0] = '<span class="negro">$$puesto_desempenado_detalle$$</span>';
