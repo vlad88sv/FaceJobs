@@ -214,7 +214,12 @@ cv::$defcv['paso5_referencias_personal.telefono']['subtexto'] = 'Teléfono del l
 
 /* paso5_referencias_laboral */
 
-cv::$defcv['paso5_referencias_laboral.ID_empresa']['tipo'] = uiForm::$textoSimple;
+cv::$defcv['paso5_referencias_laboral.ID_empresa']['tipo'] = uiForm::$comboboxComplejo;
+cv::$defcv['paso5_referencias_laboral.ID_empresa']['datos']['tabla'] = 'paso3_empresa';
+cv::$defcv['paso5_referencias_laboral.ID_empresa']['datos']['clave'] = 'ID_paso3_empresa';
+cv::$defcv['paso5_referencias_laboral.ID_empresa']['datos']['valor'] = 'nombre_empresa';
+cv::$defcv['paso5_referencias_laboral.ID_empresa']['datos']['filtros']['mios'] = true;
+
 cv::$defcv['paso5_referencias_laboral.ID_empresa']['texto'] = 'Empresa:';
 cv::$defcv['paso5_referencias_laboral.ID_empresa']['subtexto'] = 'Selecciona la empresa en la cual laboró con este contacto de referencia laboral';
 
@@ -324,6 +329,20 @@ cv::$deflazo['paso3_cargos']['campos'][] = 'paso3_cargos.funciones';
 cv::$deflazo['paso4_expectativa_laboral']['vista']['class'] = 'lazoVistaPeque';
 cv::$deflazo['paso4_expectativa_laboral']['vista'][0][0] = '<span class="ocre">$$ID_area_interes_valor$$</span>';
 cv::$deflazo['paso4_expectativa_laboral']['campos'][] = 'paso4_expectativa_laboral.ID_area_interes';
+
+
+cv::$deflazo['paso5_referencias_laboral']['vistaCamposExtra'][] = '(SELECT pais FROM datos_pais AS dp WHERE dp.ID_pais = (SELECT ID_pais FROM paso3_empresa AS p3e WHERE p3e.ID_paso3_empresa = t1.ID_empresa )) AS "pais_valor"';
+cv::$deflazo['paso5_referencias_laboral']['vistaCamposExtra'][] = '(SELECT actividad_economica FROM datos_actividad_economica AS dae WHERE dae.ID_actividad_economica = (SELECT ID_actividad_economica FROM paso3_empresa AS p3e WHERE p3e.ID_paso3_empresa = t1.ID_empresa )) AS "ID_actividad_economica_valor"';
+cv::$deflazo['paso5_referencias_laboral']['vista'][0][0] = '$$pais_valor$$';
+cv::$deflazo['paso5_referencias_laboral']['vista'][0][1] = 'Nombre:';
+cv::$deflazo['paso5_referencias_laboral']['vista'][0][2] = 'Teléfono:';
+cv::$deflazo['paso5_referencias_laboral']['vista'][0][3] = 'Cargo:';
+cv::$deflazo['paso5_referencias_laboral']['vista'][1][0] = '<span class="ocre">$$ID_empresa_valor$$</span>';
+cv::$deflazo['paso5_referencias_laboral']['vista'][1][1] = '<span class="negro">$$nombre$$</span>';
+cv::$deflazo['paso5_referencias_laboral']['vista'][1][2] = '<span class="negro">$$telefono$$</span>';
+cv::$deflazo['paso5_referencias_laboral']['vista'][1][3] = '<span class="negro">$$cargo$$</span>';
+cv::$deflazo['paso5_referencias_laboral']['vista'][2][0] = '<span class="gris">Actividad económica de la empresa</span>';
+cv::$deflazo['paso5_referencias_laboral']['vista'][3][0] = '<span class="negro">$$ID_actividad_economica_valor$$</span>';
 
 cv::$deflazo['paso5_referencias_laboral']['campos'][] = 'paso5_referencias_laboral.ID_empresa';
 cv::$deflazo['paso5_referencias_laboral']['campos'][] = 'paso5_referencias_laboral.nombre';
