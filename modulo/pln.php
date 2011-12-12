@@ -179,7 +179,7 @@ class pln
                 break;
             
             case uiForm::$cheque:
-                $retorno .= '<input type="checkbox" $$identificacion$$ />';
+                $retorno .= '<input type="checkbox" $$identificacion$$ value="1" />';
                 break;
             
             case uiForm::$radio:
