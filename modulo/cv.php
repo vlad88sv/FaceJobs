@@ -154,11 +154,17 @@ cv::$defcv['paso3_empresa.ID_actividad_economica']['datos']['valor'] = 'activida
 cv::$defcv['paso3_empresa.ID_actividad_economica']['texto'] = 'Actividad económica de la empresa:';
 
 /* paso3_cargos */
+cv::$defcv['paso3_cargos.ID_paso3_empresa']['tipo'] = uiForm::$comboboxComplejo;
+cv::$defcv['paso3_cargos.ID_paso3_empresa']['datos']['tabla'] = 'paso3_empresa';
+cv::$defcv['paso3_cargos.ID_paso3_empresa']['datos']['clave'] = 'ID_paso3_empresa';
+cv::$defcv['paso3_cargos.ID_paso3_empresa']['datos']['valor'] = 'nombre_empresa';
+cv::$defcv['paso3_cargos.ID_paso3_empresa']['datos']['filtros']['mios'] = true;
+cv::$defcv['paso3_cargos.ID_paso3_empresa']['texto'] = 'Empresa:';
  
 cv::$defcv['paso3_cargos.ID_puesto_desempenado']['tipo'] = uiForm::$comboboxComplejo;
-cv::$defcv['paso3_cargos.ID_puesto_desempenado']['datos']['tabla'] = 'datos_puesto_desempenado';
-cv::$defcv['paso3_cargos.ID_puesto_desempenado']['datos']['clave'] = 'ID_puesto_desempenado';
-cv::$defcv['paso3_cargos.ID_puesto_desempenado']['datos']['valor'] = 'puesto_desempenado';
+cv::$defcv['paso3_cargos.ID_puesto_desempenado']['datos']['tabla'] = 'datos_area_estudio';
+cv::$defcv['paso3_cargos.ID_puesto_desempenado']['datos']['clave'] = 'ID_area_estudio';
+cv::$defcv['paso3_cargos.ID_puesto_desempenado']['datos']['valor'] = 'area_estudio';
 cv::$defcv['paso3_cargos.ID_puesto_desempenado']['texto'] = 'Puesto desempeñado:';
 cv::$defcv['paso3_cargos.ID_puesto_desempenado']['subtexto'] = 'Seleccione en la siguiente lista el puesto que mas se asemeje.';
 
@@ -187,8 +193,6 @@ cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['datos']['tabla'] = 'dat
 cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['datos']['clave'] = 'ID_area_estudio';
 cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['datos']['valor'] = 'area_estudio';
 cv::$defcv['paso4_expectativa_laboral.ID_area_interes']['texto'] = 'Área de interés:';
-
-
 
 /* paso5_referencias_personal */
 
@@ -290,6 +294,32 @@ cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.ID_pais
 cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.institucion';
 cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.nombre_curso';
 cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.fecha_finalizacion';
+
+cv::$deflazo['paso3_empresa']['vistaUniones'][] = 'paso3_cargos';
+cv::$deflazo['paso3_empresa']['vistaCamposExtra'][] = '(SELECT CONCAT(`fecha_inicio`, " - ", IF(actualmente,"Actualidad",`fecha_final`)) FROM paso3_cargos as p3c WHERE p3c.ID_paso3_empresa=t1.ID_paso3_empresa GROUP BY ID_paso3_empresa LIMIT 1) AS "fecha_compuesta"';
+cv::$deflazo['paso3_empresa']['vista'][0][0] = '<span class="ocre">$$fecha_compuesta$$</span>';
+cv::$deflazo['paso3_empresa']['vista'][1][0] = '<span class="negro">$$ID_pais_valor$$</span>';
+cv::$deflazo['paso3_empresa']['vista'][2][0] = '<span class="ocre">$$nombre_empresa$$</span>';
+cv::$deflazo['paso3_empresa']['vista'][2][1] = 'Actividad económica de la empresa: <span class="negro">$$ID_actividad_economica_valor$$</span>';
+
+cv::$deflazo['paso3_empresa']['campos'][] = 'paso3_empresa.ID_pais';
+cv::$deflazo['paso3_empresa']['campos'][] = 'paso3_empresa.nombre_empresa';
+cv::$deflazo['paso3_empresa']['campos'][] = 'paso3_empresa.ID_actividad_economica';
+
+cv::$deflazo['paso3_cargos']['vistaVirtual'] = true;
+cv::$deflazo['paso3_cargos']['vistaVirtualRemota'] = 'paso3_empresa';
+cv::$deflazo['paso3_cargos']['vistaCamposExtra'][] = 'CONCAT(`fecha_inicio`, " - ", IF(actualmente,"Actualidad",`fecha_final`)) AS "fecha_compuesta"';
+cv::$deflazo['paso3_cargos']['vista'][0][0] = '<span class="ocre">$$fecha_compuesta$$</span>';
+cv::$deflazo['paso3_cargos']['vista'][1][0] = '<span class="gris">Puesto desempeñado:</span>';
+cv::$deflazo['paso3_cargos']['vista'][2][0] = '<span class="negro">$$puesto_desempenado_detalle$$</span>';
+
+cv::$deflazo['paso3_cargos']['campos'][] = 'paso3_cargos.ID_paso3_empresa';
+cv::$deflazo['paso3_cargos']['campos'][] = 'paso3_cargos.ID_puesto_desempenado';
+cv::$deflazo['paso3_cargos']['campos'][] = 'paso3_cargos.puesto_desempenado_detalle';
+cv::$deflazo['paso3_cargos']['campos'][] = 'paso3_cargos.actualmente';
+cv::$deflazo['paso3_cargos']['campos'][] = 'paso3_cargos.fecha_inicio';
+cv::$deflazo['paso3_cargos']['campos'][] = 'paso3_cargos.fecha_final';
+cv::$deflazo['paso3_cargos']['campos'][] = 'paso3_cargos.funciones';
 
 cv::$deflazo['paso4_expectativa_laboral']['vista']['class'] = 'lazoVistaPeque';
 cv::$deflazo['paso4_expectativa_laboral']['vista'][0][0] = '<span class="ocre">$$ID_area_interes_valor$$</span>';

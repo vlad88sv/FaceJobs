@@ -79,7 +79,7 @@ $(".autoLazo").click(function() {
 	$("#lazo_"+$(this).attr("rel")+ " .lazoCampos").prepend(\'<div class="guardando_form" style="text-align:center;"><img src="img/ajax.gif" /> Guardando...</div>\');
 	$.post(\'ajax\',{serial:$("#lazo_"+$(this).attr("rel")).serialize()},$.proxy(function() {
 		$(".guardando_form").remove();
-		cargarContenedorLazoVista($(this).attr("rel"));
+		cargarContenedorLazoVista($(this).attr("vista"));
 	},this),"html");
 	$("#lazo_"+$(this).attr("rel"))[0].reset();
 });

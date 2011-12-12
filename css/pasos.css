@@ -30,10 +30,12 @@
 table{border-collapse:collapse;}
 .lazoCampos {border:1px #CCC solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:15px;padding-bottom:15px;}
 .lazoVista {border:2px #aaa solid; border-radius:10px;background-color:#EEE;margin-bottom: 5px;margin-top: 10px;position: relative;font-size: 11px;}
+.lazoVistaVirtual {border:none; border-radius:0;background-color:#EEE;position: relative;font-size: 11px;margin:0 30px;min-height:18px;}
 .lazoVistaPeque {display:inline-block;width:200px;float:left;margin-right:10px;}
-.lazoVista table td {vertical-align: top;}
+.lazoVista table td {vertical-align: top;padding:0 2px;}
 .lazoVistaBolita{font-size:24px;color:#5b0504; margin: 0 2px;float: left;line-height:18px;height:20px;}
 .lazoVistaControles{position:absolute;right:2px;top:2px;}
+.lazoVistaControles a {display:inline-block;}
 .lazoControles {text-align: right !important;}
 .lazoControles .boton {display: inline-block !important; border: 1px solid #666;border-radius: 5px;text-align: center;width: 55px !important; height: 20px !important;line-height: 20px; font-size:12px;}
 .lazoControles .boton a {color: #F7F7F7 !important;text-decoration: none;display: block;}

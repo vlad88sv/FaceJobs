@@ -76,11 +76,11 @@ class pln
                 $retornoCampos .= $this->procesarCampo($campo,true);
             }
             
-            $retornoVista = '<div class="contenedorLazoVista" id="vista_'.$lazo.'" rel="'.$lazo.'"></div>';
+            $retornoVista = !isset(cv::$deflazo[$lazo]['vistaVirtual']) ? '<div class="contenedorLazoVista" id="vista_'.$lazo.'" rel="'.$lazo.'"></div>' : '';
             $retornoCampos = '<div class="lazoCampos">'.$retornoCampos;
             $retornoCampos .= '
             <div class="lazoControles">
-	            <div class="boton"><a href="#" class="autoLazo" rel="'.$lazo.'">Guardar</a></div>
+	            <div class="boton"><a href="#" class="autoLazo" rel="'.$lazo.'" vista="'.((isset(cv::$deflazo[$lazo]['vistaVirtual']) && isset(cv::$deflazo[$lazo]['vistaVirtualRemota'])) ? cv::$deflazo[$lazo]['vistaVirtualRemota'] : $lazo ).'">Guardar</a></div>
 	            <div class="boton"><a href="#" class="reset" rel="'.$lazo.'">Cancelar</a></div>            
             </div>
             ';
