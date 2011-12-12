@@ -86,7 +86,15 @@ if (!sesion::iniciado())
 		
 		if(is_array(cv::$defcv[$campo]['datos']) && isset(cv::$defcv[$campo]['datos']['tabla']) && isset(cv::$defcv[$campo]['datos']['clave']) && isset(cv::$defcv[$campo]['datos']['valor']))
         {
-            $campos[] = '(SELECT '.cv::$defcv[$campo]['datos']['valor'].' FROM '.cv::$defcv[$campo]['datos']['tabla'].' AS t2 WHERE t2.'.cv::$defcv[$campo]['datos']['clave'].' = t1.'.$partes[2].') AS '.$partes[2].'_valor';
+        	$filtros = '';
+			if (@is_array(cv::$defcv[$campo]['datos']['filtros']))
+			{
+				if (in_array('mios', cv::$defcv[$campo]['datos']['filtros']))
+				{
+					$filtros = 'AND ID_cuenta='.usuario::$info['ID_cuenta'];
+				}
+			}
+            $campos[] = '(SELECT '.cv::$defcv[$campo]['datos']['valor'].' FROM '.cv::$defcv[$campo]['datos']['tabla'].' AS t2 WHERE t2.'.cv::$defcv[$campo]['datos']['clave'].' = t1.'.$partes[2].' '.$filtros.') AS '.$partes[2].'_valor';
         }
 		
 		if(isset(cv::$defcv[$campo]['valores']))
