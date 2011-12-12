@@ -17,13 +17,19 @@ class uiForm
 
 class ui
 {
-    public static function ObtenerImagen($archivo)
+    public static function ObtenerImagen($archivo,$ancho,$alto,$crop)
     {
         $ruta = 'img/'.$archivo;
         
-        if (!file_exists($ruta))
-            $ruta = 'imagen_sinfoto';
-            
+		$prefijo = $crop ? 'crop' : 'imagen';
+        
+        if (empty($archivo) || !file_exists($ruta))
+		{
+            $ruta = $prefijo.'_'.$ancho.'_'.$alto.'_sinfoto.jpg';
+		} else {
+			$ruta = $prefijo.'_'.$ancho.'_'.$alto.'_'.$archivo.'.jpg';
+		}
+
         return $ruta;
     }
 }
