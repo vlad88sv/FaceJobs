@@ -40,7 +40,7 @@ if (!sesion::iniciado())
     <meta name="robots" content="index, follow" />
     <meta property="fb:app_id" content="<?php echo general::$config['appId']; ?>" />
     <meta property="og:url" content="<?php echo PROY_URL; ?>" />
-    <meta property="og:image" content="<?php echo PROY_URL; ?>img/logo.png"/>
+    <meta property="og:image" content="<?php echo PROY_URL; ?>img/logo_cuadrado.jpg"/>
     <link href="favicon.ico" rel="icon" type="image/x-icon" />
     <?php echo head::obtenerEstilosCSS(); ?>
     <?php echo head::obtenerScriptsJS(); ?>
@@ -60,7 +60,7 @@ if (!sesion::iniciado())
     <script src="http://connect.facebook.net/en_US/all.js#appId=<?php echo general::$config['appId']; ?>&xfbml=1"></script>
     <script>
         $(document).ready(function() {
-            FB.init({appId: <?php echo general::$config['appId']; ?>,xfbml: true, oauth: true});
+            FB.init({appId: <?php echo general::$config['appId']; ?>,xfbml: true, oauth: true, cookie: true, status: true});
             FB.Event.subscribe('auth.login', function(response) {window.location.reload();});
             FB.Event.subscribe('auth.logout', function(response) {window.location.reload();});
         });
