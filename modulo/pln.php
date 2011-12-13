@@ -38,7 +38,7 @@ class pln
     
     private function procesarGrupos()
     {
-        $this->pln = preg_replace('/\[grupo\:(.*?)\](.*?)\[\/grupo\]/s','<div class="grupo" id="grupo_$1">$2</div>',$this->pln);
+        $this->pln = preg_replace(array('/\[grupo\:(.*?)\]/','/\[\/grupo\]/'),array('<div class="grupo" id="grupo_$1">','</div>'),$this->pln);
     }
     
     private function procesarTitulos()
