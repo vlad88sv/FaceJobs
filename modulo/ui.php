@@ -19,7 +19,7 @@ class ui
 {
     public static function ObtenerImagen($archivo,$ancho,$alto,$crop)
     {
-        $ruta = 'img/'.$archivo;
+        $ruta = 'pool/img/'.$archivo;
         
 		$prefijo = $crop ? 'crop' : 'imagen';
         
