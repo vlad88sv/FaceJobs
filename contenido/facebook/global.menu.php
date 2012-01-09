@@ -3,6 +3,11 @@ general::registrarEstiloCSS('menu','menu');
 
 $menu['inicio']['texto'] = 'Inicio';
 $menu['inicio']['titulo'] = 'Iniciar en '.PROY_NOMBRE;
+$menu['buscar']['nivel'] = array(usuario::$tipoVisitante);
+
+$menu['inicio']['texto'] = 'Perfil';
+$menu['inicio']['titulo'] = 'Mi Currilum Vitae';
+$menu['buscar']['nivel'] = array(usuario::$tipoCandidato);
 
 $menu['buscar']['texto'] = 'Ofertas de trabajo';
 $menu['buscar']['titulo'] = 'Ver las ofertas de trabajo';
