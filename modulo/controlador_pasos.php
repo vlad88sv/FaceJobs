@@ -100,12 +100,22 @@ $(".contenedorLazoVista").each(function(){
 	cargarContenedorLazoVista($(this).attr("rel"));
 });
 
+$(".lazoVistaControlesEditar").live("click",function(){
+    event.preventDefault();
+    var ID = $(this).attr("rel");
+    var Lazo = $(this).parents(".contenedorLazoVista").attr("rel");
+    $.post("ajax", {VistaLazo:Lazo,editar:ID}, function(data){
+        jQuery.each(data, function(i, val) {
+            $('#'+Lazo+'_'+i).val(val);
+        });
+    }, "json");
+});
 
 $(".lazoVistaControlesEliminar").live("click",function(){
-	event.preventDefault();
-	var EliminarID = $(this).attr("rel");
-	var Lazo = $(this).parents(".contenedorLazoVista").attr("rel");
-	$(this).parents(".contenedorLazoVista").load("ajax", {VistaLazo:Lazo,borrar:EliminarID});
+    event.preventDefault();
+    var EliminarID = $(this).attr("rel");
+    var Lazo = $(this).parents(".contenedorLazoVista").attr("rel");
+    $(this).parents(".contenedorLazoVista").load("ajax", {VistaLazo:Lazo,borrar:EliminarID});
 });
 
 $(".cargar-archivo").each(function(){

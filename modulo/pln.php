@@ -66,17 +66,20 @@ class pln
             $retornoCampos = "";
             $retornoVista = "";
             
-            /* Procesar la vista */
-            /* *falta* */
+            
             
             /* Procesar los campos */
-            $campos = array();
             foreach(cv::$deflazo[$lazo]['campos'] as $campo)
             {
                 $retornoCampos .= $this->procesarCampo($campo,true);
             }
             
+            $retornoCampos = '<input type="hidden" value="0" name="'.$lazo.'.ID_'.$lazo.'" id="'.$lazo.'_ID_'.$lazo.'" />'.$retornoCampos;
+            
+            /* Procesar la vista */
+            // Acá solamente es un DIV que posteriormente interpreta controlador_pasos
             $retornoVista = !isset(cv::$deflazo[$lazo]['vistaVirtual']) ? '<div class="contenedorLazoVista" id="vista_'.$lazo.'" rel="'.$lazo.'"></div>' : '';
+            
             $retornoCampos = '<div class="lazoCampos">'.$retornoCampos;
             $retornoCampos .= '
             <div class="lazoControles">

@@ -59,7 +59,17 @@ if (!sesion::iniciado())
 	$r = db::consultar($c);
   	// No retornar, que pase a if (isset($_POST['VistaLazo'])) para mandar el contenido actualizado
   }
-  
+
+  if (isset($_POST['VistaLazo']) && isset($_POST['editar']))
+  {
+  	$c = 'SELECT * FROM '.$_POST['VistaLazo'].' WHERE ID_cuenta="'.usuario::$info['ID_cuenta'].'" AND ID_'.$_POST['VistaLazo'].'="'.$_POST['editar'].'" LIMIT 1';
+	$r = db::consultar($c);
+        $f = mysql_fetch_assoc($r);
+        echo json_encode($f);
+        return;
+  	// retonar, no neecesitamos actualizar la vista aun.
+  }  
+
   if (isset($_POST['VistaLazo']))
   {
   	CargarVistaLazo(false);
@@ -75,54 +85,53 @@ if (!sesion::iniciado())
 	$ID_table = 2;
 	foreach(cv::$deflazo[$_POST['VistaLazo']]['campos'] as $campo)
 	{
-		if (!isset(cv::$defcv[$campo]))
-			continue;
+            if (!isset(cv::$defcv[$campo]))
+                continue;
+            
+            if (!preg_match('/(.*)\.(.*)/',$campo,$partes))
+                continue;  
 		
-		if (!preg_match('/(.*)\.(.*)/',$campo,$partes))
-            continue;  
-		
-		$campos[] = $partes[2];
-		
-		if (cv::$defcv[$campo]['tipo'] == uiForm::$comboboxPaises)
-		{ 
-			cv::$defcv[$campo]['datos']['tabla'] = 'datos_pais';
-            cv::$defcv[$campo]['datos']['clave'] = 'ID_pais';
-            cv::$defcv[$campo]['datos']['valor'] = 'pais';
-		}
-		
-		if(isset(cv::$defcv[$campo]['datos']) && is_array(cv::$defcv[$campo]['datos']) && isset(cv::$defcv[$campo]['datos']['tabla']) && isset(cv::$defcv[$campo]['datos']['clave']) && isset(cv::$defcv[$campo]['datos']['valor']))
-        {
-        	$filtros = '';
-			if (@is_array(cv::$defcv[$campo]['datos']['filtros']))
-			{
-				if (in_array('mios', cv::$defcv[$campo]['datos']['filtros']))
-				{
-					$filtros = 'AND ID_cuenta='.usuario::$info['ID_cuenta'];
-				}
-			}
-            $campos[] = '(SELECT '.cv::$defcv[$campo]['datos']['valor'].' FROM '.cv::$defcv[$campo]['datos']['tabla'].' AS t'.$ID_table.' WHERE t'.$ID_table.'.'.cv::$defcv[$campo]['datos']['clave'].' = t1.'.$partes[2].' '.$filtros.') AS '.$partes[2].'_valor';
-			
-			$ID_table++;
-        }
-		
-		if(isset(cv::$defcv[$campo]['valores']))
-		{
-			$tmpCampo = '(CASE '.$partes[2];
-			
-			foreach (cv::$defcv[$campo]['valores'] as $key => $value) {
-				$tmpCampo .= ' WHEN "'.$key.'" THEN "'.$value.'"';
-			}
-			
-			$campos[] = $tmpCampo.' END) AS '.$partes[2].'_valor';
-		}
+            $campos[] = $partes[2];
+            
+            if (cv::$defcv[$campo]['tipo'] == uiForm::$comboboxPaises)
+            { 
+                cv::$defcv[$campo]['datos']['tabla'] = 'datos_pais';
+                cv::$defcv[$campo]['datos']['clave'] = 'ID_pais';
+                cv::$defcv[$campo]['datos']['valor'] = 'pais';
+            }
+            
+            if(isset(cv::$defcv[$campo]['datos']) && is_array(cv::$defcv[$campo]['datos']) && isset(cv::$defcv[$campo]['datos']['tabla']) && isset(cv::$defcv[$campo]['datos']['clave']) && isset(cv::$defcv[$campo]['datos']['valor']))
+            {
+                $filtros = '';
+                if (@is_array(cv::$defcv[$campo]['datos']['filtros']))
+                {
+                    if (in_array('mios', cv::$defcv[$campo]['datos']['filtros']))
+                    {
+                            $filtros = 'AND ID_cuenta='.usuario::$info['ID_cuenta'];
+                    }
+                }
+                $campos[] = '(SELECT '.cv::$defcv[$campo]['datos']['valor'].' FROM '.cv::$defcv[$campo]['datos']['tabla'].' AS t'.$ID_table.' WHERE t'.$ID_table.'.'.cv::$defcv[$campo]['datos']['clave'].' = t1.'.$partes[2].' '.$filtros.') AS '.$partes[2].'_valor';			
+                $ID_table++;
+            }
+            
+            if(isset(cv::$defcv[$campo]['valores']))
+            {
+                $tmpCampo = '(CASE '.$partes[2];
+                
+                foreach (cv::$defcv[$campo]['valores'] as $key => $value) {
+                        $tmpCampo .= ' WHEN "'.$key.'" THEN "'.$value.'"';
+                }
+                
+                $campos[] = $tmpCampo.' END) AS '.$partes[2].'_valor';
+            }
 	}
 
 	if (is_array(@cv::$deflazo[$_POST['VistaLazo']]['vistaCamposExtra']))
 	{
-		foreach(cv::$deflazo[$_POST['VistaLazo']]['vistaCamposExtra'] as $campo)
-		{
-			$campos[] = $campo;	
-		}
+            foreach(cv::$deflazo[$_POST['VistaLazo']]['vistaCamposExtra'] as $campo)
+            {
+                $campos[] = $campo;	
+            }
 	}
 	
   	$c = 'SELECT ID_'.$_POST['VistaLazo'].', '.implode(',',$campos).' FROM '.$_POST['VistaLazo'] .' AS t1';
@@ -137,27 +146,27 @@ if (!sesion::iniciado())
 		echo '<table><tr>';
 		if (isset(cv::$deflazo[$_POST['VistaLazo']]['vista']))
 		{
-			foreach(cv::$deflazo[$_POST['VistaLazo']]['vista'] as $columna => $filas)
-			{
-				echo '<td><table>';
-					foreach ($filas as $fila => $contenido) {
-						foreach ($f as $campo => $valor) {
-							$contenido = preg_replace('/\$\$'.$campo.'\$\$/', $valor, $contenido);
-						}
-						echo '<tr><td>'.$contenido.'</td></tr>';
-					}
-				echo '</table></td>';
-			}
+                    foreach(cv::$deflazo[$_POST['VistaLazo']]['vista'] as $columna => $filas)
+                    {
+                        echo '<td><table>';
+                            foreach ($filas as $fila => $contenido) {
+                                foreach ($f as $campo => $valor) {
+                                        $contenido = preg_replace('/\$\$'.$campo.'\$\$/', $valor, $contenido);
+                                }
+                                echo '<tr><td>'.$contenido.'</td></tr>';
+                            }
+                        echo '</table></td>';
+                    }
 		}
 		echo '</tr></table>';
 		
 		if (is_array(@cv::$deflazo[$_POST['VistaLazo']]['vistaUniones']))
 		{
-			echo '<br />';
-			foreach (cv::$deflazo[$_POST['VistaLazo']]['vistaUniones'] as $Vista) {
-				$_POST['VistaLazo'] = $Vista;
-				CargarVistaLazo(true);
-			}
+                    echo '<br />';
+                    foreach (cv::$deflazo[$_POST['VistaLazo']]['vistaUniones'] as $Vista) {
+                        $_POST['VistaLazo'] = $Vista;
+                        CargarVistaLazo(true);
+                    }
 		}
 		echo '</div>';
 	}
