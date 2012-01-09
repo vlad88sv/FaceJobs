@@ -79,9 +79,8 @@ $("input:checkbox.auto").click(function() {
 $(".autoLazo").click(function() {
 	event.preventDefault();
 	$("#lazo_"+$(this).attr("rel")+ " .lazoCampos").prepend('<div class="guardando_form" style="text-align:center;"><img src="img/ajax.gif" /> Guardando...</div>');
-	$.post('ajax',{serial:$("#lazo_"+$(this).attr("rel")).serialize()},$.proxy(function() {
+	$("#vista_"+$(this).attr("rel")).load('ajax',{VistaLazo: $(this).attr("rel"), serial:$("#lazo_"+$(this).attr("rel")).serialize()},$.proxy(function() {
 		$(".guardando_form").remove();
-		cargarContenedorLazoVista($(this).attr("vista"));
 	},this),"html");
 	$("#lazo_"+$(this).attr("rel"))[0].reset();
         $("#"+$(this).attr("rel")+"_ID_"+$(this).attr("rel")).val("0");
