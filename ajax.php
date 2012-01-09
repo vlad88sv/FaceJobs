@@ -42,15 +42,16 @@ if (!sesion::iniciado())
         preg_match('/(.*)\.(.*)/',$k,$partes);
         $op[$partes[1]][$partes[2]] = $v; 
     }
-	// jQuery.unserialize() //**************
+    // jQuery.unserialize() //**************
 
-	// Guardemos
-	foreach ($op AS $tabla => $DATOS)
-	{
-		$DATOS['ID_cuenta'] = usuario::$info['ID_cuenta'];
-		db::reemplazar($tabla, $DATOS);
-	}
-	// Guardemos //**************
+    // ToDo: validación de datos, denegar guardar la tabla si algún campo no cumple los requisitos.
+    // Guardemos
+    foreach ($op AS $tabla => $DATOS)
+    {
+        $DATOS['ID_cuenta'] = usuario::$info['ID_cuenta'];
+        db::reemplazar($tabla, $DATOS);
+    }
+    // Guardemos //**************
   }
 
   if (isset($_POST['VistaLazo']) && isset($_POST['borrar']))
