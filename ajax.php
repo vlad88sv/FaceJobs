@@ -65,6 +65,7 @@ if (!sesion::iniciado())
   	$c = 'SELECT * FROM '.$_POST['VistaLazo'].' WHERE ID_cuenta="'.usuario::$info['ID_cuenta'].'" AND ID_'.$_POST['VistaLazo'].'="'.$_POST['editar'].'" LIMIT 1';
 	$r = db::consultar($c);
         $f = mysql_fetch_assoc($r);
+        unset($f['ID_cuenta'],$f['actualizacion']);
         echo json_encode($f);
         return;
   	// retonar, no neecesitamos actualizar la vista aun.

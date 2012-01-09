@@ -84,11 +84,13 @@ $(".autoLazo").click(function() {
 		cargarContenedorLazoVista($(this).attr("vista"));
 	},this),"html");
 	$("#lazo_"+$(this).attr("rel"))[0].reset();
+        $("#"+$(this).attr("rel")+"_ID_"+$(this).attr("rel")).val("0");
 });
 
 $(".reset").click(function() {
 	event.preventDefault();
 	$("#lazo_"+$(this).attr("rel"))[0].reset();
+        $("#"+$(this).attr("rel")+"_ID_"+$(this).attr("rel")).val("0");
 });
 
 function cargarContenedorLazoVista(id)
@@ -106,7 +108,29 @@ $(".lazoVistaControlesEditar").live("click",function(){
     var Lazo = $(this).parents(".contenedorLazoVista").attr("rel");
     $.post("ajax", {VistaLazo:Lazo,editar:ID}, function(data){
         jQuery.each(data, function(i, val) {
-            $('#'+Lazo+'_'+i).val(val);
+            switch($('#'+Lazo+'_'+i).get(0).tagName.toLowerCase())
+            {
+                case 'input':
+                    switch ($('#'+Lazo+'_'+i).attr('type'))
+                    {
+                        case 'hidden':
+                        case 'text':
+                            $('#'+Lazo+'_'+i).val(val);
+                            break;
+                        case 'radio':
+                            $('#'+Lazo+'_'+i+'[value="'+val+'"]').attr("checked","checked");
+                            break;
+                        case 'checkbox':
+                            if (val == 1) $('#'+Lazo+'_'+i).attr("checked","checked");
+                            break;
+                    }
+                    break;
+                case 'textarea':
+                case 'select':
+                    $('#'+Lazo+'_'+i).val(val);
+                    break;
+            }
+            
         });
     }, "json");
 });
