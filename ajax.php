@@ -166,7 +166,9 @@ if (!sesion::iniciado())
                     echo '<br />';
                     foreach (cv::$deflazo[$_POST['VistaLazo']]['vistaUniones'] as $Vista) {
                         $_POST['VistaLazo'] = $Vista;
+                        echo '<div class="contenedorLazoVista" id="vista_'.$Vista.'" rel="'.$Vista.'">';
                         CargarVistaLazo(true);
+                        echo '</div>';
                     }
 		}
 		echo '</div>';
