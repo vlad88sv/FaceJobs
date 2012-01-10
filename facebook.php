@@ -1,7 +1,7 @@
 <?php
 /* Frontend de Facebook. */
 sesion::iniciar_sesion();
-general::registrarScriptJS('jQuery','jquery-1.6.2');
+general::registrarScriptJS('jQuery','jquery-1.7.1');
 general::registrarEstiloCSS('facebook','facebook');
 body::agregarAlInicio('cabecera',true);
 body::agregarAlInicio('global.menu',true);
@@ -9,7 +9,7 @@ if (!sesion::iniciado())
 {
     body::agregarAlContenido ('sesion.iniciar',true);
 } else {
-    switch ($_GET['peticion'])
+    switch (@$_GET['peticion'])
     {
         case 'tds':
             body::agregarAlContenido ('terminos.y.condiciones',true);
@@ -44,7 +44,7 @@ if (!sesion::iniciado())
     <link href="favicon.ico" rel="icon" type="image/x-icon" />
     <?php echo head::obtenerEstilosCSS(); ?>
     <?php echo head::obtenerScriptsJS(); ?>
-    <?php echo head::$extra; ?>    
+    <?php echo head::$extra; ?> 
     <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', '<?php echo general::$config['google-UA']; ?>']);
@@ -60,9 +60,10 @@ if (!sesion::iniciado())
     <script src="http://connect.facebook.net/en_US/all.js#appId=<?php echo general::$config['appId']; ?>&xfbml=1"></script>
     <script>
         $(document).ready(function() {
-            FB.init({appId: <?php echo general::$config['appId']; ?>,xfbml: true, oauth: true, cookie: true, status: true});
+            FB.init({appId: <?php echo general::$config['appId']; ?>,status: true, cookie: true, xfbml: true});
             FB.Event.subscribe('auth.login', function(response) {window.location.reload();});
             FB.Event.subscribe('auth.logout', function(response) {window.location.reload();});
+            FB.getLoginStatus(function(response) {if (response.session) {login();}});
         });
     </script>
 </head>
