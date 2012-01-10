@@ -1,2 +1,2 @@
 #!/bin/bash
-rsync --compress --exclude '*.psd' --exclude '.git' -av ./  root@vps.mupi.com.sv:/var/www/facejobs.org/
+rsync --compress-level=9 --exclude '*.psd' --exclude '.git' -a --progress ./  root@vps.mupi.com.sv:/var/www/facejobs.org/
