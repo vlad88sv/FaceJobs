@@ -27,8 +27,10 @@ body::agregarAlContenido('ver.pasos',true);
 general::requerirModulo(array('plantilla'));
 
 general::registrarEstiloCSS('pasos','pasos');
+general::registrarEstiloCSS('FaceBox','facebox');
 
 general::registrarScriptJS('fileuploader','fileuploader');
+general::registrarScriptJS('FaceBox','jquery.facebox');
 
 $plantilla = new pln();
 
