@@ -18,7 +18,7 @@
 #contenido {border:2px #CCC solid; border-radius:10px;color:#666;padding-left:50px;padding-right:12px;padding-top:15px;padding-bottom:15px;}
 #TituloGeneral{text-align:left;margin-left:15px;}
 .grupo {border-bottom:1px #ccc solid;padding-bottom:15px;margin-bottom:15px;text-align: left;}
-.titulo {color:#666;text-align:left;font-size:14px;line-height: 14px;height:24px;}
+.titulo {color:#666;text-align:left;font-size:14px;line-height: 14px;margin-bottom:24px;}
 .numeroTitulo {background-color:#5b0504;color:#FFF;padding:2px 4px;}
 .subtitulo {padding-left: 25px; color:#5b0504;}
 .tituloCampo:before {content:"►";font-size:14px;color:#5b0504;}
