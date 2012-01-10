@@ -131,9 +131,18 @@ class pln
         switch ($tipo)
         {
             case uiForm::$cargarImagenOWebCam:
-                $retorno .= '<table style="width:100%;"><tr><td>
-                <img $$identificacion$$ src="$$reemplazar::'.$campoEsc.'$$" /></td><td style="text-align:center;"><div rel="'.$campoEsc.'" class="cargar-archivo">Cargar fotografía desde computadora</div>-o-<div>Tomate una fotografía con tu camara web</div>
-                </td></tr></table>';
+                $retorno .= '<table style="width:100%;">
+                <tr>
+                    <td>
+                        <img $$identificacion$$ src="$$reemplazar::'.$campoEsc.'$$" />
+                    </td>
+                    <td style="text-align:center;color:#5B0504;">
+                        <div rel="'.$campoEsc.'" class="cargar-archivo">Cargar fotografía desde computadora</div>
+                        -o-
+                        <div>Tomate una fotografía con tu camara web</div>
+                    </td>
+                </tr>
+                </table>';
                 break;
             
             case uiForm::$textoSimple:
