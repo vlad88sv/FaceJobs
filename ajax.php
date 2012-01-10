@@ -150,6 +150,8 @@ if (!sesion::iniciado())
 		{
                     foreach(cv::$deflazo[$_POST['VistaLazo']]['vista'] as $columna => $filas)
                     {
+                        if (!is_array($filas))
+                            continue;
                         echo '<td><table>';
                             foreach ($filas as $fila => $contenido) {
                                 foreach ($f as $campo => $valor) {
