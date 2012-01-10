@@ -17,8 +17,13 @@ public static function iniciar_sesion()
   
   $user = self::$facebook->getUser();
 
-  error_log(self::$facebook->getAccessToken());
-  if ($user)
+  try {  
+    $cache = self::$facebook->api('/me');
+  } catch (FacebookApiException $e) {
+    $cache = false;
+  }
+  
+  if ($user && $cache)
   {
     //Create Query
     $params = array(
@@ -34,7 +39,6 @@ public static function iniciar_sesion()
     
     if (db::verificarIndice('cuentas','ID',array($user)) == 0)
     {
-      $cache = self::$facebook->api('/me');
       
       $datos['ID'] = $cache['id'];
       $datos['link'] = $cache['link'];

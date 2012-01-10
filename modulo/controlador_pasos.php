@@ -107,6 +107,7 @@ $(".lazoVistaControlesEditar").live("click",function(){
     event.preventDefault();
     var ID = $(this).attr("rel");
     var Lazo = $(this).parents(".contenedorLazoVista").attr("rel");
+    $("#lazo_"+Lazo+ " .lazoCampos").prepend('<div class="guardando_form" style="text-align:center;"><img src="img/ajax.gif" /> Cargando para edición...</div>');
     $.post("ajax", {VistaLazo:Lazo,editar:ID}, function(data){
         jQuery.each(data, function(i, val) {
             switch($('#'+Lazo+'_'+i).get(0).tagName.toLowerCase())
@@ -131,7 +132,7 @@ $(".lazoVistaControlesEditar").live("click",function(){
                     $('#'+Lazo+'_'+i).val(val);
                     break;
             }
-            
+            $(".guardando_form").remove();
         });
     }, "json");
 });

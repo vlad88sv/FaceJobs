@@ -56,16 +56,6 @@ if (!sesion::iniciado())
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
     </script>
-
-    <script src="http://connect.facebook.net/en_US/all.js#appId=<?php echo general::$config['appId']; ?>&xfbml=1"></script>
-    <script>
-        $(document).ready(function() {
-            FB.init({appId: <?php echo general::$config['appId']; ?>,status: true, cookie: true, xfbml: true});
-            FB.Event.subscribe('auth.login', function(response) {window.location.reload();});
-            FB.Event.subscribe('auth.logout', function(response) {window.location.reload();});
-            FB.getLoginStatus(function(response) {if (response.session) {login();}});
-        });
-    </script>
 </head>
 
 <body>
@@ -77,9 +67,32 @@ if (!sesion::iniciado())
         <?php echo body::$final; ?>
     </div>
     </div>
-    <script>
+    <script type="text/javascript">
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId: '<?php echo general::$config['appId']; ?>',
+          cookie: true,
+          xfbml: true,
+          oauth: true
+        });
+        FB.Event.subscribe('auth.login', function(response) {
+          window.location.reload();
+        });
+        FB.Event.subscribe('auth.logout', function(response) {
+          window.location.reload();
+        });
+      };
+      (function() {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+      }());
+    </script>
+    <script type="text/javascript">
+    $(window).load(function () {
         FB.Canvas.setAutoGrow();
         FB.Canvas.setDoneLoading();
+    });
     </script>
 </body>
 </html>
