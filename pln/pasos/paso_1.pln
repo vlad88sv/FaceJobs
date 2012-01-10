@@ -9,6 +9,7 @@
 [campo]paso1_personal.nombres[/campo]
 [campo]paso1_personal.apellidos[/campo]
 [campo]paso1_personal.estado_civil[/campo]
+[campo]paso1_personal.fecha_nacimiento[/campo]
 [campo]paso1_personal.sexo[/campo]
 [campo]paso1_personal.telefono_contacto[/campo]
 [campo]paso1_personal.ID_nacionalidad[/campo]
