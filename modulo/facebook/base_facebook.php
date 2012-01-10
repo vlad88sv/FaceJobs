@@ -278,8 +278,19 @@ abstract class BaseFacebook
    *
    * @return boolean true if and only if the server supports file upload.
    */
-  public function useFileUploadSupport() {
+  public function getFileUploadSupport() {
     return $this->fileUploadSupport;
+  }
+
+  /**
+   * DEPRECATED! Please use getFileUploadSupport instead.
+   *
+   * Get the file upload support status.
+   *
+   * @return boolean true if and only if the server supports file upload.
+   */
+  public function useFileUploadSupport() {
+    return $this->getFileUploadSupport();
   }
 
   /**
@@ -314,7 +325,8 @@ abstract class BaseFacebook
     // access token, in case we navigate to the /oauth/access_token
     // endpoint, where SOME access token is required.
     $this->setAccessToken($this->getApplicationAccessToken());
-    if ($user_access_token = $this->getUserAccessToken()) {
+    $user_access_token = $this->getUserAccessToken();
+    if ($user_access_token) {
       $this->setAccessToken($user_access_token);
     }
 
@@ -705,7 +717,12 @@ abstract class BaseFacebook
 
     // results are returned, errors are thrown
     if (is_array($result) && isset($result['error_code'])) {
-      throw new FacebookApiException($result);
+      $this->throwAPIException($result);
+    }
+
+    if ($params['method'] === 'auth.expireSession' ||
+        $params['method'] === 'auth.revokeAuthorization') {
+      $this->destroySession();
     }
 
     return $result;
@@ -782,7 +799,7 @@ abstract class BaseFacebook
     }
 
     $opts = self::$CURL_OPTS;
-    if ($this->useFileUploadSupport()) {
+    if ($this->getFileUploadSupport()) {
       $opts[CURLOPT_POSTFIELDS] = $params;
     } else {
       $opts[CURLOPT_POSTFIELDS] = http_build_query($params, null, '&');
@@ -1036,6 +1053,8 @@ abstract class BaseFacebook
       case 'OAuthException':
         // OAuth 2.0 Draft 10 style
       case 'invalid_token':
+        // REST server errors are just Exceptions
+      case 'Exception':
         $message = $e->getMessage();
       if ((strpos($message, 'Error validating access token') !== false) ||
           (strpos($message, 'Invalid OAuth access token') !== false)) {
@@ -1076,6 +1095,15 @@ abstract class BaseFacebook
    */
   protected static function base64UrlDecode($input) {
     return base64_decode(strtr($input, '-_', '+/'));
+  }
+
+  /**
+   * Destroy the current session
+   */
+  public function destroySession() {
+    $this->setAccessToken(null);
+    $this->user = 0;
+    $this->clearAllPersistentData();
   }
 
   /**

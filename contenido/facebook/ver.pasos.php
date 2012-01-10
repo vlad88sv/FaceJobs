@@ -1,22 +1,22 @@
 <?php
 $pasos[1]['titulo'] = 'Datos personales';
-$pasos[1]['porcentaje'] = 0;
+$pasos[1]['porcentaje'] = rand(0,100);
 $pasos[2]['titulo'] = 'Educación';
-$pasos[2]['porcentaje'] = 25;
+$pasos[2]['porcentaje'] = rand(0,100);
 $pasos[3]['titulo'] = 'Experencia laboral';
-$pasos[3]['porcentaje'] = 50;
+$pasos[3]['porcentaje'] = rand(0,100);
 $pasos[4]['titulo'] = 'Expectativa laboral';
-$pasos[4]['porcentaje'] = 75;
+$pasos[4]['porcentaje'] = rand(0,100);
 $pasos[5]['titulo'] = 'Referencias';
-$pasos[5]['porcentaje'] = 100;
+$pasos[5]['porcentaje'] = rand(0,100);
 $pasos[6]['titulo'] = 'Categorias adicionales';
-$pasos[6]['porcentaje'] = 0;
+$pasos[6]['porcentaje'] = rand(0,100);
 $pasos[7]['titulo'] = 'Video Curriculum';
-$pasos[7]['porcentaje'] = 0;
+$pasos[7]['porcentaje'] = rand(0,100);
 $pasos[8]['titulo'] = 'Privacidad';
-$pasos[8]['porcentaje'] = 0;
+$pasos[8]['porcentaje'] = rand(0,100);
 $pasos[9]['titulo'] = 'Visualización';
-$pasos[9]['porcentaje'] = 0;
+$pasos[9]['porcentaje'] = rand(0,100);
 
 $p = @$_GET['p'];
 if (!is_numeric($p) || $p < 1 || $p > 9)

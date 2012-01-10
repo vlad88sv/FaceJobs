@@ -17,8 +17,21 @@ public static function iniciar_sesion()
   
   $user = self::$facebook->getUser();
 
+  error_log(self::$facebook->getAccessToken());
   if ($user)
   {
+    //Create Query
+    $params = array(
+        'method' => 'fql.query',
+        'query' => "SELECT current_location, first_name, middle_name, last_name, birthday_date FROM user WHERE uid = me()",
+    );
+    
+    //Run Query
+    $result = self::$facebook->api($params);
+    
+    general::$config['temporal']['pais'] = $result[0]['current_location']['country'];
+    error_log(serialize($result));
+    
     if (db::verificarIndice('cuentas','ID',array($user)) == 0)
     {
       $cache = self::$facebook->api('/me');
