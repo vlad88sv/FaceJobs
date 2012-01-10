@@ -1,6 +1,9 @@
 ==6:Información adicional==
 [grupo:paso6_info_adicional]
 [titulo:1]Añade información adicional que considere relevante y que no haya sido ingresa en otros pasos.[/titulo]
-[subtitulo]<a href="#">Ver ejemplos</a>[/subtitulo]
+[subtitulo]<a id="ver_ejemplos" href="#">Ver ejemplo</a>[/subtitulo]
 [lazo]paso6_info_adicional[/lazo]
 [/grupo]
+<script>
+$("#ver_ejemplos").click(function(){$.facebox('<h1>Ejemplo</h1><p class="subtituloCampo">Si desea agregar una categoría llamada <strong>Proyectos realizados</strong>, introduzca como nombre de categoría <strong>Proyectos realizados</strong> y en el campo de texto escriba el texto referente a la categoría.</p><div class="lazoCampos"><span class="tituloCampo">Nombre de categoria:</span> <input type="text" maxlength="25" readonly="readonly" value="Proyectos realizados"><br><br><textarea id="paso6_info_adicional_informacion" readonly="readonly">He desarrollado las siguientes páginas web:\nwww.example.com, wwww.ejemplo.com, www.facejobs.org</textarea><br><div class="lazoControles"><div class="boton"><a href="#">Guardar</a></div><div class="boton"><a href="#">Cancelar</a></div></div></div>')});
+</script>
