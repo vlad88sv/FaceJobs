@@ -35,7 +35,7 @@ public static function iniciar_sesion()
     $result = self::$facebook->api($params);
     
     general::$config['temporal']['pais'] = $result[0]['current_location']['country'];
-    error_log(serialize($result));
+    //error_log(serialize($result));
     
     if (db::verificarIndice('cuentas','ID',array($user)) == 0)
     {
