@@ -371,6 +371,13 @@ cv::$deflazo['paso6_info_adicional']['vista']['class'] = 'lazoVistaPeque';
 cv::$deflazo['paso6_info_adicional']['vista'][0][0] = '$$categoria$$';
 cv::$deflazo['paso6_info_adicional']['campos'][] = 'paso6_info_adicional.categoria';
 cv::$deflazo['paso6_info_adicional']['campos'][] = 'paso6_info_adicional.informacion';
+
+cv::$deflazo['paso6_info_adicional_vista']['paraTabla'] = 'paso6_info_adicional';
+cv::$deflazo['paso6_info_adicional_vista']['vista'][0][0] = '<h2>$$categoria$$</h2>';
+cv::$deflazo['paso6_info_adicional_vista']['vista'][0][1] = '$$informacion$$';
+cv::$deflazo['paso6_info_adicional_vista']['campos'][] = 'paso6_info_adicional.categoria';
+cv::$deflazo['paso6_info_adicional_vista']['campos'][] = 'paso6_info_adicional.informacion';
+
 class cv
 {
     public static $defcv = array();
