@@ -263,7 +263,7 @@ cv::$defcv['paso0.ID_idioma_nativo']['datos']['valor'] = 'idioma';
 cv::$defcv['paso0.ID_idioma_nativo']['texto'] = 'Idioma nativo';
 
 cv::$defcv['paso0.ID_expectativa_salarial']['tipo'] = uiForm::$comboboxSimple;
-cv::$defcv['paso0.ID_expectativa_salarial']['texto'] = 'Selecciona el rango de tu expectativa salarial';
+cv::$defcv['paso0.ID_expectativa_salarial']['texto'] = 'Rango de expectativa salarial';
 cv::$defcv['paso0.ID_expectativa_salarial']['valores'] = array(0 => 'USD \$100 - USD \$250','USD \$250 - USD \$500','USD \$500 - USD \$750','USD \$750 - USD \$1000','USD \$1000 - USD \$1500','USD \$1500 - USD \$2000','USD \$2000 - USD \$3000','> USD \$3000');
 /*cv::$defcv['paso0.video_hash'];*/
 

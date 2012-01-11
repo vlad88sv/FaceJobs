@@ -23,7 +23,9 @@ class pln
         $this->procesarSubTitulos();
         $this->procesarTitulos();
         $this->procesarLazos();
+        $this->procesarVistaLazos();
         $this->procesarCampos();
+        $this->procesarVisuales();
         
         // Finalmente reemplazamos los valores con los del usuario
         $this->reemplazarValores();
@@ -92,6 +94,123 @@ class pln
             
             $this->pln = preg_replace( '/\[lazo\]'.$lazo.'\[\/lazo\]/', $retorno, $this->pln );
         }
+    }
+    
+    private function procesarVisuales()
+    {
+        $campos = array();
+        preg_match_all('/\[visual](.*?)\[\/visual\]/s',$this->pln,$campos);
+        
+        foreach($campos[1] as $campo)
+        {
+            if ($retorno = $this->procesarVisual($campo));
+            $this->pln = preg_replace( '/\[visual\]'.$campo.'\[\/visual\]/', $retorno, $this->pln );
+        }
+    }
+    
+    private function procesarVisual($campo,$esLazo = false)
+    {
+        $retorno = "";
+        if (!isset(cv::$defcv[$campo]))
+            return false;
+        
+        $campoEsc = preg_replace('/\./','_',$campo);
+        
+        if(isset(cv::$defcv[$campo]['tipo']))
+           $tipo = cv::$defcv[$campo]['tipo'];
+        else
+            $tipo = uiForm::$textoSimple;
+                
+        if(isset(cv::$defcv[$campo]['texto']))
+            $retorno .= '<span class="tituloCampo">'.cv::$defcv[$campo]['texto'].'</span> ';
+                
+        switch ($tipo)
+        {
+            case uiForm::$cargarImagenOWebCam:
+                $retorno .= '<img src="$$reemplazar::'.$campoEsc.'$$" />';
+                break;
+            
+            case uiForm::$textoSimple:
+                $retorno .= '<span class="visualTexto">$$reemplazar::'.$campoEsc.'$$</span>';
+                break;
+            
+            case uiForm::$comboboxSimple;
+                $options = '<option value="">Seleccione</option>';
+                if(is_array(cv::$defcv[$campo]['valores']))
+                {
+                    foreach (cv::$defcv[$campo]['valores'] as $valor => $texto)
+                        $options .= '<option value="'.$valor.'">'.$texto.'</option>';
+                }
+                $retorno .= '<select disabled="disabled" $$identificacion$$>'.$options.'</select>';
+                break;
+                
+            case uiForm::$comboboxPaises:
+                cv::$defcv[$campo]['datos']['tabla'] = 'datos_pais';
+                cv::$defcv[$campo]['datos']['clave'] = 'ID_pais';
+                cv::$defcv[$campo]['datos']['valor'] = 'pais';
+                
+            case uiForm::$comboboxComplejo:
+                $options = '<option value="">Seleccione</option>';
+                if(is_array(cv::$defcv[$campo]['datos']) && isset(cv::$defcv[$campo]['datos']['tabla']) && isset(cv::$defcv[$campo]['datos']['clave']) && isset(cv::$defcv[$campo]['datos']['valor']))
+                {
+                    $c = 'SELECT '.cv::$defcv[$campo]['datos']['clave'].' AS "clave", '.cv::$defcv[$campo]['datos']['valor'].' AS "valor" FROM '.cv::$defcv[$campo]['datos']['tabla'];
+                    $r = db::consultar($c);
+                    while ($f = mysql_fetch_assoc($r))
+                        $options .= '<option value="'.$f['clave'].'">'.$f['valor'].'</option>';
+                }
+                $retorno .= '<select disabled="disabled" $$identificacion$$>'.$options.'</select>';
+                break;
+            
+            case uiForm::$fecha:
+                $retorno .= '<span class="visualTexto">$$reemplazar::'.$campoEsc.'$$</span>';
+                break;
+
+            case uiForm::$telefono:
+                $retorno .= '<span class="visualTexto">$$reemplazar::'.$campoEsc.'$$</span>';
+                break;
+                
+            case uiForm::$correo:
+                $retorno .= '<span class="visualTexto">$$reemplazar::'.$campoEsc.'$$</span>';
+                break;
+
+            case uiForm::$sino:
+                $retorno .= '<input disabled="disabled" type="radio" $$identificacion$$ value="1" /> Si <input disabled="disabled" type="radio" $$identificacion$$ value="0" /> No ';
+                break;
+            
+            case uiForm::$cheque:
+                $retorno .= '<input disabled="disabled" type="checkbox" $$identificacion$$ value="1" />';
+                break;
+            
+            case uiForm::$radio:
+                $options = '';
+                if(is_array(cv::$defcv[$campo]['valores']))
+                {
+                    foreach (cv::$defcv[$campo]['valores'] as $valor => $texto)
+                        $retorno .= '<input disabled="disabled" type="radio" $$identificacion$$ value="'.$valor.'"/> ' . $texto;
+                }
+                break;
+
+            case uiForm::$memo:
+                $retorno .= '<br /><textarea disabled="disabled">$$reemplazar::'.$campoEsc.'$$</textarea>';
+                break;
+        }
+        
+        $retorno = preg_replace('/\$\$identificacion\$\$/','name="'.$campo.'" id="'.$campoEsc.'"',$retorno);
+
+        
+        if(isset(cv::$defcv[$campo]['subtexto']))
+            $retorno .= '<br /><span class="subtituloCampo">'.cv::$defcv[$campo]['subtexto'].'</span>';
+        
+        if(!isset(cv::$defcv[$campo]['enLinea']))
+            $retorno .= '<br />'."\n";
+        
+        $partes = null;
+        
+        if (preg_match('/(.*)\.(.*)/',$campo,$partes))
+        {
+            $this->campos[$partes[1]][]= $partes[2];
+        }
+        return $retorno;
     }
     
     private function procesarCampos()
@@ -298,7 +417,122 @@ class pln
                     $this->pln = preg_replace('/(id="'.$campoEsc.'")/','$1 checked="checked"',$this->pln,1);
                 break;
         }
+    }
+
+    private function procesarVistaLazos()
+    {
+        $lazos = array();
+        preg_match_all('/\[vistalazo](.*?)\[\/vistalazo\]/s',$this->pln,$lazos);
+        
+        foreach($lazos[1] as $lazo)
+        {
+            if (!isset(cv::$deflazo[$lazo]))
+                continue;
+            
+            $this->pln = preg_replace( '/\[vistalazo\]'.$lazo.'\[\/vistalazo\]/', $this->VistaLazo($lazo), $this->pln );
+        }
     }    
+    
+    function VistaLazo($lazo,$virtual=false)
+    {
+        $retorno = '';
+	
+	if (!is_array(cv::$deflazo[$lazo]['campos']) || !is_array((cv::$deflazo[$lazo]['vista'])) || (!$virtual && isset(cv::$deflazo[$lazo]['vistaVirtual'])) )
+		return;
+	
+	$ID_table = 2;
+	foreach(cv::$deflazo[$lazo]['campos'] as $campo)
+	{
+            if (!isset(cv::$defcv[$campo]))
+                continue;
+            
+            if (!preg_match('/(.*)\.(.*)/',$campo,$partes))
+                continue;  
+		
+            $campos[] = $partes[2];
+            
+            if (cv::$defcv[$campo]['tipo'] == uiForm::$comboboxPaises)
+            { 
+                cv::$defcv[$campo]['datos']['tabla'] = 'datos_pais';
+                cv::$defcv[$campo]['datos']['clave'] = 'ID_pais';
+                cv::$defcv[$campo]['datos']['valor'] = 'pais';
+            }
+            
+            if(isset(cv::$defcv[$campo]['datos']) && is_array(cv::$defcv[$campo]['datos']) && isset(cv::$defcv[$campo]['datos']['tabla']) && isset(cv::$defcv[$campo]['datos']['clave']) && isset(cv::$defcv[$campo]['datos']['valor']))
+            {
+                $filtros = '';
+                if (@is_array(cv::$defcv[$campo]['datos']['filtros']))
+                {
+                    if (in_array('mios', cv::$defcv[$campo]['datos']['filtros']))
+                    {
+                            $filtros = 'AND ID_cuenta='.usuario::$info['ID_cuenta'];
+                    }
+                }
+                $campos[] = '(SELECT '.cv::$defcv[$campo]['datos']['valor'].' FROM '.cv::$defcv[$campo]['datos']['tabla'].' AS t'.$ID_table.' WHERE t'.$ID_table.'.'.cv::$defcv[$campo]['datos']['clave'].' = t1.'.$partes[2].' '.$filtros.') AS '.$partes[2].'_valor';			
+                $ID_table++;
+            }
+            
+            if(isset(cv::$defcv[$campo]['valores']))
+            {
+                $tmpCampo = '(CASE '.$partes[2];
+                
+                foreach (cv::$defcv[$campo]['valores'] as $key => $value) {
+                        $tmpCampo .= ' WHEN "'.$key.'" THEN "'.$value.'"';
+                }
+                
+                $campos[] = $tmpCampo.' END) AS '.$partes[2].'_valor';
+            }
+	}
+
+	if (is_array(@cv::$deflazo[$lazo]['vistaCamposExtra']))
+	{
+            foreach(cv::$deflazo[$lazo]['vistaCamposExtra'] as $campo)
+            {
+                $campos[] = $campo;	
+            }
+	}
+	
+  	$c = 'SELECT ID_'.$lazo.', '.implode(',',$campos).' FROM '.$lazo .' AS t1';
+	
+  	$r = db::consultar($c);
+  	while ($f = mysql_fetch_assoc($r) )
+	{
+		$retorno .= '<div class="'.($virtual ? 'lazoVistaVirtual' : 'lazoVista').' '.@cv::$deflazo[$lazo]['vista']['class'].'">';
+		if (!$virtual) $retorno .= '<span class="lazoVistaBolita">•</span>';
+		$retorno .= '<table><tr>';
+		if (isset(cv::$deflazo[$lazo]['vista']))
+		{
+                    foreach(cv::$deflazo[$lazo]['vista'] as $columna => $filas)
+                    {
+                        if (!is_array($filas))
+                            continue;
+                        $retorno .= '<td><table>';
+                            foreach ($filas as $fila => $contenido) {
+                                foreach ($f as $campo => $valor) {
+                                        $contenido = preg_replace('/\$\$'.$campo.'\$\$/', $valor, $contenido);
+                                }
+                                $retorno .= '<tr><td>'.$contenido.'</td></tr>';
+                            }
+                        $retorno .= '</table></td>';
+                    }
+		}
+		$retorno .= '</tr></table>';
+		
+		if (is_array(@cv::$deflazo[$lazo]['vistaUniones']))
+		{
+                    $retorno .= '<br />';
+                    foreach (cv::$deflazo[$lazo]['vistaUniones'] as $Vista) {
+                        $retorno .= '<div class="contenedorLazoVista" id="vista_'.$Vista.'" rel="'.$Vista.'">';
+                        $this->VistaLazo($Vista,true);
+                        $retorno .= '</div>';
+                    }
+		}
+		$retorno .= '</div>';
+	}
+	$retorno .= '<br style="clear:both;" />';
+        
+        return $retorno;
+    }
 }
 
 ?>
