@@ -296,7 +296,32 @@ class pln
                 break;
             
             case uiForm::$fecha:
-                $retorno .= '<input type="text" $$identificacion$$ value="$$reemplazar::'.$campoEsc.'$$" />';
+                if (!isset(cv::$defcv[$campo]['flags']))
+                    cv::$defcv[$campo]['flags'] = 'DMY';
+                
+                switch (cv::$defcv[$campo]['flags'])
+                {
+                    case 'DMY':
+                        cv::$defcv[$campo.'Dia']['tipo'] = uiForm::$comboboxSimple;
+                        cv::$defcv[$campo.'Dia']['valores'] = array('1' => 1);
+                        cv::$defcv[$campo.'Dia']['enLinea'] = true;
+                        
+                        $retorno .= $this->procesarCampo($campo.'Dia',$esLazo);
+                        
+                        cv::$defcv[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
+                        cv::$defcv[$campo.'Mes']['valores'] = array('1' => 'Enero');
+                        cv::$defcv[$campo.'Mes']['enLinea'] = true;
+                        $retorno .= $this->procesarCampo($campo.'Mes',$esLazo);
+                        
+                        cv::$defcv[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
+                        cv::$defcv[$campo.'Ano']['valores'] = array('2011' => '2011');
+                        cv::$defcv[$campo.'Ano']['enLinea'] = true;
+                        $retorno .= $this->procesarCampo($campo.'Ano',$esLazo);
+                        
+                        $retorno .= '<input type="hidden" $$identificacion$$ value="$$reemplazar::'.$campoEsc.'$$" />';
+
+                    break;
+                }
                 break;
 
             case uiForm::$telefono:
