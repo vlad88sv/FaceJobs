@@ -492,7 +492,8 @@ class pln
             }
 	}
 	
-  	$c = 'SELECT ID_'.$lazo.', '.implode(',',$campos).' FROM '.$lazo .' AS t1';
+        $tabla = isset(cv::$deflazo[$lazo]['paraTabla'])  ? cv::$deflazo[$lazo]['paraTabla'] : $lazo;
+  	$c = 'SELECT ID_'.$tabla.', '.implode(',',$campos).' FROM '.$tabla .' AS t1';
 	
   	$r = db::consultar($c);
   	while ($f = mysql_fetch_assoc($r) )
