@@ -21,6 +21,7 @@ cv::$defcv['paso1_personal.estado_civil']['valores'] = array('casado' => 'Casado
 cv::$defcv['paso1_personal.estado_civil']['texto'] = 'Estado civil:';
 
 cv::$defcv['paso1_personal.fecha_nacimiento']['tipo'] = uiForm::$fecha;
+cv::$defcv['paso1_personal.fecha_nacimiento']['anoLimite'] = '1994';
 cv::$defcv['paso1_personal.fecha_nacimiento']['flags'] = 'DMY';
 cv::$defcv['paso1_personal.fecha_nacimiento']['texto'] = 'Fecha de nacimiento:';
 
@@ -176,11 +177,11 @@ cv::$defcv['paso3_cargos.actualmente']['tipo'] = uiForm::$cheque;
 cv::$defcv['paso3_cargos.actualmente']['texto'] = 'Se desempeña actualmente en este puesto de trabajo:';
 
 cv::$defcv['paso3_cargos.fecha_inicio']['tipo'] = uiForm::$fecha;
-cv::$defcv['paso3_cargos.fecha_inicio']['flags'] = 'YM';
+cv::$defcv['paso3_cargos.fecha_inicio']['flags'] = 'MY';
 cv::$defcv['paso3_cargos.fecha_inicio']['texto'] = 'Fecha desde:';
 
 cv::$defcv['paso3_cargos.fecha_final']['tipo'] = uiForm::$fecha;
-cv::$defcv['paso3_cargos.fecha_final']['flags'] = 'YM';
+cv::$defcv['paso3_cargos.fecha_final']['flags'] = 'MY';
 cv::$defcv['paso3_cargos.fecha_final']['texto'] = 'Fecha hasta:';
 
 cv::$defcv['paso3_cargos.funciones']['tipo'] = uiForm::$memo;
@@ -305,7 +306,7 @@ cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.nombre_
 cv::$deflazo['paso2_otros_estudios']['campos'][] = 'paso2_otros_estudios.fecha_finalizacion';
 
 cv::$deflazo['paso3_empresa']['vistaUniones'][] = 'paso3_cargos';
-cv::$deflazo['paso3_empresa']['vistaCamposExtra'][] = '(SELECT CONCAT(DATE_FORMAT(`fecha_inicio`,"%b/%Y"), " - ", IF(actualmente,"actualidad",DATE_FORMAT(`fecha_final`,"%b/%Y"))) FROM paso3_cargos as p3c WHERE p3c.ID_paso3_empresa=t1.ID_paso3_empresa GROUP BY ID_paso3_empresa LIMIT 1) AS "fecha_compuesta"';
+cv::$deflazo['paso3_empresa']['vistaCamposExtra'][] = '(SELECT CONCAT(MIN(DATE_FORMAT(STR_TO_DATE(CONCAT(`fecha_inicioMes`,",",`fecha_inicioAno`),"%m,%Y"),"%b/%Y")), " - ", IF(actualmente,"actualidad",DATE_FORMAT(STR_TO_DATE(CONCAT(`fecha_finalMes`,",",`fecha_finalAno`),"%m,%Y"),"%b/%Y"))) FROM paso3_cargos as p3c WHERE p3c.ID_paso3_empresa=t1.ID_paso3_empresa GROUP BY p3c.ID_paso3_empresa LIMIT 1) AS "fecha_compuesta"';
 cv::$deflazo['paso3_empresa']['vista'][0][0] = '<span class="ocre">$$fecha_compuesta$$</span>';
 cv::$deflazo['paso3_empresa']['vista'][1][0] = '<span class="negro">$$ID_pais_valor$$</span>';
 cv::$deflazo['paso3_empresa']['vista'][2][0] = '<span class="ocre">$$nombre_empresa$$</span>';
@@ -317,7 +318,7 @@ cv::$deflazo['paso3_empresa']['campos'][] = 'paso3_empresa.ID_actividad_economic
 
 cv::$deflazo['paso3_cargos']['vistaVirtual'] = true;
 cv::$deflazo['paso3_cargos']['vistaVirtualRemota'] = 'paso3_empresa';
-cv::$deflazo['paso3_cargos']['vistaCamposExtra'][] = 'CONCAT(DATE_FORMAT(`fecha_inicio`,"%b/%Y"), " - ", IF(actualmente,"actualidad",DATE_FORMAT(`fecha_final`,"%b/%Y"))) AS "fecha_compuesta"';
+cv::$deflazo['paso3_cargos']['vistaCamposExtra'][] = 'CONCAT(DATE_FORMAT(STR_TO_DATE(CONCAT(`fecha_inicioMes`,",",`fecha_inicioAno`),"%m,%Y"),"%b/%Y"), " - ", IF(actualmente,"actualidad",DATE_FORMAT(STR_TO_DATE(CONCAT(`fecha_finalMes`,",",`fecha_finalAno`),"%m,%Y"),"%b/%Y"))) AS "fecha_compuesta"';
 cv::$deflazo['paso3_cargos']['vista'][0][0] = '<span class="ocre">$$fecha_compuesta$$</span>';
 cv::$deflazo['paso3_cargos']['vista'][1][0] = '<span class="gris">Puesto desempeñado:</span>';
 cv::$deflazo['paso3_cargos']['vista'][2][0] = '<span class="negro">$$puesto_desempenado_detalle$$</span>';

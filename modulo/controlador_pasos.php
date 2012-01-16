@@ -81,7 +81,7 @@ $("input:checkbox.auto").click(function() {
 $(".autoLazo").click(function() {
 	event.preventDefault();
 	$("#lazo_"+$(this).attr("rel")+ " .lazoCampos").prepend('<div class="guardando_form" style="text-align:center;"><img src="img/ajax.gif" /> Guardando...</div>');
-	$("#vista_"+$(this).attr("rel")).load('ajax',{VistaLazo: $(this).attr("rel"), serial:$("#lazo_"+$(this).attr("rel")).serialize()},$.proxy(function() {
+	$("#vista_"+$(this).attr("vista")).load('ajax',{VistaLazo: $(this).attr("vista"), serial:$("#lazo_"+$(this).attr("rel")).serialize()},$.proxy(function() {
 		$(".guardando_form").remove();
 	},this),"html");
 	$("#lazo_"+$(this).attr("rel"))[0].reset();
@@ -110,7 +110,12 @@ $(".lazoVistaControlesEditar").live("click",function(){
     $("#lazo_"+Lazo+ " .lazoCampos").prepend('<div class="guardando_form" style="text-align:center;"><img src="img/ajax.gif" /> Cargando para edición...</div>');
     $.post("ajax", {VistaLazo:Lazo,editar:ID}, function(data){
         jQuery.each(data, function(i, val) {
-            switch($('#'+Lazo+'_'+i).get(0).tagName.toLowerCase())
+            try {
+                tag = $('#'+Lazo+'_'+i).get(0).tagName.toLowerCase();
+            } catch (err) {
+                return true;
+            }
+            switch(tag)
             {
                 case 'input':
                     switch ($('#'+Lazo+'_'+i).attr('type'))
@@ -133,6 +138,7 @@ $(".lazoVistaControlesEditar").live("click",function(){
                     break;
             }
             $(".guardando_form").remove();
+            return true;
         });
     }, "json");
 });

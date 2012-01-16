@@ -15,3 +15,13 @@ body{background:#fff;font-size:100%;font-family:"lucida grande",tahoma,verdana,a
 .ocre{color:#5b0504;}
 .gris{color:#535353;}
 .negro{color:#000;}
+
+#PlantillaGeneral {width: 100%;}
+#PlantillaGeneralMenu {width: 30%;text-align: left;}
+#PlantillaGeneralMenu img {border: 1px #6d6d6d solid; width:110px; height: 110px;}
+#PlantillaGeneralMenu ul {list-style:none;margin:0;border:none;padding:0;}
+#PlantillaGeneralMenu ul li {color: #666;font-size: 14px;font-weight: bold; line-height: 15px;}
+#PlantillaGeneralMenu ul ul {padding: 5px;}
+#PlantillaGeneralMenu ul ul li {color: black; font-size: 12px;}
+
+#PlantillaGeneralContenido {width: 70%;border:1px solid #8c8b8b;border-radius: 5px;text-align: left;vertical-align: top;padding: 2px 17px;}

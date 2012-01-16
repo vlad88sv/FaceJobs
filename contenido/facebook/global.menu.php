@@ -7,11 +7,11 @@ $menu['buscar']['nivel'] = array(usuario::$tipoVisitante);
 
 $menu['inicio']['texto'] = 'Perfil';
 $menu['inicio']['titulo'] = 'Mi Currilum Vitae';
-$menu['buscar']['nivel'] = array(usuario::$tipoCandidato);
+$menu['inicio']['nivel'] = array(usuario::$tipoCandidato);
 
-$menu['buscar']['texto'] = 'Ofertas de trabajo';
-$menu['buscar']['titulo'] = 'Ver las ofertas de trabajo';
-$menu['buscar']['nivel'] = array(usuario::$tipoCandidato, usuario::$tipoAdministrador);
+$menu['ofertas']['texto'] = 'Ofertas de trabajo';
+$menu['ofertas']['titulo'] = 'Ver las ofertas de trabajo';
+$menu['ofertas']['nivel'] = array(usuario::$tipoCandidato, usuario::$tipoAdministrador);
 
 $menu['mensajes']['texto'] = 'Mensajes';
 $menu['mensajes']['titulo'] = 'Centro de mensajes';

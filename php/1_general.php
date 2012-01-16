@@ -58,6 +58,7 @@ public static function requerirModulo(array $nombreModulos)
 /* Registremos todas los modulos que creamos necesarios */  
 general::registrarModulo('sesion_facebook','sesion_facebook.php');
 general::registrarModulo('facebook-sdk','facebook/facebook.php');
+general::registrarModulo('plantilla-general','plantilla_general.php');
 general::registrarModulo('ui','ui.php');
 general::registrarModulo('plantilla','pln.php');
 general::registrarModulo('controlador_pasos','controlador_pasos.php');

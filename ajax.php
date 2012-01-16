@@ -32,9 +32,9 @@ if (!sesion::iniciado())
     }
   }
   
-  if (isset($_POST['serial']))
+  if (isset($_POST['VistaLazo']) && isset($_POST['serial']))
   {
-  	// jQuery.unserialize()
+    // jQuery.unserialize()
     $op = array();
     $pairs = explode("&", $_POST['serial']);
     foreach ($pairs as $pair) {
@@ -137,7 +137,6 @@ if (!sesion::iniciado())
 	}
 	
   	$c = 'SELECT ID_'.$_POST['VistaLazo'].', '.implode(',',$campos).' FROM '.$_POST['VistaLazo'] .' AS t1';
-	
 	//echo "<pre>$c</pre>";
   	$r = db::consultar($c);
   	while ($f = mysql_fetch_assoc($r) )

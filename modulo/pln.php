@@ -162,7 +162,70 @@ class pln
                 break;
             
             case uiForm::$fecha:
-                $retorno .= '<span class="visualTexto">$$reemplazar::'.$campoEsc.'$$</span>';
+                if (!isset(cv::$defcv[$campo]['flags']))
+                cv::$defcv[$campo]['flags'] = 'DMY';
+                
+                for($i=1; $i < 32; $i++)
+                {
+                    $dia[$i] = $i;
+                }
+                
+                $mes[1] = 'Enero';
+                $mes[2] = 'Febrero';
+                $mes[3] = 'Marzo';
+                $mes[4] = 'Abril';
+                $mes[5] = 'Mayo';
+                $mes[6] = 'Junio';
+                $mes[7] = 'Julio';
+                $mes[8] = 'Agosto';
+                $mes[9] = 'Septiembre';
+                $mes[10] = 'Octubre';
+                $mes[11] = 'Noviembre';
+                $mes[12] = 'Diciembre';
+                
+                for($i=(isset ($defcv[$campo]['anoLimite']) ? $defcv[$campo]['anoLimite'] : 2012) ; $i >1950 ; $i--)
+                {
+                    $ano[$i] = $i;
+                }
+                switch (cv::$defcv[$campo]['flags'])
+                {
+                    
+                    case 'DMY':
+                        cv::$defcv[$campo.'Dia']['tipo'] = uiForm::$comboboxSimple;
+                        cv::$defcv[$campo.'Dia']['valores'] = $dia;
+                        cv::$defcv[$campo.'Dia']['enLinea'] = true;                        
+                        $retorno .= $this->procesarVisual($campo.'Dia',$esLazo);
+                        
+                        cv::$defcv[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
+                        cv::$defcv[$campo.'Mes']['valores'] = $mes;
+                        cv::$defcv[$campo.'Mes']['enLinea'] = true;
+                        $retorno .= $this->procesarVisual($campo.'Mes',$esLazo);
+                        
+                        cv::$defcv[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
+                        cv::$defcv[$campo.'Ano']['valores'] = $ano;
+                        cv::$defcv[$campo.'Ano']['enLinea'] = true;
+                        $retorno .= $this->procesarVisual($campo.'Ano',$esLazo);
+                    break;
+                
+                    case 'MY':
+                        cv::$defcv[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
+                        cv::$defcv[$campo.'Mes']['valores'] = $mes;
+                        cv::$defcv[$campo.'Mes']['enLinea'] = true;
+                        $retorno .= $this->procesarVisual($campo.'Mes',$esLazo);
+                        
+                        cv::$defcv[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
+                        cv::$defcv[$campo.'Ano']['valores'] = $ano;
+                        cv::$defcv[$campo.'Ano']['enLinea'] = true;
+                        $retorno .= $this->procesarVisual($campo.'Ano',$esLazo);
+                    break;
+                
+                    case 'Y':
+                        cv::$defcv[$campo]['tipo'] = uiForm::$comboboxSimple;
+                        cv::$defcv[$campo]['valores'] = $ano;
+                        cv::$defcv[$campo]['enLinea'] = true;
+                        return $this->procesarVisual($campo,$esLazo);
+                    break;
+                }
                 break;
 
             case uiForm::$telefono:
@@ -299,27 +362,66 @@ class pln
                 if (!isset(cv::$defcv[$campo]['flags']))
                     cv::$defcv[$campo]['flags'] = 'DMY';
                 
+                for($i=1; $i < 32; $i++)
+                {
+                    $dia[$i] = $i;
+                }
+                
+                $mes[1] = 'Enero';
+                $mes[2] = 'Febrero';
+                $mes[3] = 'Marzo';
+                $mes[4] = 'Abril';
+                $mes[5] = 'Mayo';
+                $mes[6] = 'Junio';
+                $mes[7] = 'Julio';
+                $mes[8] = 'Agosto';
+                $mes[9] = 'Septiembre';
+                $mes[10] = 'Octubre';
+                $mes[11] = 'Noviembre';
+                $mes[12] = 'Diciembre';
+                
+                for($i=(isset ($defcv[$campo]['anoLimite']) ? $defcv[$campo]['anoLimite'] : 2012) ; $i >1950 ; $i--)
+                {
+                    $ano[$i] = $i;
+                }
                 switch (cv::$defcv[$campo]['flags'])
                 {
+                    
                     case 'DMY':
                         cv::$defcv[$campo.'Dia']['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo.'Dia']['valores'] = array('1' => 1);
-                        cv::$defcv[$campo.'Dia']['enLinea'] = true;
-                        
+                        cv::$defcv[$campo.'Dia']['valores'] = $dia;
+                        cv::$defcv[$campo.'Dia']['enLinea'] = true;                        
                         $retorno .= $this->procesarCampo($campo.'Dia',$esLazo);
                         
                         cv::$defcv[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo.'Mes']['valores'] = array('1' => 'Enero');
+                        cv::$defcv[$campo.'Mes']['valores'] = $mes;
                         cv::$defcv[$campo.'Mes']['enLinea'] = true;
                         $retorno .= $this->procesarCampo($campo.'Mes',$esLazo);
                         
                         cv::$defcv[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo.'Ano']['valores'] = array('2011' => '2011');
+                        cv::$defcv[$campo.'Ano']['valores'] = $ano;
                         cv::$defcv[$campo.'Ano']['enLinea'] = true;
                         $retorno .= $this->procesarCampo($campo.'Ano',$esLazo);
+                        //$retorno .= '<input type="hidden" $$identificacion$$ value="$$reemplazar::'.$campoEsc.'$$" />';
+                    break;
+                
+                    case 'MY':
+                        cv::$defcv[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
+                        cv::$defcv[$campo.'Mes']['valores'] = $mes;
+                        cv::$defcv[$campo.'Mes']['enLinea'] = true;
+                        $retorno .= $this->procesarCampo($campo.'Mes',$esLazo);
                         
-                        $retorno .= '<input type="hidden" $$identificacion$$ value="$$reemplazar::'.$campoEsc.'$$" />';
-
+                        cv::$defcv[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
+                        cv::$defcv[$campo.'Ano']['valores'] = $ano;
+                        cv::$defcv[$campo.'Ano']['enLinea'] = true;
+                        $retorno .= $this->procesarCampo($campo.'Ano',$esLazo);
+                    break;
+                
+                    case 'Y':
+                        cv::$defcv[$campo]['tipo'] = uiForm::$comboboxSimple;
+                        cv::$defcv[$campo]['valores'] = $ano;
+                        cv::$defcv[$campo]['enLinea'] = true;
+                        return $this->procesarCampo($campo,$esLazo);
                     break;
                 }
                 break;
@@ -548,9 +650,7 @@ class pln
 		{
                     $retorno .= '<br />';
                     foreach (cv::$deflazo[$lazo]['vistaUniones'] as $Vista) {
-                        $retorno .= '<div class="contenedorLazoVista" id="vista_'.$Vista.'" rel="'.$Vista.'">';
-                        $this->VistaLazo($Vista,true);
-                        $retorno .= '</div>';
+                        $retorno .= $this->VistaLazo($Vista,true);
                     }
 		}
 		$retorno .= '</div>';
