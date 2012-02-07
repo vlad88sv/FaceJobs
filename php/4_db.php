@@ -104,7 +104,7 @@ class db
         return $id;        
     }
     
-    public static function obtenerPorIndice($tabla, $llave, array $valores, $limite)
+    public static function obtenerPorIndice($tabla, $llave, array $valores)
     {
         $valores = "'".implode("','",$valores)."'";
         $c = "SELECT * FROM `$tabla` WHERE `$llave` IN ($valores) LIMIT 1";
