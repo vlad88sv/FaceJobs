@@ -5,6 +5,7 @@ class pln
 {
     public $pln;
     public $campos = array();
+    private $debug = false;
     public function procesar($plantilla)
     {
         /* Plan:
@@ -19,16 +20,25 @@ class pln
         $this->pln= file_get_contents(_BASE_plantilla.$plantilla.'.pln');
     
         $this->procesarTituloGeneral();
+        if ($this->debug) error_log ('procesarTituloGeneral'.' :: ' . strlen($this->pln));
         $this->procesarGrupos();
+        if ($this->debug) error_log ('procesarGrupos'.' :: ' . strlen($this->pln));
         $this->procesarSubTitulos();
+        if ($this->debug) error_log ('procesarSubTitulos'.' :: ' . strlen($this->pln));
         $this->procesarTitulos();
+        if ($this->debug) error_log ('procesarTitulos'.' :: ' . strlen($this->pln));
         $this->procesarLazos();
+        if ($this->debug) error_log ('procesarLazos'.' :: ' . strlen($this->pln));
         $this->procesarVistaLazos();
+        if ($this->debug) error_log ('procesarVistaLazos'.' :: ' . strlen($this->pln));
         $this->procesarCampos();
+        if ($this->debug) error_log ('procesarCampos'.' :: ' . strlen($this->pln));
         $this->procesarVisuales();
+        if ($this->debug) error_log ('procesarVisuales'.' :: ' . strlen($this->pln));
         
         // Finalmente reemplazamos los valores con los del usuario
         $this->reemplazarValores();
+        if ($this->debug) error_log ('reemplazarValores'.' :: ' . strlen($this->pln));
     }
     
     // ==0:ABC==
@@ -297,8 +307,8 @@ class pln
         
         foreach($campos[1] as $campo)
         {
-            if ($retorno = $this->procesarCampo($campo));
-            $this->pln = preg_replace( '/\[campo\]'.$campo.'\[\/campo\]/', $retorno, $this->pln );
+            if ($retorno = $this->procesarCampo($campo))
+                $this->pln = preg_replace( '/\[campo\]'.$campo.'\[\/campo\]/', $retorno, $this->pln );
         }
     }
     
@@ -358,7 +368,7 @@ class pln
                 $options = '<option value="">Seleccione</option>';
                 if(is_array(campos::$defcampos[$campo]['datos']) && isset(campos::$defcampos[$campo]['datos']['tabla']) && isset(campos::$defcampos[$campo]['datos']['clave']) && isset(campos::$defcampos[$campo]['datos']['valor']))
                 {
-                    if (in_array('mios', campos::$defcampos[$campo]['datos']['filtros']))
+                    if (isset(campos::$defcampos[$campo]['datos']['filtros']) && in_array('mios', campos::$defcampos[$campo]['datos']['filtros']))
                     {
                         $filtros = 'AND ID_cuenta='.usuario::$info['ID_cuenta'];
                     }
@@ -466,6 +476,10 @@ class pln
             case uiForm::$memo:
                 $retorno .= '<br /><textarea $$identificacion$$>$$reemplazar::'.$campoEsc.'$$</textarea>';
                 break;
+            
+            default:
+                return false;
+                break;
         }
 
         $retorno = preg_replace('/\$\$identificacion\$\$/',($esLazo ? '' : 'class="auto" ').'rel="'.$campo.'" name="'.$campo.'" id="'.$campoEsc.'"',$retorno);
@@ -496,7 +510,7 @@ class pln
         {
            $c = 'SELECT '.join(', ',$this->campos[$tabla]).' FROM ' . $tabla.' WHERE ID_cuenta='.usuario::$info['ID_cuenta'];
            
-           //echo $c.'<br />';
+           if ($this->debug) error_log('reemplazarValores.Query :: ' . $c);
            
            $r = db::consultar($c);           
            if (!$r) continue;
@@ -506,7 +520,11 @@ class pln
         
            foreach($campos as $campo)
            {
+            if (isset($f[$campo]))
+            {
             $this->EstablecerCampo($tabla.'.'.$campo,$f[$campo]);
+            if ($this->debug) error_log('reemplazarValores.EstablecerCampo :: ' . $tabla.'.'.$campo . '[ '. strlen($this->pln) . ' ]');
+            }
            }
         }
         

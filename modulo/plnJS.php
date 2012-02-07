@@ -108,6 +108,7 @@ $(".lazoVistaControlesEliminar").live("click",function(){
 $(".cargar-archivo").each(function(){
     new qq.FileUploaderBasic({
         button: $(this)[0],
+	params: {ref: $("#"+$(this).attr("rel")).attr("name") },
         identificador: this,
         action: '<?php echo PROY_URL; ?>carga',
         showMessage: function(message){ alert(message); },

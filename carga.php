@@ -143,15 +143,16 @@ class qqFileUploader {
             }
         }
         
-        if ($this->file->save($uploadDirectory . $filename . '.' . $ext)){
+        if ((preg_match('/(.*)\.(.*)/',$_GET['ref'],$partes)) && $this->file->save($uploadDirectory . $filename . '.' . $ext)){
+            
             $hash = sha1(microtime(true));
             rename($uploadDirectory . $filename . '.' . $ext, 'pool/img/'.$hash);
-			
-			$DATOS['ID_cuenta'] = usuario::$info['ID_cuenta'];
-			$DATOS['foto_hash'] = $hash;
-			
-			db::insertualizar('paso1_personal', $DATOS);
-			
+            
+            $DATOS['ID_cuenta'] = usuario::$info['ID_cuenta'];
+            $DATOS[$partes[2]] = $hash;
+            
+            db::insertualizar($partes[1], $DATOS);
+	    
             return array('hash'=>$hash, 'success'=>true);
         } else {
             return array('error'=> 'Could not save uploaded file.' .
