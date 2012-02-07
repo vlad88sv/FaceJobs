@@ -61,8 +61,11 @@ general::registrarModulo('facebook-sdk','facebook/facebook.php');
 general::registrarModulo('plantilla-general','plantilla_general.php');
 general::registrarModulo('ui','ui.php');
 general::registrarModulo('plantilla','pln.php');
+general::registrarModulo('plantilla.JS','plnJS.php');
+general::registrarModulo('plantilla.campos','plnCampos.php');
 general::registrarModulo('controlador_pasos','controlador_pasos.php');
 general::registrarModulo('cv','cv.php');
+general::registrarModulo('campos','campos.php');
 general::registrarModulo('phmagick','phmagick/phmagick.php');
 general::registrarScriptJS('jquery','jquery-1.6.2');
 
