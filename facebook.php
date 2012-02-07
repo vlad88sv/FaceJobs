@@ -11,6 +11,9 @@ if (!sesion::iniciado())
 } else {
     switch (@$_GET['peticion'])
     {
+        case 'registro.empresas':
+            body::agregarAlContenido ('registro.empresas',true);
+            break;
         case 'ofertas':
             body::agregarAlContenido ('ofertas.trabajo',true);
             break;
@@ -28,6 +31,9 @@ if (!sesion::iniciado())
             break;
         case 'faqs':
             body::agregarAlContenido ('faqs',true);
+            break;
+        case 'pasos':
+            body::agregarAlContenido ('pasos',true);
             break;
         case 'paso':
         case 'inicio':

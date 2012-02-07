@@ -1,6 +1,17 @@
-<?php ob_start(); ?>
+<?php
+general::requerirModulo(array('plantilla','campos','plantilla-general'));
+
+general::registrarEstiloCSS('pasos','pasos');
+general::registrarEstiloCSS('FaceBox','facebox');
+
+ob_start();
+?>
 <h1><img src="img/mensajes/mensaje.gif" /> Mensajes</h1>
 <?php
-general::requerirModulo(array('plantilla-general'));
-CrearPlantillaGeneral(ob_get_clean());
+$plantilla = new pln();
+$plantilla->procesar('mensajes');
+echo $plantilla->pln;
+$buffer = ob_get_clean();
+
+CrearPlantillaGeneral($buffer);
 ?>

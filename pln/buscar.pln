@@ -1,0 +1,14 @@
+<div class="cajita_rendoda">
+[campo]paso0.tipo_busqueda[/campo]
+<div id="busqueda_avanzada">
+<div class="cajita_rendoda">[lazo]buscar_areas_interes[/lazo]</div>
+<div class="cajita_rendoda">[lazo]buscar_actividad_economica_empresa[/lazo]</div>
+<div class="cajita_rendoda">[lazo]buscar_pais[/lazo]</div>
+<div class="cajita_rendoda">[lazo]buscar_palabras_claves[/lazo]</div>
+</div>
+</div>
+<div style="color:#5b0504;font-size: 10px;">
+[campo]paso0.busqueda_ocultar_vistas[/campo]
+[campo]paso0.busqueda_ocultar_aplicadas[/campo]
+[campo]paso0.busqueda_ocultar_anonimas[/campo]
+</div>
