@@ -1,4 +1,6 @@
 <?php
+general::requerirModulo(array('plantilla.JS','plantilla.campos','ui'));
+general::registrarEstiloCSS('pln','pln');
 class pln
 {
     public $pln;
@@ -13,8 +15,6 @@ class pln
         
         // MemCache
         // if ($mc = memcached('plantillas',$plantilla.'.pln')) {$this->pln = $mc; return;}
-        
-        general::requerirModulo(array('ui','cv'));
         
         $this->pln= file_get_contents(_BASE_plantilla.$plantilla.'.pln');
     
@@ -61,7 +61,7 @@ class pln
         
         foreach($lazos[1] as $lazo)
         {
-            if (!isset(cv::$deflazo[$lazo]))
+            if (!isset(campos::$deflazo[$lazo]))
                 continue;
             
             $retorno =  "";
@@ -71,7 +71,7 @@ class pln
             
             
             /* Procesar los campos */
-            foreach(cv::$deflazo[$lazo]['campos'] as $campo)
+            foreach(campos::$deflazo[$lazo]['campos'] as $campo)
             {
                 $retornoCampos .= $this->procesarCampo($campo,true);
             }
@@ -80,12 +80,12 @@ class pln
             
             /* Procesar la vista */
             // Acá solamente es un DIV que posteriormente interpreta controlador_pasos
-            $retornoVista = !isset(cv::$deflazo[$lazo]['vistaVirtual']) ? '<div class="contenedorLazoVista" id="vista_'.$lazo.'" rel="'.$lazo.'"></div>' : '';
+            $retornoVista = !isset(campos::$deflazo[$lazo]['vistaVirtual']) ? '<div class="contenedorLazoVista" id="vista_'.$lazo.'" vista="'.((isset(campos::$deflazo[$lazo]['vistaVirtual']) && isset(campos::$deflazo[$lazo]['vistaVirtualRemota'])) ? campos::$deflazo[$lazo]['vistaVirtualRemota'] : $lazo ).'" rel="'.$lazo.'"></div>' : '';
             
             $retornoCampos = '<div class="lazoCampos">'.$retornoCampos;
             $retornoCampos .= '
             <div class="lazoControles">
-	            <div class="boton"><a href="#" class="autoLazo" rel="'.$lazo.'" vista="'.((isset(cv::$deflazo[$lazo]['vistaVirtual']) && isset(cv::$deflazo[$lazo]['vistaVirtualRemota'])) ? cv::$deflazo[$lazo]['vistaVirtualRemota'] : $lazo ).'">Guardar</a></div>
+	            <div class="boton"><a href="#" class="autoLazo" rel="'.$lazo.'" vista="'.((isset(campos::$deflazo[$lazo]['vistaVirtual']) && isset(campos::$deflazo[$lazo]['vistaVirtualRemota'])) ? campos::$deflazo[$lazo]['vistaVirtualRemota'] : $lazo ).'">Agregar</a></div>
 	            <div class="boton"><a href="#" class="reset" rel="'.$lazo.'">Cancelar</a></div>            
             </div>
             ';
@@ -111,18 +111,18 @@ class pln
     private function procesarVisual($campo,$esLazo = false)
     {
         $retorno = "";
-        if (!isset(cv::$defcv[$campo]))
+        if (!isset(campos::$defcampos[$campo]))
             return false;
         
         $campoEsc = preg_replace('/\./','_',$campo);
         
-        if(isset(cv::$defcv[$campo]['tipo']))
-           $tipo = cv::$defcv[$campo]['tipo'];
+        if(isset(campos::$defcampos[$campo]['tipo']))
+           $tipo = campos::$defcampos[$campo]['tipo'];
         else
             $tipo = uiForm::$textoSimple;
                 
-        if(isset(cv::$defcv[$campo]['texto']))
-            $retorno .= '<span class="tituloCampo">'.cv::$defcv[$campo]['texto'].'</span> ';
+        if(isset(campos::$defcampos[$campo]['texto']))
+            $retorno .= '<span class="tituloCampo">'.campos::$defcampos[$campo]['texto'].'</span> ';
                 
         switch ($tipo)
         {
@@ -136,24 +136,28 @@ class pln
             
             case uiForm::$comboboxSimple;
                 $options = '<option value="">Seleccione</option>';
-                if(is_array(cv::$defcv[$campo]['valores']))
+                if(is_array(campos::$defcampos[$campo]['valores']))
                 {
-                    foreach (cv::$defcv[$campo]['valores'] as $valor => $texto)
+                    foreach (campos::$defcampos[$campo]['valores'] as $valor => $texto)
                         $options .= '<option value="'.$valor.'">'.$texto.'</option>';
                 }
                 $retorno .= '<select disabled="disabled" $$identificacion$$>'.$options.'</select>';
                 break;
                 
             case uiForm::$comboboxPaises:
-                cv::$defcv[$campo]['datos']['tabla'] = 'datos_pais';
-                cv::$defcv[$campo]['datos']['clave'] = 'ID_pais';
-                cv::$defcv[$campo]['datos']['valor'] = 'pais';
+                campos::$defcampos[$campo]['datos']['tabla'] = 'datos_pais';
+                campos::$defcampos[$campo]['datos']['clave'] = 'ID_pais';
+                campos::$defcampos[$campo]['datos']['valor'] = 'pais';
                 
             case uiForm::$comboboxComplejo:
                 $options = '<option value="">Seleccione</option>';
-                if(is_array(cv::$defcv[$campo]['datos']) && isset(cv::$defcv[$campo]['datos']['tabla']) && isset(cv::$defcv[$campo]['datos']['clave']) && isset(cv::$defcv[$campo]['datos']['valor']))
+                if(is_array(campos::$defcampos[$campo]['datos']) && isset(campos::$defcampos[$campo]['datos']['tabla']) && isset(campos::$defcampos[$campo]['datos']['clave']) && isset(campos::$defcampos[$campo]['datos']['valor']))
                 {
-                    $c = 'SELECT '.cv::$defcv[$campo]['datos']['clave'].' AS "clave", '.cv::$defcv[$campo]['datos']['valor'].' AS "valor" FROM '.cv::$defcv[$campo]['datos']['tabla'];
+                    if (in_array('mios', campos::$defcampos[$campo]['datos']['filtros']))
+                    {
+                        $filtros = 'AND ID_cuenta='.usuario::$info['ID_cuenta'];
+                    }
+                    $c = 'SELECT '.campos::$defcampos[$campo]['datos']['clave'].' AS "clave", '.campos::$defcampos[$campo]['datos']['valor'].' AS "valor" FROM '.campos::$defcampos[$campo]['datos']['tabla'].' WHERE 1 ' . $filtros;
                     $r = db::consultar($c);
                     while ($f = mysql_fetch_assoc($r))
                         $options .= '<option value="'.$f['clave'].'">'.$f['valor'].'</option>';
@@ -162,8 +166,8 @@ class pln
                 break;
             
             case uiForm::$fecha:
-                if (!isset(cv::$defcv[$campo]['flags']))
-                cv::$defcv[$campo]['flags'] = 'DMY';
+                if (!isset(campos::$defcampos[$campo]['flags']))
+                campos::$defcampos[$campo]['flags'] = 'DMY';
                 
                 for($i=1; $i < 32; $i++)
                 {
@@ -187,42 +191,42 @@ class pln
                 {
                     $ano[$i] = $i;
                 }
-                switch (cv::$defcv[$campo]['flags'])
+                switch (campos::$defcampos[$campo]['flags'])
                 {
                     
                     case 'DMY':
-                        cv::$defcv[$campo.'Dia']['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo.'Dia']['valores'] = $dia;
-                        cv::$defcv[$campo.'Dia']['enLinea'] = true;                        
+                        campos::$defcampos[$campo.'Dia']['tipo'] = uiForm::$comboboxSimple;
+                        campos::$defcampos[$campo.'Dia']['valores'] = $dia;
+                        campos::$defcampos[$campo.'Dia']['enLinea'] = true;                        
                         $retorno .= $this->procesarVisual($campo.'Dia',$esLazo);
                         
-                        cv::$defcv[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo.'Mes']['valores'] = $mes;
-                        cv::$defcv[$campo.'Mes']['enLinea'] = true;
+                        campos::$defcampos[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
+                        campos::$defcampos[$campo.'Mes']['valores'] = $mes;
+                        campos::$defcampos[$campo.'Mes']['enLinea'] = true;
                         $retorno .= $this->procesarVisual($campo.'Mes',$esLazo);
                         
-                        cv::$defcv[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo.'Ano']['valores'] = $ano;
-                        cv::$defcv[$campo.'Ano']['enLinea'] = true;
+                        campos::$defcampos[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
+                        campos::$defcampos[$campo.'Ano']['valores'] = $ano;
+                        campos::$defcampos[$campo.'Ano']['enLinea'] = true;
                         $retorno .= $this->procesarVisual($campo.'Ano',$esLazo);
                     break;
                 
                     case 'MY':
-                        cv::$defcv[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo.'Mes']['valores'] = $mes;
-                        cv::$defcv[$campo.'Mes']['enLinea'] = true;
+                        campos::$defcampos[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
+                        campos::$defcampos[$campo.'Mes']['valores'] = $mes;
+                        campos::$defcampos[$campo.'Mes']['enLinea'] = true;
                         $retorno .= $this->procesarVisual($campo.'Mes',$esLazo);
                         
-                        cv::$defcv[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo.'Ano']['valores'] = $ano;
-                        cv::$defcv[$campo.'Ano']['enLinea'] = true;
+                        campos::$defcampos[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
+                        campos::$defcampos[$campo.'Ano']['valores'] = $ano;
+                        campos::$defcampos[$campo.'Ano']['enLinea'] = true;
                         $retorno .= $this->procesarVisual($campo.'Ano',$esLazo);
                     break;
                 
                     case 'Y':
-                        cv::$defcv[$campo]['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo]['valores'] = $ano;
-                        cv::$defcv[$campo]['enLinea'] = true;
+                        campos::$defcampos[$campo]['tipo'] = uiForm::$comboboxSimple;
+                        campos::$defcampos[$campo]['valores'] = $ano;
+                        campos::$defcampos[$campo]['enLinea'] = true;
                         return $this->procesarVisual($campo,$esLazo);
                     break;
                 }
@@ -246,10 +250,14 @@ class pln
             
             case uiForm::$radio:
                 $options = '';
-                if(is_array(cv::$defcv[$campo]['valores']))
+                if(is_array(campos::$defcampos[$campo]['valores']))
                 {
-                    foreach (cv::$defcv[$campo]['valores'] as $valor => $texto)
-                        $retorno .= '<input disabled="disabled" type="radio" $$identificacion$$ value="'.$valor.'"/> ' . $texto;
+                    $i = 0;
+                    foreach (campos::$defcampos[$campo]['valores'] as $valor => $texto)
+                    {
+                        $retorno .= '<input disabled="disabled" type="radio" name="'.$campo.'" id="'.$campoEsc.'_'.$i.'" value="'.$valor.'"/> ' . $texto;
+                        $i++;
+                    }
                 }
                 break;
 
@@ -261,10 +269,10 @@ class pln
         $retorno = preg_replace('/\$\$identificacion\$\$/','name="'.$campo.'" id="'.$campoEsc.'"',$retorno);
 
         
-        if(isset(cv::$defcv[$campo]['subtexto']))
-            $retorno .= '<br /><span class="subtituloCampo">'.cv::$defcv[$campo]['subtexto'].'</span>';
+        if(isset(campos::$defcampos[$campo]['subtexto']))
+            $retorno .= '<br /><span class="subtituloCampo">'.campos::$defcampos[$campo]['subtexto'].'</span>';
         
-        if(!isset(cv::$defcv[$campo]['enLinea']))
+        if(!isset(campos::$defcampos[$campo]['enLinea']))
             $retorno .= '<br />'."\n";
         
         $partes = null;
@@ -296,19 +304,19 @@ class pln
     
     private function procesarCampo($campo,$esLazo = false)
     {
-        $retorno = "";
-        if (!isset(cv::$defcv[$campo]))
+        $filtros = $retorno = "";
+        if (!isset(campos::$defcampos[$campo]))
             return false;
         
         $campoEsc = preg_replace('/\./','_',$campo);
         
-        if(isset(cv::$defcv[$campo]['tipo']))
-           $tipo = cv::$defcv[$campo]['tipo'];
+        if(isset(campos::$defcampos[$campo]['tipo']))
+           $tipo = campos::$defcampos[$campo]['tipo'];
         else
             $tipo = uiForm::$textoSimple;
                 
-        if(isset(cv::$defcv[$campo]['texto']))
-            $retorno .= '<span class="tituloCampo">'.cv::$defcv[$campo]['texto'].'</span> ';
+        if(isset(campos::$defcampos[$campo]['texto']))
+            $retorno .= '<span class="tituloCampo">'.campos::$defcampos[$campo]['texto'].'</span> ';
                 
         switch ($tipo)
         {
@@ -328,29 +336,33 @@ class pln
                 break;
             
             case uiForm::$textoSimple:
-                $retorno .= '<input type="text" $$identificacion$$ maxlength="'.(isset(cv::$defcv[$campo]['longitud']) ? cv::$defcv[$campo]['longitud'] : '500').'" value="$$reemplazar::'.$campoEsc.'$$" />';
+                $retorno .= '<input type="text" $$identificacion$$ maxlength="'.(isset(campos::$defcampos[$campo]['longitud']) ? campos::$defcampos[$campo]['longitud'] : '500').'" value="$$reemplazar::'.$campoEsc.'$$" />';
                 break;
             
             case uiForm::$comboboxSimple;
                 $options = '<option value="">Seleccione</option>';
-                if(is_array(cv::$defcv[$campo]['valores']))
+                if(is_array(campos::$defcampos[$campo]['valores']))
                 {
-                    foreach (cv::$defcv[$campo]['valores'] as $valor => $texto)
+                    foreach (campos::$defcampos[$campo]['valores'] as $valor => $texto)
                         $options .= '<option value="'.$valor.'">'.$texto.'</option>';
                 }
                 $retorno .= '<select $$identificacion$$>'.$options.'</select>';
                 break;
                 
             case uiForm::$comboboxPaises:
-                cv::$defcv[$campo]['datos']['tabla'] = 'datos_pais';
-                cv::$defcv[$campo]['datos']['clave'] = 'ID_pais';
-                cv::$defcv[$campo]['datos']['valor'] = 'pais';
+                campos::$defcampos[$campo]['datos']['tabla'] = 'datos_pais';
+                campos::$defcampos[$campo]['datos']['clave'] = 'ID_pais';
+                campos::$defcampos[$campo]['datos']['valor'] = 'pais';
                 
             case uiForm::$comboboxComplejo:
                 $options = '<option value="">Seleccione</option>';
-                if(is_array(cv::$defcv[$campo]['datos']) && isset(cv::$defcv[$campo]['datos']['tabla']) && isset(cv::$defcv[$campo]['datos']['clave']) && isset(cv::$defcv[$campo]['datos']['valor']))
+                if(is_array(campos::$defcampos[$campo]['datos']) && isset(campos::$defcampos[$campo]['datos']['tabla']) && isset(campos::$defcampos[$campo]['datos']['clave']) && isset(campos::$defcampos[$campo]['datos']['valor']))
                 {
-                    $c = 'SELECT '.cv::$defcv[$campo]['datos']['clave'].' AS "clave", '.cv::$defcv[$campo]['datos']['valor'].' AS "valor" FROM '.cv::$defcv[$campo]['datos']['tabla'];
+                    if (in_array('mios', campos::$defcampos[$campo]['datos']['filtros']))
+                    {
+                        $filtros = 'AND ID_cuenta='.usuario::$info['ID_cuenta'];
+                    }
+                    $c = 'SELECT '.campos::$defcampos[$campo]['datos']['clave'].' AS "clave", '.campos::$defcampos[$campo]['datos']['valor'].' AS "valor" FROM '.campos::$defcampos[$campo]['datos']['tabla'].' WHERE 1 ' . $filtros;
                     $r = db::consultar($c);
                     while ($f = mysql_fetch_assoc($r))
                         $options .= '<option value="'.$f['clave'].'">'.$f['valor'].'</option>';
@@ -359,8 +371,8 @@ class pln
                 break;
             
             case uiForm::$fecha:
-                if (!isset(cv::$defcv[$campo]['flags']))
-                    cv::$defcv[$campo]['flags'] = 'DMY';
+                if (!isset(campos::$defcampos[$campo]['flags']))
+                    campos::$defcampos[$campo]['flags'] = 'DMY';
                 
                 for($i=1; $i < 32; $i++)
                 {
@@ -384,43 +396,43 @@ class pln
                 {
                     $ano[$i] = $i;
                 }
-                switch (cv::$defcv[$campo]['flags'])
+                switch (campos::$defcampos[$campo]['flags'])
                 {
                     
                     case 'DMY':
-                        cv::$defcv[$campo.'Dia']['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo.'Dia']['valores'] = $dia;
-                        cv::$defcv[$campo.'Dia']['enLinea'] = true;                        
+                        campos::$defcampos[$campo.'Dia']['tipo'] = uiForm::$comboboxSimple;
+                        campos::$defcampos[$campo.'Dia']['valores'] = $dia;
+                        campos::$defcampos[$campo.'Dia']['enLinea'] = true;                        
                         $retorno .= $this->procesarCampo($campo.'Dia',$esLazo);
                         
-                        cv::$defcv[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo.'Mes']['valores'] = $mes;
-                        cv::$defcv[$campo.'Mes']['enLinea'] = true;
+                        campos::$defcampos[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
+                        campos::$defcampos[$campo.'Mes']['valores'] = $mes;
+                        campos::$defcampos[$campo.'Mes']['enLinea'] = true;
                         $retorno .= $this->procesarCampo($campo.'Mes',$esLazo);
                         
-                        cv::$defcv[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo.'Ano']['valores'] = $ano;
-                        cv::$defcv[$campo.'Ano']['enLinea'] = true;
+                        campos::$defcampos[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
+                        campos::$defcampos[$campo.'Ano']['valores'] = $ano;
+                        campos::$defcampos[$campo.'Ano']['enLinea'] = true;
                         $retorno .= $this->procesarCampo($campo.'Ano',$esLazo);
                         //$retorno .= '<input type="hidden" $$identificacion$$ value="$$reemplazar::'.$campoEsc.'$$" />';
                     break;
                 
                     case 'MY':
-                        cv::$defcv[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo.'Mes']['valores'] = $mes;
-                        cv::$defcv[$campo.'Mes']['enLinea'] = true;
+                        campos::$defcampos[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
+                        campos::$defcampos[$campo.'Mes']['valores'] = $mes;
+                        campos::$defcampos[$campo.'Mes']['enLinea'] = true;
                         $retorno .= $this->procesarCampo($campo.'Mes',$esLazo);
                         
-                        cv::$defcv[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo.'Ano']['valores'] = $ano;
-                        cv::$defcv[$campo.'Ano']['enLinea'] = true;
+                        campos::$defcampos[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
+                        campos::$defcampos[$campo.'Ano']['valores'] = $ano;
+                        campos::$defcampos[$campo.'Ano']['enLinea'] = true;
                         $retorno .= $this->procesarCampo($campo.'Ano',$esLazo);
                     break;
                 
                     case 'Y':
-                        cv::$defcv[$campo]['tipo'] = uiForm::$comboboxSimple;
-                        cv::$defcv[$campo]['valores'] = $ano;
-                        cv::$defcv[$campo]['enLinea'] = true;
+                        campos::$defcampos[$campo]['tipo'] = uiForm::$comboboxSimple;
+                        campos::$defcampos[$campo]['valores'] = $ano;
+                        campos::$defcampos[$campo]['enLinea'] = true;
                         return $this->procesarCampo($campo,$esLazo);
                     break;
                 }
@@ -444,9 +456,9 @@ class pln
             
             case uiForm::$radio:
                 $options = '';
-                if(is_array(cv::$defcv[$campo]['valores']))
+                if(is_array(campos::$defcampos[$campo]['valores']))
                 {
-                    foreach (cv::$defcv[$campo]['valores'] as $valor => $texto)
+                    foreach (campos::$defcampos[$campo]['valores'] as $valor => $texto)
                         $retorno .= '<input type="radio" $$identificacion$$ value="'.$valor.'"/> ' . $texto;
                 }
                 break;
@@ -458,10 +470,10 @@ class pln
 
         $retorno = preg_replace('/\$\$identificacion\$\$/',($esLazo ? '' : 'class="auto" ').'rel="'.$campo.'" name="'.$campo.'" id="'.$campoEsc.'"',$retorno);
         
-        if(isset(cv::$defcv[$campo]['subtexto']))
-            $retorno .= '<br /><span class="subtituloCampo">'.cv::$defcv[$campo]['subtexto'].'</span>';
+        if(isset(campos::$defcampos[$campo]['subtexto']))
+            $retorno .= '<br /><span class="subtituloCampo">'.campos::$defcampos[$campo]['subtexto'].'</span>';
         
-        if(!isset(cv::$defcv[$campo]['enLinea']))
+        if(!isset(campos::$defcampos[$campo]['enLinea']))
             $retorno .= '<br />'."\n";
             
         
@@ -504,13 +516,13 @@ class pln
     private function EstablecerCampo($campo,$valor)
     {
         
-        if (!isset(cv::$defcv[$campo]))
+        if (!isset(campos::$defcampos[$campo]))
             return false;
      
         $campoEsc = preg_replace('/\./','_',$campo);
      
-        if(isset(cv::$defcv[$campo]['tipo']))
-           $tipo = cv::$defcv[$campo]['tipo'];
+        if(isset(campos::$defcampos[$campo]['tipo']))
+           $tipo = campos::$defcampos[$campo]['tipo'];
         else
             $tipo = uiForm::$textoSimple;
         
@@ -553,7 +565,7 @@ class pln
         
         foreach($lazos[1] as $lazo)
         {
-            if (!isset(cv::$deflazo[$lazo]))
+            if (!isset(campos::$deflazo[$lazo]))
                 continue;
             
             $this->pln = preg_replace( '/\[vistalazo\]'.$lazo.'\[\/vistalazo\]/', $this->VistaLazo($lazo), $this->pln );
@@ -564,13 +576,13 @@ class pln
     {
         $retorno = '';
 	
-	if (!is_array(cv::$deflazo[$lazo]['campos']) || !is_array((cv::$deflazo[$lazo]['vista'])) || (!$virtual && isset(cv::$deflazo[$lazo]['vistaVirtual'])) )
+	if (!is_array(campos::$deflazo[$lazo]['campos']) || !is_array((campos::$deflazo[$lazo]['vista'])) || (!$virtual && isset(campos::$deflazo[$lazo]['vistaVirtual'])) )
 		return;
 	
 	$ID_table = 2;
-	foreach(cv::$deflazo[$lazo]['campos'] as $campo)
+	foreach(campos::$deflazo[$lazo]['campos'] as $campo)
 	{
-            if (!isset(cv::$defcv[$campo]))
+            if (!isset(campos::$defcampos[$campo]))
                 continue;
             
             if (!preg_match('/(.*)\.(.*)/',$campo,$partes))
@@ -578,32 +590,32 @@ class pln
 		
             $campos[] = $partes[2];
             
-            if (cv::$defcv[$campo]['tipo'] == uiForm::$comboboxPaises)
+            if (campos::$defcampos[$campo]['tipo'] == uiForm::$comboboxPaises)
             { 
-                cv::$defcv[$campo]['datos']['tabla'] = 'datos_pais';
-                cv::$defcv[$campo]['datos']['clave'] = 'ID_pais';
-                cv::$defcv[$campo]['datos']['valor'] = 'pais';
+                campos::$defcampos[$campo]['datos']['tabla'] = 'datos_pais';
+                campos::$defcampos[$campo]['datos']['clave'] = 'ID_pais';
+                campos::$defcampos[$campo]['datos']['valor'] = 'pais';
             }
             
-            if(isset(cv::$defcv[$campo]['datos']) && is_array(cv::$defcv[$campo]['datos']) && isset(cv::$defcv[$campo]['datos']['tabla']) && isset(cv::$defcv[$campo]['datos']['clave']) && isset(cv::$defcv[$campo]['datos']['valor']))
+            if(isset(campos::$defcampos[$campo]['datos']) && is_array(campos::$defcampos[$campo]['datos']) && isset(campos::$defcampos[$campo]['datos']['tabla']) && isset(campos::$defcampos[$campo]['datos']['clave']) && isset(campos::$defcampos[$campo]['datos']['valor']))
             {
                 $filtros = '';
-                if (@is_array(cv::$defcv[$campo]['datos']['filtros']))
+                if (@is_array(campos::$defcampos[$campo]['datos']['filtros']))
                 {
-                    if (in_array('mios', cv::$defcv[$campo]['datos']['filtros']))
+                    if (in_array('mios', campos::$defcampos[$campo]['datos']['filtros']))
                     {
                             $filtros = 'AND ID_cuenta='.usuario::$info['ID_cuenta'];
                     }
                 }
-                $campos[] = '(SELECT '.cv::$defcv[$campo]['datos']['valor'].' FROM '.cv::$defcv[$campo]['datos']['tabla'].' AS t'.$ID_table.' WHERE t'.$ID_table.'.'.cv::$defcv[$campo]['datos']['clave'].' = t1.'.$partes[2].' '.$filtros.') AS '.$partes[2].'_valor';			
+                $campos[] = '(SELECT '.campos::$defcampos[$campo]['datos']['valor'].' FROM '.campos::$defcampos[$campo]['datos']['tabla'].' AS t'.$ID_table.' WHERE t'.$ID_table.'.'.campos::$defcampos[$campo]['datos']['clave'].' = t1.'.$partes[2].' '.$filtros.') AS '.$partes[2].'_valor';			
                 $ID_table++;
             }
             
-            if(isset(cv::$defcv[$campo]['valores']))
+            if(isset(campos::$defcampos[$campo]['valores']))
             {
                 $tmpCampo = '(CASE '.$partes[2];
                 
-                foreach (cv::$defcv[$campo]['valores'] as $key => $value) {
+                foreach (campos::$defcampos[$campo]['valores'] as $key => $value) {
                         $tmpCampo .= ' WHEN "'.$key.'" THEN "'.$value.'"';
                 }
                 
@@ -611,26 +623,26 @@ class pln
             }
 	}
 
-	if (is_array(@cv::$deflazo[$lazo]['vistaCamposExtra']))
+	if (is_array(@campos::$deflazo[$lazo]['vistaCamposExtra']))
 	{
-            foreach(cv::$deflazo[$lazo]['vistaCamposExtra'] as $campo)
+            foreach(campos::$deflazo[$lazo]['vistaCamposExtra'] as $campo)
             {
                 $campos[] = $campo;	
             }
 	}
 	
-        $tabla = isset(cv::$deflazo[$lazo]['paraTabla'])  ? cv::$deflazo[$lazo]['paraTabla'] : $lazo;
-  	$c = 'SELECT ID_'.$tabla.', '.implode(',',$campos).' FROM '.$tabla .' AS t1';
+        $tabla = isset(campos::$deflazo[$lazo]['paraTabla'])  ? campos::$deflazo[$lazo]['paraTabla'] : $lazo;
+  	$c = 'SELECT ID_'.$tabla.', '.implode(',',$campos).' FROM '.$tabla .' AS t1 WHERE ID_cuenta="'.usuario::$info['ID_cuenta'].'"';
 	
   	$r = db::consultar($c);
   	while ($f = mysql_fetch_assoc($r) )
 	{
-		$retorno .= '<div class="'.($virtual ? 'lazoVistaVirtual' : 'lazoVista').' '.@cv::$deflazo[$lazo]['vista']['class'].'">';
+		$retorno .= '<div class="'.($virtual ? 'lazoVistaVirtual' : 'lazoVista').' '.@campos::$deflazo[$lazo]['vista']['class'].'">';
 		if (!$virtual) $retorno .= '<span class="lazoVistaBolita">•</span>';
 		$retorno .= '<table><tr>';
-		if (isset(cv::$deflazo[$lazo]['vista']))
+		if (isset(campos::$deflazo[$lazo]['vista']))
 		{
-                    foreach(cv::$deflazo[$lazo]['vista'] as $columna => $filas)
+                    foreach(campos::$deflazo[$lazo]['vista'] as $columna => $filas)
                     {
                         if (!is_array($filas))
                             continue;
@@ -646,10 +658,10 @@ class pln
 		}
 		$retorno .= '</tr></table>';
 		
-		if (is_array(@cv::$deflazo[$lazo]['vistaUniones']))
+		if (is_array(@campos::$deflazo[$lazo]['vistaUniones']))
 		{
                     $retorno .= '<br />';
-                    foreach (cv::$deflazo[$lazo]['vistaUniones'] as $Vista) {
+                    foreach (campos::$deflazo[$lazo]['vistaUniones'] as $Vista) {
                         $retorno .= $this->VistaLazo($Vista,true);
                     }
 		}
