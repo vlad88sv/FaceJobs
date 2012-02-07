@@ -27,3 +27,12 @@ body{background:#fff;font-size:100%;font-family:"lucida grande",tahoma,verdana,a
 #PlantillaGeneralContenido {width: 530px;border:1px solid #8c8b8b;border-radius: 5px;text-align: left;vertical-align: top;padding: 2px 17px;}
 
 .cajita_rendoda {border: 1px #6d6d6d solid;border-radius: 5px;padding: 4px;margin-bottom: 10px;}
+
+table.lista_empresas {width: 100%; border-collapse: collapse;}
+table.lista_empresas tr:nth-child(odd) { background-color: #e0dddd; }
+table.lista_empresas td.logo { width: 40px; padding: 5px 20px; vertical-align: middle;}
+table.lista_empresas td.informacion { vertical-align: middle;}
+table.lista_empresas td.accion { width: 80px; vertical-align: middle;text-align: center;}
+
+div.boton {display: inline-block !important; border: 1px solid #666;border-radius: 5px;text-align: center;width: 55px !important; height: 20px !important;line-height: 20px; font-size:12px;}
+div.boton a {color: #F7F7F7 !important;text-decoration: none;display: block;}
