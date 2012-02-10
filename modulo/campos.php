@@ -55,6 +55,8 @@ campos::$defcampos['buscar_palabras_claves.palabra_clave']['texto'] = 'Palabra c
 // Registro de empresas
 campos::$defcampos['empresa_registro.foto_hash']['tipo'] = uiForm::$cargarImagenOWebCam;
 
+campos::$defcampos['empresa_registro.logo_hash']['tipo'] = uiForm::$cargarImagenOWebCam;
+
 campos::$defcampos['empresa_registro.nombre_legal']['tipo'] = uiForm::$textoSimple;
 campos::$defcampos['empresa_registro.nombre_legal']['texto'] = 'Nombre legal de la empresa';
 
@@ -120,4 +122,15 @@ campos::$defcampos['empresa_registro.privacidad_contacto_telefono']['texto'] = '
 campos::$defcampos['empresa_registro.privacidad_telefono_empresa']['tipo'] = uiForm::$radio;
 campos::$defcampos['empresa_registro.privacidad_telefono_empresa']['valores'] = array('publico' => 'Público', 'privado' => 'Privado');
 campos::$defcampos['empresa_registro.privacidad_telefono_empresa']['texto'] = 'Télefono de la empresa';
+
+// ver.empresa
+
+campos::$defcampos['paso0.busqueda_ocultar_puestos_vistos']['tipo'] = uiForm::$cheque;
+campos::$defcampos['paso0.busqueda_ocultar_puestos_vistos']['texto'] = "ocultar puestos vistos";
+campos::$defcampos['paso0.busqueda_ocultar_puestos_vistos']['enLinea'] = true;
+
+campos::$defcampos['paso0.busqueda_ocultar_puestos_aplicados']['tipo'] = uiForm::$cheque;
+campos::$defcampos['paso0.busqueda_ocultar_puestos_aplicados']['texto'] = "ocultar puestos aplicados";
+campos::$defcampos['paso0.busqueda_ocultar_puestos_aplicados']['enLinea'] = true;
+
 ?>

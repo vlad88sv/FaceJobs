@@ -11,6 +11,9 @@ if (!sesion::iniciado())
 } else {
     switch (@$_GET['peticion'])
     {
+        case 'ver.empresa':
+            body::agregarAlContenido ('ver.empresa',true);
+            break;
         case 'registro.empresas':
             body::agregarAlContenido ('registro.empresas',true);
             break;
@@ -42,6 +45,7 @@ if (!sesion::iniciado())
             break;
         case 'error':        
         default:
+            error_log($_GET['peticion']);
             body::agregarAlContenido ('404',true);    
     }
 }

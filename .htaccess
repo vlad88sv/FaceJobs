@@ -1,24 +1,8 @@
+DirectorySlash Off
 ErrorDocument 404 /index.php?peticion=error
 
 RewriteEngine on
 RewriteBase /
-
-<ifModule mod_gzip.c>
-  mod_gzip_on Yes
-  mod_gzip_dechunk Yes
-</ifModule>
-<ifModule mod_expires.c>
-    ExpiresActive On
-    ExpiresDefault "access plus 2 year"
-</ifModule>
-<ifModule mod_headers.c>
-    Header set Cache-Control "private"
-    Header unset Last-Modified
-    Header unset ETag
-</ifModule>
-FileETag None
-
-RewriteEngine on
 
 RewriteCond %{REQUEST_URI} ^/crop_([0-9]+)_([0-9]+)_([a-za-z0-9]{40}|sinfoto)(\.jpg){0,1}$
 RewriteCond %{DOCUMENT_ROOT}/pool/img/c/%1_%2_%3 -f
@@ -32,6 +16,8 @@ RewriteRule ^imagen_([0-9]+)_([0-9]+)_([a-za-z0-9]{40}|sinfoto)(\.jpg){0,1}$ ima
 
 RewriteRule ^(paypal|ajax|gotofacebook|carga)$ $1.php [L,QSA]
 
+RewriteRule ^(.*?)\!(.*)$ index.php?peticion=$1&2=$2 [L,QSA]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)\.html$ index.php?peticion=$1 [L,QSA]
+RewriteRule ^(.*?)\.html$ index.php?peticion=$1 [L,QSA]

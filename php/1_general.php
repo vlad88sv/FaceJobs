@@ -65,6 +65,7 @@ general::registrarModulo('plantilla.JS','plnJS.php');
 general::registrarModulo('plantilla.campos','plnCampos.php');
 general::registrarModulo('controlador_pasos','controlador_pasos.php');
 general::registrarModulo('cv','cv.php');
+general::registrarModulo('web','web.php');
 general::registrarModulo('campos','campos.php');
 general::registrarModulo('phmagick','phmagick/phmagick.php');
 general::registrarScriptJS('jquery','jquery-1.6.2');

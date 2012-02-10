@@ -28,6 +28,15 @@ class web
         
         return $pageURL;
     }
+    
+    public static function SEO($URL){
+        $URL = preg_replace("`\[.*\]`U","",$URL);
+        $URL = preg_replace('`&(amp;)?#?[a-z0-9]+;`i','-',$URL);
+        $URL = htmlentities($URL, ENT_COMPAT, 'utf-8');
+        $URL = preg_replace( "`&([a-z])(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig|quot|rsquo);`i","\\1", $URL );
+        $URL = preg_replace( array("`[^a-z0-9]`i","`[-]+`") , "-", $URL);
+        return strtolower(trim($URL, '-'));
+    }
 }
 
 /* Configuración de Facebook */

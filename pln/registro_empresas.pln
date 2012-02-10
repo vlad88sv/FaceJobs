@@ -2,6 +2,8 @@
 [grupo:empresa_foto]
 [titulo:1]Carga el logo de la empresa para que forme parte del perfil de esta.[/titulo]
 [campo]empresa_registro.foto_hash[/campo]
+[subtitulo]Icono de 64x64px utilizado para representar su empresa en listas.[/subtitulo]
+[campo]empresa_registro.logo_hash[/campo]
 [/grupo]
 [grupo:datos_empresa]
 [titulo:2]Llena los siguientes datos de la empresa[/titulo]
