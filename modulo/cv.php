@@ -50,6 +50,11 @@ campos::$defcampos['paso1_personal.vehiculo']['texto'] = 'Posee vehiculo:';
 campos::$defcampos['paso1_personal.discapacidad_fisica']['tipo'] = uiForm::$sino;
 campos::$defcampos['paso1_personal.discapacidad_fisica']['texto'] = 'Posee alguna discapacidad física:';
 
+campos::$defcampos['paso1_personal.tiempo_completo']['tipo'] = uiForm::$sino;
+campos::$defcampos['paso1_personal.tiempo_completo']['texto'] = 'Posee disponibilidad para un trabajo de tiempo completo:';
+
+campos::$defcampos['paso1_personal.disponibilidad_viajar']['tipo'] = uiForm::$sino;
+campos::$defcampos['paso1_personal.disponibilidad_viajar']['texto'] = 'Posee disponibilidad para viajar si es requerido:';
 
 /******* paso2_educacion_secundaria **********/
 

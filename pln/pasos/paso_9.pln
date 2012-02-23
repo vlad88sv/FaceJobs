@@ -23,6 +23,8 @@
 [visual]paso1_personal.licencia_conducir[/visual]
 [visual]paso1_personal.vehiculo[/visual]
 [visual]paso1_personal.discapacidad_fisica[/visual]
+[visual]paso1_personal.tiempo_completo[/visual]
+[visual]paso1_personal.disponibilidad_viajar[/visual]
 </td>
 </tr>
 </table>

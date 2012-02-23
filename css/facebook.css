@@ -1,10 +1,12 @@
 html,body{margin:0;padding:0;border:0;width:100%;height:100%;}
 body{background:#fff;font-size:100%;font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-size:13px;text-align:center;margin:auto;}
 
-#cabecera{height:96px;text-align:left;position:relative;}
+#cabecera{width:100%;border-collapse: collapse;}
+#cabecera #logotipo {width:264px;}
+#cabecera td {padding:0px;vertical-align:bottom;}
+#cabecera #menu {text-align:right;} 
 #bandera{position:absolute;right:5px;top:5px;}
 #bandera #imagen{text-align:right;}
-#cabera_pais{color:#535353;font-style:italic;text-align:left;}
 #contenedor{width:760px;margin:auto;}
 #final{width:100%; margin-top: 5px;border-top: 1px #CCC solid;}
 #final a {color:#5b0504; font-size: 11px; text-decoration: none; margin: 0 10px;}
@@ -17,7 +19,7 @@ body{background:#fff;font-size:100%;font-family:"lucida grande",tahoma,verdana,a
 .negro{color:#000;}
 
 #PlantillaGeneral {width: 100%;}
-#PlantillaGeneralMenu {text-align: left;vertical-align: top;}
+#PlantillaGeneralMenu {text-align: left;vertical-align: top;width:200px;}
 #PlantillaGeneralMenu img {border: 1px #6d6d6d solid; width:110px; height: 110px;}
 #PlantillaGeneralMenu ul {list-style:none;margin:0;border:none;padding:0;}
 #PlantillaGeneralMenu ul li {color: #666;font-size: 14px;font-weight: bold; line-height: 15px; text-decoration: none;}
@@ -36,3 +38,12 @@ table.lista_empresas td.accion { width: 80px; vertical-align: middle;text-align:
 
 div.boton {display: inline-block !important; border: 1px solid #666;border-radius: 5px;text-align: center;width: 55px !important; height: 20px !important;line-height: 20px; font-size:12px;}
 div.boton a {color: #F7F7F7 !important;text-decoration: none;display: block;}
+
+
+#rejilla_filtros table {width:100%;border-collapse:collapse;}
+#rejilla_filtros table td {padding: 2px 5px 5px 5px; font-size:10px;}
+#rejilla_filtros table tr:nth-child(odd) {background-color: #d8d7d7;}
+#rejilla_filtros table tr:nth-child(even) {background-color: #ebe9e9;}
+#rejilla_filtros h1 {font-size:12px;}
+
+input[type="checkbox"] {margin:0px;}

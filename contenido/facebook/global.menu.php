@@ -1,38 +1,38 @@
 <?php
 general::registrarEstiloCSS('menu','menu');
 
-$menu['inicio']['texto'] = 'Inicio';
-$menu['inicio']['titulo'] = 'Iniciar en '.PROY_NOMBRE;
-$menu['buscar']['nivel'] = array(usuario::$tipoVisitante);
+$menu['actividad.economica']['texto'] = 'Actividad Económica';
+$menu['actividad.economica']['enlace'] = 'busqueda.html?c=actividad.economica';
+$menu['actividad.economica']['titulo'] = 'Búscar por actividad economica';
 
-$menu['inicio']['texto'] = 'Perfil';
-$menu['inicio']['titulo'] = 'Mi Currilum Vitae';
-$menu['inicio']['nivel'] = array(usuario::$tipoCandidato);
+$menu['area.puesto']['texto'] = 'Área de Puesto';
+$menu['area.puesto']['enlace'] = 'busqueda.html?c=area.puesto';
+$menu['area.puesto']['titulo'] = 'Búscar en base al área del puesto';
 
-$menu['ofertas']['texto'] = 'Ofertas de trabajo';
-$menu['ofertas']['titulo'] = 'Ver las ofertas de trabajo';
-$menu['ofertas']['nivel'] = array(usuario::$tipoCandidato, usuario::$tipoAdministrador);
+$menu['informatica']['texto'] = 'Informática';
+$menu['informatica']['enlace'] = 'busqueda.html?c=informatica';
+$menu['informatica']['titulo'] = 'Búscar candidatos en base a su sector de desempeño en la informática';
 
-$menu['mensajes']['texto'] = 'Mensajes';
-$menu['mensajes']['titulo'] = 'Centro de mensajes';
-$menu['mensajes']['nivel'] = array(usuario::$tipoCandidato, usuario::$tipoEmpresa, usuario::$tipoAdministrador);
+$menu['oficio']['texto'] = 'Oficio';
+$menu['oficio']['enlace'] = 'busqueda.html?c=oficio';
+$menu['oficio']['titulo'] = 'Búscar candidados en base a sus habilidades';
 
-$menu['empresas']['texto'] = 'Empresas';
-$menu['empresas']['titulo'] = 'Listado de empresas';
-$menu['empresas']['nivel'] = array(usuario::$tipoCandidato, usuario::$tipoAdministrador);
 
-$menu['estadisticas']['texto'] = 'Estadísticas';
-$menu['estadisticas']['titulo'] = 'Estadísticas de '.PROY_NOMBRE;
-$menu['estadisticas']['nivel'] = array(usuario::$tipoCandidato, usuario::$tipoEmpresa, usuario::$tipoAdministrador);
+$menu['estudio']['texto'] = 'Estudio';
+$menu['estudio']['enlace'] = 'busqueda.html?c=estudio';
+$menu['estudio']['titulo'] = 'Búscar candidados en base a sus estudios profesionales';
 
-$menu['tds']['texto'] = 'TDS';
-$menu['tds']['titulo'] = 'Terminos y condiciones';
-$menu['tds']['pie'] = true;
+// Áreas de actividad económica correspondientes a las empresas donde han trabajados los FaceJobianos
+$c = 'SELECT grupo, subgrupo FROM `datos_puesto` WHERE 1 GROUP BY grupo, subgrupo';
+$rMenuActividad = db::consultar($c);
 
-$menu['faqs']['texto'] = "FAQ's";
-$menu['faqs']['titulo'] = 'Preguntas frecuentes';
-$menu['faqs']['pie'] = true;
+// Áreas de puesto correspondientes a las puestos donde han trabajados los FaceJobianos
+$c = 'SELECT grupo, subgrupo FROM `datos_puesto` WHERE 1 GROUP BY grupo, subgrupo';
+$rMenuPuesto = db::consultar($c);
 
+// Tags de estudio correspondientes a los estudios realizados por los FaceJobianos
+$c = 'SELECT grupo, subgrupo FROM `datos_puesto` WHERE 1 GROUP BY grupo, subgrupo';
+$rMenuEstudio = db::consultar($c);
 ?>
 <ul id="nav" class="dropdown dropdown-horizontal">
 
@@ -42,12 +42,13 @@ foreach ($menu as $enlace => $datos)
     if (empty($datos['nivel']) || !is_array($datos['nivel']) || in_array(usuario::$info['tipo'],$datos['nivel']))
     {
         if (empty($datos['pie']))
-            echo '<li'.(@$_GET['peticion'] == $enlace ? ' class="seleccionado"' : '').'><a id="menu_'.$enlace.'"  title="'._($datos['titulo']).'" href="'.PROY_URL.$enlace.'.html">'._($datos['texto']).'</a></li>';
+            echo '<li'.(@$_GET['peticion'] == $enlace ? ' class="seleccionado"' : '').'><a id="menu_'.$enlace.'"  title="'._($datos['titulo']).'" href="'.PROY_URL.$datos['enlace'].'.html">'._($datos['texto']).'</a></li>';
         else
-            body::agregarContenidoAlFinal('<a id="menu_'.$enlace.'"  title="'._($datos['titulo']).'" href="'.PROY_URL.$enlace.'.html">'._($datos['texto']).'</a>');
+            body::agregarContenidoAlFinal('<a id="menu_'.$enlace.'"  title="'._($datos['titulo']).'" href="'.PROY_URL.$datos['enlace'].'">'._($datos['texto']).'</a>');
     }
 }
 ?>
-<li><a href="javascript:void(0)" onclick="FB.ui({ method: 'apprequests', message: 'La mejor bolsa de trabajo de $$PAIS$$', display:'iframe'});">Contar a los amigos</a></li>
+
+<li style="float:right;padding:0px;"><span>Búsqueda rápida:&nbsp;<input id="menu_busqueda_rapida" type="text" value="" /></span></li>
 
 </ul>

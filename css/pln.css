@@ -5,51 +5,51 @@
 #controlador_pasos a {color:#AAA; font-size: 20px; text-decoration: none; display: block;}
 
 #pasos {width: 100%;background-color: #FFF;float: left;clear: both;margin-bottom: 35px; margin-top: 17px;}
-.paso {float: left;margin-right: 20px;}
-.paso .titulo {color: #111;width: 100%;text-align: center;}
-.paso .numero {background: url('../img/fondo_paso.gif') no-repeat center; width:40px; height:40px; line-height: 40px; width: 64px; text-align: center;}
-.paso .numero a {color:#5b0504; font-size: 20px; text-decoration: none; display: block;}
-.paso .resaltado {background-image: url('../img/fondo_paso_resaltado.gif');}
-.paso .resaltado a {color:#FFF;}
-.paso .texto {color: #666; width: 64px; height: 34px;line-height: 90%; margin-top: 5px;}
-.paso .porcentaje {color:#5b0504; width: 50px; height: 16px; border: 1px solid #111;margin: 0 auto;}
-.paso .porcentaje .barra {background-color: #ccc;float: left; height:16px;}
-.paso .porcentaje .valor {float: left;text-align: center;width: 50px;}
+#pasos .paso {float: left;margin-right: 20px;}
+#pasos .paso .titulo {color: #111;width: 100%;text-align: center;}
+#pasos .paso .numero {background: url('../img/fondo_paso.gif') no-repeat center; width:40px; height:40px; line-height: 40px; width: 64px; text-align: center;}
+#pasos .paso .numero a {color:#5b0504; font-size: 20px; text-decoration: none; display: block;}
+#pasos .paso .resaltado {background-image: url('../img/fondo_paso_resaltado.gif');}
+#pasos .paso .resaltado a {color:#FFF;}
+#pasos .paso .texto {color: #666; width: 64px; height: 34px;line-height: 90%; margin-top: 5px;}
+#pasos .paso .porcentaje {color:#5b0504; width: 50px; height: 16px; border: 1px solid #111;margin: 0 auto;}
+#pasos .paso .porcentaje .barra {background-color: #ccc;float: left; height:16px;}
+#pasos .paso .porcentaje .valor {float: left;text-align: center;width: 50px;}
 #contenido {border:2px #CCC solid; border-radius:10px;color:#666;padding-left:50px;padding-right:12px;padding-top:15px;padding-bottom:15px;}
-#TituloGeneral{text-align:left;margin-left:15px;}
-.grupo {border-bottom:1px #ccc solid;padding-bottom:15px;margin-bottom:15px;text-align: left;}
-.titulo {color:#666;text-align:left;font-size:14px;line-height: 14px;margin-bottom:24px;}
-.numeroTitulo {background-color:#5b0504;color:#FFF;padding:2px 4px;}
-.subtitulo {padding-left: 25px; color:#5b0504;}
-.tituloCampo:before {content:"►";font-size:14px;color:#5b0504;}
-.tituloCampo{padding-left:10px;}
-.subtituloCampo{padding-left:10px;font-size:12px;color:#5b0504;padding-left:25px;}
-.campo {}
-.vista {}
-.lazo {}
-.visualTexto{color: #000;}
-table{border-collapse:collapse;}
-.lazoCampos {border:1px #CCC solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:15px;padding-bottom:15px;}
-.lazoVista {border:2px #aaa solid; border-radius:10px;background-color:#EEE;margin-bottom: 5px;margin-top: 10px;position: relative;font-size: 11px;}
-.lazoVistaVirtual {border:none; border-radius:0;background-color:#EEE;position: relative;font-size: 11px;margin:0 30px;min-height:18px;}
-.lazoVistaPeque {display:inline-block;width:200px;float:left;margin-right:10px;}
-.lazoVista table td {vertical-align: top;padding:0 2px;}
-.lazoVistaBolita{font-size:24px;color:#5b0504; margin: 0 2px;float: left;line-height:18px;height:20px;}
-.lazoVistaControles{position:absolute;right:2px;top:2px;}
-.lazoVistaControles a {display:inline-block;}
-.lazoControles {text-align: right !important;}
-.lazoControles .boton {display: inline-block !important; border: 1px solid #666;border-radius: 5px;text-align: center;width: 55px !important; height: 20px !important;line-height: 20px; font-size:12px;}
-.lazoControles .boton a {color: #F7F7F7 !important;text-decoration: none;display: block;}
+#contenido #TituloGeneral{text-align:left;margin-left:15px;}
+#contenido .grupo {border-bottom:1px #ccc solid;padding-bottom:15px;margin-bottom:15px;text-align: left;}
+#contenido .titulo {color:#666;text-align:left;font-size:14px;line-height: 14px;margin-bottom:24px;}
+#contenido .numeroTitulo {background-color:#5b0504;color:#FFF;padding:2px 4px;}
+#contenido .subtitulo {padding-left: 25px; color:#5b0504;}
+#contenido .tituloCampo:before {content:"►";font-size:14px;color:#5b0504;}
+#contenido .tituloCampo{padding-left:10px;}
+#contenido .subtituloCampo{padding-left:10px;font-size:12px;color:#5b0504;padding-left:25px;}
+#contenido .campo {}
+#contenido .vista {}
+#contenido .lazo {}
+#contenido .visualTexto{color: #000;}
+#contenido table{border-collapse:collapse;}
+#contenido .lazoCampos {border:1px #CCC solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:15px;padding-bottom:15px;}
+#contenido .lazoVista {border:2px #aaa solid; border-radius:10px;background-color:#EEE;margin-bottom: 5px;margin-top: 10px;position: relative;font-size: 11px;}
+#contenido .lazoVistaVirtual {border:none; border-radius:0;background-color:#EEE;position: relative;font-size: 11px;margin:0 30px;min-height:18px;}
+#contenido .lazoVistaPeque {display:inline-block;width:200px;float:left;margin-right:10px;}
+#contenido .lazoVista table td {vertical-align: top;padding:0 2px;}
+#contenido .lazoVistaBolita{font-size:24px;color:#5b0504; margin: 0 2px;float: left;line-height:18px;height:20px;}
+#contenido .lazoVistaControles{position:absolute;right:2px;top:2px;}
+#contenido .lazoVistaControles a {display:inline-block;}
+#contenido .lazoControles {text-align: right !important;}
+#contenido .lazoControles .boton {display: inline-block !important; border: 1px solid #666;border-radius: 5px;text-align: center;width: 55px !important; height: 20px !important;line-height: 20px; font-size:12px;}
+#contenido .lazoControles .boton a {color: #F7F7F7 !important;text-decoration: none;display: block;}
 
-.grupoVisualizacion {border:2px #CCC solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:3px;padding-bottom:15px;margin-bottom: 15px;}
+#contenido .grupoVisualizacion {border:2px #CCC solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:3px;padding-bottom:15px;margin-bottom: 15px;}
 
-input[type=text] {border-radius: 6px;padding: 2px 4px;background-color: #DDD; width: 250px; border: 1px #666 solid;}
-input:focus {background-color: #FFF;}
-#paso3_cargos_funciones,#paso6_info_adicional_informacion{width: 500px; height: 300px;margin: auto;display: block;border-radius: 10px;}
+#contenido input[type=text] {border-radius: 6px;padding: 2px 4px;background-color: #DDD; width: 250px; border: 1px #666 solid;}
+#contenido input:focus {background-color: #FFF;}
+#contenido #paso3_cargos_funciones,#paso6_info_adicional_informacion{width: 500px; height: 300px;margin: auto;display: block;border-radius: 10px;}
 
-h1,h2,h3 {color:black;}
-h1 {margin-top:1px;}
-h2:before {content:"►";font-size:14px;color:#5b0504;}
-h2 {font-size: 13px;}
+#contenido h1,h2,h3 {color:black;}
+#contenido h1 {margin-top:1px;}
+#contenido h2:before {content:"►";font-size:14px;color:#5b0504;}
+#contenido h2 {font-size: 13px;}
 
-.editarPaso{background-color: #5b0504; color: white; display:inline-block; border-radius: 5px; text-decoration: none; font-size:14px;height:26px;line-height: 26px;float: right; padding: 1px 5px;}
+#contenido .editarPaso{background-color: #5b0504; color: white; display:inline-block; border-radius: 5px; text-decoration: none; font-size:14px;height:26px;line-height: 26px;float: right; padding: 1px 5px;}

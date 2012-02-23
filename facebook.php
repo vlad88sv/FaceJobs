@@ -35,13 +35,15 @@ if (!sesion::iniciado())
         case 'faqs':
             body::agregarAlContenido ('faqs',true);
             break;
-        case 'pasos':
-            body::agregarAlContenido ('pasos',true);
-            break;
         case 'paso':
-        case 'inicio':
+            body::agregarAlContenido ('controlador.pasos',true);
+            break;
+        case 'perfil':
+            body::agregarAlContenido ('perfil',true);
+            break;
+        case 'busqueda':
         case '':
-            body::agregarAlContenido ('inicio',true);
+            body::agregarAlContenido ('busqueda',true);
             break;
         case 'error':        
         default:

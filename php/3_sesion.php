@@ -18,6 +18,11 @@ class usuario
     {
         self::$info = db::obtenerPorIndice('cuentas','ID',array($ID),1);
     }
+    
+    public static function recargar()
+    {
+        self::cargar(self::$info['ID_cuenta']);
+    }
 
 }
 

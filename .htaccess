@@ -14,7 +14,7 @@ RewriteCond %{DOCUMENT_ROOT}/pool/img/m/%1_%2_%3 -f
 RewriteRule ^imagen_([0-9]+)_([0-9]+)_([a-za-z0-9]{40}|sinfoto)(\.jpg){0,1}$ %{DOCUMENT_ROOT}/pool/img/m/$1_$2_$3 [L]
 RewriteRule ^imagen_([0-9]+)_([0-9]+)_([a-za-z0-9]{40}|sinfoto)(\.jpg){0,1}$ imagenes.php?ancho=$1&alto=$2&hash=$3 [L]
 
-RewriteRule ^(paypal|ajax|gotofacebook|carga)$ $1.php [L,QSA]
+RewriteRule ^(paypal|ajax|gotofacebook|carga|ajax.rejilla)$ $1.php [L,QSA]
 
 RewriteRule ^(.*?)\!(.*)$ index.php?peticion=$1&2=$2 [L,QSA]
 

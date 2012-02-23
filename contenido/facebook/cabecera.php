@@ -1,7 +1,17 @@
-<div id="cabecera">
-    <img id="logotipo" src="img/facebook_cabecera.png" alt="Face.Jobs" />
-    <div id="bandera">
-    	<div class="fb-like" data-href="http://apps.facebook.com/facejobs_org" data-send="true" data-layout="button_count" data-width="80" data-show-faces="true" data-action="recommend"></div>
-    </div>
-    <div id="cabera_pais">La bolsa de trabajo de mayor alcance en <?php echo (!empty(general::$config['temporal']['pais']) ? general::$config['temporal']['pais'] : 'el mundo') ; ?></div>
-</div>
+<table id="cabecera">
+    <tr>
+    <td id="logotipo">
+        <a href="<?php echo PROY_URL; ?>"><img src="img/facebook_cabecera.png" alt="Face.Jobs" /></a>
+    </td>
+    <td id="menu">
+            <?php if (usuario::$info['tipo'] == "candidato"): ?>
+                <a href="perfil.html">[Editar curriculum]</a>
+                <a href="perfil.html?modo=empresa">[Como Empresa]</a>
+            <?php endif;?>
+            <?php if (usuario::$info['tipo'] == "empresa"): ?>
+                <a href="perfil.html">[Editar perfil de empresa]</a>
+                <a href="perfil.html?modo=candidato">[Como Candidato]</a>
+            <?php endif;?>
+    </td>
+    </tr>
+</table>

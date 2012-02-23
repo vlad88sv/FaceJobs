@@ -1,7 +1,7 @@
-#nav{display: inline-block;top:0;width:100%;font-size:11px;height:20px;line-height:20px;z-index:597;padding:0;text-align:justify;background:#882a29 url('../img/menu_fondo.gif') repeat-x;}
-#nav li{float:left;height:20px;line-height:normal;color:#FFF;white-space:nowrap;}
+#nav{display: inline-block;top:0;width:100%;font-size:11px;height:24px;line-height:24px;z-index:597;padding:0;text-align:justify;background:#882a29 url('../img/menu_fondo.gif') repeat-x;}
+#nav li{float:left;height:24px;line-height:24px;color:#FFF;white-space:nowrap; padding: 0px 10px;}
 #nav li.hover,#nav li:hover{cursor:default;position:relative;z-index:599;}
-#nav li a{color:#FFF;text-decoration:none;display:block;padding:5px 10px;font-weight:bold;}
+#nav li a, #nav li span{color:#FFF;text-decoration:none;display:block;font-weight:bold;height:24px;line-height:24px;}
 #nav li a:hover{color:#DDD;}
 #nav li.seleccionado a{font-size:12px;}
 
@@ -15,3 +15,4 @@
 #nav,#nav li ul{list-style:none !important;margin:0;border:none;}
 #nav li.hover,#nav li:hover,.lidestacado{background-color:#EC454E;}
 
+#menu_busqueda_rapida {border:1px solid black; border-radius:5px;height:20px;line-height:20px; padding:0px;}

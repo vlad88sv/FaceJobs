@@ -19,4 +19,5 @@
 [campo]paso1_personal.licencia_conducir[/campo]
 [campo]paso1_personal.vehiculo[/campo]
 [campo]paso1_personal.discapacidad_fisica[/campo]
+[campo]paso1_personal.tiempo_completo[/campo]
 [/grupo]
