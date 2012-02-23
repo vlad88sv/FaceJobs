@@ -2,15 +2,15 @@
 <script>
 $(function() {
 
-$("select.auto").change(function() {
+$("select.auto").live("change",function() {
     $(this).after('<img class="guardando g_'+$(this).attr("id")+'" src="img/ajax.gif" />');
     $.post('ajax',{campo:$(this).attr("rel"), valor:$(this).val()},function() {$(".guardando").remove()},"html");
     $(this).removeClass("sucio");
 });
 
-$("input:text.auto").change(function(){$(this).addClass("sucio");})
+$("input:text.auto").live("change",function(){$(this).addClass("sucio");})
 
-$("input:text.auto").focusout(function() {
+$("input:text.auto").live("focusout",function() {
   if ($(this).hasClass("sucio"))
   {
     $(this).after('<img class="guardando g_'+$(this).attr("id")+'" src="img/ajax.gif" />');
@@ -19,20 +19,20 @@ $("input:text.auto").focusout(function() {
   }
 });
 
-$("input:radio.auto").click(function() {
+$("input:radio.auto").live("click",function() {
     $(this).after('<img class="guardando g_'+$(this).attr("id")+'" src="img/ajax.gif" />');
     $.post('ajax',{campo:$(this).attr("rel"), valor:$(this).val()},function() {$(".guardando").remove()},"html");
     $(this).removeClass("sucio");
 });
 
-$("input:checkbox.auto").click(function() {
+$("input:checkbox.auto").live("click",function() {
     $(this).after('<img class="guardando g_'+$(this).attr("id")+'" src="img/ajax.gif" />');
     $.post('ajax',{campo:$(this).attr("rel"), valor:($(this).attr("checked") ? "1" : "0")},function() {$(".guardando").remove()},"html");
     $(this).removeClass("sucio");
     
 });
 
-$(".autoLazo").click(function() {
+$(".autoLazo").live("click",function() {
 	event.preventDefault();
 	$("#lazo_"+$(this).attr("rel")+ " .lazoCampos").prepend('<div class="guardando_form" style="text-align:center;"><img src="img/ajax.gif" /> Guardando...</div>');
 	$("#vista_"+$(this).attr("vista")).load('ajax',{VistaLazo: $(this).attr("vista"), serial:$("#lazo_"+$(this).attr("rel")).serialize()},$.proxy(function() {
@@ -42,7 +42,7 @@ $(".autoLazo").click(function() {
         $("#"+$(this).attr("rel")+"_ID_"+$(this).attr("rel")).val("0");
 });
 
-$(".reset").click(function() {
+$(".reset").live("click",function() {
 	event.preventDefault();
 	$("#lazo_"+$(this).attr("rel"))[0].reset();
         $("#"+$(this).attr("rel")+"_ID_"+$(this).attr("rel")).val("0");
