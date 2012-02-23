@@ -29,3 +29,8 @@ $plantilla->procesar('pasos/paso_'.$paso);
 
 body::agregarContenidoAlContenido($plantilla->pln);
 ?>
+<script>
+    $(function(){
+        plnJS_iniciar();
+    });
+</script>

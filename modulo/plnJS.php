@@ -48,15 +48,6 @@ $(".reset").live("click",function() {
         $("#"+$(this).attr("rel")+"_ID_"+$(this).attr("rel")).val("0");
 });
 
-function cargarContenedorLazoVista(id)
-{
-	$("#vista_"+id).load("ajax", {VistaLazo:id});
-}
-
-$(".contenedorLazoVista").each(function(){
-	cargarContenedorLazoVista($(this).attr("rel"));
-});
-
 $(".lazoVistaControlesEditar").live("click",function(){
     event.preventDefault();
     var ID = $(this).attr("rel");
@@ -105,22 +96,34 @@ $(".lazoVistaControlesEliminar").live("click",function(){
     $(this).parents(".contenedorLazoVista").load("ajax", {VistaLazo:ActualizarLazo,borrar:EliminarID,lazo:tabla});
 });
 
-$(".cargar-archivo").each(function(){
-    new qq.FileUploaderBasic({
-        button: $(this)[0],
-	params: {ref: $("#"+$(this).attr("rel")).attr("name") },
-        identificador: this,
-        action: '<?php echo PROY_URL; ?>carga',
-        showMessage: function(message){ alert(message); },
-        debug: false,
-        allowedExtensions: ['jpg', 'png', 'jpeg', 'gif'],
-        onSubmit: function(id, fileName){$('#'+$(this.identificador).attr('rel')).attr('src','img/ajax2.gif');},
-        onProgress: function(id, fileName, loaded, total){},
-        onComplete: function(id, fileName, responseJSON){$('#'+$(this.identificador).attr('rel')).attr('src','crop_110_110_'+responseJSON.hash+'.jpg');}
-    });
-
-});
-
 }); //Document.Ready()
+
+function cargarContenedorLazoVista(id)
+{
+    $("#vista_"+id).load("ajax", {VistaLazo:id});
+}
+
+function plnJS_iniciar()
+{
+    $(".contenedorLazoVista").each(function(){
+        cargarContenedorLazoVista($(this).attr("rel"));
+    });
+    
+    $(".cargar-archivo").each(function(){
+        new qq.FileUploaderBasic({
+            button: $(this)[0],
+        params: {ref: $("#"+$(this).attr("rel")).attr("name") },
+            identificador: this,
+            action: '<?php echo PROY_URL; ?>carga',
+            showMessage: function(message){ alert(message); },
+            debug: false,
+            allowedExtensions: ['jpg', 'png', 'jpeg', 'gif'],
+            onSubmit: function(id, fileName){$('#'+$(this.identificador).attr('rel')).attr('src','img/ajax2.gif');},
+            onProgress: function(id, fileName, loaded, total){},
+            onComplete: function(id, fileName, responseJSON){$('#'+$(this.identificador).attr('rel')).attr('src','crop_110_110_'+responseJSON.hash+'.jpg');}
+        });
+    
+    });
+}
 </script>
 <?php head::agregarContenido(ob_get_clean()); ?>
