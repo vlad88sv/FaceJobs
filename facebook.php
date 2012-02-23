@@ -1,7 +1,6 @@
 <?php
 /* Frontend de Facebook. */
 sesion::iniciar_sesion();
-general::registrarScriptJS('jQuery','jquery-1.7.1');
 general::registrarEstiloCSS('facebook','facebook');
 body::agregarAlInicio('cabecera',true);
 body::agregarAlInicio('global.menu',true);
@@ -51,6 +50,15 @@ if (!sesion::iniciado())
             body::agregarAlContenido ('404',true);    
     }
 }
+
+if (isset($_GET['contenido']))
+{
+echo '<div id="contenedor">';
+echo body::$contenido;
+echo '</div>';
+return;
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
