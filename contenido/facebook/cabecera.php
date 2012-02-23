@@ -6,11 +6,11 @@
     <td id="menu">
             <?php if (usuario::$info['tipo'] == "candidato"): ?>
                 <a href="perfil.html">[Editar curriculum]</a>
-                <a href="perfil.html?modo=empresa">[Como Empresa]</a>
+                <a href="perfil.html?modo=empresa">[Ser Empresa]</a>
             <?php endif;?>
             <?php if (usuario::$info['tipo'] == "empresa"): ?>
                 <a href="perfil.html">[Editar perfil de empresa]</a>
-                <a href="perfil.html?modo=candidato">[Como Candidato]</a>
+                <a href="perfil.html?modo=candidato">[Ser Candidato]</a>
             <?php endif;?>
     </td>
     </tr>
