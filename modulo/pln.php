@@ -265,7 +265,7 @@ class pln
                     $i = 0;
                     foreach (campos::$defcampos[$campo]['valores'] as $valor => $texto)
                     {
-                        $retorno .= '<input disabled="disabled" type="radio" name="'.$campo.'" id="'.$campoEsc.'_'.$i.'" value="'.$valor.'"/> ' . $texto;
+                        $retorno .= '<input disabled="disabled" type="radio" $$identificacion$$ value="'.$valor.'"/> ' . $texto;
                         $i++;
                     }
                 }
