@@ -24,10 +24,9 @@ if (!is_numeric($paso) || $paso < 1 || $paso > 9)
 
 general::requerirModulo(array('plantilla','cv'));
 
-$plantilla = new pln();
-$plantilla->procesar('pasos/paso_'.$paso);
+pln::procesar('pasos/paso_'.$paso);
 
-body::agregarContenidoAlContenido($plantilla->pln);
+body::agregarContenidoAlContenido(pln::$pln);
 ?>
 <script>
     $(function(){

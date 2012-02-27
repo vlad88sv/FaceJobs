@@ -3,10 +3,10 @@ general::requerirModulo(array('plantilla.campos','plantilla.UI','plantilla.JS','
 general::registrarEstiloCSS('pln','pln');
 class pln
 {
-    public $pln;
-    public $campos = array();
-    private $debug = false;
-    public function procesar($plantilla)
+    public static $pln;
+    public static $campos = array();
+    private static $debug = false;
+    public static function procesar($plantilla)
     {
         /* Plan:
           * Las plantillas son cacheables, pues no se ubican aca los valores
@@ -15,59 +15,59 @@ class pln
          */
         
         // MemCache
-        // if ($mc = memcached('plantillas',$plantilla.'.pln')) {$this->pln = $mc; return;}
+        // if ($mc = memcached('plantillas',$plantilla.'.pln')) {self::$pln = $mc; return;}
         
-        $this->pln= file_get_contents(_BASE_plantilla.$plantilla.'.pln');
+        self::$pln= file_get_contents(_BASE_plantilla.$plantilla.'.pln');
     
-        $this->procesarTituloGeneral();
-        if ($this->debug) error_log ('procesarTituloGeneral'.' :: ' . strlen($this->pln));
-        $this->procesarGrupos();
-        if ($this->debug) error_log ('procesarGrupos'.' :: ' . strlen($this->pln));
-        $this->procesarSubTitulos();
-        if ($this->debug) error_log ('procesarSubTitulos'.' :: ' . strlen($this->pln));
-        $this->procesarTitulos();
-        if ($this->debug) error_log ('procesarTitulos'.' :: ' . strlen($this->pln));
-        $this->procesarLazos();
-        if ($this->debug) error_log ('procesarLazos'.' :: ' . strlen($this->pln));
-        $this->procesarVistaLazos();
-        if ($this->debug) error_log ('procesarVistaLazos'.' :: ' . strlen($this->pln));
-        $this->procesarCampos();
-        if ($this->debug) error_log ('procesarCampos'.' :: ' . strlen($this->pln));
-        $this->procesarVisuales();
-        if ($this->debug) error_log ('procesarVisuales'.' :: ' . strlen($this->pln));
+        self::procesarTituloGeneral();
+        if (self::$debug) error_log ('procesarTituloGeneral'.' :: ' . strlen(self::$pln));
+        self::procesarGrupos();
+        if (self::$debug) error_log ('procesarGrupos'.' :: ' . strlen(self::$pln));
+        self::procesarSubTitulos();
+        if (self::$debug) error_log ('procesarSubTitulos'.' :: ' . strlen(self::$pln));
+        self::procesarTitulos();
+        if (self::$debug) error_log ('procesarTitulos'.' :: ' . strlen(self::$pln));
+        self::procesarLazos();
+        if (self::$debug) error_log ('procesarLazos'.' :: ' . strlen(self::$pln));
+        self::procesarVistaLazos();
+        if (self::$debug) error_log ('procesarVistaLazos'.' :: ' . strlen(self::$pln));
+        self::procesarCampos();
+        if (self::$debug) error_log ('procesarCampos'.' :: ' . strlen(self::$pln));
+        self::procesarVisuales();
+        if (self::$debug) error_log ('procesarVisuales'.' :: ' . strlen(self::$pln));
         
         // Finalmente reemplazamos los valores con los del usuario
-        $this->reemplazarValores();
-        if ($this->debug) error_log ('reemplazarValores'.' :: ' . strlen($this->pln));
+        self::reemplazarValores();
+        if (self::$debug) error_log ('reemplazarValores'.' :: ' . strlen(self::$pln));
     }
     
     // ==0:ABC==
-    private function procesarTituloGeneral()
+    private static function procesarTituloGeneral()
     {
-        $this->pln = preg_replace('/==([0-9]*?)\:(.*)==(.*)/s','<div id="TituloGeneral"><span class="numeroGeneral">Paso $1</span> $2</div>'."\n".'<div id="contenido">'."\n".'$3'."\n".'</div> <!-- Contenido !-->'."\n",$this->pln);
-        $this->pln = preg_replace('/==(.*)==(.*)/s','<div id="TituloGeneral">$1</div>'."\n".'<div id="contenido">'."\n".'$2'."\n".'</div> <!-- Contenido !-->'."\n",$this->pln);
+        self::$pln = preg_replace('/==([0-9]*?)\:(.*)==(.*)/s','<div id="TituloGeneral"><span class="numeroGeneral">Paso $1</span> $2</div>'."\n".'<div id="contenido">'."\n".'$3'."\n".'</div> <!-- Contenido !-->'."\n",self::$pln);
+        self::$pln = preg_replace('/==(.*)==(.*)/s','<div id="TituloGeneral">$1</div>'."\n".'<div id="contenido">'."\n".'$2'."\n".'</div> <!-- Contenido !-->'."\n",self::$pln);
     }
     
-    private function procesarGrupos()
+    private static function procesarGrupos()
     {
-        $this->pln = preg_replace(array('/\[grupo\:(.*?)\]/','/\[\/grupo\]/'),array('<div class="grupo" id="grupo_$1">','</div>'),$this->pln);
+        self::$pln = preg_replace(array('/\[grupo\:(.*?)\]/','/\[\/grupo\]/'),array('<div class="grupo" id="grupo_$1">','</div>'),self::$pln);
     }
     
-    private function procesarTitulos()
+    private static function procesarTitulos()
     {
-        $this->pln = preg_replace('/\[titulo\:([0-9]*?)](.*?)\[\/titulo\]/s','<div class="titulo"><span class="numeroTitulo">$1</span> $2</div>',$this->pln);
-        $this->pln = preg_replace('/\[titulo](.*?)\[\/titulo\]/s','<div class="titulo">$1</div>',$this->pln);
+        self::$pln = preg_replace('/\[titulo\:([0-9]*?)](.*?)\[\/titulo\]/s','<div class="titulo"><span class="numeroTitulo">$1</span> $2</div>',self::$pln);
+        self::$pln = preg_replace('/\[titulo](.*?)\[\/titulo\]/s','<div class="titulo">$1</div>',self::$pln);
     }
     
-    private function procesarSubTitulos()
+    private static function procesarSubTitulos()
     {
-        $this->pln = preg_replace('/\[subtitulo](.*?)\[\/subtitulo\]/s','<div class="subtitulo">$1</div>',$this->pln);
+        self::$pln = preg_replace('/\[subtitulo](.*?)\[\/subtitulo\]/s','<div class="subtitulo">$1</div>',self::$pln);
     }
     
-    private function procesarLazos()
+    private static function procesarLazos()
     {
         $lazos = array();
-        preg_match_all('/\[lazo](.*?)\[\/lazo\]/s',$this->pln,$lazos);
+        preg_match_all('/\[lazo](.*?)\[\/lazo\]/s',self::$pln,$lazos);
         
         foreach($lazos[1] as $lazo)
         {
@@ -102,31 +102,26 @@ class pln
             $retornoCampos .= '</div>';
             $retorno .= '<form id="lazo_'.$lazo.'" method="post">'.$retornoVista.$retornoCampos.'</form>';
             
-            $this->pln = preg_replace( '/\[lazo\]'.$lazo.'\[\/lazo\]/', $retorno, $this->pln );
+            self::$pln = preg_replace( '/\[lazo\]'.$lazo.'\[\/lazo\]/', $retorno, self::$pln );
         }
     }
     
-    private function procesarVisuales()
+    private static function procesarVisuales()
     {
         $campos = array();
-        preg_match_all('/\[visual](.*?)\[\/visual\]/s',$this->pln,$campos);
+        preg_match_all('/\[visual](.*?)\[\/visual\]/s',self::$pln,$campos);
         
         foreach($campos[1] as $campo)
         {
             if ($retorno = plnUI::procesarVisual($campo))
-            {
-                if (preg_match('/(.*)\.(.*)/',$campo,$partes))
-                {
-                    $this->campos[$partes[1]][]= $partes[2];
-                }
-                
-                $this->pln = preg_replace( '/\[visual\]'.$campo.'\[\/visual\]/', $retorno, $this->pln );
+            {               
+                self::$pln = preg_replace( '/\[visual\]'.$campo.'\[\/visual\]/', $retorno, self::$pln );
             }
         }
     }
     
     
-    private function procesarCampos()
+    private static function procesarCampos()
     {
         /* Plan:
           * 1. Encontrar todos los campos de .pln y descartar los que no existan en $defcv[$campo]
@@ -135,23 +130,13 @@ class pln
         */
         
         $campos = array();
-        preg_match_all('/\[campo](.*?)\[\/campo\]/s',$this->pln,$campos);
+        preg_match_all('/\[campo](.*?)\[\/campo\]/s',self::$pln,$campos);
         
         foreach($campos[1] as $campo)
         {
             if ($retorno = plnUI::procesarCampo($campo))
-            {
-                if(!$esLazo)
-                {
-                    $partes = null;
-                    
-                    if (preg_match('/(.*)\.(.*)/',$campo,$partes))
-                    {
-                        $this->campos[$partes[1]][]= $partes[2];
-                    }
-                }
-                
-                $this->pln = preg_replace( '/\[campo\]'.$campo.'\[\/campo\]/', $retorno, $this->pln );
+            {                
+                self::$pln = preg_replace( '/\[campo\]'.$campo.'\[\/campo\]/', $retorno, self::$pln );
             }
                 
         }
@@ -159,14 +144,14 @@ class pln
     
 
     
-    private function reemplazarValores()
+    private static function reemplazarValores()
     {
         
-        foreach($this->campos as $tabla => $campos)
+        foreach(self::$campos as $tabla => $campos)
         {
-           $c = 'SELECT '.join(', ',$this->campos[$tabla]).' FROM ' . $tabla.' WHERE ID_cuenta='.usuario::$info['ID_cuenta'];
+           $c = 'SELECT '.join(', ',self::$campos[$tabla]).' FROM ' . $tabla.' WHERE ID_cuenta='.usuario::$info['ID_cuenta'];
            
-           if ($this->debug) error_log('reemplazarValores.Query :: ' . $c);
+           if (self::$debug) error_log('reemplazarValores.Query :: ' . $c);
            
            $r = db::consultar($c);           
            if (!$r) continue;
@@ -178,16 +163,16 @@ class pln
            {
             if (isset($f[$campo]))
             {
-            $this->EstablecerCampo($tabla.'.'.$campo,$f[$campo]);
-            if ($this->debug) error_log('reemplazarValores.EstablecerCampo :: ' . $tabla.'.'.$campo . '[ '. strlen($this->pln) . ' ]');
+            self::EstablecerCampo($tabla.'.'.$campo,$f[$campo]);
+            if (self::$debug) error_log('reemplazarValores.EstablecerCampo :: ' . $tabla.'.'.$campo . '[ '. strlen(self::$pln) . ' ]');
             }
            }
         }
         
-        $this->pln = preg_replace('/\$\$reemplazar\:\:.*?\$\$/','',$this->pln);
+        self::$pln = preg_replace('/\$\$reemplazar\:\:.*?\$\$/','',self::$pln);
     }    
     
-    private function EstablecerCampo($campo,$valor)
+    private static function EstablecerCampo($campo,$valor)
     {
         
         if (!isset(campos::$defcampos[$campo]))
@@ -203,7 +188,7 @@ class pln
         switch ($tipo)
         {
             case uiForm::$cargarImagenOWebCam:
-                $this->pln = preg_replace('/\$\$reemplazar\:\:'.$campoEsc.'\$\$/',ui::ObtenerImagen($valor,110,110,true),$this->pln);
+                self::$pln = preg_replace('/\$\$reemplazar\:\:'.$campoEsc.'\$\$/',ui::ObtenerImagen($valor,110,110,true),self::$pln);
                 break;
 
             case uiForm::$textoSimple:
@@ -211,42 +196,42 @@ class pln
             case uiForm::$memo:
             case uiForm::$fecha:
             case uiForm::$telefono:
-                $this->pln = preg_replace('/\$\$reemplazar\:\:'.$campoEsc.'\$\$/',$valor,$this->pln);
+                self::$pln = preg_replace('/\$\$reemplazar\:\:'.$campoEsc.'\$\$/',$valor,self::$pln);
                 break;
 
             case uiForm::$comboboxSimple:
             case uiForm::$comboboxComplejo:
             case uiForm::$comboboxPaises:
-                $this->pln = preg_replace('/(id="'.$campoEsc.'".*?value="'.$valor.'")/','$1 selected="selected"',$this->pln,1);
+                self::$pln = preg_replace('/(id="'.$campoEsc.'".*?value="'.$valor.'")/','$1 selected="selected"',self::$pln,1);
                 break;
                 
             case uiForm::$sino:
             case uiForm::$radio:                        
-                $this->pln = preg_replace('/(id="'.$campoEsc.'".*?value="'.$valor.'")/','$1 checked="checked"',$this->pln,1);
+                self::$pln = preg_replace('/(id="'.$campoEsc.'".*?value="'.$valor.'")/','$1 checked="checked"',self::$pln,1);
                 break;
 
             case uiForm::$cheque:
                 if ($valor == "1")
-                    $this->pln = preg_replace('/(id="'.$campoEsc.'")/','$1 checked="checked"',$this->pln,1);
+                    self::$pln = preg_replace('/(id="'.$campoEsc.'")/','$1 checked="checked"',self::$pln,1);
                 break;
         }
     }
 
-    private function procesarVistaLazos()
+    private static function procesarVistaLazos()
     {
         $lazos = array();
-        preg_match_all('/\[vistalazo](.*?)\[\/vistalazo\]/s',$this->pln,$lazos);
+        preg_match_all('/\[vistalazo](.*?)\[\/vistalazo\]/s',self::$pln,$lazos);
         
         foreach($lazos[1] as $lazo)
         {
             if (!isset(campos::$deflazo[$lazo]))
                 continue;
             
-            $this->pln = preg_replace( '/\[vistalazo\]'.$lazo.'\[\/vistalazo\]/', $this->VistaLazo($lazo), $this->pln );
+            self::$pln = preg_replace( '/\[vistalazo\]'.$lazo.'\[\/vistalazo\]/', self::VistaLazo($lazo), self::$pln );
         }
     }    
     
-    function VistaLazo($lazo,$virtual=false)
+    private static function VistaLazo($lazo,$virtual=false)
     {
         $retorno = '';
 	
@@ -336,7 +321,7 @@ class pln
 		{
                     $retorno .= '<br />';
                     foreach (campos::$deflazo[$lazo]['vistaUniones'] as $Vista) {
-                        $retorno .= $this->VistaLazo($Vista,true);
+                        $retorno .= self::VistaLazo($Vista,true);
                     }
 		}
 		$retorno .= '</div>';

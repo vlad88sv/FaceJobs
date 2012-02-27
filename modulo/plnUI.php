@@ -21,18 +21,10 @@ class plnUI
         switch ($tipo)
         {
             case uiForm::$cargarImagenOWebCam:
-                $retorno .= '<table style="width:100%;">
-                <tr>
-                    <td>
-                        <img $$identificacion$$ src="$$reemplazar::'.$campoEsc.'$$" />
-                    </td>
-                    <td style="text-align:center;color:#5B0504;">
-                        <div rel="'.$campoEsc.'" class="cargar-archivo">Cargar fotografía desde computadora</div>
-                        -o-
-                        <div>Tomate una fotografía con tu camara web</div>
-                    </td>
-                </tr>
-                </table>';
+                $retorno .= '
+                        <div style="text-align:center;"><img $$identificacion$$ src="$$reemplazar::'.$campoEsc.'$$" /></div>
+                        <div rel="'.$campoEsc.'" class="cargar-archivo">Subir fotografía</div>
+                        ';
                 break;
             
             case uiForm::$textoSimple:
@@ -114,7 +106,6 @@ class plnUI
                         campos::$defcampos[$campo.'Ano']['valores'] = $ano;
                         campos::$defcampos[$campo.'Ano']['enLinea'] = true;
                         $retorno .= self::procesarCampo($campo.'Ano',$esLazo);
-                        //$retorno .= '<input type="hidden" $$identificacion$$ value="$$reemplazar::'.$campoEsc.'$$" />';
                     break;
                 
                     case 'MY':
@@ -181,6 +172,12 @@ class plnUI
             $retorno .= '<br />'."\n";
             
         
+        $partes = null;
+    
+        if (preg_match('/(.*)\.(.*)/',$campo,$partes))
+        {
+            pln::$campos[$partes[1]][]= $partes[2];
+        }
 
         return $retorno;
     }    
@@ -227,10 +224,11 @@ class plnUI
                 campos::$defcampos[$campo]['datos']['valor'] = 'pais';
                 
             case uiForm::$comboboxComplejo:
+                $filtros = '';
                 $options = '<option value="">Seleccione</option>';
                 if(is_array(campos::$defcampos[$campo]['datos']) && isset(campos::$defcampos[$campo]['datos']['tabla']) && isset(campos::$defcampos[$campo]['datos']['clave']) && isset(campos::$defcampos[$campo]['datos']['valor']))
                 {
-                    if (in_array('mios', campos::$defcampos[$campo]['datos']['filtros']))
+                    if (isset(campos::$defcampos[$campo]['datos']['filtros']) && in_array('mios', campos::$defcampos[$campo]['datos']['filtros']))
                     {
                         $filtros = 'AND ID_cuenta='.usuario::$info['ID_cuenta'];
                     }
@@ -353,6 +351,11 @@ class plnUI
             $retorno .= '<br />'."\n";
         
         $partes = null;
+        
+        if (preg_match('/(.*)\.(.*)/',$campo,$partes))
+        {
+            pln::$campos[$partes[1]][]= $partes[2];
+        }
         
         return $retorno;
     }

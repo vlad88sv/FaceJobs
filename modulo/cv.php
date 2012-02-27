@@ -11,7 +11,7 @@ campos::$defcampos['paso1_personal.apellidos']['tipo'] = uiForm::$textoSimple;
 campos::$defcampos['paso1_personal.apellidos']['longitud'] = 250;
 campos::$defcampos['paso1_personal.apellidos']['texto'] = 'Apellidos:';
 
-campos::$defcampos['paso1_personal.estado_civil']['tipo'] = uiForm::$comboboxSimple;
+campos::$defcampos['paso1_personal.estado_civil']['tipo'] = uiForm::$radio;
 campos::$defcampos['paso1_personal.estado_civil']['valores'] = array('casado' => 'Casado','soltero' => 'Soltero','divorciado' => 'Divorciado','viudo' => 'Viudo','union libre' => 'Unión libre');
 campos::$defcampos['paso1_personal.estado_civil']['texto'] = 'Estado civil:';
 
@@ -20,7 +20,7 @@ campos::$defcampos['paso1_personal.fecha_nacimiento']['anoLimite'] = '1994';
 campos::$defcampos['paso1_personal.fecha_nacimiento']['flags'] = 'DMY';
 campos::$defcampos['paso1_personal.fecha_nacimiento']['texto'] = 'Fecha de nacimiento:';
 
-campos::$defcampos['paso1_personal.sexo']['tipo'] = uiForm::$comboboxSimple;
+campos::$defcampos['paso1_personal.sexo']['tipo'] = uiForm::$radio;
 campos::$defcampos['paso1_personal.sexo']['valores'] = array('masculino' => 'Masculino','femenino' => 'Femenino');
 campos::$defcampos['paso1_personal.sexo']['texto'] = 'Sexo:';
 

@@ -8,22 +8,22 @@
 #pasos .paso {float: left;margin-right: 20px;}
 #pasos .paso .titulo {color: #111;width: 100%;text-align: center;}
 #pasos .paso .numero {background: url('../img/fondo_paso.gif') no-repeat center; width:40px; height:40px; line-height: 40px; width: 64px; text-align: center;}
-#pasos .paso .numero a {color:#5b0504; font-size: 20px; text-decoration: none; display: block;}
+#pasos .paso .numero a {color:#813b3a; font-size: 20px; text-decoration: none; display: block;}
 #pasos .paso .resaltado {background-image: url('../img/fondo_paso_resaltado.gif');}
 #pasos .paso .resaltado a {color:#FFF;}
 #pasos .paso .texto {color: #666; width: 64px; height: 34px;line-height: 90%; margin-top: 5px;}
-#pasos .paso .porcentaje {color:#5b0504; width: 50px; height: 16px; border: 1px solid #111;margin: 0 auto;}
+#pasos .paso .porcentaje {color:#813b3a; width: 50px; height: 16px; border: 1px solid #111;margin: 0 auto;}
 #pasos .paso .porcentaje .barra {background-color: #ccc;float: left; height:16px;}
 #pasos .paso .porcentaje .valor {float: left;text-align: center;width: 50px;}
-#contenido {border:2px #CCC solid; border-radius:10px;color:#666;padding-left:50px;padding-right:12px;padding-top:15px;padding-bottom:15px;}
+#contenido {color:#6d6d6d;}
 #contenido #TituloGeneral{text-align:left;margin-left:15px;}
 #contenido .grupo {border-bottom:1px #ccc solid;padding-bottom:15px;margin-bottom:15px;text-align: left;}
-#contenido .titulo {color:#666;text-align:left;font-size:14px;line-height: 14px;margin-bottom:24px;}
-#contenido .numeroTitulo {background-color:#5b0504;color:#FFF;padding:2px 4px;}
-#contenido .subtitulo {padding-left: 25px; color:#5b0504;}
-#contenido .tituloCampo:before {content:"►";font-size:14px;color:#5b0504;}
+#contenido .titulo {color:#813b3a;text-align:left;font-size:14px;line-height: 14px;background-color:#f7f6f6; border:1px #aaaaaa solid;padding:4px 8px;}
+#contenido .numeroTitulo {background-color:#813b3a;color:#FFF;padding:2px 4px;}
+#contenido .subtitulo {padding-left: 25px; color:#813b3a;}
+#contenido .tituloCampo:before {content:"►";font-size:14px;color:#813b3a;}
 #contenido .tituloCampo{padding-left:10px;}
-#contenido .subtituloCampo{padding-left:10px;font-size:12px;color:#5b0504;padding-left:25px;}
+#contenido .subtituloCampo{padding-left:10px;font-size:12px;color:#813b3a;padding-left:25px;}
 #contenido .campo {}
 #contenido .vista {}
 #contenido .lazo {}
@@ -32,9 +32,9 @@
 #contenido .lazoCampos {border:1px #CCC solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:15px;padding-bottom:15px;}
 #contenido .lazoVista {border:2px #aaa solid; border-radius:10px;background-color:#EEE;margin-bottom: 5px;margin-top: 10px;position: relative;font-size: 11px;}
 #contenido .lazoVistaVirtual {border:none; border-radius:0;background-color:#EEE;position: relative;font-size: 11px;margin:0 30px;min-height:18px;}
-#contenido .lazoVistaPeque {display:inline-block;width:200px;float:left;margin-right:10px;}
+#contenido .lazoVistaPeque {display:inline-block;padding:2px 4px;float:left;margin-right:10px;}
 #contenido .lazoVista table td {vertical-align: top;padding:0 2px;}
-#contenido .lazoVistaBolita{font-size:24px;color:#5b0504; margin: 0 2px;float: left;line-height:18px;height:20px;}
+#contenido .lazoVistaBolita{font-size:24px;color:#813b3a; margin: 0 2px;float: left;line-height:18px;height:20px;}
 #contenido .lazoVistaControles{position:absolute;right:2px;top:2px;}
 #contenido .lazoVistaControles a {display:inline-block;}
 #contenido .lazoControles {text-align: right !important;}
@@ -43,13 +43,17 @@
 
 #contenido .grupoVisualizacion {border:2px #CCC solid; border-radius:10px;padding-left:15px;padding-right:12px;padding-top:3px;padding-bottom:15px;margin-bottom: 15px;}
 
-#contenido input[type=text] {border-radius: 6px;padding: 2px 4px;background-color: #DDD; width: 250px; border: 1px #666 solid;}
+#contenido input[type=text] {border-radius: 6px;padding: 2px 4px;background-color: white; width: 250px; border: 1px #afadad solid;}
 #contenido input:focus {background-color: #FFF;}
 #contenido #paso3_cargos_funciones,#paso6_info_adicional_informacion{width: 500px; height: 300px;margin: auto;display: block;border-radius: 10px;}
 
 #contenido h1,h2,h3 {color:black;}
 #contenido h1 {margin-top:1px;}
-#contenido h2:before {content:"►";font-size:14px;color:#5b0504;}
+#contenido h2:before {content:"►";font-size:14px;color:#813b3a;}
 #contenido h2 {font-size: 13px;}
 
-#contenido .editarPaso{background-color: #5b0504; color: white; display:inline-block; border-radius: 5px; text-decoration: none; font-size:14px;height:26px;line-height: 26px;float: right; padding: 1px 5px;}
+#contenido .editarPaso{background-color: #813b3a; color: white; display:inline-block; border-radius: 5px; text-decoration: none; font-size:10px;height:14px;line-height: 14px;float: right; padding: 1px 5px;}
+
+.cargar-archivo {background-color: #640604;border-radius:5px; border:1px #bdbaba solid; color: #bdbaba;text-align:center;padding:2px;}
+
+.padpln {padding-left:150px;}
