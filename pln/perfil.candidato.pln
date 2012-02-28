@@ -1,40 +1,44 @@
 ====
 [grupo:visualizacion]
-[titulo]Datos personales[/titulo]
-	<table style="width:100%;">
+[titulo]Datos personales<a class="editarPaso" href="paso.html?contenido=caja&p=datos.personales">Editar</a>[/titulo]
+	<table style="width:100%;border-collapse:collapse;">
 	<tr>
-	<td style="vertical-align:top;">
-	[campo]paso1_personal.foto_hash[/campo]
+	<td style="vertical-align:top;width:150px;padding:0px;text-align:center;">
+	[visual]paso1_personal.foto_hash[/visual]
 	</td>
-	<td>
-	[campo]paso1_personal.nombres[/campo]
-	[campo]paso1_personal.apellidos[/campo]
-	[campo]paso1_personal.estado_civil[/campo]
-	[campo]paso1_personal.fecha_nacimiento[/campo]
-	[campo]paso1_personal.sexo[/campo]
-	[campo]paso1_personal.telefono_contacto[/campo]
-	[campo]paso1_personal.ID_nacionalidad[/campo]
-	[campo]paso1_personal.ciudad_de_domicilio[/campo]
-	[campo]paso1_personal.direccion_domicilio[/campo]
-	[campo]paso1_personal.correo_electronico[/campo]
-	[campo]paso1_personal.licencia_conducir[/campo]
-	[campo]paso1_personal.vehiculo[/campo]
-	[campo]paso1_personal.discapacidad_fisica[/campo]
-	[campo]paso1_personal.tiempo_completo[/campo]
-	[campo]paso1_personal.disponibilidad_viajar[/campo]
+	<td style="padding:0px;">
+	[visual]paso1_personal.nombres[/visual]
+	[visual]paso1_personal.apellidos[/visual]
+	[visual]paso1_personal.estado_civil[/visual]
+	[visual]paso1_personal.fecha_nacimiento[/visual]
+	[visual]paso1_personal.sexo[/visual]
+	[visual]paso1_personal.telefono_contacto[/visual]
+	[visual]paso1_personal.ID_nacionalidad[/visual]
+	[visual]paso1_personal.ciudad_de_domicilio[/visual]
+	[visual]paso1_personal.correo_electronico[/visual]
+	[visual]paso1_personal.licencia_conducir[/visual]
+	[visual]paso1_personal.vehiculo[/visual]
+	[visual]paso1_personal.discapacidad_fisica[/visual]
+	[visual]paso1_personal.solo_medio_tiempo[/visual]
+	[visual]paso1_personal.disponibilidad_viajar[/visual]
 	</td>
 	</tr>
 	</table>
 
-[titulo]Perfil Profesional<a class="editarPaso" href="paso.html?contenido=caja&p=4">Editar</a>[/titulo]
+[titulo]Perfil Profesional<a class="editarPaso" href="paso.html?contenido=caja&p=perfil.profesional">Editar</a>[/titulo]
 	<div class="padpln">
-	<h2>Áreas de interés</h2>
-	[vistalazo]paso4_expectativa_laboral[/vistalazo]
-	<h2>Expectativa salarial</h2>
+	[visual]paso0.perfil_profesional_titulo[/visual]
+	[visual]paso0.perfil_profesional_descripcion[/visual]
 	[visual]paso0.ID_expectativa_salarial[/visual]
 	</div>
 
-[titulo]Educación Formal<a class="editarPaso" href="paso.html?contenido=caja&p=2">Editar</a>[/titulo]
+
+[titulo]Interes Profesional<a class="editarPaso" href="paso.html?contenido=caja&p=expectativa.laboral">Editar</a>[/titulo]
+	<div class="padpln">
+	[vistalazo]paso4_expectativa_laboral[/vistalazo]
+	</div>
+
+[titulo]Educación Formal<a class="editarPaso" href="paso.html?contenido=caja&p=educacion.formal">Editar</a>[/titulo]
 	<div class="padpln">
 	<h2>Educación secundaria</h2>
 	[visual]paso2_educacion_secundaria.ID_pais[/visual]
@@ -46,31 +50,29 @@
 	[vistalazo]paso2_educacion_superior[/vistalazo]
 	</div>
 
-[titulo]Idiomas[/titulo]
-	<div class="padpln">
-	[vistalazo]paso2_idiomas[/vistalazo]
-	</div>
-
-[titulo]Otros estudios[/titulo]
-	<div class="padpln">
-	[vistalazo]paso2_otros_estudios[/vistalazo]
-	</div>
-
-[titulo]Experiencia Laboral<a class="editarPaso" href="paso.html?contenido=caja&p=3">Editar</a>[/titulo]
+[titulo]Experiencia Laboral<a class="editarPaso" href="paso.html?contenido=caja&p=experiencia.laboral">Editar</a>[/titulo]
 	<div class="padpln">
 	[vistalazo]paso3_empresa[/vistalazo]
 	</div>
 
-[titulo]Conocimientos o Habilidades Adquiridas<a class="editarPaso" href="paso.html?contenido=caja&p=6">Editar</a>[/titulo]
+[titulo]Idiomas<a class="editarPaso" href="paso.html?contenido=caja&p=idiomas">Editar</a>[/titulo]
 	<div class="padpln">
-	[vistalazo]paso6_info_adicional_vista[/vistalazo]
+	[vistalazo]paso2_idiomas[/vistalazo]
 	</div>
 
-[titulo]Referencias Personales/Laborales<a class="editarPaso" href="paso.html?contenido=caja&p=5">Editar</a>[/titulo]
+[titulo]Otros estudios<a class="editarPaso" href="paso.html?contenido=caja&p=otros.estudios">Editar</a>[/titulo]
 	<div class="padpln">
-	<h2>Referencias laborales</h2>
-	[vistalazo]paso5_referencias_laboral[/vistalazo]
-	<h2>Referencias personales</h2>
-	[vistalazo]paso5_referencias_personal[/vistalazo]
+	[vistalazo]paso2_otros_estudios[/vistalazo]
+	</div>
+
+
+[titulo]Conocimientos, Habilidades Adquiridas u Oficios prácticados<a class="editarPaso" href="paso.html?contenido=caja&p=exp.adicional">Editar</a>[/titulo]
+	<div class="padpln">
+	[vistalazo]paso6_oficios[/vistalazo]
+	</div>
+
+[titulo]Referencias Personales/Laborales<a class="editarPaso" href="paso.html?contenido=caja&p=referencias">Editar</a>[/titulo]
+	<div class="padpln">
+	[vistalazo]paso5_referencias[/vistalazo]
 	</div>
 [/grupo]

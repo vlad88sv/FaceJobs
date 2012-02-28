@@ -8,9 +8,9 @@ $("select.auto").live("change",function() {
     $(this).removeClass("sucio");
 });
 
-$("input:text.auto").live("change",function(){$(this).addClass("sucio");})
+$("input:text.auto,textarea.auto").live("change",function(){$(this).addClass("sucio");})
 
-$("input:text.auto").live("focusout",function() {
+$("input:text.auto,textarea.auto").live("focusout",function() {
   if ($(this).hasClass("sucio"))
   {
     $(this).after('<img class="guardando g_'+$(this).attr("id")+'" src="img/ajax.gif" />');

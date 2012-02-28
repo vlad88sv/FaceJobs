@@ -5,7 +5,11 @@ general::registrarScriptJS('fileuploader','fileuploader');
 ?>
 <h1><img src="img/empresas/edificio.gif" /> Perfil de Empresa</h1>
 <?php
-$plantilla = new pln();
-$plantilla->procesar('perfil.empresa');
-echo $plantilla->pln;
+pln::procesar('perfil.empresa');
+echo pln::$pln;
 ?>
+<script type="text/javascript">
+    $(function(){
+         plnJS_iniciar();
+    });
+</script>

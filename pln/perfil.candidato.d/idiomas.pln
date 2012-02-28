@@ -1,0 +1,6 @@
+==Idiomas==
+[grupo:paso2_idiomas]
+[titulo:3]Idiomas[/titulo]
+[subtitulo]Ingresa todos los idiomas de los que tengas algún conocimiento, pulsando el botón agregar cada ves que desees.[/subtitulo]
+[lazo]paso2_idiomas[/lazo]
+[/grupo]

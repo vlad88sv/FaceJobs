@@ -1,11 +1,11 @@
-==1:Ingresa tus datos personales==
-[grupo:paso1_personal]
-[titulo:1]Carga una foto para que forme parte de tu curriculum[/titulo]
+==Edición de datos personales==
+[titulo]Datos personales[/titulo]
+<table style="width:100%;border-collapse:collapse;">
+<tr>
+<td style="vertical-align:top;width:150px;padding:0px;">
 [campo]paso1_personal.foto_hash[/campo]
-[/grupo]
-[grupo:paso1_personal2]
-[titulo:2]Llena los siguientes datos[/titulo]
-[subtitulo]En el paso 8 podras seleccionar que datos personales prefieres que sean privados[/subtitulo]
+</td>
+<td style="padding:0px;">
 [campo]paso1_personal.nombres[/campo]
 [campo]paso1_personal.apellidos[/campo]
 [campo]paso1_personal.estado_civil[/campo]
@@ -14,10 +14,12 @@
 [campo]paso1_personal.telefono_contacto[/campo]
 [campo]paso1_personal.ID_nacionalidad[/campo]
 [campo]paso1_personal.ciudad_de_domicilio[/campo]
-[campo]paso1_personal.direccion_domicilio[/campo]
 [campo]paso1_personal.correo_electronico[/campo]
 [campo]paso1_personal.licencia_conducir[/campo]
 [campo]paso1_personal.vehiculo[/campo]
 [campo]paso1_personal.discapacidad_fisica[/campo]
-[campo]paso1_personal.tiempo_completo[/campo]
-[/grupo]
+[campo]paso1_personal.solo_medio_tiempo[/campo]
+[campo]paso1_personal.disponibilidad_viajar[/campo]
+</td>
+</tr>
+</table>

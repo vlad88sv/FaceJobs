@@ -17,55 +17,63 @@ class pln
         // MemCache
         // if ($mc = memcached('plantillas',$plantilla.'.pln')) {self::$pln = $mc; return;}
         
-        self::$pln= file_get_contents(_BASE_plantilla.$plantilla.'.pln');
+        if (!file_exists(_BASE_plantilla.$plantilla.'.pln'))
+        {
+            echo '<pre>'._BASE_plantilla.$plantilla.' ???</pre>';
+            return;
+        }
+        
+        self::$pln = file_get_contents(_BASE_plantilla.$plantilla.'.pln');
     
         self::procesarTituloGeneral();
-        if (self::$debug) error_log ('procesarTituloGeneral'.' :: ' . strlen(self::$pln));
-        self::procesarGrupos();
-        if (self::$debug) error_log ('procesarGrupos'.' :: ' . strlen(self::$pln));
-        self::procesarSubTitulos();
-        if (self::$debug) error_log ('procesarSubTitulos'.' :: ' . strlen(self::$pln));
-        self::procesarTitulos();
-        if (self::$debug) error_log ('procesarTitulos'.' :: ' . strlen(self::$pln));
-        self::procesarLazos();
-        if (self::$debug) error_log ('procesarLazos'.' :: ' . strlen(self::$pln));
-        self::procesarVistaLazos();
-        if (self::$debug) error_log ('procesarVistaLazos'.' :: ' . strlen(self::$pln));
-        self::procesarCampos();
-        if (self::$debug) error_log ('procesarCampos'.' :: ' . strlen(self::$pln));
-        self::procesarVisuales();
-        if (self::$debug) error_log ('procesarVisuales'.' :: ' . strlen(self::$pln));
         
-        // Finalmente reemplazamos los valores con los del usuario
+        self::procesarGrupos();
+        
+        self::procesarSubTitulos();
+        
+        self::procesarTitulos();
+        
+        self::procesarLazos();
+        
+        self::procesarVistaLazos();
+        
+        self::procesarCampos();
+        
+        self::procesarVisuales();
+
         self::reemplazarValores();
-        if (self::$debug) error_log ('reemplazarValores'.' :: ' . strlen(self::$pln));
     }
     
     // ==0:ABC==
     private static function procesarTituloGeneral()
     {
+        if (self::$debug) error_log ('procesarTituloGeneral'.' :: ' . strlen(self::$pln));
         self::$pln = preg_replace('/==([0-9]*?)\:(.*)==(.*)/s','<div id="TituloGeneral"><span class="numeroGeneral">Paso $1</span> $2</div>'."\n".'<div id="contenido">'."\n".'$3'."\n".'</div> <!-- Contenido !-->'."\n",self::$pln);
         self::$pln = preg_replace('/==(.*)==(.*)/s','<div id="TituloGeneral">$1</div>'."\n".'<div id="contenido">'."\n".'$2'."\n".'</div> <!-- Contenido !-->'."\n",self::$pln);
     }
     
     private static function procesarGrupos()
     {
+        if (self::$debug) error_log ('procesarGrupos'.' :: ' . strlen(self::$pln));
         self::$pln = preg_replace(array('/\[grupo\:(.*?)\]/','/\[\/grupo\]/'),array('<div class="grupo" id="grupo_$1">','</div>'),self::$pln);
     }
     
     private static function procesarTitulos()
     {
+        if (self::$debug) error_log ('procesarTitulos'.' :: ' . strlen(self::$pln));
         self::$pln = preg_replace('/\[titulo\:([0-9]*?)](.*?)\[\/titulo\]/s','<div class="titulo"><span class="numeroTitulo">$1</span> $2</div>',self::$pln);
         self::$pln = preg_replace('/\[titulo](.*?)\[\/titulo\]/s','<div class="titulo">$1</div>',self::$pln);
     }
     
     private static function procesarSubTitulos()
     {
+        if (self::$debug) error_log ('procesarSubTitulos'.' :: ' . strlen(self::$pln));
         self::$pln = preg_replace('/\[subtitulo](.*?)\[\/subtitulo\]/s','<div class="subtitulo">$1</div>',self::$pln);
     }
     
     private static function procesarLazos()
     {
+        if (self::$debug) error_log ('procesarLazos'.' :: ' . strlen(self::$pln));
         $lazos = array();
         preg_match_all('/\[lazo](.*?)\[\/lazo\]/s',self::$pln,$lazos);
         
@@ -108,6 +116,7 @@ class pln
     
     private static function procesarVisuales()
     {
+        if (self::$debug) error_log ('procesarVisuales'.' :: ' . strlen(self::$pln));
         $campos = array();
         preg_match_all('/\[visual](.*?)\[\/visual\]/s',self::$pln,$campos);
         
@@ -129,6 +138,7 @@ class pln
           * 3. Dejar un marcador de reemplazo de valor, ya que por razones de memcache no lo ubicamos aqui.
         */
         
+        if (self::$debug) error_log ('procesarCampos'.' :: ' . strlen(self::$pln));
         $campos = array();
         preg_match_all('/\[campo](.*?)\[\/campo\]/s',self::$pln,$campos);
         
@@ -146,7 +156,8 @@ class pln
     
     private static function reemplazarValores()
     {
-        
+        if (self::$debug) error_log ('reemplazarValores'.' :: ' . strlen(self::$pln));
+           
         foreach(self::$campos as $tabla => $campos)
         {
            $c = 'SELECT '.join(', ',self::$campos[$tabla]).' FROM ' . $tabla.' WHERE ID_cuenta='.usuario::$info['ID_cuenta'];
@@ -219,6 +230,7 @@ class pln
 
     private static function procesarVistaLazos()
     {
+        if (self::$debug) error_log ('procesarVistaLazos'.' :: ' . strlen(self::$pln));
         $lazos = array();
         preg_match_all('/\[vistalazo](.*?)\[\/vistalazo\]/s',self::$pln,$lazos);
         

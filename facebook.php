@@ -35,7 +35,7 @@ if (!sesion::iniciado())
             body::agregarAlContenido ('faqs',true);
             break;
         case 'paso':
-            body::agregarAlContenido ('controlador.pasos',true);
+            body::agregarAlContenido ('perfil.candidato.editor',true);
             break;
         case 'perfil':
             body::agregarAlContenido ('perfil',true);

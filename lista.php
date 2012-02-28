@@ -17,11 +17,14 @@
                 
                 $line = str_replace('* ', '', $line);
             
-            if (1) {
+            if (0) 
                 echo "<pre>INSERT INTO datos_puesto (grupo, subgrupo, puesto) VALUES ('". $grupo ."','". $subgrupo ."','". $line ."');</pre>\n";
-            } else {
+            
+            if (0)
                 echo "<pre>INSERT INTO datos_tag_estudio (grupo, subgrupo, estudio) VALUES ('". $grupo ."','". $subgrupo ."','". $line ."');</pre>\n";
-            }
+            
+            if (1)
+                echo "<pre>INSERT INTO datos_oficio (grupo, subgrupo, oficio) VALUES ('". $grupo ."','". $subgrupo ."','". $line ."');</pre>\n";
         }
     }
 ?>

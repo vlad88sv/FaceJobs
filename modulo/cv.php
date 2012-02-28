@@ -48,13 +48,13 @@ campos::$defcampos['paso1_personal.vehiculo']['tipo'] = uiForm::$sino;
 campos::$defcampos['paso1_personal.vehiculo']['texto'] = 'Posee vehiculo:';
 
 campos::$defcampos['paso1_personal.discapacidad_fisica']['tipo'] = uiForm::$sino;
-campos::$defcampos['paso1_personal.discapacidad_fisica']['texto'] = 'Posee alguna discapacidad física:';
+campos::$defcampos['paso1_personal.discapacidad_fisica']['texto'] = 'Discapacidad física:';
 
-campos::$defcampos['paso1_personal.tiempo_completo']['tipo'] = uiForm::$sino;
-campos::$defcampos['paso1_personal.tiempo_completo']['texto'] = 'Posee disponibilidad para un trabajo de tiempo completo:';
+campos::$defcampos['paso1_personal.solo_medio_tiempo']['tipo'] = uiForm::$sino;
+campos::$defcampos['paso1_personal.solo_medio_tiempo']['texto'] = 'Solo medio tiempo:';
 
 campos::$defcampos['paso1_personal.disponibilidad_viajar']['tipo'] = uiForm::$sino;
-campos::$defcampos['paso1_personal.disponibilidad_viajar']['texto'] = 'Posee disponibilidad para viajar si es requerido:';
+campos::$defcampos['paso1_personal.disponibilidad_viajar']['texto'] = 'Disponibilidad para viajar:';
 
 /******* paso2_educacion_secundaria **********/
 
@@ -87,9 +87,11 @@ campos::$defcampos['paso2_educacion_superior.institucion']['longitud'] = 250;
 campos::$defcampos['paso2_educacion_superior.institucion']['texto'] = 'Institución:';
 
 campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['tipo'] = uiForm::$comboboxComplejo;
-campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['datos']['tabla'] = 'datos_area_estudio';
-campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['datos']['clave'] = 'ID_area_estudio';
-campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['datos']['valor'] = 'area_estudio';
+campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['datos']['tabla'] = 'datos_tag_estudio';
+campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['datos']['clave'] = 'ID_tag_estudio';
+campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['datos']['valor'] = 'estudio';
+campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['datos']['filtros']['where'] = '`grupo` = "Superior"';
+
 campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['texto'] = 'Área de estudio:';
 campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['enLinea'] = true;
 
@@ -163,9 +165,9 @@ campos::$defcampos['paso3_cargos.ID_paso3_empresa']['datos']['filtros']['mios'] 
 campos::$defcampos['paso3_cargos.ID_paso3_empresa']['texto'] = 'Empresa:';
  
 campos::$defcampos['paso3_cargos.ID_puesto_desempenado']['tipo'] = uiForm::$comboboxComplejo;
-campos::$defcampos['paso3_cargos.ID_puesto_desempenado']['datos']['tabla'] = 'datos_area_estudio';
-campos::$defcampos['paso3_cargos.ID_puesto_desempenado']['datos']['clave'] = 'ID_area_estudio';
-campos::$defcampos['paso3_cargos.ID_puesto_desempenado']['datos']['valor'] = 'area_estudio';
+campos::$defcampos['paso3_cargos.ID_puesto_desempenado']['datos']['tabla'] = 'datos_puesto';
+campos::$defcampos['paso3_cargos.ID_puesto_desempenado']['datos']['clave'] = 'ID_puesto';
+campos::$defcampos['paso3_cargos.ID_puesto_desempenado']['datos']['valor'] = 'puesto';
 campos::$defcampos['paso3_cargos.ID_puesto_desempenado']['texto'] = 'Puesto desempeñado:';
 campos::$defcampos['paso3_cargos.ID_puesto_desempenado']['subtexto'] = 'Seleccione en la siguiente lista el puesto que mas se asemeje.';
 
@@ -190,60 +192,40 @@ campos::$defcampos['paso3_cargos.funciones']['texto'] = 'Descripción de funcion
 /* paso4_expectativa_laboral */
 
 campos::$defcampos['paso4_expectativa_laboral.ID_area_interes']['tipo'] = uiForm::$comboboxComplejo;
-campos::$defcampos['paso4_expectativa_laboral.ID_area_interes']['datos']['tabla'] = 'datos_area_estudio';
-campos::$defcampos['paso4_expectativa_laboral.ID_area_interes']['datos']['clave'] = 'ID_area_estudio';
-campos::$defcampos['paso4_expectativa_laboral.ID_area_interes']['datos']['valor'] = 'area_estudio';
+campos::$defcampos['paso4_expectativa_laboral.ID_area_interes']['datos']['tabla'] = 'datos_puesto';
+campos::$defcampos['paso4_expectativa_laboral.ID_area_interes']['datos']['clave'] = 'ID_puesto';
+campos::$defcampos['paso4_expectativa_laboral.ID_area_interes']['datos']['valor'] = 'puesto';
 campos::$defcampos['paso4_expectativa_laboral.ID_area_interes']['texto'] = 'Área de interés:';
 
-/* paso5_referencias_personal */
+/* paso5_referencias */
 
-campos::$defcampos['paso5_referencias_personal.empresa']['tipo'] = uiForm::$textoSimple;
-campos::$defcampos['paso5_referencias_personal.empresa']['texto'] = 'Empresa:';
-campos::$defcampos['paso5_referencias_personal.empresa']['subtexto'] = 'Nombre comercial de la empresa en la que labora este contacto.';
+campos::$defcampos['paso5_referencias.tipo']['tipo'] = uiForm::$radio;
+campos::$defcampos['paso5_referencias.tipo']['valores'] = array('personal' => 'Personal', 'laboral' => 'Laboral');
+campos::$defcampos['paso5_referencias.tipo']['texto'] = 'Tipo de Referencia:';
 
-campos::$defcampos['paso5_referencias_personal.nombre']['tipo'] = uiForm::$textoSimple;
-campos::$defcampos['paso5_referencias_personal.nombre']['texto'] = 'Nombre:';
-campos::$defcampos['paso5_referencias_personal.nombre']['subtexto'] = 'Nombre completo de la persona que ingresarás como referencia personal';
+campos::$defcampos['paso5_referencias.empresa']['tipo'] = uiForm::$textoSimple;
+campos::$defcampos['paso5_referencias.empresa']['texto'] = 'Empresa:';
+campos::$defcampos['paso5_referencias.empresa']['subtexto'] = 'Nombre comercial de la empresa en la que labora este contacto.';
 
-campos::$defcampos['paso5_referencias_personal.cargo']['tipo'] = uiForm::$textoSimple;
-campos::$defcampos['paso5_referencias_personal.cargo']['texto'] = 'Cargo:';
-campos::$defcampos['paso5_referencias_personal.cargo']['subtexto'] = 'Cargo que desempeña la persona que ingresarás como referencia personal';
+campos::$defcampos['paso5_referencias.nombre']['tipo'] = uiForm::$textoSimple;
+campos::$defcampos['paso5_referencias.nombre']['texto'] = 'Nombre:';
+campos::$defcampos['paso5_referencias.nombre']['subtexto'] = 'Nombre completo de la persona que ingresarás como referencia personal';
 
-campos::$defcampos['paso5_referencias_personal.telefono']['tipo'] = uiForm::$textoSimple;
-campos::$defcampos['paso5_referencias_personal.telefono']['texto'] = 'Teléfono:';
-campos::$defcampos['paso5_referencias_personal.telefono']['subtexto'] = 'Teléfono del lugar de trabajo de esta referencia personal';
+campos::$defcampos['paso5_referencias.cargo']['tipo'] = uiForm::$textoSimple;
+campos::$defcampos['paso5_referencias.cargo']['texto'] = 'Cargo:';
+campos::$defcampos['paso5_referencias.cargo']['subtexto'] = 'Cargo que desempeña la persona que ingresarás como referencia personal';
 
-/* paso5_referencias_laboral */
-
-campos::$defcampos['paso5_referencias_laboral.ID_empresa']['tipo'] = uiForm::$comboboxComplejo;
-campos::$defcampos['paso5_referencias_laboral.ID_empresa']['datos']['tabla'] = 'paso3_empresa';
-campos::$defcampos['paso5_referencias_laboral.ID_empresa']['datos']['clave'] = 'ID_paso3_empresa';
-campos::$defcampos['paso5_referencias_laboral.ID_empresa']['datos']['valor'] = 'nombre_empresa';
-campos::$defcampos['paso5_referencias_laboral.ID_empresa']['datos']['filtros']['mios'] = true;
-
-campos::$defcampos['paso5_referencias_laboral.ID_empresa']['texto'] = 'Empresa:';
-campos::$defcampos['paso5_referencias_laboral.ID_empresa']['subtexto'] = 'Selecciona la empresa en la cual laboró con este contacto de referencia laboral';
+campos::$defcampos['paso5_referencias.telefono']['tipo'] = uiForm::$textoSimple;
+campos::$defcampos['paso5_referencias.telefono']['texto'] = 'Teléfono:';
+campos::$defcampos['paso5_referencias.telefono']['subtexto'] = 'Teléfono del lugar de trabajo de esta referencia personal';
 
 
-campos::$defcampos['paso5_referencias_laboral.nombre']['tipo'] = uiForm::$textoSimple;
-campos::$defcampos['paso5_referencias_laboral.nombre']['texto'] = 'Nombre:';
-campos::$defcampos['paso5_referencias_laboral.nombre']['subtexto'] = 'Nombre completo de la persona que ingresarás como referencia laboral';
-
-campos::$defcampos['paso5_referencias_laboral.cargo']['tipo'] = uiForm::$textoSimple;
-campos::$defcampos['paso5_referencias_laboral.cargo']['texto'] = 'Cargo:';
-campos::$defcampos['paso5_referencias_laboral.cargo']['subtexto'] = 'Cargo que desempeña la persona que ingresarás como referencia laboral';
-
-campos::$defcampos['paso5_referencias_laboral.telefono']['tipo'] = uiForm::$textoSimple;
-campos::$defcampos['paso5_referencias_laboral.telefono']['texto'] = 'Teléfono:';
-campos::$defcampos['paso5_referencias_laboral.telefono']['subtexto'] = 'Teléfono del lugar de trabajo de esta referencia laboral';
-
-/* paso6_info_adicional */
-
-campos::$defcampos['paso6_info_adicional.categoria']['tipo'] = uiForm::$textoSimple;
-campos::$defcampos['paso6_info_adicional.categoria']['texto'] = 'Nombre de categoria:';
-campos::$defcampos['paso6_info_adicional.categoria']['longitud'] = 25;
-
-campos::$defcampos['paso6_info_adicional.informacion']['tipo'] = uiForm::$memo;
+/* paso6_oficios */
+campos::$defcampos['paso6_oficios.ID_oficio']['tipo'] = uiForm::$textoSimple;
+campos::$defcampos['paso6_oficios.ID_oficio']['tipo'] = uiForm::$comboboxComplejo;
+campos::$defcampos['paso6_oficios.ID_oficio']['datos']['tabla'] = 'datos_oficio';
+campos::$defcampos['paso6_oficios.ID_oficio']['datos']['clave'] = 'ID_puesto';
+campos::$defcampos['paso6_oficios.ID_oficio']['datos']['valor'] = 'oficio';
 
 /* paso7_privacidad */
 
@@ -264,13 +246,16 @@ campos::$defcampos['paso0.ID_idioma_nativo']['datos']['valor'] = 'idioma';
 campos::$defcampos['paso0.ID_idioma_nativo']['texto'] = 'Idioma nativo';
 
 campos::$defcampos['paso0.ID_expectativa_salarial']['tipo'] = uiForm::$comboboxSimple;
-campos::$defcampos['paso0.ID_expectativa_salarial']['texto'] = 'Rango de expectativa salarial';
+campos::$defcampos['paso0.ID_expectativa_salarial']['texto'] = 'Expectativa salarial';
 campos::$defcampos['paso0.ID_expectativa_salarial']['valores'] = array(0 => 'USD \$100 - USD \$250','USD \$250 - USD \$500','USD \$500 - USD \$750','USD \$750 - USD \$1000','USD \$1000 - USD \$1500','USD \$1500 - USD \$2000','USD \$2000 - USD \$3000','> USD \$3000');
-/*campos::$defcampos['paso0.video_hash'];*/
+
+campos::$defcampos['paso0.perfil_profesional_titulo']['tipo'] = uiForm::$textoSimple;
+campos::$defcampos['paso0.perfil_profesional_titulo']['texto'] = 'Encabezado';
+
+campos::$defcampos['paso0.perfil_profesional_descripcion']['tipo'] = uiForm::$memo;
+campos::$defcampos['paso0.perfil_profesional_descripcion']['texto'] = 'Descripción';
 
 campos::$deflazo['paso1']['vistaCamposExtra'][] = '(SELECT CONCAT(DATE_FORMAT(`fecha_inicio`,"%b/%Y"), " - ", IF(actualmente,"actualidad",DATE_FORMAT(`fecha_final`,"%b/%Y"))) FROM paso3_cargos as p3c WHERE p3c.ID_paso3_empresa=t1.ID_paso3_empresa GROUP BY ID_paso3_empresa LIMIT 1) AS "fecha_compuesta"';
-//campos::$deflazo['paso1']
-
 
 campos::$deflazo['paso2_educacion_superior']['vistaCamposExtra'][] = 'CONCAT(`fecha_desde`, " - ", IF(completo,`fecha_hasta`,"Actualidad")) AS "fecha_compuesta"';
 campos::$deflazo['paso2_educacion_superior']['vista'][0][0] = '<span class="ocre">$$fecha_compuesta$$</span>';
@@ -310,7 +295,7 @@ campos::$deflazo['paso3_empresa']['vistaCamposExtra'][] = '(SELECT CONCAT(MIN(DA
 campos::$deflazo['paso3_empresa']['vista'][0][0] = '<span class="ocre">$$fecha_compuesta$$</span>';
 campos::$deflazo['paso3_empresa']['vista'][1][0] = '<span class="negro">$$ID_pais_valor$$</span>';
 campos::$deflazo['paso3_empresa']['vista'][2][0] = '<span class="ocre">$$nombre_empresa$$</span>';
-campos::$deflazo['paso3_empresa']['vista'][2][1] = 'Actividad económica de la empresa: <span class="negro">$$ID_actividad_economica_valor$$</span>';
+campos::$deflazo['paso3_empresa']['vista'][2][1] = 'Actividad económica: <span class="negro">$$ID_actividad_economica_valor$$</span>';
 
 campos::$deflazo['paso3_empresa']['campos'][] = 'paso3_empresa.ID_pais';
 campos::$deflazo['paso3_empresa']['campos'][] = 'paso3_empresa.nombre_empresa';
@@ -321,7 +306,7 @@ campos::$deflazo['paso3_cargos']['vistaVirtualRemota'] = 'paso3_empresa';
 campos::$deflazo['paso3_cargos']['vistaCamposExtra'][] = 'CONCAT(DATE_FORMAT(STR_TO_DATE(CONCAT(`fecha_inicioMes`,",",`fecha_inicioAno`),"%m,%Y"),"%b/%Y"), " - ", IF(actualmente,"actualidad",DATE_FORMAT(STR_TO_DATE(CONCAT(`fecha_finalMes`,",",`fecha_finalAno`),"%m,%Y"),"%b/%Y"))) AS "fecha_compuesta"';
 campos::$deflazo['paso3_cargos']['vista'][0][0] = '<span class="ocre">$$fecha_compuesta$$</span>';
 campos::$deflazo['paso3_cargos']['vista'][1][0] = '<span class="gris">Puesto desempeñado:</span>';
-campos::$deflazo['paso3_cargos']['vista'][2][0] = '<span class="negro">$$puesto_desempenado_detalle$$</span>';
+campos::$deflazo['paso3_cargos']['vista'][2][0] = '<span class="negro">$$ID_puesto_desempenado_valor$$ / $$puesto_desempenado_detalle$$</span>';
 
 campos::$deflazo['paso3_cargos']['campos'][] = 'paso3_cargos.ID_paso3_empresa';
 campos::$deflazo['paso3_cargos']['campos'][] = 'paso3_cargos.ID_puesto_desempenado';
@@ -335,47 +320,24 @@ campos::$deflazo['paso4_expectativa_laboral']['vista']['class'] = 'lazoVistaPequ
 campos::$deflazo['paso4_expectativa_laboral']['vista'][0][0] = '<span class="ocre">$$ID_area_interes_valor$$</span>';
 campos::$deflazo['paso4_expectativa_laboral']['campos'][] = 'paso4_expectativa_laboral.ID_area_interes';
 
+campos::$deflazo['paso5_referencias']['vista'][0][] = 'Tipo de referencia';
+campos::$deflazo['paso5_referencias']['vista'][0][] = 'Nombre:';
+campos::$deflazo['paso5_referencias']['vista'][0][] = 'Teléfono:';
+campos::$deflazo['paso5_referencias']['vista'][0][] = 'Cargo:';
+campos::$deflazo['paso5_referencias']['vista'][0][] = 'Empresa:';
+campos::$deflazo['paso5_referencias']['vista'][1][] = '<span class="negro">$$tipo$$</span>';
+campos::$deflazo['paso5_referencias']['vista'][1][] = '<span class="negro">$$nombre$$</span>';
+campos::$deflazo['paso5_referencias']['vista'][1][] = '<span class="negro">$$telefono$$</span>';
+campos::$deflazo['paso5_referencias']['vista'][1][] = '<span class="negro">$$cargo$$</span>';
+campos::$deflazo['paso5_referencias']['vista'][1][] = '<span class="negro">$$empresa$$</span>';
 
-campos::$deflazo['paso5_referencias_laboral']['vistaCamposExtra'][] = '(SELECT pais FROM datos_pais AS dp WHERE dp.ID_pais = (SELECT ID_pais FROM paso3_empresa AS p3e WHERE p3e.ID_paso3_empresa = t1.ID_empresa )) AS "pais_valor"';
-campos::$deflazo['paso5_referencias_laboral']['vistaCamposExtra'][] = '(SELECT actividad_economica FROM datos_actividad_economica AS dae WHERE dae.ID_actividad_economica = (SELECT ID_actividad_economica FROM paso3_empresa AS p3e WHERE p3e.ID_paso3_empresa = t1.ID_empresa )) AS "ID_actividad_economica_valor"';
-campos::$deflazo['paso5_referencias_laboral']['vista'][0][0] = '$$pais_valor$$';
-campos::$deflazo['paso5_referencias_laboral']['vista'][0][1] = 'Nombre:';
-campos::$deflazo['paso5_referencias_laboral']['vista'][0][2] = 'Teléfono:';
-campos::$deflazo['paso5_referencias_laboral']['vista'][0][3] = 'Cargo:';
-campos::$deflazo['paso5_referencias_laboral']['vista'][1][0] = '<span class="ocre">$$ID_empresa_valor$$</span>';
-campos::$deflazo['paso5_referencias_laboral']['vista'][1][1] = '<span class="negro">$$nombre$$</span>';
-campos::$deflazo['paso5_referencias_laboral']['vista'][1][2] = '<span class="negro">$$telefono$$</span>';
-campos::$deflazo['paso5_referencias_laboral']['vista'][1][3] = '<span class="negro">$$cargo$$</span>';
-campos::$deflazo['paso5_referencias_laboral']['vista'][2][0] = '<span class="gris">Actividad económica de la empresa</span>';
-campos::$deflazo['paso5_referencias_laboral']['vista'][3][0] = '<span class="negro">$$ID_actividad_economica_valor$$</span>';
+campos::$deflazo['paso5_referencias']['campos'][] = 'paso5_referencias.tipo';
+campos::$deflazo['paso5_referencias']['campos'][] = 'paso5_referencias.empresa';
+campos::$deflazo['paso5_referencias']['campos'][] = 'paso5_referencias.nombre';
+campos::$deflazo['paso5_referencias']['campos'][] = 'paso5_referencias.cargo';
+campos::$deflazo['paso5_referencias']['campos'][] = 'paso5_referencias.telefono';
 
-campos::$deflazo['paso5_referencias_laboral']['campos'][] = 'paso5_referencias_laboral.ID_empresa';
-campos::$deflazo['paso5_referencias_laboral']['campos'][] = 'paso5_referencias_laboral.nombre';
-campos::$deflazo['paso5_referencias_laboral']['campos'][] = 'paso5_referencias_laboral.cargo';
-campos::$deflazo['paso5_referencias_laboral']['campos'][] = 'paso5_referencias_laboral.telefono';
-
-campos::$deflazo['paso5_referencias_personal']['vista'][0][1] = 'Nombre:';
-campos::$deflazo['paso5_referencias_personal']['vista'][0][2] = 'Teléfono:';
-campos::$deflazo['paso5_referencias_personal']['vista'][0][3] = 'Cargo:';
-campos::$deflazo['paso5_referencias_personal']['vista'][0][4] = 'Empresa:';
-campos::$deflazo['paso5_referencias_personal']['vista'][1][1] = '<span class="negro">$$nombre$$</span>';
-campos::$deflazo['paso5_referencias_personal']['vista'][1][2] = '<span class="negro">$$telefono$$</span>';
-campos::$deflazo['paso5_referencias_personal']['vista'][1][3] = '<span class="negro">$$cargo$$</span>';
-campos::$deflazo['paso5_referencias_personal']['vista'][1][4] = '<span class="negro">$$empresa$$</span>';
-
-campos::$deflazo['paso5_referencias_personal']['campos'][] = 'paso5_referencias_personal.empresa';
-campos::$deflazo['paso5_referencias_personal']['campos'][] = 'paso5_referencias_personal.nombre';
-campos::$deflazo['paso5_referencias_personal']['campos'][] = 'paso5_referencias_personal.cargo';
-campos::$deflazo['paso5_referencias_personal']['campos'][] = 'paso5_referencias_personal.telefono';
-
-campos::$deflazo['paso6_info_adicional']['vista']['class'] = 'lazoVistaPeque';
-campos::$deflazo['paso6_info_adicional']['vista'][0][0] = '$$categoria$$';
-campos::$deflazo['paso6_info_adicional']['campos'][] = 'paso6_info_adicional.categoria';
-campos::$deflazo['paso6_info_adicional']['campos'][] = 'paso6_info_adicional.informacion';
-
-campos::$deflazo['paso6_info_adicional_vista']['paraTabla'] = 'paso6_info_adicional';
-campos::$deflazo['paso6_info_adicional_vista']['vista'][0][0] = '<h2>$$categoria$$</h2>';
-campos::$deflazo['paso6_info_adicional_vista']['vista'][0][1] = '$$informacion$$';
-campos::$deflazo['paso6_info_adicional_vista']['campos'][] = 'paso6_info_adicional.categoria';
-campos::$deflazo['paso6_info_adicional_vista']['campos'][] = 'paso6_info_adicional.informacion';
+campos::$deflazo['paso6_oficios']['vista']['class'] = 'lazoVistaPeque';
+campos::$deflazo['paso6_oficios']['vista'][0][0] = '$$ID_oficio_valor$$';
+campos::$deflazo['paso6_oficios']['campos'][] = 'paso6_oficios.ID_oficio';
 ?>

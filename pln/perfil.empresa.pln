@@ -1,9 +1,18 @@
 ====
 [grupo:empresa_foto]
 [titulo:1]Carga el logo de la empresa para que forme parte del perfil de esta.[/titulo]
+<table style="width:100%;table-layout:fixed;">
+<tr>
+<td style="text-align:center">
 [campo]empresa_registro.foto_hash[/campo]
-[subtitulo]Icono de 64x64px utilizado para representar su empresa en listas.[/subtitulo]
+[subtitulo]Logotipo de su empresa (máximo 500x500 px)[/subtitulo]
+</td>
+<td style="text-align:center">
 [campo]empresa_registro.logo_hash[/campo]
+[subtitulo]Icono (máximo 110x110 px)[/subtitulo]
+</td>
+</tr>
+</table>
 [/grupo]
 [grupo:datos_empresa]
 [titulo:2]Llena los siguientes datos de la empresa[/titulo]

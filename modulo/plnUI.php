@@ -22,7 +22,7 @@ class plnUI
         {
             case uiForm::$cargarImagenOWebCam:
                 $retorno .= '
-                        <div style="text-align:center;"><img $$identificacion$$ src="$$reemplazar::'.$campoEsc.'$$" /></div>
+                        <div style="text-align:center;height:110px;"><img $$identificacion$$ src="$$reemplazar::'.$campoEsc.'$$" /></div>
                         <div rel="'.$campoEsc.'" class="cargar-archivo">Subir fotografía</div>
                         ';
                 break;
@@ -174,7 +174,7 @@ class plnUI
         
         $partes = null;
     
-        if (preg_match('/(.*)\.(.*)/',$campo,$partes))
+        if (!$esLazo && preg_match('/(.*)\.(.*)/',$campo,$partes))
         {
             pln::$campos[$partes[1]][]= $partes[2];
         }
@@ -337,7 +337,7 @@ class plnUI
                 break;
 
             case uiForm::$memo:
-                $retorno .= '<br /><textarea disabled="disabled">$$reemplazar::'.$campoEsc.'$$</textarea>';
+                $retorno .= '<br /><textarea disabled="disabled" $$identificacion$$>$$reemplazar::'.$campoEsc.'$$</textarea>';
                 break;
         }
         
@@ -352,7 +352,7 @@ class plnUI
         
         $partes = null;
         
-        if (preg_match('/(.*)\.(.*)/',$campo,$partes))
+        if (!$esLazo && preg_match('/(.*)\.(.*)/',$campo,$partes))
         {
             pln::$campos[$partes[1]][]= $partes[2];
         }

@@ -1,0 +1,15 @@
+==Ingresa toda la información que consideres importante acerca de tu educación==
+[grupo:paso2_educacion_secundaria]
+[titulo:1]Educación secundaria[/titulo]
+[campo]paso2_educacion_secundaria.ID_pais[/campo]
+[campo]paso2_educacion_secundaria.institucion[/campo]
+[campo]paso2_educacion_secundaria.ano_finalizacion[/campo]
+[campo]paso2_educacion_secundaria.incompleto[/campo]
+[campo]paso2_educacion_secundaria.titulo[/campo]
+[/grupo]
+
+[grupo:paso2_educacion_superior]
+[titulo:2]Educación superior[/titulo]
+[subtitulo]Ingresa todos tus estudios de Educación Superior pulsando en el botón agregar cada ves que desees.[/subtitulo]
+[lazo]paso2_educacion_superior[/lazo]
+[/grupo]
