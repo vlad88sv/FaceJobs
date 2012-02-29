@@ -18,7 +18,7 @@ body{background:#fff;font-size:100%;font-family:"lucida grande",tahoma,verdana,a
 .gris{color:#535353;}
 .negro{color:#000;}
 
-#PlantillaGeneral {width: 100%;}
+#PlantillaGeneral {width: 100%;table-layout:fixed;}
 #PlantillaGeneralMenu {text-align: left;vertical-align: top;width:200px;}
 #PlantillaGeneralMenu img {border: 1px #6d6d6d solid; width:110px; height: 110px;}
 #PlantillaGeneralMenu ul {list-style:none;margin:0;border:none;padding:0;}
@@ -27,6 +27,7 @@ body{background:#fff;font-size:100%;font-family:"lucida grande",tahoma,verdana,a
 #PlantillaGeneralMenu ul ul li a {color: #5b0504; font-size: 12px; text-decoration: none;}
 
 #PlantillaGeneralContenido {width: 530px;border:1px solid #8c8b8b;border-radius: 5px;text-align: left;vertical-align: top;padding: 2px 17px;}
+#PlantillaGeneralRejilla {overflow:hidden;}
 
 .cajita_rendoda {border: 1px #6d6d6d solid;border-radius: 5px;padding: 4px;margin-bottom: 10px;}
 

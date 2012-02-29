@@ -5,5 +5,7 @@ sesion::iniciar_sesion();
 if (!sesion::iniciado())
     return;
 
-echo 'Hola!, ya cargué!';
+echo '<code>';
+echo str_replace("\n","<br />",print_r($_POST,true));
+echo '</code>';
 ?>

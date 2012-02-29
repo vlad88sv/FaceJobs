@@ -1,6 +1,7 @@
 <?php
-general::registrarEstiloCSS('blitzer','blitzer/jquery-ui-1.8.17.custom');
+general::requerirModulo(array('ui'));
 
+general::registrarEstiloCSS('blitzer','blitzer/jquery-ui-1.8.17.custom');
 
 general::registrarScriptJS('jquery.ui','ui/jquery.ui.core.min');
 general::registrarScriptJS('jquery.ui.widget','ui/jquery.ui.widget.min');
@@ -42,16 +43,24 @@ echo '</tr>';
 echo '</table>';
 ?>
 <script type="text/javascript">
-$(function(){
-    function ActualizarRejilla()
-    {
-      $("#PlantillaGeneralRejilla").html('<div><img src="img/ajax.gif" /> Cargando vista...</div>');
-      $("#PlantillaGeneralRejilla").load('ajax.rejilla',{serial:$("#rejilla_filtros").serialize()});
-    }
+var funcionando = false;
+var pendientes = false;
+function ActualizarRejilla()
+{
+   if (funcionando) {console.log('Esperando AJAX...'); pendientes = true; return;};
     
+   funcionando = true;
+   $("#PlantillaGeneralRejilla").html('<div><img src="img/ajax.gif" /> Cargando vista...</div>');
+   $("#PlantillaGeneralRejilla").load('ajax.rejilla',$("#rejilla_filtros").serializeArray(),function(){funcionando = false; if (pendientes) ActualizarRejilla(); pendientes = false;});
+    
+}
+
+$(function(){
+
     ActualizarRejilla();
     
     $("#rejilla_filtros input").click(function(){ActualizarRejilla();});
     $("#rejilla_filtros select").change(function(){ActualizarRejilla();});
+
 });
 </script>
