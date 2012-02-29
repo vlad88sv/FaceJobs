@@ -51,7 +51,7 @@ campos::$defcampos['paso1_personal.discapacidad_fisica']['tipo'] = uiForm::$sino
 campos::$defcampos['paso1_personal.discapacidad_fisica']['texto'] = 'Discapacidad física:';
 
 campos::$defcampos['paso1_personal.solo_medio_tiempo']['tipo'] = uiForm::$sino;
-campos::$defcampos['paso1_personal.solo_medio_tiempo']['texto'] = 'Solo medio tiempo:';
+campos::$defcampos['paso1_personal.solo_medio_tiempo']['texto'] = 'Únicamente medio tiempo:';
 
 campos::$defcampos['paso1_personal.disponibilidad_viajar']['tipo'] = uiForm::$sino;
 campos::$defcampos['paso1_personal.disponibilidad_viajar']['texto'] = 'Disponibilidad para viajar:';
@@ -125,7 +125,7 @@ campos::$defcampos['paso2_idiomas.ID_idioma']['datos']['valor'] = 'idioma';
 campos::$defcampos['paso2_idiomas.ID_idioma']['texto'] = 'Idioma:';
 
 campos::$defcampos['paso2_idiomas.nivel']['tipo'] = uiForm::$radio;
-campos::$defcampos['paso2_idiomas.nivel']['valores'] = array('basico' => 'Básico', 'intermedio' => 'Intermedio', 'avanzado' => 'Avanzado');
+campos::$defcampos['paso2_idiomas.nivel']['valores'] = array('basico' => 'Básico', 'intermedio' => 'Intermedio', 'avanzado' => 'Avanzado', 'nativo' => 'Nativo');
 
 /* paso2_otros_estudios */
 
