@@ -32,6 +32,16 @@ class ui
 
         return $ruta;
     }
+    
+    public static function ArrayCheckbox($name,$clase, array $contenido, array $seleccionados)
+    {
+        $buffer = '';
+        foreach($contenido as $valor => $texto)
+        {
+            $buffer .= sprintf('<div><input type="checkbox" name="%s[]" class="%s" value="%s">%s</div>',$name,$clase,$valor,$texto);
+        }
+        return $buffer;
+    }
 }
 
 class imagenes
