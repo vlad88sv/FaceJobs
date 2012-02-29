@@ -41,8 +41,9 @@ div.boton {display: inline-block !important; border: 1px solid #666;border-radiu
 div.boton a {color: #F7F7F7 !important;text-decoration: none;display: block;}
 
 
-#rejilla_filtros table {width:100%;border-collapse:collapse;}
+#rejilla_filtros table {width:200px;table-layout:fixed;border-collapse:collapse;}
 #rejilla_filtros table td {padding: 2px 5px 5px 5px; font-size:10px;}
+#rejilla_filtros table td div {white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 #rejilla_filtros table tr:nth-child(odd) {background-color: #d8d7d7;}
 #rejilla_filtros table tr:nth-child(even) {background-color: #ebe9e9;}
 #rejilla_filtros h1 {font-size:12px;}

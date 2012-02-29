@@ -16,13 +16,10 @@ class rejilla
         $secciones[] = '<h1>▼ Carreras</h1>'.self::ObtenerCarreras();
         $secciones[] = '<h1>▼ Puestos</h1>'.self::ObtenerAreaDePuesto();
         $secciones[] = '<h1>▼ Oficios</h1>'.self::ObtenerOficios();
-        $secciones[] = '<h1>▼ Experiencia</h1>
-        <input type="hidden" id="experiencia" name="experiencia" value="0" /><p id="valor_experiencia" class="ocre"></p><div id="slider_experiencia"></div>';
+        $secciones[] = '<h1>▼ Experiencia</h1>'.self::ObtenerExperiencia();
         $secciones[] = '<h1>▼ Idiomas</h1>'.self::ObtenerIdiomas();
-        $secciones[] = '<h1>▼ Edad</h1>
-        <input type="hidden" name="edad_min"  id="edad_min" value="0" /><input type="hidden" name="edad_max" id="edad_max" value="0" /><p id="valor_edad" class="ocre"></p><div id="slider_edad"></div>';
-        $secciones[] = '<h1>▼ Expectativa salarial</h1>
-        <input type="hidden" name="expectativa_salarial" id="expectativa_salarial" value="0" /><p id="valor_expectativa_salarial" class="ocre"></p><div id="slider_expectativa_salarial"></div>';
+        $secciones[] = '<h1>▼ Edad</h1>'.self::ObtenerEdad();
+        $secciones[] = '<h1>▼ Expectativa salarial</h1>'.self::ObtenerExpectativaSalarial();
         $secciones[] = '<h1>▼ Otros</h1>'.self::ObtenerOtros();
         $secciones[] = '<h1>▼ Lugar de domicilio</h1>'.self::ObtenerDomicilio();
         
@@ -89,6 +86,21 @@ class rejilla
     }
     
     public static function resultados() {}
+    
+    private static function ObtenerExpectativaSalarial()
+    {
+        return '<input type="hidden" name="expectativa_salarial" id="expectativa_salarial" value="0" /><p id="valor_expectativa_salarial" class="ocre"></p><div id="slider_expectativa_salarial"></div>';
+    }
+    
+    private static function ObtenerEdad()
+    {
+        return '<input type="hidden" name="edad_min"  id="edad_min" value="0" /><input type="hidden" name="edad_max" id="edad_max" value="0" /><p id="valor_edad" class="ocre"></p><div id="slider_edad"></div>';
+    }
+    
+    private static function ObtenerExperiencia()
+    {
+        return '<input type="hidden" id="experiencia" name="experiencia" value="0" /><p id="valor_experiencia" class="ocre"></p><div id="slider_experiencia"></div>';
+    }
     
     private static function ObtenerCarreras()
     {

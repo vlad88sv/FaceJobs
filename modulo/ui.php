@@ -38,7 +38,7 @@ class ui
         $buffer = '';
         foreach($contenido as $valor => $texto)
         {
-            $buffer .= sprintf('<div><input type="checkbox" name="%s[]" class="%s" value="%s">%s</div>',$name,$clase,$valor,$texto);
+            $buffer .= sprintf('<div><input type="checkbox" name="%s[]" class="%s" value="%s" title="%s">%s</div>',$name,$clase,$valor,$texto,$texto);
         }
         return $buffer;
     }
