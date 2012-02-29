@@ -5,8 +5,4 @@
 #nav li a:hover{color:#DDD;}
 #nav li.seleccionado a{font-size:12px;}
 
-#nav li ul{background-color:#FFF;border:1px solid #999;padding:7px 0;left:0;position:absolute;top:100%;visibility:hidden;width:160px;z-index:598;}
-#nav li:hover ul, #nav li.hover ul{visibility:visible;}
-#nav li.hover,#nav li:hover,.lidestacado{background-color:#EC454E;}
-
 #menu_busqueda_rapida {border:1px solid black; border-radius:5px;height:20px;line-height:20px; padding:0px;margin-top: 1px;}
