@@ -138,7 +138,7 @@ class plnUI
                 break;
 
             case uiForm::$sino:
-                $retorno .= '<input type="radio" $$identificacion$$ value="1" /> Si <input type="radio" $$identificacion$$ value="0" /> No ';
+                $retorno .= '<input type="radio" name="'.$campo.'" id="'.$campoEsc.'_si" value="1" /> <label for="'.$campoEsc.'_si">Si</label> <input type="radio" name="'.$campo.'" id="'.$campoEsc.'_no" value="0" />  <label for="'.$campoEsc.'_no">No</label> ';
                 break;
             
             case uiForm::$cheque:
@@ -150,7 +150,7 @@ class plnUI
                 if(is_array(campos::$defcampos[$campo]['valores']))
                 {
                     foreach (campos::$defcampos[$campo]['valores'] as $valor => $texto)
-                        $retorno .= '<input type="radio" $$identificacion$$ value="'.$valor.'"/> ' . $texto;
+                        $retorno .= '<input type="radio" name="'.$campo.'" id="'.$campoEsc.'_'.$valor.'" value="'.$valor.'"/> <label for="'.$campoEsc.'_'.$valor.'">' . $texto . '</label>';
                 }
                 break;
 
@@ -215,7 +215,7 @@ class plnUI
                     foreach (campos::$defcampos[$campo]['valores'] as $valor => $texto)
                         $options .= '<option value="'.$valor.'">'.$texto.'</option>';
                 }
-                $retorno .= '<select disabled="disabled" $$identificacion$$>'.$options.'</select>';
+                $retorno .= '<select class="plnUI_extraer" disabled="disabled" $$identificacion$$>'.$options.'</select>';
                 break;
                 
             case uiForm::$comboboxPaises:
@@ -237,7 +237,7 @@ class plnUI
                     while ($f = mysql_fetch_assoc($r))
                         $options .= '<option value="'.$f['clave'].'">'.$f['valor'].'</option>';
                 }
-                $retorno .= '<select disabled="disabled" $$identificacion$$>'.$options.'</select>';
+                $retorno .= '<select class="plnUI_extraer" disabled="disabled" $$identificacion$$>'.$options.'</select>';
                 break;
             
             case uiForm::$fecha:
@@ -273,12 +273,12 @@ class plnUI
                         campos::$defcampos[$campo.'Dia']['tipo'] = uiForm::$comboboxSimple;
                         campos::$defcampos[$campo.'Dia']['valores'] = $dia;
                         campos::$defcampos[$campo.'Dia']['enLinea'] = true;                        
-                        $retorno .= self::procesarVisual($campo.'Dia',$esLazo);
+                        $retorno .= self::procesarVisual($campo.'Dia',$esLazo) . ' / ';
                         
                         campos::$defcampos[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
                         campos::$defcampos[$campo.'Mes']['valores'] = $mes;
                         campos::$defcampos[$campo.'Mes']['enLinea'] = true;
-                        $retorno .= self::procesarVisual($campo.'Mes',$esLazo);
+                        $retorno .= self::procesarVisual($campo.'Mes',$esLazo) . ' / ';
                         
                         campos::$defcampos[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
                         campos::$defcampos[$campo.'Ano']['valores'] = $ano;
@@ -290,7 +290,7 @@ class plnUI
                         campos::$defcampos[$campo.'Mes']['tipo'] = uiForm::$comboboxSimple;
                         campos::$defcampos[$campo.'Mes']['valores'] = $mes;
                         campos::$defcampos[$campo.'Mes']['enLinea'] = true;
-                        $retorno .= self::procesarVisual($campo.'Mes',$esLazo);
+                        $retorno .= self::procesarVisual($campo.'Mes',$esLazo) . ' / ';
                         
                         campos::$defcampos[$campo.'Ano']['tipo'] = uiForm::$comboboxSimple;
                         campos::$defcampos[$campo.'Ano']['valores'] = $ano;
@@ -316,7 +316,7 @@ class plnUI
                 break;
 
             case uiForm::$sino:
-                $retorno .= '<input disabled="disabled" type="radio" $$identificacion$$ value="1" /> Si <input disabled="disabled" type="radio" $$identificacion$$ value="0" /> No ';
+                $retorno .= '<input class="plnUI_extraerRadio" disabled="disabled" type="radio" name="'.$campo.'" id="'.$campoEsc.'_si" value="1" /> <label for="'.$campoEsc.'_si">Si</label> <input class="plnUI_extraerRadio" disabled="disabled" type="radio" name="'.$campo.'" id="'.$campoEsc.'_no" value="0" />  <label for="'.$campoEsc.'_no">No</label> ';
                 break;
             
             case uiForm::$cheque:
@@ -330,14 +330,14 @@ class plnUI
                     $i = 0;
                     foreach (campos::$defcampos[$campo]['valores'] as $valor => $texto)
                     {
-                        $retorno .= '<input disabled="disabled" type="radio" $$identificacion$$ value="'.$valor.'"/> ' . $texto;
+                        $retorno .= '<input class="plnUI_extraerRadio" disabled="disabled" type="radio" name="'.$campo.'" id="'.$campoEsc.'_'.$valor.'" value="'.$valor.'"/> <label for="'.$campoEsc.'_'.$valor.'">' . $texto . '</label>';
                         $i++;
                     }
                 }
                 break;
 
             case uiForm::$memo:
-                $retorno .= '<br /><textarea disabled="disabled" $$identificacion$$>$$reemplazar::'.$campoEsc.'$$</textarea>';
+                $retorno .= '<br /><div class="textarea" $$identificacion$$>$$reemplazar::'.$campoEsc.'$$</div>';
                 break;
         }
         

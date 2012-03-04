@@ -213,12 +213,12 @@ class pln
             case uiForm::$comboboxSimple:
             case uiForm::$comboboxComplejo:
             case uiForm::$comboboxPaises:
-                self::$pln = preg_replace('/(id="'.$campoEsc.'".*?value="'.$valor.'")/','$1 selected="selected"',self::$pln,1);
+                self::$pln = preg_replace('/(name="'.$campo.'".*?value="'.$valor.'")/','$1 selected="selected"',self::$pln,1);
                 break;
                 
             case uiForm::$sino:
             case uiForm::$radio:                        
-                self::$pln = preg_replace('/(id="'.$campoEsc.'".*?value="'.$valor.'")/','$1 checked="checked"',self::$pln,1);
+                self::$pln = preg_replace('/(name="'.$campo.'".*?value="'.$valor.'")/','$1 checked="checked"',self::$pln,1);
                 break;
 
             case uiForm::$cheque:

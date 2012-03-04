@@ -2,15 +2,15 @@
 <script>
 $(function() {
 
-$("select.auto").live("change",function() {
+$("select.auto").live("change",function(event) {
     $(this).after('<img class="guardando g_'+$(this).attr("id")+'" src="img/ajax.gif" />');
     $.post('ajax',{campo:$(this).attr("rel"), valor:$(this).val()},function() {$(".guardando").remove()},"html");
     $(this).removeClass("sucio");
 });
 
-$("input:text.auto,textarea.auto").live("change",function(){$(this).addClass("sucio");})
+$("input:text.auto,textarea.auto").live("change",function(event){$(this).addClass("sucio");})
 
-$("input:text.auto,textarea.auto").live("focusout",function() {
+$("input:text.auto,textarea.auto").live("focusout",function(event) {
   if ($(this).hasClass("sucio"))
   {
     $(this).after('<img class="guardando g_'+$(this).attr("id")+'" src="img/ajax.gif" />');
@@ -19,20 +19,20 @@ $("input:text.auto,textarea.auto").live("focusout",function() {
   }
 });
 
-$("input:radio.auto").live("click",function() {
+$("input:radio.auto").live("click",function(event) {
     $(this).after('<img class="guardando g_'+$(this).attr("id")+'" src="img/ajax.gif" />');
     $.post('ajax',{campo:$(this).attr("rel"), valor:$(this).val()},function() {$(".guardando").remove()},"html");
     $(this).removeClass("sucio");
 });
 
-$("input:checkbox.auto").live("click",function() {
+$("input:checkbox.auto").live("click",function(event) {
     $(this).after('<img class="guardando g_'+$(this).attr("id")+'" src="img/ajax.gif" />');
     $.post('ajax',{campo:$(this).attr("rel"), valor:($(this).attr("checked") ? "1" : "0")},function() {$(".guardando").remove()},"html");
     $(this).removeClass("sucio");
     
 });
 
-$(".autoLazo").live("click",function() {
+$(".autoLazo").live("click",function(event) {
 	event.preventDefault();
 	$("#lazo_"+$(this).attr("rel")+ " .lazoCampos").prepend('<div class="guardando_form" style="text-align:center;"><img src="img/ajax.gif" /> Guardando...</div>');
 	$("#vista_"+$(this).attr("vista")).load('ajax',{VistaLazo: $(this).attr("vista"), serial:$("#lazo_"+$(this).attr("rel")).serialize()},$.proxy(function() {
@@ -42,13 +42,13 @@ $(".autoLazo").live("click",function() {
         $("#"+$(this).attr("rel")+"_ID_"+$(this).attr("rel")).val("0");
 });
 
-$(".reset").live("click",function() {
+$(".reset").live("click",function(event) {
 	event.preventDefault();
 	$("#lazo_"+$(this).attr("rel"))[0].reset();
         $("#"+$(this).attr("rel")+"_ID_"+$(this).attr("rel")).val("0");
 });
 
-$(".lazoVistaControlesEditar").live("click",function(){
+$(".lazoVistaControlesEditar").live("click",function(event){
     event.preventDefault();
     var ID = $(this).attr("rel");
     var Lazo = $(this).parents(".contenedorLazoVista").attr("rel");
@@ -88,7 +88,7 @@ $(".lazoVistaControlesEditar").live("click",function(){
     }, "json");
 });
 
-$(".lazoVistaControlesEliminar").live("click",function(){
+$(".lazoVistaControlesEliminar").live("click",function(event){
     event.preventDefault();
     var EliminarID = $(this).attr("rel");
     var ActualizarLazo = $(this).parents(".contenedorLazoVista").attr("vista");
@@ -107,6 +107,22 @@ function plnJS_iniciar()
 {
     $(".contenedorLazoVista").each(function(){
         cargarContenedorLazoVista($(this).attr("rel"));
+    });
+    
+    $('.plnUI_extraer').each(function(){
+    	$(this).replaceWith('<span class="visualTexto">'+$(this).find('option:selected').text()+'</span>');
+    });
+    
+    $('.plnUI_extraerRadio').each(function(){
+
+        if (!$(this).is(':checked'))
+        	$('label[for="'+$(this).attr("id")+'"]').remove();
+        	
+		if ($(this).is(':checked'))
+        	//alert($('label[for="'+$(this).attr("id")+'"]').text());
+        	$('label[for="'+$(this).attr("id")+'"]').replaceWith('<span class="visualTexto">'+$('label[for="'+$(this).attr("id")+'"]').text()+'</span>');
+  
+        $(this).remove();
     });
     
     $(".cargar-archivo").each(function(){
