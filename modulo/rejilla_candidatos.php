@@ -11,11 +11,20 @@ class rejilla
     public static function filtros()
     {
         $seccion = array();
+        $accion = !empty($_GET['2']) ? $_GET['2'] : '';
         
+        if ( $accion == 'actividad.economica' )
         $secciones[] = '<h1>▼ Act. económica</h1>'.self::ObtenerActEconomica();
-        $secciones[] = '<h1>▼ Carreras</h1>'.self::ObtenerCarreras();
+
+        if ( $accion == 'estudio' )
+        $secciones[] = '<h1>▼ Estudios</h1>'.self::ObtenerEstudios();
+
+        if ( $accion == 'area.puesto' )
         $secciones[] = '<h1>▼ Puestos</h1>'.self::ObtenerAreaDePuesto();
+
+        if ( $accion == 'oficio' )
         $secciones[] = '<h1>▼ Oficios</h1>'.self::ObtenerOficios();
+        
         $secciones[] = '<h1>▼ Experiencia</h1>'.self::ObtenerExperiencia();
         $secciones[] = '<h1>▼ Idiomas</h1>'.self::ObtenerIdiomas();
         $secciones[] = '<h1>▼ Edad</h1>'.self::ObtenerEdad();
@@ -102,9 +111,10 @@ class rejilla
         return '<input type="hidden" id="experiencia" name="experiencia" value="0" /><p id="valor_experiencia" class="ocre"></p><div id="slider_experiencia"></div>';
     }
     
-    private static function ObtenerCarreras()
+    private static function ObtenerEstudios()
     {
-        $consulta = 'SELECT `ID_area_estudio`, `estudio` FROM `paso2_educacion_superior` LEFT JOIN `datos_tag_estudio` ON `ID_area_estudio` = `ID_tag_estudio`';
+        // Estudio superior
+        $consulta = 'SELECT `ID_area_estudio`, `estudio` FROM `paso2_educacion_superior` LEFT JOIN `datos_tag_estudio_superior` ON `ID_area_estudio` = `ID_tag_estudio_superior`';
         $resultado = db::consultar($consulta);
         
         while ($resultado && $registro = mysql_fetch_assoc($resultado))
@@ -112,7 +122,23 @@ class rejilla
             $arrCarreras[$registro['ID_area_estudio']] = $registro['estudio'];
         }
 
-        return ui::ArrayCheckbox('carreras', '', $arrCarreras, array());
+        $retorno = ui::ArrayCheckbox('carreras', '', $arrCarreras, array());
+        unset($arrCarreras);
+        
+        $retorno .= '<hr />';
+        
+        // Bachillerato
+        $consulta = 'SELECT `ID_area_estudio`, `estudio` FROM `paso2_educacion_secundaria` LEFT JOIN `datos_tag_estudio_bachiller` ON `ID_area_estudio` = `ID_tag_estudio_bachiller` WHERE `ID_area_estudio` >0 GROUP BY `ID_area_estudio`';
+        $resultado = db::consultar($consulta);
+        
+        while ($resultado && $registro = mysql_fetch_assoc($resultado))
+        {
+            $arrCarreras[$registro['ID_area_estudio']] = $registro['estudio'];
+        }
+        
+        $retorno .= ui::ArrayCheckbox('bachillerato', '', $arrCarreras, array());
+        
+        return $retorno;
     }
 
     private static function ObtenerAreaDePuesto()
@@ -169,12 +195,12 @@ class rejilla
 
     private static function ObtenerIdiomas()
     {
-        $consulta = 'SELECT `ID_idioma`, CONCAT(`idioma`, " - " , `nivel`) AS "idioma_nivel" FROM `paso2_idiomas` LEFT JOIN `datos_idioma` USING(ID_idioma) GROUP BY `ID_idioma`';
+        $consulta = 'SELECT `ID_idioma`, `nivel`, CONCAT(`idioma`, " - " , `nivel`) AS "idioma_nivel" FROM `paso2_idiomas` LEFT JOIN `datos_idioma` USING(ID_idioma) GROUP BY `ID_idioma`,`nivel`';
         $resultado = db::consultar($consulta);
         
         while ($resultado && $registro = mysql_fetch_assoc($resultado))
         {
-            $arrCarreras[$registro['ID_idioma']] = $registro['idioma_nivel'];
+            $arrCarreras[$registro['ID_idioma'].'.'.$registro['nivel']] = $registro['idioma_nivel'];
         }
 
         return ui::ArrayCheckbox('idiomas', '', $arrCarreras, array());

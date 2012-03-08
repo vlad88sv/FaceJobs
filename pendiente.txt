@@ -1,0 +1,11 @@
+Bugs:
+* Empresas / Cargos -> Revisar/Rediseñar. Lugar: Ingreso de CV.
+
+ToDo:
+* Rejilla de candidatos
+* Rejilla de puestos
+* Guardar búsqueda
+* Cargar búsqueda
+* Publicar puesto
+* Crear busqueda en base a CV
+* PermaLink "a mi cv" y "a mi empresa" y "a este puesto"

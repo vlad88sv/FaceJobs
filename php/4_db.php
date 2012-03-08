@@ -145,6 +145,11 @@ class db
         $f = mysql_fetch_assoc($resultado);
         return $f['cantidad'];
     }
+	
+	public static function fetch($resultado)
+	{
+		return mysql_fetch_assoc($resultado);
+	} 
 }
 
 class cache

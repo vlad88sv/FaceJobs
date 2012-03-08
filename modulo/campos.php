@@ -113,7 +113,7 @@ campos::$defcampos['empresa_registro.privacidad_contacto_nombre']['texto'] = 'No
 
 campos::$defcampos['empresa_registro.privacidad_contacto_correo']['tipo'] = uiForm::$radio;
 campos::$defcampos['empresa_registro.privacidad_contacto_correo']['valores'] = array('publico' => 'Público', 'privado' => 'Privado');
-campos::$defcampos['empresa_registro.privacidad_contacto_correo']['texto'] = 'Correo electronico del contacto';
+campos::$defcampos['empresa_registro.privacidad_contacto_correo']['texto'] = 'Correo del contacto';
 
 campos::$defcampos['empresa_registro.privacidad_contacto_telefono']['tipo'] = uiForm::$radio;
 campos::$defcampos['empresa_registro.privacidad_contacto_telefono']['valores'] = array('publico' => 'Público', 'privado' => 'Privado');

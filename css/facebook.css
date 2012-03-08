@@ -27,7 +27,7 @@ body{background:#fff;font-size:100%;font-family:"lucida grande",tahoma,verdana,a
 #PlantillaGeneralMenu ul ul li a {color: #5b0504; font-size: 12px; text-decoration: none;}
 
 #PlantillaGeneralContenido {width: 530px;border:1px solid #8c8b8b;border-radius: 5px;text-align: left;vertical-align: top;padding: 2px 17px;}
-#PlantillaGeneralRejilla {overflow:hidden;}
+#PlantillaGeneralRejilla {overflow:hidden;vertical-align:top;}
 
 .cajita_rendoda {border: 1px #6d6d6d solid;border-radius: 5px;padding: 4px;margin-bottom: 10px;}
 
@@ -49,3 +49,9 @@ div.boton a {color: #F7F7F7 !important;text-decoration: none;display: block;}
 #rejilla_filtros h1 {font-size:12px;}
 
 input[type="checkbox"] {margin:0px;}
+
+.resultado_candidato {border-collapse: collapse;width: 100%;}
+.resultado_candidato td {vertical-align: top;}
+.resultado_candidato_img {width:70px;height:90px;}
+.resultado_candidato_col1 {width:240px;}
+.resultado_candidato_col1 {width:240px;}

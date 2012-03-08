@@ -40,9 +40,14 @@ if (!sesion::iniciado())
         case 'perfil':
             body::agregarAlContenido ('perfil',true);
             break;
+        case 'ver.perfil':
+            body::agregarAlContenido ('ver.perfil',true);
+            break;
         case 'busqueda':
-        case '':
             body::agregarAlContenido ('busqueda',true);
+            break;
+        case '':
+            body::agregarAlContenido ('inicio',true);
             break;
         case 'error':        
         default:

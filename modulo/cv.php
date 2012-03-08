@@ -65,6 +65,13 @@ campos::$defcampos['paso2_educacion_secundaria.institucion']['tipo'] = uiForm::$
 campos::$defcampos['paso2_educacion_secundaria.institucion']['longitud'] = 250;
 campos::$defcampos['paso2_educacion_secundaria.institucion']['texto'] = "Institución:";
 
+campos::$defcampos['paso2_educacion_secundaria.ID_area_estudio']['tipo'] = uiForm::$comboboxComplejo;
+campos::$defcampos['paso2_educacion_secundaria.ID_area_estudio']['texto'] = "Área de estudio:";
+campos::$defcampos['paso2_educacion_secundaria.ID_area_estudio']['datos']['tabla'] = 'datos_tag_estudio_bachiller';
+campos::$defcampos['paso2_educacion_secundaria.ID_area_estudio']['datos']['clave'] = 'ID_tag_estudio_bachiller';
+campos::$defcampos['paso2_educacion_secundaria.ID_area_estudio']['datos']['valor'] = 'estudio';
+
+
 campos::$defcampos['paso2_educacion_secundaria.ano_finalizacion']['tipo'] = uiForm::$fecha;
 campos::$defcampos['paso2_educacion_secundaria.ano_finalizacion']['flags'] = 'Y';
 campos::$defcampos['paso2_educacion_secundaria.ano_finalizacion']['texto'] = "Año de finalización:";
@@ -87,10 +94,9 @@ campos::$defcampos['paso2_educacion_superior.institucion']['longitud'] = 250;
 campos::$defcampos['paso2_educacion_superior.institucion']['texto'] = 'Institución:';
 
 campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['tipo'] = uiForm::$comboboxComplejo;
-campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['datos']['tabla'] = 'datos_tag_estudio';
-campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['datos']['clave'] = 'ID_tag_estudio';
+campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['datos']['tabla'] = 'datos_tag_estudio_superior';
+campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['datos']['clave'] = 'ID_tag_estudio_superior';
 campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['datos']['valor'] = 'estudio';
-campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['datos']['filtros']['where'] = '`grupo` = "Superior"';
 
 campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['texto'] = 'Área de estudio:';
 campos::$defcampos['paso2_educacion_superior.ID_area_estudio']['enLinea'] = true;

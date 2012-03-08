@@ -1,6 +1,6 @@
 ====
 [grupo:visualizacion]
-[titulo]Datos personales<a class="editarPaso" href="paso.html?contenido=caja&p=datos.personales">Editar</a>[/titulo]
+[titulo]Datos personales[/titulo]
 	<table style="width:100%;border-collapse:collapse;">
 	<tr>
 	<td style="vertical-align:top;width:150px;padding:0px;text-align:center;">
@@ -25,7 +25,7 @@
 	</tr>
 	</table>
 
-[titulo]Perfil Profesional<a class="editarPaso" href="paso.html?contenido=caja&p=perfil.profesional">Editar</a>[/titulo]
+[titulo]Perfil Profesional[/titulo]
 	<div class="padpln">
 	[visual]paso0.perfil_profesional_titulo[/visual]
 	[visual]paso0.perfil_profesional_descripcion[/visual]
@@ -33,46 +33,45 @@
 	</div>
 
 
-[titulo]Interes Profesional<a class="editarPaso" href="paso.html?contenido=caja&p=expectativa.laboral">Editar</a>[/titulo]
+[titulo]Interes Profesional[/titulo]
 	<div class="padpln">
 	[vistalazo]paso4_expectativa_laboral[/vistalazo]
 	</div>
 
-[titulo]Educación Formal<a class="editarPaso" href="paso.html?contenido=caja&p=educacion.formal">Editar</a>[/titulo]
+[titulo]Educación Formal[/titulo]
 	<div class="padpln">
 	<h2>Educación secundaria</h2>
 	[visual]paso2_educacion_secundaria.ID_pais[/visual]
 	[visual]paso2_educacion_secundaria.institucion[/visual]
 	[visual]paso2_educacion_secundaria.ano_finalizacion[/visual]
 	[visual]paso2_educacion_secundaria.incompleto[/visual]
-	[visual]paso2_educacion_secundaria.ID_area_estudio[/visual]
 	[visual]paso2_educacion_secundaria.titulo[/visual]
 	<h2>Educación superior</h2>
 	[vistalazo]paso2_educacion_superior[/vistalazo]
 	</div>
 
-[titulo]Experiencia Laboral<a class="editarPaso" href="paso.html?contenido=caja&p=experiencia.laboral">Editar</a>[/titulo]
+[titulo]Experiencia Laboral[/titulo]
 	<div class="padpln">
 	[vistalazo]paso3_empresa[/vistalazo]
 	</div>
 
-[titulo]Idiomas<a class="editarPaso" href="paso.html?contenido=caja&p=idiomas">Editar</a>[/titulo]
+[titulo]Idiomas[/titulo]
 	<div class="padpln">
 	[vistalazo]paso2_idiomas[/vistalazo]
 	</div>
 
-[titulo]Diplomados y otros estudios<a class="editarPaso" href="paso.html?contenido=caja&p=otros.estudios">Editar</a>[/titulo]
+[titulo]Otros estudios[/titulo]
 	<div class="padpln">
 	[vistalazo]paso2_otros_estudios[/vistalazo]
 	</div>
 
 
-[titulo]Conocimientos, Habilidades Adquiridas u Oficios prácticados<a class="editarPaso" href="paso.html?contenido=caja&p=exp.adicional">Editar</a>[/titulo]
+[titulo]Conocimientos, Habilidades Adquiridas u Oficios prácticados[/titulo]
 	<div class="padpln">
 	[vistalazo]paso6_oficios[/vistalazo]
 	</div>
 
-[titulo]Referencias Personales/Laborales<a class="editarPaso" href="paso.html?contenido=caja&p=referencias">Editar</a>[/titulo]
+[titulo]Referencias Personales/Laborales[/titulo]
 	<div class="padpln">
 	[vistalazo]paso5_referencias[/vistalazo]
 	</div>

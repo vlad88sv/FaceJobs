@@ -6,13 +6,11 @@ general::registrarEstiloCSS('FaceBox','facebox');
 general::registrarScriptJS('fileuploader','fileuploader');
 general::registrarScriptJS('FaceBox','jquery.facebox');
 
-pln::procesar('perfil.candidato');
+pln::procesar('ver.perfil');
 echo pln::$pln;
 ?>
 <script type="text/javascript">
     $(function(){
-    	 $('.editarPaso').facebox();
-         $(document).bind('afterClose.facebox', function() { window.location.reload(); });         
          plnJS_iniciar();
     });
 </script>

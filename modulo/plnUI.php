@@ -138,7 +138,7 @@ class plnUI
                 break;
 
             case uiForm::$sino:
-                $retorno .= '<input type="radio" name="'.$campo.'" id="'.$campoEsc.'_si" value="1" /> <label for="'.$campoEsc.'_si">Si</label> <input type="radio" name="'.$campo.'" id="'.$campoEsc.'_no" value="0" />  <label for="'.$campoEsc.'_no">No</label> ';
+                $retorno .= '<input type="radio" '.($esLazo ? '' : 'class="auto" '). ' rel="'.$campo.'" name="'.$campo.'" id="'.$campoEsc.'_si" value="1" /> <label for="'.$campoEsc.'_si">Si</label> <input type="radio" '.($esLazo ? '' : 'class="auto" '). ' rel="'.$campo.'" name="'.$campo.'" id="'.$campoEsc.'_no" value="0" />  <label for="'.$campoEsc.'_no">No</label> ';
                 break;
             
             case uiForm::$cheque:
@@ -150,7 +150,7 @@ class plnUI
                 if(is_array(campos::$defcampos[$campo]['valores']))
                 {
                     foreach (campos::$defcampos[$campo]['valores'] as $valor => $texto)
-                        $retorno .= '<input type="radio" name="'.$campo.'" id="'.$campoEsc.'_'.$valor.'" value="'.$valor.'"/> <label for="'.$campoEsc.'_'.$valor.'">' . $texto . '</label>';
+                        $retorno .= '<input type="radio" '.($esLazo ? '' : 'class="auto" '). ' rel="'.$campo.'" name="'.$campo.'" id="'.$campoEsc.'_'.$valor.'" value="'.$valor.'"/> <label for="'.$campoEsc.'_'.$valor.'">' . $texto . '</label>';
                 }
                 break;
 

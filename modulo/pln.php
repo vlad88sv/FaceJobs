@@ -202,9 +202,12 @@ class pln
                 self::$pln = preg_replace('/\$\$reemplazar\:\:'.$campoEsc.'\$\$/',ui::ObtenerImagen($valor,110,110,true),self::$pln);
                 break;
 
+            case uiForm::$memo:
+                self::$pln = preg_replace('/\$\$reemplazar\:\:'.$campoEsc.'\$\$/',preg_replace('/\n/','<br />',$valor),self::$pln);
+                break;
+
             case uiForm::$textoSimple:
             case uiForm::$correo:
-            case uiForm::$memo:
             case uiForm::$fecha:
             case uiForm::$telefono:
                 self::$pln = preg_replace('/\$\$reemplazar\:\:'.$campoEsc.'\$\$/',$valor,self::$pln);

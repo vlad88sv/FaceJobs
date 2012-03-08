@@ -83,6 +83,15 @@
 * Secretaria de Gcia. General | Presidencia
 * Secretaria Ejecutiva
 * Secretaria Ejecutiva Bilingue
+[Medicina]
+* Medico General
+* Medico Especialista
+* Medico Cirujano
+* Enfermería
+* Odontología
+* Nutrición
+* Veterinaria
+* Psicologia
 ===Informatica===
 [Informatica]
 * Base de Datos
