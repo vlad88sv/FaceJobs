@@ -104,11 +104,17 @@ if (usuario::$info['tipo'] == usuario::$tipoCandidato) {
     {
 	$where[] = 'paso3_cargos.`ID_puesto_desempenado` IN ("'.implode('","',$_POST['puestos']).'") OR paso4_expectativa_laboral.ID_area_interes IN ("'.implode('","',$_POST['puestos']).'")';
     }    
+
+    if (isset ($_POST['actividadesEconomicas']) && is_array($_POST['actividadesEconomicas']))
+    {
+	$where[] = 'paso3_empresa.`ID_actividad_economica` IN ("'.implode('","',$_POST['actividadesEconomicas']).'")';
+    }    
+
 }
 
 $w = implode(' AND ', $where);
 
-$consulta = "SELECT ID_cuenta, nombres, apellidos, foto_hash FROM cuentas LEFT JOIN paso0 USING (ID_cuenta) LEFT JOIN paso1_personal USING(ID_cuenta) LEFT JOIN paso2_educacion_superior USING (ID_cuenta) LEFT JOIN paso2_educacion_secundaria USING (ID_cuenta) LEFT JOIN paso3_cargos USING (ID_cuenta) LEFT JOIN paso4_expectativa_laboral USING(ID_cuenta) LEFT JOIN paso6_oficios USING(ID_cuenta) WHERE 0 OR $w GROUP BY ID_cuenta";
+$consulta = "SELECT ID_cuenta, nombres, apellidos, foto_hash FROM cuentas LEFT JOIN paso0 USING (ID_cuenta) LEFT JOIN paso1_personal USING(ID_cuenta) LEFT JOIN paso2_educacion_superior USING (ID_cuenta) LEFT JOIN paso2_educacion_secundaria USING (ID_cuenta) LEFT JOIN paso3_empresa USING(ID_cuenta) LEFT JOIN paso3_cargos USING (ID_cuenta) LEFT JOIN paso4_expectativa_laboral USING(ID_cuenta) LEFT JOIN paso6_oficios USING(ID_cuenta) WHERE 0 OR $w GROUP BY ID_cuenta";
 echo '<code>';
 //echo str_replace("\n","<br />",print_r($_POST,true));
 //echo $consulta;
