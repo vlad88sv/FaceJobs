@@ -114,20 +114,27 @@ if (usuario::$info['tipo'] == usuario::$tipoCandidato) {
 
 $w = implode(' AND ', $where);
 
-$consulta = "SELECT ID_cuenta, nombres, apellidos, foto_hash FROM cuentas LEFT JOIN paso0 USING (ID_cuenta) LEFT JOIN paso1_personal USING(ID_cuenta) LEFT JOIN paso2_educacion_superior USING (ID_cuenta) LEFT JOIN paso2_educacion_secundaria USING (ID_cuenta) LEFT JOIN paso3_empresa USING(ID_cuenta) LEFT JOIN paso3_cargos USING (ID_cuenta) LEFT JOIN paso4_expectativa_laboral USING(ID_cuenta) LEFT JOIN paso6_oficios USING(ID_cuenta) WHERE 0 OR $w GROUP BY ID_cuenta";
+$consulta = "SELECT ID_cuenta, nombres, apellidos, foto_hash, (YEAR(NOW()) - paso1_personal.`fecha_nacimientoAno`) AS edad, ID_expectativa_salarial FROM cuentas LEFT JOIN paso0 USING (ID_cuenta) LEFT JOIN paso1_personal USING(ID_cuenta) LEFT JOIN paso2_educacion_superior USING (ID_cuenta) LEFT JOIN paso2_educacion_secundaria USING (ID_cuenta) LEFT JOIN paso3_empresa USING(ID_cuenta) LEFT JOIN paso3_cargos USING (ID_cuenta) LEFT JOIN paso4_expectativa_laboral USING(ID_cuenta) LEFT JOIN paso6_oficios USING(ID_cuenta) WHERE 0 OR $w GROUP BY ID_cuenta";
 echo '<code>';
 //echo str_replace("\n","<br />",print_r($_POST,true));
 //echo $consulta;
+echo '</code>';
+
 $resultado = db::consultar($consulta);
 
 general::requerirModulo(array('plantilla.campos','plantilla.UI','plantilla.JS','ui'));
 
 while ($registro = mysql_fetch_assoc($resultado))
 {
-    echo '<hr />';
-    echo '<table class="resultado_candidato">';
-    echo '<tr><td class="resultado_candidato_img"><img src="'.ui::ObtenerImagen($registro['foto_hash'],70,90,true).'" /></td><td class="resultado_candidato_col1">'.$registro['apellidos'] . ', ' . $registro['nombres'].'</td><td class="resultado_candidato_col2">Aspiración salarial:</td></tr>';
-    echo '</table>';
+    $ExpSalarial = array(0 => 'USD $100 - USD $250','USD $250 - USD $500','USD $500 - USD $750','USD $750 - USD $1000','USD $1000 - USD $1500','USD $1500 - USD $2000','USD $2000 - USD $3000','> USD $3000');
+    echo '<hr class="ocre"/>';
+    echo '<div class="resultado_candidato">';
+    echo '<div class="resultado_candidato_img"><img src="'.ui::ObtenerImagen($registro['foto_hash'],70,90,true).'" /></div>';
+    echo '<div class="resultado_candidato_col1">'.$registro['edad'].' años</div>';
+    echo '<div class="resultado_candidato_divisor"></div>';    
+    echo '<div class="resultado_candidato_col2">Aspiración salarial: '.$ExpSalarial[$registro['ID_expectativa_salarial']].'</div>';
+    echo '<div class="resultado_candidato_pie"><a href="#" class="gris">Ver curriculum</a></div>';
+    echo '</div>';
 }
-echo '</code>';
+
 ?>
