@@ -143,12 +143,12 @@ class rejilla
 
     private static function ObtenerAreaDePuesto()
     {
-        $consulta = 'SELECT `ID_puesto_desempenado`, `puesto` FROM `paso3_cargos` LEFT JOIN `datos_puesto` ON `ID_puesto_desempenado` = `ID_puesto`';
+        $consulta = 'SELECT `ID_puesto`, `puesto` FROM `datos_puesto` WHERE `ID_puesto` IN (SELECT `ID_puesto_desempenado` FROM `paso3_cargos`) OR `ID_puesto` IN (SELECT `ID_area_interes` FROM `paso4_expectativa_laboral`)';
         $resultado = db::consultar($consulta);
         
         while ($resultado && $registro = mysql_fetch_assoc($resultado))
         {
-            $arrCarreras[$registro['ID_puesto_desempenado']] = $registro['puesto'];
+            $arrCarreras[$registro['ID_puesto']] = $registro['puesto'];
         }
 
         return ui::ArrayCheckbox('puestos', '', $arrCarreras, array());
