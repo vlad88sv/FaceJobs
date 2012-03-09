@@ -70,7 +70,7 @@ class imagenes
         readfile($destino);
     }
   
-    public static function crop_imagen($origen,$destino,$ancho)
+    public static function crop_imagen($origen,$destino,$ancho,$alto)
     {    
         if(@($ancho*$alto) > 562500)
             die('La imagen solicitada excede el límite de este servicio');
@@ -82,7 +82,7 @@ class imagenes
         {
            general::requerirModulo(array('phmagick'));
            $phMagick = new phMagick ($origen, $destino);
-           $phMagick->resizeExactly($ancho,$ancho);
+           $phMagick->resizeExactly($ancho,$alto);
         }
     
         header("Accept-Ranges: bytes",true);
