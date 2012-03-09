@@ -122,7 +122,7 @@ echo '</code>';
 
 $resultado = db::consultar($consulta);
 
-general::requerirModulo(array('plantilla.campos','plantilla.UI','plantilla.JS','ui'));
+general::requerirModulo(array('ui'));
 
 while ($registro = mysql_fetch_assoc($resultado))
 {
@@ -133,7 +133,7 @@ while ($registro = mysql_fetch_assoc($resultado))
     echo '<div class="resultado_candidato_col1">'.$registro['edad'].' años</div>';
     echo '<div class="resultado_candidato_divisor"></div>';    
     echo '<div class="resultado_candidato_col2">Aspiración salarial: '.$ExpSalarial[$registro['ID_expectativa_salarial']].'</div>';
-    echo '<div class="resultado_candidato_pie"><a href="#" class="gris">Ver curriculum</a></div>';
+    echo '<div class="resultado_candidato_pie"><a href="ver.perfil!'.$registro['ID_cuenta'].'#'.web::SEO($registro['apellidos'].','.$registro['nombres']).'" class="gris">Ver curriculum</a></div>';
     echo '</div>';
 }
 
