@@ -45,6 +45,7 @@
 	[visual]paso2_educacion_secundaria.institucion[/visual]
 	[visual]paso2_educacion_secundaria.ano_finalizacion[/visual]
 	[visual]paso2_educacion_secundaria.incompleto[/visual]
+	[visual]paso2_educacion_secundaria.ID_area_estudio[/visual]
 	[visual]paso2_educacion_secundaria.titulo[/visual]
 	<h2>Educación superior</h2>
 	[vistalazo]paso2_educacion_superior[/vistalazo]
@@ -60,7 +61,7 @@
 	[vistalazo]paso2_idiomas[/vistalazo]
 	</div>
 
-[titulo]Otros estudios[/titulo]
+[titulo]Diplomados y otros estudios[/titulo]
 	<div class="padpln">
 	[vistalazo]paso2_otros_estudios[/vistalazo]
 	</div>

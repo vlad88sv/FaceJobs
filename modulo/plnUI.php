@@ -52,7 +52,7 @@ class plnUI
                 {
                     if (isset(campos::$defcampos[$campo]['datos']['filtros']) && in_array('mios', campos::$defcampos[$campo]['datos']['filtros']))
                     {
-                        $filtros = 'AND ID_cuenta='.usuario::$info['ID_cuenta'];
+                        $filtros = 'AND ID_cuenta='.pln::$ID;
                     }
                     $c = 'SELECT '.campos::$defcampos[$campo]['datos']['clave'].' AS "clave", '.campos::$defcampos[$campo]['datos']['valor'].' AS "valor" FROM '.campos::$defcampos[$campo]['datos']['tabla'].' WHERE 1 ' . $filtros;
                     $r = db::consultar($c);
@@ -230,7 +230,7 @@ class plnUI
                 {
                     if (isset(campos::$defcampos[$campo]['datos']['filtros']) && in_array('mios', campos::$defcampos[$campo]['datos']['filtros']))
                     {
-                        $filtros = 'AND ID_cuenta='.usuario::$info['ID_cuenta'];
+                        $filtros = 'AND ID_cuenta='.pln::$ID;
                     }
                     $c = 'SELECT '.campos::$defcampos[$campo]['datos']['clave'].' AS "clave", '.campos::$defcampos[$campo]['datos']['valor'].' AS "valor" FROM '.campos::$defcampos[$campo]['datos']['tabla'].' WHERE 1 ' . $filtros;
                     $r = db::consultar($c);

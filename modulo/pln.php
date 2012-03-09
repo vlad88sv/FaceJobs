@@ -4,9 +4,11 @@ general::registrarEstiloCSS('pln','pln');
 class pln
 {
     public static $pln;
+    public static $ID = 0;
     public static $campos = array();
     private static $debug = false;
-    public static function procesar($plantilla)
+    
+    public static function procesar($plantilla, $ID = 0)
     {
         /* Plan:
           * Las plantillas son cacheables, pues no se ubican aca los valores
@@ -16,6 +18,8 @@ class pln
         
         // MemCache
         // if ($mc = memcached('plantillas',$plantilla.'.pln')) {self::$pln = $mc; return;}
+        
+        self::$ID = ($ID ? $ID : usuario::$info['ID_cuenta']);
         
         if (!file_exists(_BASE_plantilla.$plantilla.'.pln'))
         {
@@ -160,7 +164,7 @@ class pln
            
         foreach(self::$campos as $tabla => $campos)
         {
-           $c = 'SELECT '.join(', ',self::$campos[$tabla]).' FROM ' . $tabla.' WHERE ID_cuenta='.usuario::$info['ID_cuenta'];
+           $c = 'SELECT '.join(', ',self::$campos[$tabla]).' FROM ' . $tabla.' WHERE ID_cuenta='.self::$ID;
            
            if (self::$debug) error_log('reemplazarValores.Query :: ' . $c);
            
@@ -278,7 +282,7 @@ class pln
                 {
                     if (in_array('mios', campos::$defcampos[$campo]['datos']['filtros']))
                     {
-                            $filtros = 'AND ID_cuenta='.usuario::$info['ID_cuenta'];
+                            $filtros = 'AND ID_cuenta='.self::$ID;
                     }
                 }
                 $campos[] = '(SELECT '.campos::$defcampos[$campo]['datos']['valor'].' FROM '.campos::$defcampos[$campo]['datos']['tabla'].' AS t'.$ID_table.' WHERE t'.$ID_table.'.'.campos::$defcampos[$campo]['datos']['clave'].' = t1.'.$partes[2].' '.$filtros.') AS '.$partes[2].'_valor';			
@@ -306,7 +310,7 @@ class pln
 	}
 	
     $tabla = isset(campos::$deflazo[$lazo]['paraTabla'])  ? campos::$deflazo[$lazo]['paraTabla'] : $lazo;
-  	$c = 'SELECT ID_'.$tabla.', '.implode(',',$campos).' FROM '.$tabla .' AS t1 WHERE ID_cuenta="'.usuario::$info['ID_cuenta'].'"';
+  	$c = 'SELECT ID_'.$tabla.', '.implode(',',$campos).' FROM '.$tabla .' AS t1 WHERE ID_cuenta="'.self::$ID.'"';
 	
   	$r = db::consultar($c);
   	while ($f = mysql_fetch_assoc($r) )

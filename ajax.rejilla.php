@@ -5,6 +5,7 @@ sesion::iniciar_sesion();
 if (!sesion::iniciado())
     return;
 
+   
 if (usuario::$info['tipo'] == usuario::$tipoCandidato) {
 } else {    
     if (isset ($_POST['carreras']) && is_array($_POST['carreras']))
@@ -112,13 +113,20 @@ if (usuario::$info['tipo'] == usuario::$tipoCandidato) {
 
 }
 
-$w = implode(' AND ', $where);
+if (isset($where) && is_array($where) && count($where))
+    $w = ' OR '. implode(' AND ', $where);
+else
+    $w = '';
 
-$consulta = "SELECT ID_cuenta, nombres, apellidos, foto_hash, (YEAR(NOW()) - paso1_personal.`fecha_nacimientoAno`) AS edad, ID_expectativa_salarial FROM cuentas LEFT JOIN paso0 USING (ID_cuenta) LEFT JOIN paso1_personal USING(ID_cuenta) LEFT JOIN paso2_educacion_superior USING (ID_cuenta) LEFT JOIN paso2_educacion_secundaria USING (ID_cuenta) LEFT JOIN paso3_empresa USING(ID_cuenta) LEFT JOIN paso3_cargos USING (ID_cuenta) LEFT JOIN paso4_expectativa_laboral USING(ID_cuenta) LEFT JOIN paso6_oficios USING(ID_cuenta) WHERE 0 OR $w GROUP BY ID_cuenta";
+$consulta = "SELECT ID_cuenta, nombres, apellidos, foto_hash, (YEAR(NOW()) - paso1_personal.`fecha_nacimientoAno`) AS edad, ID_expectativa_salarial FROM cuentas LEFT JOIN paso0 USING (ID_cuenta) LEFT JOIN paso1_personal USING(ID_cuenta) LEFT JOIN paso2_educacion_superior USING (ID_cuenta) LEFT JOIN paso2_educacion_secundaria USING (ID_cuenta) LEFT JOIN paso3_empresa USING(ID_cuenta) LEFT JOIN paso3_cargos USING (ID_cuenta) LEFT JOIN paso4_expectativa_laboral USING(ID_cuenta) LEFT JOIN paso6_oficios USING(ID_cuenta) WHERE 0 $w GROUP BY ID_cuenta";
+/*
 echo '<code>';
-//echo str_replace("\n","<br />",print_r($_POST,true));
-//echo $consulta;
+echo str_replace("\n","<br />",print_r($_POST,true));
 echo '</code>';
+*/
+
+//error_log ($consulta);
+
 
 $resultado = db::consultar($consulta);
 
