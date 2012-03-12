@@ -58,6 +58,6 @@ input[type="checkbox"] {margin:0px;}
 .resultado_candidato_col1 {width:234px;height:74px;position: absolute;left:70px;color:#5b0504;text-align:left;padding:3px;}
 .resultado_candidato_col2 {width:234px;height:74px;position: absolute;left:310px;color:#585858;text-align:right;padding:3px;}
 .resultado_candidato_pie  {width:480px;position: absolute;left:70px;bottom:0px;}
-.resultado_candidato_pie  a {text-decoration: none;}
+.resultado_candidato_pie  a {text-decoration: none;color:#535353;}
 .resultado_candidato_pie  a:hover {text-decoration: underline;}
 .resultado_candidato_divisor {border-left:1px solid #5b0504;position: absolute;left:310px;top: 20px;bottom:18px;}

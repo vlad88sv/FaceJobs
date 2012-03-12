@@ -1,12 +1,16 @@
 <?php
-general::requerirModulo(array('ui'));
+general::requerirModulo(array('plantilla','cv','ui'));
 
 general::registrarEstiloCSS('blitzer','blitzer/jquery-ui-1.8.17.custom');
+general::registrarEstiloCSS('FaceBox','facebox');
 
 general::registrarScriptJS('jquery.ui','ui/jquery.ui.core.min');
 general::registrarScriptJS('jquery.ui.widget','ui/jquery.ui.widget.min');
 general::registrarScriptJS('jquery.ui.mouse','ui/jquery.ui.mouse.min');
 general::registrarScriptJS('jquery.ui.slider','ui/jquery.ui.slider.min');
+general::registrarScriptJS('FaceBox','jquery.facebox');
+
+pln::procesar('perfil.candidato');
 
 $rejilla = array();
 

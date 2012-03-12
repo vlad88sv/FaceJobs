@@ -141,8 +141,8 @@ while ($registro = mysql_fetch_assoc($resultado))
     echo '<div class="resultado_candidato_col1">'.$registro['edad'].' años</div>';
     echo '<div class="resultado_candidato_divisor"></div>';    
     echo '<div class="resultado_candidato_col2">Aspiración salarial: '.$ExpSalarial[$registro['ID_expectativa_salarial']].'</div>';
-    echo '<div class="resultado_candidato_pie"><a href="ver.perfil!'.$registro['ID_cuenta'].'#'.web::SEO($registro['apellidos'].','.$registro['nombres']).'" class="gris">Ver curriculum</a></div>';
+    echo '<div class="resultado_candidato_pie"><a class="facebox" href="'.PROY_URL.'ver.perfil!'.$registro['ID_cuenta'].'?contenido" class="gris">Ver curriculum</a></div>';
     echo '</div>';
 }
-
 ?>
+<script type="text/javascript">$(function(){$('.facebox').facebox();});</script>

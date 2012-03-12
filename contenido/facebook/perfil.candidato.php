@@ -7,6 +7,7 @@ general::registrarScriptJS('fileuploader','fileuploader');
 general::registrarScriptJS('FaceBox','jquery.facebox');
 
 pln::procesar('perfil.candidato');
+
 echo pln::$pln;
 ?>
 <script type="text/javascript">
