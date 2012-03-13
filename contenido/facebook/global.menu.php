@@ -9,18 +9,17 @@ $menu['area.puesto']['texto'] = 'Área de Puesto';
 $menu['area.puesto']['enlace'] = 'busqueda!area.puesto';
 $menu['area.puesto']['titulo'] = 'Búscar en base al área del puesto';
 
-$menu['informatica']['texto'] = 'Informática';
-$menu['informatica']['enlace'] = 'busqueda!informatica';
-$menu['informatica']['titulo'] = 'Búscar candidatos en base a su sector de desempeño en la informática';
-
 $menu['oficio']['texto'] = 'Oficio';
 $menu['oficio']['enlace'] = 'busqueda!oficio';
 $menu['oficio']['titulo'] = 'Búscar candidados en base a sus habilidades';
 
-
 $menu['estudio']['texto'] = 'Estudio';
 $menu['estudio']['enlace'] = 'busqueda!estudio';
 $menu['estudio']['titulo'] = 'Búscar candidados en base a sus estudios profesionales';
+
+$menu['categorias']['texto'] = '<img src="img/folder.categorias.png" />';
+$menu['categorias']['enlace'] = 'busqueda!categorias';
+$menu['categorias']['titulo'] = 'Ver candidatos que Ud. ha categorizado previamente';
 
 // Áreas de actividad económica correspondientes a las empresas donde han trabajados los FaceJobianos
 $c = 'SELECT grupo, subgrupo FROM `datos_puesto` WHERE 1 GROUP BY grupo, subgrupo';

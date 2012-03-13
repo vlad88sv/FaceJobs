@@ -12,6 +12,9 @@ class rejilla
     {
         $seccion = array();
         $accion = !empty($_GET['2']) ? $_GET['2'] : '';
+
+        if ( $accion == 'categorias' )
+        $secciones[] = '<h1>▼ Categorias</h1>'.self::ObtenerCategorias();
         
         if ( $accion == 'actividad.economica' )
         $secciones[] = '<h1>▼ Act. económica</h1>'.self::ObtenerActEconomica();
@@ -204,6 +207,19 @@ class rejilla
         }
 
         return ui::ArrayCheckbox('idiomas', '', $arrCarreras, array());
+    }
+
+    private static function ObtenerCategorias()
+    {
+        $consulta = 'SELECT `ID_empresa_categoria`, `categoria` FROM `empresa_categorias` WHERE ID_cuenta='.usuario::$info['ID_cuenta'].' ORDER BY `categoria` ASC';
+        $resultado = db::consultar($consulta);
+        
+        while ($resultado && $registro = mysql_fetch_assoc($resultado))
+        {
+            $arrCarreras[$registro['ID_empresa_categoria']] = $registro['categoria'];
+        }
+
+        return ui::ArrayCheckbox('categorias', '', $arrCarreras, array());
     }
     
     private static function ObtenerOtros()

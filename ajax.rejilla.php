@@ -41,7 +41,12 @@ if (usuario::$info['tipo'] == usuario::$tipoCandidato) {
     if (isset ($_POST['oficios']) && is_array($_POST['oficios']))
     {
 	$where[] = 'paso6_oficios.`ID_oficio` IN ("'.implode('","',$_POST['oficios']).'")';
-    }    
+    }
+    
+    if (isset ($_POST['categorias']) && is_array($_POST['categorias']))
+    {
+	$where[] = '`ID_cuenta` IN (SELECT `ID_perfil` FROM `empresa_categorias_perfil` WHERE `empresa_categorias_perfil`.`ID_empresa_categoria` IN ("'.implode('","',$_POST['categorias']).'"))';
+    }
     
     if (isset($_POST['expectativa_salarial']) && is_numeric($_POST['expectativa_salarial']))
     {
@@ -103,7 +108,7 @@ if (usuario::$info['tipo'] == usuario::$tipoCandidato) {
 
     if (isset ($_POST['puestos']) && is_array($_POST['puestos']))
     {
-	$where[] = 'paso3_cargos.`ID_puesto_desempenado` IN ("'.implode('","',$_POST['puestos']).'") OR paso4_expectativa_laboral.ID_area_interes IN ("'.implode('","',$_POST['puestos']).'")';
+	$where[] = '(paso3_cargos.`ID_puesto_desempenado` IN ("'.implode('","',$_POST['puestos']).'") OR paso4_expectativa_laboral.ID_area_interes IN ("'.implode('","',$_POST['puestos']).'"))';
     }    
 
     if (isset ($_POST['actividadesEconomicas']) && is_array($_POST['actividadesEconomicas']))
@@ -114,11 +119,11 @@ if (usuario::$info['tipo'] == usuario::$tipoCandidato) {
 }
 
 if (isset($where) && is_array($where) && count($where))
-    $w = ' OR '. implode(' AND ', $where);
+    $w = ' AND '. implode(' AND ', $where);
 else
     $w = '';
 
-$consulta = "SELECT ID_cuenta, nombres, apellidos, foto_hash, (YEAR(NOW()) - paso1_personal.`fecha_nacimientoAno`) AS edad, ID_expectativa_salarial FROM cuentas LEFT JOIN paso0 USING (ID_cuenta) LEFT JOIN paso1_personal USING(ID_cuenta) LEFT JOIN paso2_educacion_superior USING (ID_cuenta) LEFT JOIN paso2_educacion_secundaria USING (ID_cuenta) LEFT JOIN paso3_empresa USING(ID_cuenta) LEFT JOIN paso3_cargos USING (ID_cuenta) LEFT JOIN paso4_expectativa_laboral USING(ID_cuenta) LEFT JOIN paso6_oficios USING(ID_cuenta) WHERE 0 $w GROUP BY ID_cuenta";
+$consulta = "SELECT ID_cuenta, nombres, apellidos, foto_hash, (YEAR(NOW()) - paso1_personal.`fecha_nacimientoAno`) AS edad, ID_expectativa_salarial FROM cuentas LEFT JOIN paso0 USING (ID_cuenta) LEFT JOIN paso1_personal USING(ID_cuenta) LEFT JOIN paso2_educacion_superior USING (ID_cuenta) LEFT JOIN paso2_educacion_secundaria USING (ID_cuenta) LEFT JOIN paso3_empresa USING(ID_cuenta) LEFT JOIN paso3_cargos USING (ID_cuenta) LEFT JOIN paso4_expectativa_laboral USING(ID_cuenta) LEFT JOIN paso6_oficios USING(ID_cuenta) WHERE foto_hash<>'' $w GROUP BY ID_cuenta";
 /*
 echo '<code>';
 echo str_replace("\n","<br />",print_r($_POST,true));
@@ -145,4 +150,3 @@ while ($registro = mysql_fetch_assoc($resultado))
     echo '</div>';
 }
 ?>
-<script type="text/javascript">$(function(){$('.facebox').facebox();});</script>

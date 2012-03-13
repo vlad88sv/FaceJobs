@@ -9,3 +9,7 @@ ToDo:
 * Publicar puesto
 * Crear busqueda en base a CV
 * PermaLink "a mi cv" y "a mi empresa" y "a este puesto"
+
+
+General:
+* Certificado SSL

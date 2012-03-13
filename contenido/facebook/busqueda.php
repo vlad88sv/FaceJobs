@@ -52,10 +52,10 @@ var pendientes = false;
 function ActualizarRejilla()
 {
    if (funcionando) {console.log('Esperando AJAX...'); pendientes = true; return;};
-    
+
    funcionando = true;
    $("#PlantillaGeneralRejilla").html('<div><img src="img/ajax.gif" /> Cargando vista...</div>');
-   $("#PlantillaGeneralRejilla").load('ajax.rejilla',$("#rejilla_filtros").serializeArray(),function(){funcionando = false; if (pendientes) ActualizarRejilla(); pendientes = false;});
+   $("#PlantillaGeneralRejilla").load('ajax.rejilla',$("#rejilla_filtros").serializeArray(),function(){funcionando = false; if (pendientes) ActualizarRejilla(); pendientes = false; $('.facebox').facebox();});
     
 }
 
