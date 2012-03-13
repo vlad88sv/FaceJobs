@@ -127,8 +127,8 @@ class pln
         foreach($campos[1] as $campo)
         {
             if ($retorno = plnUI::procesarVisual($campo))
-            {               
-                self::$pln = preg_replace( '/\[visual\]'.$campo.'\[\/visual\]/', $retorno, self::$pln );
+            {
+                self::$pln = preg_replace( '/\[visual\]'.preg_quote($campo).'\[\/visual\]/', $retorno, self::$pln );
             }
         }
     }
@@ -214,7 +214,7 @@ class pln
             case uiForm::$correo:
             case uiForm::$fecha:
             case uiForm::$telefono:
-                self::$pln = preg_replace('/\$\$reemplazar\:\:'.$campoEsc.'\$\$/',$valor,self::$pln);
+                self::$pln = preg_replace('/\$\$reemplazar\:\:'.preg_quote($campoEsc).'\$\$/',$valor,self::$pln);
                 break;
 
             case uiForm::$comboboxSimple:

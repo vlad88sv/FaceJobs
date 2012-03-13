@@ -7,8 +7,7 @@
 	[visual]paso1_personal.foto_hash[/visual]
 	</td>
 	<td style="padding:0px;">
-	[visual]paso1_personal.nombres[/visual]
-	[visual]paso1_personal.apellidos[/visual]
+	[visual]paso1_personal.CONCAT(apellidos,", ",nombres)[/visual]
 	[visual]paso1_personal.estado_civil[/visual]
 	[visual]paso1_personal.fecha_nacimiento[/visual]
 	[visual]paso1_personal.sexo[/visual]

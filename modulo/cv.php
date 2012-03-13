@@ -3,6 +3,9 @@
 
 campos::$defcampos['paso1_personal.foto_hash']['tipo'] = uiForm::$cargarImagenOWebCam;
 
+campos::$defcampos['paso1_personal.CONCAT(apellidos,", ",nombres)']['tipo'] = uiForm::$textoSimple;
+campos::$defcampos['paso1_personal.CONCAT(apellidos,", ",nombres)']['texto'] = 'Nombre:';
+
 campos::$defcampos['paso1_personal.nombres']['tipo'] = uiForm::$textoSimple;
 campos::$defcampos['paso1_personal.nombres']['longitud'] = 250;
 campos::$defcampos['paso1_personal.nombres']['texto'] = 'Nombres:';
