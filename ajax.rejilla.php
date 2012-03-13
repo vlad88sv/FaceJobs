@@ -5,9 +5,18 @@ sesion::iniciar_sesion();
 if (!sesion::iniciado())
     return;
 
-   
+$ret['html'] = '';
+
 if (usuario::$info['tipo'] == usuario::$tipoCandidato) {
-} else {    
+} else {
+    
+    if (isset($_POST['operacion']) && $_POST['operacion'] == 'guardar')
+    {
+	$ret['html'] = 'Guardando: ' . preg_replace('/,/','<br />',json_encode($_POST));
+	echo json_encode($ret);
+	return;
+    }
+    
     if (isset ($_POST['carreras']) && is_array($_POST['carreras']))
     {
 	$where[] = 'paso2_educacion_superior.`ID_area_estudio` IN ('.implode(',',$_POST['carreras']).')';
@@ -137,8 +146,6 @@ $resultado = db::consultar($consulta);
 
 general::requerirModulo(array('ui'));
 
-$ret['html'] = '';
-
 while ($registro = mysql_fetch_assoc($resultado))
 {
     $ExpSalarial = array(0 => 'USD $100 - USD $250','USD $250 - USD $500','USD $500 - USD $750','USD $750 - USD $1000','USD $1000 - USD $1500','USD $1500 - USD $2000','USD $2000 - USD $3000','> USD $3000');
@@ -151,8 +158,6 @@ while ($registro = mysql_fetch_assoc($resultado))
     $ret['html'] .= '<div class="resultado_candidato_pie"><a class="facebox" href="'.PROY_URL.'ver.perfil!'.$registro['ID_cuenta'].'?contenido" class="gris">Ver curriculum</a></div>';
     $ret['html'] .= '</div>';
 }
-
-//echo preg_replace('/,/','<br />',json_encode($_POST));
 
 echo json_encode($ret);
 ?>

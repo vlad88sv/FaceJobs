@@ -3,8 +3,22 @@ class rejilla
 {
     public static function menu ()
     {
-        $ret = '';
-        $ret .= '<div style="text-align:left;margin:10px 0px;font-size:10px;color:grey;"><span style="font-size:14px;font-weight:bold;color:black;">3,000</span> resultados</span>, yey!. [<a href="#">Utilizar búsqueda guardada</a>] [<a href="#">Guardar búsqueda actual</a>] [<a href="#">Publicar puesto en base a esta búsqueda</a>]</div>';
+        $ret = '
+        <script>
+            $(function(){
+                $("#guardar_busqueda_actual").click(function(){
+                    $.post("ajax.rejilla",{operacion:"guardar",datos:$("#rejilla_filtros").serializeArray()},function(data){
+                        $("#PlantillaGeneralRejilla").html(data.html);
+                    },"json");
+                });
+            });
+        </script>
+        ';
+        $ret .= '<div style="text-align:left;margin:10px 0px;font-size:10px;color:grey;">
+        <span style="font-size:14px;font-weight:bold;color:black;">3,000</span> resultados</span>, yey!.
+        [<a id="utilizar_busqueda_guardada" href="#">Utilizar búsqueda guardada</a>]
+        [<a id="guardar_busqueda_actual" href="#">Guardar búsqueda actual</a>]
+        [<a id="publicar_puesto_base_busqueda" href="#">Publicar puesto en base a esta búsqueda</a>]</div>';
         return $ret;
     }
     

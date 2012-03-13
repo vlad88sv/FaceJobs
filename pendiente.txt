@@ -4,11 +4,10 @@ Bugs:
 ToDo:
 * Rejilla de candidatos
 * Rejilla de puestos
-* Guardar búsqueda
-* Cargar búsqueda
+* Guardar/Cargar búsqueda
 * Publicar puesto
 * Crear busqueda en base a CV
-* PermaLink "a mi cv" y "a mi empresa" y "a este puesto"
+* PermaLink "a mi empresa" y "a este puesto"
 
 
 General:
