@@ -65,6 +65,7 @@ input[type="checkbox"] {margin:0px;}
 
 .contenedor_grupo {border:1px #CCC solid; border-radius:10px; padding-left:15px;padding-right:12px;padding-top:3px;padding-bottom:15px;margin-bottom: 15px;}
 div#caja_controles {text-align: left;}
-div#caja_controles code {border:1px solid #813B3A;padding:2px;}
+div#caja_controles a {text-decoration: none;}
+div#caja_controles a:hover {text-decoration: underline;}
 div#categorias_perfil .categoria {background-color: #EEEEEE;border: 2px solid #AAAAAA;border-radius: 5px ;font-size: 11px;margin: 5px;padding:2px 5px;display:inline-block;}
 div#categorias_perfil .categoria label {color:#813B3A;padding: 0 5px;}

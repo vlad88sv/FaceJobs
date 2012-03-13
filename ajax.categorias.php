@@ -6,7 +6,24 @@ if ( !sesion::iniciado() || empty($_POST['perfil']) || !is_numeric($_POST['perfi
     return;
 
 $ID_CUENTA_PERFIL = $_POST['perfil'];
-   
+
+if (!empty($_POST['categoria']) && is_numeric($_POST['categoria']) && !empty($_POST['estado']) && in_array($_POST['estado'],array('agregar','eliminar')))
+{
+    if ($_POST['estado'] == 'eliminar')
+    {
+        // Vamos a cambiar el estado de una categoria.
+        // Al eliminar podriamos dejar fuera ID_cuenta y siempre sería eliminación unica, pero alguien podria a fuerza bruta borrar todos los registros.
+        $consulta = sprintf('DELETE FROM `empresa_categorias_perfil` WHERE ID_perfil=%s AND ID_empresa_categoria IN (SELECT ID_empresa_categoria FROM `empresa_categorias` WHERE ID_empresa_categoria=%s AND ID_cuenta=%s) LIMIT 1', $ID_CUENTA_PERFIL, $_POST['categoria'],usuario::$info['ID_cuenta']);
+        db::consultar($consulta);
+    } else {
+        // Vamos a agregar el perfil a la categoria, solo que aseguremonos que esa categoria sea de el.
+        unset($datos);
+        $datos['ID_perfil'] = $ID_CUENTA_PERFIL;
+        $datos['ID_empresa_categoria'] = $_POST['categoria'];
+        db::insertar('empresa_categorias_perfil', $datos);
+        unset($datos);
+    }
+}
 
 if (!empty($_POST['crearCategoria']))
 {
