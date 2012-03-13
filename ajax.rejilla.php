@@ -137,16 +137,22 @@ $resultado = db::consultar($consulta);
 
 general::requerirModulo(array('ui'));
 
+$ret['html'] = '';
+
 while ($registro = mysql_fetch_assoc($resultado))
 {
     $ExpSalarial = array(0 => 'USD $100 - USD $250','USD $250 - USD $500','USD $500 - USD $750','USD $750 - USD $1000','USD $1000 - USD $1500','USD $1500 - USD $2000','USD $2000 - USD $3000','> USD $3000');
-    echo '<hr class="ocre"/>';
-    echo '<div class="resultado_candidato">';
-    echo '<div class="resultado_candidato_img"><img src="'.ui::ObtenerImagen($registro['foto_hash'],70,90,true).'" /></div>';
-    echo '<div class="resultado_candidato_col1">'.$registro['edad'].' años</div>';
-    echo '<div class="resultado_candidato_divisor"></div>';    
-    echo '<div class="resultado_candidato_col2">Aspiración salarial: '.$ExpSalarial[$registro['ID_expectativa_salarial']].'</div>';
-    echo '<div class="resultado_candidato_pie"><a class="facebox" href="'.PROY_URL.'ver.perfil!'.$registro['ID_cuenta'].'?contenido" class="gris">Ver curriculum</a></div>';
-    echo '</div>';
+    $ret['html'] .= '<hr class="ocre"/>';
+    $ret['html'] .= '<div class="resultado_candidato">';
+    $ret['html'] .= '<div class="resultado_candidato_img"><img src="'.ui::ObtenerImagen($registro['foto_hash'],70,90,true).'" /></div>';
+    $ret['html'] .= '<div class="resultado_candidato_col1">'.$registro['edad'].' años</div>';
+    $ret['html'] .= '<div class="resultado_candidato_divisor"></div>';    
+    $ret['html'] .= '<div class="resultado_candidato_col2">Aspiración salarial: '.$ExpSalarial[$registro['ID_expectativa_salarial']].'</div>';
+    $ret['html'] .= '<div class="resultado_candidato_pie"><a class="facebox" href="'.PROY_URL.'ver.perfil!'.$registro['ID_cuenta'].'?contenido" class="gris">Ver curriculum</a></div>';
+    $ret['html'] .= '</div>';
 }
+
+//echo preg_replace('/,/','<br />',json_encode($_POST));
+
+echo json_encode($ret);
 ?>

@@ -55,7 +55,18 @@ function ActualizarRejilla()
 
    funcionando = true;
    $("#PlantillaGeneralRejilla").html('<div><img src="img/ajax.gif" /> Cargando vista...</div>');
-   $("#PlantillaGeneralRejilla").load('ajax.rejilla',$("#rejilla_filtros").serializeArray(),function(){funcionando = false; if (pendientes) ActualizarRejilla(); pendientes = false; $('.facebox').facebox();});
+   $.post('ajax.rejilla',$("#rejilla_filtros").serializeArray(),function(data){
+        funcionando = false;
+    
+        if (pendientes)
+            ActualizarRejilla();
+    
+        pendientes = false;
+    
+        $('.facebox').facebox();
+        
+        $("#PlantillaGeneralRejilla").html(data.html);
+    },'json');
     
 }
 
