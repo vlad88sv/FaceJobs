@@ -2,7 +2,7 @@
 require_once('arranque.php');
 sesion::iniciar_sesion();
 
-if ( !sesion::iniciado() || empty($_POST['perfil']) || !is_numeric($_POST['perfil']) )
+if ( !sesion::iniciado() || !in_array(usuario::$info['tipo'], array(usuario::$tipoAdministrador, usuario::$tipoEmpresa)) || empty($_POST['perfil']) || !is_numeric($_POST['perfil']) )
     return;
 
 $ID_CUENTA_PERFIL = $_POST['perfil'];
