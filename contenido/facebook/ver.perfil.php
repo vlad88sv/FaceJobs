@@ -1,10 +1,5 @@
 <?php
-general::requerirModulo(array('plantilla','cv','plantilla-general'));
-
-general::registrarEstiloCSS('FaceBox','facebox');
-
-general::registrarScriptJS('fileuploader','fileuploader');
-general::registrarScriptJS('FaceBox','jquery.facebox');
+general::requerirModulo(array('plantilla','cv'));
 ?>
 
 <div id="caja_controles" class="contenedor_grupo">
