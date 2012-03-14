@@ -31,8 +31,8 @@ class depurar
         
         if (class_exists('db'))
             db::insertar('depurar', $datos);
-        else
-            error_log(print_r($datos,true));
+        
+        error_log(print_r($datos,true));
     }
 }
 ?>
