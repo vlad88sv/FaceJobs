@@ -107,7 +107,7 @@ class pln
             $retornoCampos = '<div class="lazoCampos">'.$retornoCampos;
             $retornoCampos .= '
             <div class="lazoControles">
-	            <div class="boton"><a href="#" class="autoLazo" rel="'.$lazo.'" vista="'.((isset(campos::$deflazo[$lazo]['vistaVirtual']) && isset(campos::$deflazo[$lazo]['vistaVirtualRemota'])) ? campos::$deflazo[$lazo]['vistaVirtualRemota'] : $lazo ).'">Agregar</a></div>
+	            <div class="boton"><a href="#" class="autoLazo" rel="'.$lazo.'" vista="'.((isset(campos::$deflazo[$lazo]['vistaVirtual']) && isset(campos::$deflazo[$lazo]['vistaVirtualRemota'])) ? campos::$deflazo[$lazo]['vistaVirtualRemota'] : $lazo ).'">Guardar</a></div>
 	            <div class="boton"><a href="#" class="reset" rel="'.$lazo.'">Cancelar</a></div>            
             </div>
             ';

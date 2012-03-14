@@ -225,15 +225,17 @@ class rejilla
 
     private static function ObtenerCategorias()
     {
-        $consulta = 'SELECT `ID_empresa_categoria`, `categoria` FROM `empresa_categorias` WHERE ID_cuenta='.usuario::$info['ID_cuenta'].' ORDER BY `categoria` ASC';
+        $consulta = 'SELECT `ID_empresa_categorias`, `categoria` FROM `empresa_categorias` WHERE ID_cuenta='.usuario::$info['ID_cuenta'].' ORDER BY `categoria` ASC';
         $resultado = db::consultar($consulta);
+        
+        $arrCarreras = array();
         
         while ($resultado && $registro = mysql_fetch_assoc($resultado))
         {
-            $arrCarreras[$registro['ID_empresa_categoria']] = $registro['categoria'];
+            $arrCarreras[$registro['ID_empresa_categorias']] = $registro['categoria'];
         }
 
-        return ui::ArrayCheckbox('categorias', '', $arrCarreras, array());
+        return ui::ArrayCheckbox('categorias', '', $arrCarreras, array()).'<br /><a href="editar.categorias.html" target="_blank">Editar categorias</a>';
     }
     
     private static function ObtenerOtros()

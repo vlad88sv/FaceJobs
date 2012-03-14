@@ -46,6 +46,9 @@ if (!sesion::iniciado())
         case 'busqueda':
             body::agregarAlContenido ('busqueda',true);
             break;
+        case 'editar.categorias':
+            body::agregarAlContenido ('editar.categorias',true);
+            break;
         case '':
             body::agregarAlContenido ('inicio',true);
             break;

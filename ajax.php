@@ -79,10 +79,13 @@ if (!sesion::iniciado())
   
   function CargarVistaLazo($virtual=false)
   {
-  	general::requerirModulo(array('plantilla.campos','campos','cv'));
+  	general::requerirModulo(array('plantilla.campos','campos.busqueda','campos','cv'));
 	
-	if (!is_array(campos::$deflazo[$_POST['VistaLazo']]['campos']) || !is_array((campos::$deflazo[$_POST['VistaLazo']]['vista'])) || (!$virtual && isset(campos::$deflazo[$_POST['VistaLazo']]['vistaVirtual'])) )
-		return;
+	if (!isset(campos::$deflazo[$_POST['VistaLazo']]) || !is_array(campos::$deflazo[$_POST['VistaLazo']]['campos']) || !is_array((campos::$deflazo[$_POST['VistaLazo']]['vista'])) || (!$virtual && isset(campos::$deflazo[$_POST['VistaLazo']]['vistaVirtual'])) )
+        {
+            error_log('pln.ajax.CargarVistaLazo: "'.$_POST['VistaLazo'].'" no existe como lazo');
+	    return;
+        }
 	
 	$ID_table = 2;
 	foreach(campos::$deflazo[$_POST['VistaLazo']]['campos'] as $campo)
