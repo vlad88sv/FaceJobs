@@ -39,13 +39,13 @@
 
 #facebox .close{
   position:absolute;
-  top:5px;
-  right:5px;
+  top:-10px;
+  right:-10px;
   padding:2px;
-  background:#fff;
+  background:transparent;
 }
 #facebox .close img{
-  opacity:0.3;
+  opacity:0.9;
 }
 #facebox .close:hover img{
   opacity:1.0;
