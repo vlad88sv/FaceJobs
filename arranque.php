@@ -9,8 +9,7 @@
  + No debe existir función de uso público
  + No variables de uso público
  + No constantes de uso público
- + Ser agnostico con el frontend utilizado
-  
+   
  Datos:
  + Fecha de creación: 2 de Septiembre de 2011
  + Creado por: Vladimir Hidalgo

@@ -56,7 +56,7 @@ class body
     */
     private static function cargarContenido($contenidoArchivo, $procesar)
     {
-        $archivo = _BASE_contenido.frontend::$frontend.'/'.$contenidoArchivo.'.php';
+        $archivo = _BASE_contenido.$contenidoArchivo.'.php';
         if (!file_exists($archivo))
         {
             depurar::registrar('contenido::cargarContenido', 'Archivo no encontrado: '.$contenidoArchivo, errores::$critico);
