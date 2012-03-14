@@ -54,18 +54,23 @@ function ActualizarRejilla()
    if (funcionando) {console.log('Esperando AJAX...'); pendientes = true; return;};
 
    funcionando = true;
-   $("#PlantillaGeneralRejilla").html('<div><img src="img/ajax.gif" /> Cargando vista...</div>');
+   $("#PlantillaGeneralRejilla").html('<div style="color:#882A29;font-size:14px;"><img src="img/ajax.gif" /> Realizando búsqueda...</div>');
    $.post('ajax.rejilla',$("#rejilla_filtros").serializeArray(),function(data){
         funcionando = false;
     
         if (pendientes)
+        {
+            pendientes = false;
             ActualizarRejilla();
+            return;
+        }
     
         pendientes = false;
     
-        $('.facebox').facebox();
         
         $("#PlantillaGeneralRejilla").html(data.html);
+        
+        $('.facebox').facebox();
     },'json');
     
 }

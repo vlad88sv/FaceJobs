@@ -7,7 +7,7 @@ class rejilla
         <script>
             $(function(){
                 $("#guardar_busqueda_actual").click(function(){
-                    $.post("ajax.rejilla",{operacion:"guardar",datos:$("#rejilla_filtros").serializeArray()},function(data){
+                    $.post("ajax.rejilla",{operacion:"guardar"},function(data){
                         $("#PlantillaGeneralRejilla").html(data.html);
                     },"json");
                 });

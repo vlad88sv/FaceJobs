@@ -6,14 +6,19 @@ if (!sesion::iniciado())
     return;
 
 $ret['html'] = '';
+function ejecutarParteGuardarBusqueda()
+{
+    global $ret;
+    $ret['html'] = '<label for="guardar_busqueda">Puesto o nombre de búsqueda:</label> <input type="text" id="guardarBusqueda" name="guardarBusqueda" value="" /><input type="button" value="Guardar" />';
+    echo json_encode($ret);
+}
 
 if (usuario::$info['tipo'] == usuario::$tipoCandidato) {
 } else {
     
     if (isset($_POST['operacion']) && $_POST['operacion'] == 'guardar')
     {
-	$ret['html'] = 'Guardando: ' . preg_replace('/,/','<br />',json_encode($_POST));
-	echo json_encode($ret);
+	ejecutarParteGuardarBusqueda();
 	return;
     }
     
