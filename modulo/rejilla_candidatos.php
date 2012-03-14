@@ -6,7 +6,8 @@ class rejilla
         $ret = '
         <script>
             $(function(){
-                $("#guardar_busqueda_actual").click(function(){
+                $("#guardar_busqueda_actual").click(function(event){
+                    event.preventDefault();
                     $.post("ajax.rejilla",{operacion:"guardar"},function(data){
                         $("#PlantillaGeneralRejilla").html(data.html);
                     },"json");
@@ -235,7 +236,7 @@ class rejilla
             $arrCarreras[$registro['ID_empresa_categorias']] = $registro['categoria'];
         }
 
-        return ui::ArrayCheckbox('categorias', '', $arrCarreras, array()).'<br /><a href="editar.categorias.html" target="_blank">Editar categorias</a>';
+        return ui::ArrayCheckbox('categorias', '', $arrCarreras, array()).'<br /><a href="editar.categorias.html?contenido" class="facebox">Editar categorias</a>';
     }
     
     private static function ObtenerOtros()
