@@ -68,6 +68,7 @@ general::registrarModulo('controlador_pasos','controlador_pasos.php');
 general::registrarModulo('cv','cv.php');
 general::registrarModulo('web','web.php');
 general::registrarModulo('campos','campos.php');
+general::registrarModulo('campos.busqueda','campos.busqueda.php');
 general::registrarModulo('rejilla.candidatos','rejilla_candidatos.php');
 general::registrarModulo('rejilla.puestos','rejilla_puestos.php');
 general::registrarModulo('phmagick','phmagick/phmagick.php');
