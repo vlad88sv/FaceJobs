@@ -69,3 +69,5 @@ div#caja_controles a {text-decoration: none;}
 div#caja_controles a:hover {text-decoration: underline;}
 div#categorias_perfil .categoria {background-color: #EEEEEE;border: 2px solid #AAAAAA;border-radius: 5px ;font-size: 11px;margin: 5px;padding:2px 5px;display:inline-block;}
 div#categorias_perfil .categoria label {color:#813B3A;padding: 0 5px;}
+#resumen_busqueda {font-weight: normal; font-size: 10px;color:gray;}
+#resumen_busqueda b  {font-weight: bold; font-size: 10px;color:#813B3A}

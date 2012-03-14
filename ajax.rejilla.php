@@ -10,6 +10,7 @@ function ejecutarParteGuardarBusqueda()
 {
     global $ret;
     $ret['html'] = '<label for="guardar_busqueda">Puesto o nombre de búsqueda:</label> <input type="text" id="guardarBusqueda" name="guardarBusqueda" value="" /><input type="button" value="Guardar" />';
+    $ret['html'] .= '<div id="resumen_busqueda"></div>';
     echo json_encode($ret);
 }
 
@@ -59,7 +60,7 @@ if (usuario::$info['tipo'] == usuario::$tipoCandidato) {
     
     if (isset ($_POST['categorias']) && is_array($_POST['categorias']))
     {
-	$where[] = '`ID_cuenta` IN (SELECT `ID_perfil` FROM `empresa_categorias_perfil` WHERE `empresa_categorias_perfil`.`ID_empresa_categoria` IN ("'.implode('","',$_POST['categorias']).'"))';
+	$where[] = '`ID_cuenta` IN (SELECT `ID_perfil` FROM `empresa_categorias_perfil` WHERE `empresa_categorias_perfil`.`ID_empresa_categorias` IN ("'.implode('","',$_POST['categorias']).'"))';
     }
     
     if (isset($_POST['expectativa_salarial']) && is_numeric($_POST['expectativa_salarial']))
@@ -150,6 +151,8 @@ echo '</code>';
 $resultado = db::consultar($consulta);
 
 general::requerirModulo(array('ui'));
+
+$ret['html'] .= '<div id="resumen_busqueda"></div>';
 
 while ($registro = mysql_fetch_assoc($resultado))
 {

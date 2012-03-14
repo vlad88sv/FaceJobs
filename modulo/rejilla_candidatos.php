@@ -10,11 +10,13 @@ class rejilla
                     event.preventDefault();
                     $.post("ajax.rejilla",{operacion:"guardar"},function(data){
                         $("#PlantillaGeneralRejilla").html(data.html);
+                        $("#PlantillaGeneralRejilla #resumen_busqueda").html(ObtenerResumenBusqueda());
                     },"json");
                 });
             });
         </script>
         ';
+        
         $ret .= '<div style="text-align:left;margin:10px 0px;font-size:10px;color:grey;">
         <span style="font-size:14px;font-weight:bold;color:black;">3,000</span> resultados</span>, yey!.
         [<a id="utilizar_busqueda_guardada" href="#">Utilizar búsqueda guardada</a>]
@@ -112,7 +114,6 @@ class rejilla
         return $ret;
     }
     
-    public static function resultados() {}
     
     private static function ObtenerExpectativaSalarial()
     {
@@ -242,12 +243,12 @@ class rejilla
     private static function ObtenerOtros()
     {
         return '
-        <input type="checkbox" name="otros[]" value="vehiculo_propio" />Con vehiculo propio<br />
-        <input type="checkbox" name="otros[]" value="licencia_conducir" />Con licencia de conducir<br />
-        <input type="checkbox" name="otros[]" value="masculino" />Masculino<br />
-        <input type="checkbox" name="otros[]" value="femenino" />Femenino<br />
-        <input type="checkbox" name="otros[]" value="disponibilidad_viajar" />Disponibilidad de viajar<br />
-        <input type="checkbox" name="otros[]" value="tiempo_completo" />Únicamente Tiempo completo<br />
+        <input type="checkbox" name="otros[]" value="vehiculo_propio" id="otros_vehiculo_propio" /><label for="otros_vehiculo_propio">Con vehiculo propio</label><br />
+        <input type="checkbox" name="otros[]" value="licencia_conducir" id="otros_licencia_conducir" /><label for="otros_licencia_conducir"> Con licencia de conducir</label><br />
+        <input type="checkbox" name="otros[]" value="masculino" id="otros_masculino" /><label for="otros_masculino"> Masculino</label><br />
+        <input type="checkbox" name="otros[]" value="femenino" id="otros_femenino" /><label for="otros_femenino"> Femenino</label><br />
+        <input type="checkbox" name="otros[]" value="disponibilidad_viajar" id="otros_disponibilidad_viajar" /><label for="otros_disponibilidad_viajar"> Disponibilidad de viajar</label><br />
+        <input type="checkbox" name="otros[]" value="tiempo_completo" id="otros_tiempo_completo" /><label for="otros_tiempo_completo"> Únicamente Tiempo completo</label><br />
         ';
     }    
         

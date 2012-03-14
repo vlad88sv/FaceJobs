@@ -49,6 +49,106 @@ echo '</table>';
 <script type="text/javascript">
 var funcionando = false;
 var pendientes = false;
+
+function ObtenerResumenBusqueda() {
+    ret = "";
+    ret += "Expectativa salarial: Aprox. <b>$" + $("#expectativa_salarial").val() + "</b>";
+    ret += ", con mínimo <b>" + $("#experiencia").val() + " años de experiencia</b>";
+    ret += ", cuya edad sea <b>de " + $("#edad_min").val() + " a " + $("#edad_max").val() + " años</b>. ";
+    
+    if ($('input[name="otros[]"]:checked').length > 0)
+    {
+        ret += "Otros requisitos: ";
+        var tArr = [];
+        $('input[name="otros[]"]:checked').each(function(){
+            tArr.push("<b>" + $('label[for="'+$(this).attr("id")+'"]').html() + "</b>");
+        });
+        ret += tArr.join(', ') + ". ";
+    }
+    
+    if ($('input[name="idiomas[]"]:checked').length > 0)
+    {
+        ret += "Con conocimientos de los siguientes idiomas: ";
+        var tArr = [];
+        $('input[name="idiomas[]"]:checked').each(function(){
+            tArr.push('<b>' + $(this).attr("title") + '</b>');
+        });
+        ret += tArr.join(', ') + ". ";
+    }
+    
+    if ($('input[name="categorias[]"]:checked').length > 0)
+    {
+        ret += "En mis categorias: ";
+        var tArr = [];
+        $('input[name="categorias[]"]:checked').each(function(){
+            tArr.push('<b>' + $(this).attr("title") + '</b>');
+        });
+        ret += tArr.join(', ') + ". ";
+    }
+
+    if ($('input[name="actividadesEconomicas[]"]:checked').length > 0)
+    {
+        ret += "Que haya trabajo en empresas dedicadas a: ";
+        var tArr = [];
+        $('input[name="actividadesEconomicas[]"]:checked').each(function(){
+            tArr.push('<b>' + $(this).attr("title") + '</b>');
+        });
+        ret += tArr.join(', ') + ". ";
+    }   
+
+    if ($('input[name="puestos[]"]:checked').length > 0)
+    {
+        ret += "Que haya trabajado en los siguientes puestos o desee hacerlo: ";
+        var tArr = [];
+        $('input[name="puestos[]"]:checked').each(function(){
+            tArr.push('<b>' + $(this).attr("title") + '</b>');
+        });
+        ret += tArr.join(', ') + ". ";
+    }
+    
+    if ($('input[name="oficios[]"]:checked').length > 0)
+    {
+        ret += "Que práctique alguno de los siguientes oficios: ";
+        var tArr = [];
+        $('input[name="oficios[]"]:checked').each(function(){
+            tArr.push('<b>' + $(this).attr("title") + '</b>');
+        });
+        ret += tArr.join(', ') + ". ";
+    }
+
+    if ($('input[name="carreras[]"]:checked').length > 0)
+    {
+        ret += "Que haya estudiado alguna de las siguientes carreras: ";
+        var tArr = [];
+        $('input[name="carreras[]"]:checked').each(function(){
+            tArr.push('<b>' + $(this).attr("title") + '</b>');
+        });
+        ret += tArr.join(', ') + ". ";
+    }
+    
+    if ($('input[name="bachillerato[]"]:checked').length > 0)
+    {
+        ret += "Cuyo bachillerato este en estas áreas: ";
+        var tArr = [];
+        $('input[name="bachillerato[]"]:checked').each(function(){
+            tArr.push('<b>' + $(this).attr("title") + '</b>');
+        });
+        ret += tArr.join(', ') + ".";
+    }
+
+    if ($('input[name="domicilios[]"]:checked').length > 0)
+    {
+        ret += "Que resida en las siguientes áreas: ";
+        var tArr = [];
+        $('input[name="domicilios[]"]:checked').each(function(){
+            tArr.push('<b>' + $(this).attr("title") + '</b>');
+        });
+        ret += tArr.join(', ') + ".";
+    }
+    
+    return ret;
+}
+            
 function ActualizarRejilla()
 {
    if (funcionando) {console.log('Esperando AJAX...'); pendientes = true; return;};
@@ -69,6 +169,7 @@ function ActualizarRejilla()
     
         
         $("#PlantillaGeneralRejilla").html(data.html);
+        $("#PlantillaGeneralRejilla #resumen_busqueda").html("Pérfil de búsqueda: " + ObtenerResumenBusqueda());
         
         $('.facebox').facebox();
     },'json');
