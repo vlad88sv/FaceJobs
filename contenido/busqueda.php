@@ -50,6 +50,11 @@ echo '</table>';
 var funcionando = false;
 var pendientes = false;
 
+function ObtenerResumenBusquedaJSON()
+{
+    return $("#rejilla_filtros").serializeArray().toString();
+}
+
 function ObtenerResumenBusqueda() {
     ret = "";
     ret += "Expectativa salarial: Aprox. <b>$" + $("#expectativa_salarial").val() + "</b>";
@@ -149,13 +154,21 @@ function ObtenerResumenBusqueda() {
     return ret;
 }
             
-function ActualizarRejilla()
+function ActualizarRejilla(DatosAdicionales)
 {
    if (funcionando) {console.log('Esperando AJAX...'); pendientes = true; return;};
 
    funcionando = true;
-   $("#PlantillaGeneralRejilla").html('<div style="color:#882A29;font-size:14px;"><img src="img/ajax.gif" /> Realizando búsqueda...</div>');
-   $.post('ajax.rejilla',$("#rejilla_filtros").serializeArray(),function(data){
+   $("#PlantillaGeneralRejilla").html('<div style="color:#882A29;font-size:14px;text-align:center;padding:50px 0px;"><img src="img/ajax.gif" /> Realizando búsqueda...</div>');
+   
+   
+   if ( DatosAdicionales == undefined ) {
+    var data = $("#rejilla_filtros").serializeArray();
+   } else {
+    var data = $("#rejilla_filtros").serializeArray().concat(DatosAdicionales);
+   }
+    
+   $.post('ajax.rejilla',data,function(data){
         funcionando = false;
     
         if (pendientes)

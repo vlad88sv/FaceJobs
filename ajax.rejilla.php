@@ -6,22 +6,43 @@ if (!sesion::iniciado())
     return;
 
 $ret['html'] = '';
-function ejecutarParteGuardarBusqueda()
+function ejecutarParteSolicitudGuardarBusqueda()
 {
     global $ret;
-    $ret['html'] = '<label for="guardar_busqueda">Puesto o nombre de búsqueda:</label> <input type="text" id="guardarBusqueda" name="guardarBusqueda" value="" /><input type="button" value="Guardar" />';
-    $ret['html'] .= '<div id="resumen_busqueda"></div>';
+    $ret['html'] = '<label for="guardar_busqueda">Puesto o nombre de búsqueda:</label> <input type="text" id="guardarBusqueda" name="guardarBusqueda" style="width: 270px;" value="" /> <input id="ejecutar_guardado_busqueda" type="button" value="Guardar" /><br />';
+    $ret['html'] .= '<label for="resumen_busqueda">Resumen de la búsqueda:</label><br /><textarea id="resumen_busqueda" style="width:100%;height:150px;"></textarea>';
     echo json_encode($ret);
 }
 
+function ejecutarParteGuardarbusqueda()
+{
+    global $ret;
+    //gb_ = prefijo: GuardarBusqueda_
+    $datos['titulo'] = $_POST['gb_titulo'];
+    $datos['descripcion'] = $_POST['gb_descripcion'];
+    $datos['busqueda'] = json_encode($_POST['gb_busqueda']);
+    if (db::insertar('empresa_busquedas',$datos))
+	$ret['html'] = '<p>Búsqueda guardada exitosamente.</p>';
+}
+
 if (usuario::$info['tipo'] == usuario::$tipoCandidato) {
+    /* Pendiente la parte del usuario */
 } else {
+
+
     
+    if (isset($_POST['operacion']) && $_POST['operacion'] == 'solitoGuardar')
+    {
+	ejecutarParteSolicitudGuardarBusqueda();
+	return;
+    }
+
     if (isset($_POST['operacion']) && $_POST['operacion'] == 'guardar')
     {
 	ejecutarParteGuardarBusqueda();
-	return;
     }
+
+    //$ret['html'] = serialize($_POST);
     
     if (isset ($_POST['carreras']) && is_array($_POST['carreras']))
     {

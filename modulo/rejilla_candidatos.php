@@ -8,10 +8,15 @@ class rejilla
             $(function(){
                 $("#guardar_busqueda_actual").click(function(event){
                     event.preventDefault();
-                    $.post("ajax.rejilla",{operacion:"guardar"},function(data){
+                    $.post("ajax.rejilla",{operacion:"solitoGuardar"},function(data){
                         $("#PlantillaGeneralRejilla").html(data.html);
-                        $("#PlantillaGeneralRejilla #resumen_busqueda").html(ObtenerResumenBusqueda());
+                        $("#PlantillaGeneralRejilla #resumen_busqueda").val(ObtenerResumenBusqueda().replace(/(<([^>]+)>)/ig,""));
                     },"json");
+                });
+                
+                $("#ejecutar_guardado_busqueda").live("click",function(event){
+                    event.preventDefault();
+                    ActualizarRejilla([{name:"operacion", value:"guardar"},{name:"gb_titulo", value:$("#guardarBusqueda").val()},{name:"gb_descripcion", value:$("#resumen_busqueda").val()},{name:"gb_busqueda", value:$("#rejilla_filtros").serializeArray()}]);
                 });
             });
         </script>
