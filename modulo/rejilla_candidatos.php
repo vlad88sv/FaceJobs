@@ -16,7 +16,7 @@ class rejilla
                 
                 $("#ejecutar_guardado_busqueda").live("click",function(event){
                     event.preventDefault();
-                    ActualizarRejilla([{name:"operacion", value:"guardar"},{name:"gb_titulo", value:$("#guardarBusqueda").val()},{name:"gb_descripcion", value:$("#resumen_busqueda").val()},{name:"gb_busqueda", value:$("#rejilla_filtros").serializeArray()}]);
+                    ActualizarRejilla([{name:"operacion", value:"guardar"},{name:"gb_titulo", value:$("#guardarBusqueda").val()},{name:"gb_descripcion", value:$("#resumen_busqueda").val()}]);
                 });
             });
         </script>

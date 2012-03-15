@@ -20,7 +20,8 @@ function ejecutarParteGuardarbusqueda()
     //gb_ = prefijo: GuardarBusqueda_
     $datos['titulo'] = $_POST['gb_titulo'];
     $datos['descripcion'] = $_POST['gb_descripcion'];
-    $datos['busqueda'] = json_encode($_POST['gb_busqueda']);
+    unset($_POST['gb_titulo'],$_POST['gb_descripcion'],$_POST['operacion']);
+    $datos['busqueda'] = serialize($_POST);
     if (db::insertar('empresa_busquedas',$datos))
 	$ret['html'] = '<p>Búsqueda guardada exitosamente.</p>';
 }
