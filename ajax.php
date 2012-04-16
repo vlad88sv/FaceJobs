@@ -56,128 +56,129 @@ if (!sesion::iniciado())
 
   if (isset($_POST['VistaLazo']) && isset($_POST['borrar']) && isset($_POST['lazo']))
   {
-  	$c = 'DELETE FROM '.db::codex($_POST['lazo']).' WHERE ID_cuenta="'.usuario::$info['ID_cuenta'].'" AND ID_'.db::codex($_POST['lazo']).'="'.db::codex($_POST['borrar']).'" LIMIT 1';
-	$r = db::consultar($c);
-  	// No retornar, que pase a if (isset($_POST['VistaLazo'])) para mandar el contenido actualizado
+    $c = 'DELETE FROM '.db::codex($_POST['lazo']).' WHERE ID_cuenta="'.usuario::$info['ID_cuenta'].'" AND ID_'.db::codex($_POST['lazo']).'="'.db::codex($_POST['borrar']).'" LIMIT 1';
+    $r = db::consultar($c);
+    // No retornar, que pase a if (isset($_POST['VistaLazo'])) para mandar el contenido actualizado
   }
 
   if (isset($_POST['VistaLazo']) && isset($_POST['editar']))
   {
-  	$c = 'SELECT * FROM '.db::codex($_POST['VistaLazo']).' WHERE ID_cuenta="'.usuario::$info['ID_cuenta'].'" AND ID_'.db::codex($_POST['VistaLazo']).'="'.db::codex($_POST['editar']).'" LIMIT 1';
-	$r = db::consultar($c);
-        $f = mysql_fetch_assoc($r);
-        unset($f['ID_cuenta'],$f['actualizacion']);
-        echo json_encode($f);
-        return;
-  	// retonar, no neecesitamos actualizar la vista aun.
+    $c = 'SELECT * FROM '.db::codex($_POST['VistaLazo']).' WHERE ID_cuenta="'.usuario::$info['ID_cuenta'].'" AND ID_'.db::codex($_POST['VistaLazo']).'="'.db::codex($_POST['editar']).'" LIMIT 1';
+    $r = db::consultar($c);
+    $f = mysql_fetch_assoc($r);
+    unset($f['ID_cuenta'],$f['actualizacion']);
+    echo json_encode($f);
+    return;
+    // retonar, no neecesitamos actualizar la vista aun.
   }  
 
   if (isset($_POST['VistaLazo']))
   {
-  	CargarVistaLazo(false);
+    echo CargarVistaLazo($_POST['VistaLazo']);
   }
   
-  function CargarVistaLazo($virtual=false)
+  function CargarVistaLazo($lazo,$virtual=false,$clave_Padre='',$ID_padre=0)
   {
-  	general::requerirModulo(array('plantilla.campos','campos.busqueda','campos','cv'));
+    general::requerirModulo(array('plantilla.campos','campos.busqueda','campos','cv'));
+    
+    if (!is_array(campos::$deflazo[$lazo]['campos']) || !is_array((campos::$deflazo[$lazo]['vista'])) || (!$virtual && isset(campos::$deflazo[$lazo]['vistaVirtual'])) )
+      return;
+    
+    $retorno = '';
+    
+    $ID_table = 2;
+    foreach(campos::$deflazo[$lazo]['campos'] as $campo)
+    {
+	if (!isset(campos::$defcampos[$campo]))
+	    continue;
 	
-	if (!isset(campos::$deflazo[$_POST['VistaLazo']]) || !is_array(campos::$deflazo[$_POST['VistaLazo']]['campos']) || !is_array((campos::$deflazo[$_POST['VistaLazo']]['vista'])) || (!$virtual && isset(campos::$deflazo[$_POST['VistaLazo']]['vistaVirtual'])) )
-        {
-            error_log('pln.ajax.CargarVistaLazo: "'.$_POST['VistaLazo'].'" no existe como lazo');
-	    return;
-        }
+	if (!preg_match('/(.*)\.(.*)/',$campo,$partes))
+	    continue;  
+	    
+	$campos[] = $partes[2];
 	
-	$ID_table = 2;
-	foreach(campos::$deflazo[$_POST['VistaLazo']]['campos'] as $campo)
-	{
-            if (!isset(campos::$defcampos[$campo]))
-                continue;
-            
-            if (!preg_match('/(.*)\.(.*)/',$campo,$partes))
-                continue;  
-		
-            $campos[] = $partes[2];
-            
-            if (campos::$defcampos[$campo]['tipo'] == uiForm::$comboboxPaises)
-            { 
-                campos::$defcampos[$campo]['datos']['tabla'] = 'datos_pais';
-                campos::$defcampos[$campo]['datos']['clave'] = 'ID_pais';
-                campos::$defcampos[$campo]['datos']['valor'] = 'pais';
-            }
-            
-            if(isset(campos::$defcampos[$campo]['datos']) && is_array(campos::$defcampos[$campo]['datos']) && isset(campos::$defcampos[$campo]['datos']['tabla']) && isset(campos::$defcampos[$campo]['datos']['clave']) && isset(campos::$defcampos[$campo]['datos']['valor']))
-            {
-                $filtros = '';
-                if (@is_array(campos::$defcampos[$campo]['datos']['filtros']))
-                {
-                    if (in_array('mios', campos::$defcampos[$campo]['datos']['filtros']))
-                    {
-                            $filtros = 'AND ID_cuenta='.usuario::$info['ID_cuenta'];
-                    }
-                }
-                $campos[] = '(SELECT '.campos::$defcampos[$campo]['datos']['valor'].' FROM '.campos::$defcampos[$campo]['datos']['tabla'].' AS t'.$ID_table.' WHERE t'.$ID_table.'.'.campos::$defcampos[$campo]['datos']['clave'].' = t1.'.$partes[2].' '.$filtros.' LIMIT 1) AS '.$partes[2].'_valor';			
-                $ID_table++;
-            }
-            
-            if(isset(campos::$defcampos[$campo]['valores']))
-            {
-                $tmpCampo = '(CASE '.$partes[2];
-                
-                foreach (campos::$defcampos[$campo]['valores'] as $key => $value) {
-                        $tmpCampo .= ' WHEN "'.$key.'" THEN "'.$value.'"';
-                }
-                
-                $campos[] = $tmpCampo.' END) AS '.$partes[2].'_valor';
-            }
+	if (campos::$defcampos[$campo]['tipo'] == uiForm::$comboboxPaises)
+	{ 
+	    campos::$defcampos[$campo]['datos']['tabla'] = 'datos_pais';
+	    campos::$defcampos[$campo]['datos']['clave'] = 'ID_pais';
+	    campos::$defcampos[$campo]['datos']['valor'] = 'pais';
 	}
+	
+	if(isset(campos::$defcampos[$campo]['datos']) && is_array(campos::$defcampos[$campo]['datos']) && isset(campos::$defcampos[$campo]['datos']['tabla']) && isset(campos::$defcampos[$campo]['datos']['clave']) && isset(campos::$defcampos[$campo]['datos']['valor']))
+	{
+	    $filtros = '';
+	    if (@is_array(campos::$defcampos[$campo]['datos']['filtros']))
+	    {
+		if (in_array('mios', campos::$defcampos[$campo]['datos']['filtros']))
+		{
+			$filtros = 'AND ID_cuenta='.usuario::$info['ID_cuenta'];
+		}
+	    }
+	    $campos[] = '(SELECT '.campos::$defcampos[$campo]['datos']['valor'].' FROM '.campos::$defcampos[$campo]['datos']['tabla'].' AS t'.$ID_table.' WHERE t'.$ID_table.'.'.campos::$defcampos[$campo]['datos']['clave'].' = t1.'.$partes[2].' '.$filtros.') AS '.$partes[2].'_valor';			
+	    $ID_table++;
+	}
+	
+	if(isset(campos::$defcampos[$campo]['valores']))
+	{
+	    $tmpCampo = '(CASE '.$partes[2];
+	    
+	    foreach (campos::$defcampos[$campo]['valores'] as $key => $value) {
+		    $tmpCampo .= ' WHEN "'.$key.'" THEN "'.$value.'"';
+	    }
+	    
+	    $campos[] = $tmpCampo.' END) AS '.$partes[2].'_valor';
+	}
+    }
 
-	if (is_array(@campos::$deflazo[$_POST['VistaLazo']]['vistaCamposExtra']))
+    if (is_array(@campos::$deflazo[$lazo]['vistaCamposExtra']))
+    {
+      foreach(campos::$deflazo[$lazo]['vistaCamposExtra'] as $campo)
+      {
+	  $campos[] = $campo;	
+      }
+    }
+    
+    $tabla = isset(campos::$deflazo[$lazo]['paraTabla'])  ? campos::$deflazo[$lazo]['paraTabla'] : $lazo;
+    $c = 'SELECT ID_'.$tabla.', '.implode(',',$campos).' FROM '.$tabla .' AS t1 WHERE ID_cuenta="'.usuario::$info['ID_cuenta'].'"'.($virtual && $clave_Padre && $ID_padre ? " AND $clave_Padre='$ID_padre'" : '');
+    
+    $r = db::consultar($c);
+    while ($f = mysql_fetch_assoc($r) )
+    {
+      $retorno .= '<div class="'.($virtual ? 'lazoVistaVirtual' : 'lazoVista').' '.@campos::$deflazo[$lazo]['vista']['class'].'">';
+      if (!$virtual) $retorno .= '<span class="lazoVistaBolita">•</span>';
+      $retorno .= '<span class="lazoVistaControles"><a rel="'.$f['ID_'.$_POST['VistaLazo']].'" class="lazoVistaControlesEditar" href="#"><img src="img/boton_editar.gif" /></a><br /><a rel="'.$f['ID_'.$_POST['VistaLazo']].'" class="lazoVistaControlesEliminar" href="#"><img src="img/boton_borrar.gif" /></a></span>';
+      $retorno .= '<table><tr>';
+      if (isset(campos::$deflazo[$lazo]['vista']))
+      {
+	foreach(campos::$deflazo[$lazo]['vista'] as $columna => $filas)
 	{
-            foreach(campos::$deflazo[$_POST['VistaLazo']]['vistaCamposExtra'] as $campo)
-            {
-                $campos[] = $campo;	
-            }
+	  if (!is_array($filas))
+	    continue;
+	  $retorno .= '<td><table>';
+	    foreach ($filas as $fila => $contenido) {
+	      foreach ($f as $campo => $valor) {
+		$contenido = preg_replace('/\$\$'.$campo.'\$\$/', $valor, $contenido);
+	      }
+	      $retorno .= '<tr><td>'.$contenido.'</td></tr>';
+	    }
+	  $retorno .= '</table></td>';
 	}
-	
-  	$c = 'SELECT ID_'.$_POST['VistaLazo'].', '.implode(',',$campos).' FROM '.$_POST['VistaLazo'] .' AS t1 WHERE ID_cuenta="'.usuario::$info['ID_cuenta'].'"';
-	//echo "<pre>$c</pre>";
-  	$r = db::consultar($c);
-  	while ($f = mysql_fetch_assoc($r) )
-	{
-		echo '<div class="'.($virtual ? 'lazoVistaVirtual' : 'lazoVista').' '.@campos::$deflazo[$_POST['VistaLazo']]['vista']['class'].'">';
-		if (!$virtual) echo '<span class="lazoVistaBolita">•</span>';
-		echo '<span class="lazoVistaControles"><a rel="'.$f['ID_'.$_POST['VistaLazo']].'" class="lazoVistaControlesEditar" href="#"><img src="img/boton_editar.gif" /></a><br /><a rel="'.$f['ID_'.$_POST['VistaLazo']].'" class="lazoVistaControlesEliminar" href="#"><img src="img/boton_borrar.gif" /></a></span>';
-		echo '<table><tr>';
-		if (isset(campos::$deflazo[$_POST['VistaLazo']]['vista']))
-		{
-                    foreach(campos::$deflazo[$_POST['VistaLazo']]['vista'] as $columna => $filas)
-                    {
-                        if (!is_array($filas))
-                            continue;
-                        echo '<td><table>';
-                            foreach ($filas as $fila => $contenido) {
-                                foreach ($f as $campo => $valor) {
-                                        $contenido = preg_replace('/\$\$'.$campo.'\$\$/', $valor, $contenido);
-                                }
-                                echo '<tr><td>'.$contenido.'</td></tr>';
-                            }
-                        echo '</table></td>';
-                    }
-		}
-		echo '</tr></table>';
-		
-		if (is_array(@campos::$deflazo[$_POST['VistaLazo']]['vistaUniones']))
-		{
-                    echo '<br />';
-                    foreach (campos::$deflazo[$_POST['VistaLazo']]['vistaUniones'] as $Vista) {
-                        $_POST['VistaLazo'] = $Vista;
-                        echo '<div class="contenedorLazoVista" id="vista_'.$Vista.'" rel="'.$Vista.'">';
-                        CargarVistaLazo(true);
-                        echo '</div>';
-                    }
-		}
-		echo '</div>';
-	}
-	echo '<br style="clear:both;" />';
+      }
+      $retorno .= '</tr></table>';
+      
+      if (is_array(@campos::$deflazo[$lazo]['vistaUniones']))
+      {
+	  $retorno .= '<br />';
+	  foreach (campos::$deflazo[$lazo]['vistaUniones'] as $Vista) {
+	    $retorno .= '<div class="contenedorLazoVista" id="vista_'.$Vista.'" rel="'.$Vista.'">';
+	    $retorno .= CargarVistaLazo($Vista,true,'ID_'.$tabla,$f['ID_'.$tabla]);
+	    $retorno .= '</div>';
+	  }
+      }
+      $retorno .= '</div>';
+    }
+    $retorno .= '<br style="clear:both;" />';
+    
+    return $retorno;
   }
 ?>
