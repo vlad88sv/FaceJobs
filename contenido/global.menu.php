@@ -1,4 +1,5 @@
 <?php
+return;
 general::registrarEstiloCSS('menu','menu');
 
 $menu['actividad.economica']['texto'] = 'Actividad Económica';
@@ -17,7 +18,7 @@ $menu['estudio']['texto'] = 'Estudio';
 $menu['estudio']['enlace'] = 'busqueda!estudio';
 $menu['estudio']['titulo'] = 'Búscar candidados en base a sus estudios profesionales';
 
-$menu['categorias']['texto'] = '<img src="img/folder.categorias.png" />';
+$menu['categorias']['texto'] = '<img src="/img/folder.categorias.png" />';
 $menu['categorias']['enlace'] = 'busqueda!categorias';
 $menu['categorias']['titulo'] = 'Ver candidatos que Ud. ha categorizado previamente';
 

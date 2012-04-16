@@ -9,6 +9,3 @@ ToDo:
 * Crear busqueda en base a CV
 * PermaLink "a mi empresa" y "a este puesto"
 * Asegurar que lo subido sea imagen y convertirla a: JPEG,800x800,q80
-
-General:
-* Certificado SSL

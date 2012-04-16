@@ -18,7 +18,7 @@ class head
         {
             $src = 'js/'.$script.'.js';
             if (file_exists($src))
-                $buffer .= '<script src="'.$src.'"></script>'."\n";
+                $buffer .= '<script src="/'.$src.'"></script>'."\n";
             else
                 depurar::registrar('Imposible obtener Script JS', 'head::obtenerScriptsJS ~ '.$src, errores::$error);
         }   
@@ -32,7 +32,7 @@ class head
         {
             $href = 'css/'.$archivo.'.css';
             if (file_exists($href))
-                $buffer .= '<link rel="stylesheet" type="text/css" name="'.$nombre.'" href="'.$href.'">'."\n";
+                $buffer .= '<link rel="stylesheet" type="text/css" name="'.$nombre.'" href="/'.$href.'" />'."\n";
             else
                 depurar::registrar('Imposible obtener estilo CSS', 'head::obtenerEstilosCSS ~ '.$href, errores::$error);
         }   
@@ -44,9 +44,7 @@ class head
 class body
 {
     public static $inicio = "";
-    public static $contenido = "";
-    public static $final = "";
-    
+    public static $contenido = "";    
     
     /*
      cargarContenido($contenidoArchivo, $requerir)
@@ -87,9 +85,6 @@ class body
             case 'contenido':
                 self::$contenido .= $contenido;
                 break;
-            case 'final':
-                self::$final .= $contenido;
-                break;
             default:
                 depurar::registrar('contenido::agregar','Se intento agregar contenido en '.$donde, errores::$advertencia);
         }
@@ -108,16 +103,6 @@ class body
     public static function agregarContenidoAlContenido($contenido)
     {
         self::$contenido .= $contenido;
-    }
-    
-    public static function agregarAlFinal($contenido, $procesar)
-    {
-        self::agregar($contenido,'final', $procesar);
-    }
-    
-    public static function agregarContenidoAlFinal($contenido)
-    {
-        self::$final .= $contenido;
     }
 }
 ?>

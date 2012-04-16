@@ -109,8 +109,10 @@ class db
         $valores = "'".implode("','",$valores)."'";
         $c = "SELECT * FROM `$tabla` WHERE `$llave` IN ($valores) LIMIT 1";
         $resultado = self::consultar($c);
-        $f = mysql_fetch_assoc($resultado);
-        return $f;
+        if ($resultado && $f = mysql_fetch_assoc($resultado))
+            return $f;
+        else
+            return false;
     }
     
     public static function obtenerMultiplePorIndice($tabla, $llave, array $valores, $order, $limite)

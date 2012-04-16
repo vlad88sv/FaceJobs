@@ -3,31 +3,34 @@ class web
 {
     // http://www.webcheatsheet.com/PHP/get_current_page_url.php
     // Obtiene la URL actual, $stripArgs determina si eliminar la parte dinamica de la URL
-    public static function URLactual($stripArgs=false,$friendly=false) {
-        $pageURL = '';
-        if (!$friendly)
-        {
-           $pageURL = 'http';
-           if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
-           $pageURL .= "://";
-        }
-        
-        if ($_SERVER["SERVER_PORT"] != "80") {
-           $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-        } else {
-           $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-        }
-        
-        if ($stripArgs) {$pageURL = preg_replace("/\?.*/", "",$pageURL);}
-        
-        if ($friendly)
-        {
-            $pageURL = preg_replace('/www\./', '',$pageURL);
-            $pageURL = "www.$pageURL";
-        }
-        
-        return $pageURL;
+    function URLactual($stripArgs=false,$friendly=false,$forzar_ssl=false) {
+    $pageURL = '';
+    if (!$friendly)
+    {
+       $pageURL = 'http';
+    
+       if ((self::ES_SSL() || $forzar_ssl) && $forzar_ssl != 'nunca') {$pageURL .= "s";}
+       $pageURL .= "://";
     }
+    
+    $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+    
+    if ($stripArgs) {$pageURL = preg_replace("/\?.*/", "",$pageURL);}
+    
+    if ($friendly)
+    {
+        $pageURL = preg_replace('/www\./', '',$pageURL);
+        $pageURL = "www.$pageURL";
+    }
+    
+    return $pageURL;
+    }
+    
+    function ES_SSL()
+    {
+        return ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443);
+    }
+
     
     public static function SEO($URL){
         $URL = preg_replace("`\[.*\]`U","",$URL);
@@ -66,11 +69,31 @@ general::$config['db_host'] = '127.0.0.1';
 general::$config['salt'] = 'vlad88sv';
 
 define('PROY_NOMBRE','FaceJobs');
-define('PROY_URL',preg_replace(array("/\/?$/","/www./"),"","http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']))."/");
-define('PROY_URL_AMIGABLE',"www.".preg_replace(array("/\/?$/","/www./"),"",$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']))."/");
-define('PROY_URL_ACTUAL_DINAMICA',web::URLactual(false));
-define('PROY_URL_ACTUAL',web::URLactual(true));
-define('PROY_URL_ACTUAL_AMIGABLE',web::URLactual(true,true));
 define('FACEBOX_APP_URL','http://apps.facebook.com/facejobs_org/');
 
+
+if (!empty($_GET['frontend']) && $_GET['frontend'] == 'fb')
+    define('PROY_URL_NOPROTOCOL','facejobs.org/+fb/');
+else
+    define('PROY_URL_NOPROTOCOL','facejobs.org/');
+
+if (web::ES_SSL())
+{
+    define('_B_FORZAR_SERVIDOR_IMG_NULO',true); 
+    define('PROY_URL_ESTATICA','https://facejobs.org/');
+    define('PROY_URL','https://'.PROY_URL_NOPROTOCOL);    
+} else {
+    define('PROY_URL_ESTATICA','http://facejobs.org/');
+    define('PROY_URL','http://'.PROY_URL_NOPROTOCOL);    
+}
+
+define('PROY_URL_SSL','https://'.PROY_URL_NOPROTOCOL);
+define('PROY_URL_NOSSL','http://'.PROY_URL_NOPROTOCOL);
+
+define('PROY_URL_AMIGABLE','www.Flor360.com');
+define('PROY_URL_ACTUAL_DINAMICA',web::URLactual());
+define('PROY_URL_ACTUAL',web::URLactual(true));
+define('PROY_URL_ACTUAL_NOSSL',web::URLactual(true,false,'nunca'));
+define('PROY_URL_ACTUAL_AMIGABLE',web::URLactual(true,true));
+define('PROY_URL_LIKE','http://www.facebook.com/floristeria.flor360');
 ?>

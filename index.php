@@ -1,7 +1,10 @@
 <?php
 require_once('arranque.php');
 sesion::iniciar_sesion();
+general::registrarEstiloCSS('normal','normal');
+if (!empty($_GET['frontend']) && $_GET['frontend'] == 'fb')
 general::registrarEstiloCSS('facebook','facebook');
+
 body::agregarAlInicio('cabecera',true);
 body::agregarAlInicio('global.menu',true);
 if (!sesion::iniciado())
@@ -103,12 +106,15 @@ return;
     <div id="contenedor">
     <?php echo body::$inicio; ?>
     <?php echo body::$contenido; ?>
-    <div id="final">
-        <?php echo body::$final; ?>
-    </div>
     </div>
     <script type="text/javascript">
-      window.fbAsyncInit = function() {
+    (function() {
+      var e = document.createElement('script'); e.async = true;
+      e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+      document.getElementById('fb-root').appendChild(e);
+    }());
+  
+    window.fbAsyncInit = function() {
         FB.init({
           appId: '<?php echo general::$config['appId']; ?>',
           cookie: true,
@@ -121,18 +127,10 @@ return;
         FB.Event.subscribe('auth.logout', function(response) {
           window.location.reload();
         });
-      };
-      (function() {
-        var e = document.createElement('script'); e.async = true;
-        e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-        document.getElementById('fb-root').appendChild(e);
-      }());
-    </script>
-    <script type="text/javascript">
-    $(window).load(function () {
-        FB.Canvas.setAutoGrow();
+        FB.Canvas.setSize({ height: ($('#contenedor').height() + 10) });
+        FB.Canvas.scrollTo(0,0);
         FB.Canvas.setDoneLoading();
-    });
+    };
     </script>
 </body>
 </html>

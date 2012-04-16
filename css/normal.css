@@ -1,0 +1,76 @@
+html,body{margin:0;padding:0;border:0;width:810px;height:100%;width: 100%;}
+body{background:#fff;font-size:100%;font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-size:13px;text-align:center;}
+
+#cabecera{width:100%;border-collapse: collapse;}
+#cabecera #logotipo {width:264px;}
+#cabecera td {padding:0px;vertical-align:top;}
+#cabecera #menu {text-align:left;padding-left: 20px;} 
+#bandera{position:absolute;right:5px;top:5px;}
+#bandera #imagen{text-align:right;}
+#contenedor{width:950px;min-height:500px;margin:auto;}
+
+.guardando{margin-left: 10px;}
+.boton{display: block; text-decoration: none; font-size: 16px; color: #FFF; width: 181px; height: 32px; line-height: 32px; background: #720202 no-repeat;}
+
+.ocre{color:#5b0504;}
+.gris{color:#535353;}
+.negro{color:#000;}
+
+hr.ocre {color: #5b0504;background-color: #5b0504;height: 1px;border:none;}
+
+#PlantillaGeneral {width: 100%;table-layout:fixed;}
+#PlantillaGeneralMenu {text-align: left;vertical-align: top;width:200px;}
+#PlantillaGeneralMenu img {border: 1px #6d6d6d solid; width:110px; height: 110px;}
+#PlantillaGeneralMenu ul {list-style:none;margin:0;border:none;padding:0;}
+#PlantillaGeneralMenu ul li {color: #666;font-size: 14px;font-weight: bold; line-height: 15px; text-decoration: none;}
+#PlantillaGeneralMenu ul ul {padding: 5px;}
+#PlantillaGeneralMenu ul ul li a {color: #5b0504; font-size: 12px; text-decoration: none;}
+
+#PlantillaGeneralContenido {width: 530px;border:1px solid #8c8b8b;border-radius: 5px;text-align: left;vertical-align: top;padding: 2px 17px;}
+#PlantillaGeneralRejilla {overflow:hidden;vertical-align:top;text-align: left;}
+
+.cajita_rendoda {border: 1px #6d6d6d solid;border-radius: 5px;padding: 4px;margin-bottom: 10px;}
+
+table.lista_empresas {width: 100%; border-collapse: collapse;}
+table.lista_empresas tr:nth-child(odd) { background-color: #e0dddd; }
+table.lista_empresas td.logo { width: 40px; padding: 5px 20px; vertical-align: middle;}
+table.lista_empresas td.informacion { vertical-align: middle;}
+table.lista_empresas td.accion { width: 80px; vertical-align: middle;text-align: center;}
+
+div.boton {display: inline-block !important; border: 1px solid #666;border-radius: 5px;text-align: center;width: 55px !important; height: 20px !important;line-height: 20px; font-size:12px;}
+div.boton a {color: #F7F7F7 !important;text-decoration: none;display: block;}
+
+
+#rejilla_filtros table {width:200px;table-layout:fixed;border-collapse:collapse;}
+#rejilla_filtros table td {padding: 2px 5px 5px 5px; font-size:10px;}
+#rejilla_filtros table td div {white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+#rejilla_filtros table tr:nth-child(odd) {background-color: #d8d7d7;}
+#rejilla_filtros table tr:nth-child(even) {background-color: #ebe9e9;}
+#rejilla_filtros h1 {font-size:12px;}
+
+input[type="checkbox"] {margin:0px;}
+
+.resultado_candidato      {border-collapse: collapse;width: 100%;position: relative;height:90px;}
+.resultado_candidato div  {font-size: 10px;}
+.resultado_candidato_img  {width:70px;height:90px;position: absolute;left:0px;}
+.resultado_candidato_col1 {width:234px;height:74px;position: absolute;left:70px;color:#5b0504;text-align:left;padding:3px;}
+.resultado_candidato_col2 {width:234px;height:74px;position: absolute;left:310px;color:#585858;text-align:right;padding:3px;}
+.resultado_candidato_pie  {width:480px;position: absolute;left:70px;bottom:0px;text-align:center;}
+.resultado_candidato_pie  a {text-decoration: none;color:#535353;}
+.resultado_candidato_pie  a:hover {text-decoration: underline;}
+.resultado_candidato_divisor {border-left:1px solid #5b0504;position: absolute;left:310px;top: 20px;bottom:18px;}
+
+
+.contenedor_grupo {border:1px #CCC solid; border-radius:10px; padding-left:15px;padding-right:12px;padding-top:3px;padding-bottom:15px;margin-bottom: 15px;}
+div#caja_controles {text-align: left;}
+div#caja_controles a {text-decoration: none;}
+div#caja_controles a:hover {text-decoration: underline;}
+div#categorias_perfil .categoria {background-color: #EEEEEE;border: 2px solid #AAAAAA;border-radius: 5px ;font-size: 11px;margin: 5px;padding:2px 5px;display:inline-block;}
+div#categorias_perfil .categoria label {color:#813B3A;padding: 0 5px;}
+#resumen_busqueda {font-weight: normal; font-size: 10px;color:gray;}
+#resumen_busqueda b  {font-weight: bold; font-size: 10px;color:#813B3A}
+
+#meterOsubir {table-layout: fixed; border-collapse: collapse;width: 100%;height: 400px;margin-top:50px;}
+#meterOsubir td {border:1px solid #DDD;vertical-align: top;text-align: left;padding: 10px;}
+
+div#facebox div.popup div.content div#contenedor {width:690px;}

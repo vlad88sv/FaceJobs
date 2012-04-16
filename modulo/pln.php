@@ -250,7 +250,7 @@ class pln
         }
     }    
     
-    private static function VistaLazo($lazo,$virtual=false)
+    private static function VistaLazo($lazo,$virtual=false,$clave_Padre,$ID_padre)
     {
         $retorno = '';
 	
@@ -309,8 +309,8 @@ class pln
             }
 	}
 	
-    $tabla = isset(campos::$deflazo[$lazo]['paraTabla'])  ? campos::$deflazo[$lazo]['paraTabla'] : $lazo;
-  	$c = 'SELECT ID_'.$tabla.', '.implode(',',$campos).' FROM '.$tabla .' AS t1 WHERE ID_cuenta="'.self::$ID.'"';
+        $tabla = isset(campos::$deflazo[$lazo]['paraTabla'])  ? campos::$deflazo[$lazo]['paraTabla'] : $lazo;
+  	$c = 'SELECT ID_'.$tabla.', '.implode(',',$campos).' FROM '.$tabla .' AS t1 WHERE ID_cuenta="'.self::$ID.'"'.($virtual && $clave_Padre && $ID_padre ? " AND $clave_Padre='$ID_padre'" : '');
 	
   	$r = db::consultar($c);
   	while ($f = mysql_fetch_assoc($r) )
@@ -340,7 +340,7 @@ class pln
 		{
                     $retorno .= '<br />';
                     foreach (campos::$deflazo[$lazo]['vistaUniones'] as $Vista) {
-                        $retorno .= self::VistaLazo($Vista,true);
+                        $retorno .= self::VistaLazo($Vista,true,'ID_'.$tabla,$f['ID_'.$tabla]);
                     }
 		}
 		$retorno .= '</div>';

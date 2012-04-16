@@ -248,7 +248,7 @@ class rejilla
     private static function ObtenerOtros()
     {
         return '
-        <input type="checkbox" name="otros[]" value="vehiculo_propio" id="otros_vehiculo_propio" /><label for="otros_vehiculo_propio">Con vehiculo propio</label><br />
+        <input type="checkbox" name="otros[]" value="vehiculo_propio" id="otros_vehiculo_propio" /><label for="otros_vehiculo_propio"> Con vehiculo propio</label><br />
         <input type="checkbox" name="otros[]" value="licencia_conducir" id="otros_licencia_conducir" /><label for="otros_licencia_conducir"> Con licencia de conducir</label><br />
         <input type="checkbox" name="otros[]" value="masculino" id="otros_masculino" /><label for="otros_masculino"> Masculino</label><br />
         <input type="checkbox" name="otros[]" value="femenino" id="otros_femenino" /><label for="otros_femenino"> Femenino</label><br />
