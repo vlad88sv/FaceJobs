@@ -250,7 +250,7 @@ class pln
         }
     }    
     
-    private static function VistaLazo($lazo,$virtual=false,$clave_Padre,$ID_padre)
+    private static function VistaLazo($lazo,$virtual=false,$clave_Padre='',$ID_padre=0)
     {
         $retorno = '';
 	
