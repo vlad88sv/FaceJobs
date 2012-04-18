@@ -5,23 +5,29 @@ if (db::obtenerPorIndice('paso0','ID_cuenta',array(usuario::$info['ID_cuenta']))
     return;
 }
 ?>
+<p>
+    Bienvenido a FACEJOBS, a continuación tienes la opción de ingresar tu curriculum manualmente o cargar tu hoja de vida previamente elaborada.
+</p>
 <table id="meterOsubir">
     <tr>
         <td>
-            <p>Ingresar mi Curriculum utilizando el asistente de Curriculum Vitae de FaceJobs.</p>
-            <p>Es la forma más fácil y rápida de crear tu Curriculum Vitae en línea ya que se te asistirá en el proceso de llenado a traves de un sencillo formulario.</p>
-            <a href="perfil.html">Ingresar Curriculum Vitae</a>
+            <h1>OPCION 1</h1>
+            <p>Ingresa tu curriculum utilizando el asistente de FaceJobs. Es la forma más rápida y fácil de ingresar tus datos para crear tu hoja de vida.</p>
+            <div style="text-align: center;"><a href="perfil.html" style="margin:auto;" class="boton_importante">Ingresar Curriculum Vitae</a></div>
         </td>
         <td>
-            <p>Ingresar mi Curriculum cargando mi Curriculum previamente elaborado en uno de los siguientes formatos:</p>
+            <h1>OPCION 2</h1>
+            <p>Carga aquí tu curriculum si lo tienes elaborado en cualquiera de los siguientes formatos:</p>
             <ul>
                 <li><b>Word (.doc o .docx)</b></li>
                 <li><b>PDF (.pdf)</b></li>
                 <li><b>OpenDocument (.odt)</b></li>
             </ul>
-            <label for="pais_procedencia">País:</label> <input type="input" value="<?php echo general::$config['temporal']['pais']; ?>" name="pais_procedencia" id="pais_procedencia" />
-            <input type="file" name="archivo_cv" accept="application/pdf, application/msword, application/vnd.oasis.opendocument.text" /> <br />
-            <input type="submit" value="Cargar Curriculum" />
+            <table class="estandar ancha">
+            <tr><td><label for="pais_procedencia">País:</label></td><td><input type="input" value="<?php echo general::$config['temporal']['pais']; ?>" name="pais_procedencia" id="pais_procedencia" /></td></tr>
+            <tr><td><label for="archivo_cv">Archivo:</label></td><td><input type="file" id="archivo_cv" name="archivo_cv" accept="application/pdf, application/msword, application/vnd.oasis.opendocument.text" /></td></tr>
+            </table>
+            <div style="text-align: center;"><input syle="margin:auto;" type="submit" class="boton_importante" value="Cargar Curriculum" /></div>
         </td>
     </tr>
 </table>
