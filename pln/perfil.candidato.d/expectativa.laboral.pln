@@ -1,5 +1,6 @@
-==Expectativa laboral==
-[grupo:paso4_expectativa_laboral]
-[titulo:1]Ingresa las áreas de interés en que te gustaría desempeñarte. Puedes agregar un máximo de 10.[/titulo]
+====
+[grupo:interes_profesional]
+[titulo]Ingresa las áreas de interés profesional en que te gustaría desempeñarte.[/titulo]
+[subtitulo]Ingresa las áreas de interés en las cúales desearías desempeñarte.<br />Puedes agregar un máximo de 5.[/subtitulo]
 [lazo]paso4_expectativa_laboral[/lazo]
 [/grupo]
