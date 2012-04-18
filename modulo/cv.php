@@ -118,12 +118,12 @@ campos::$defcampos['paso2_educacion_superior.nivel_alcanzado']['texto'] = 'Nivel
 
 campos::$defcampos['paso2_educacion_superior.fecha_desde']['tipo'] = uiForm::$fecha;
 campos::$defcampos['paso2_educacion_superior.fecha_desde']['flags'] = 'Y';
-campos::$defcampos['paso2_educacion_superior.fecha_desde']['texto'] = 'Fecha desde:';
+campos::$defcampos['paso2_educacion_superior.fecha_desde']['texto'] = 'Fecha de ingreso:';
 //campos::$defcampos['paso2_educacion_superior.fecha_desde']['enLinea'] = true;
 
 campos::$defcampos['paso2_educacion_superior.fecha_hasta']['tipo'] = uiForm::$fecha;
 campos::$defcampos['paso2_educacion_superior.fecha_hasta']['flags'] = 'Y';
-campos::$defcampos['paso2_educacion_superior.fecha_hasta']['texto'] = 'Fecha hasta:';
+campos::$defcampos['paso2_educacion_superior.fecha_hasta']['texto'] = 'Fecha de finalización:';
 
 /* paso2_idiomas */
 
