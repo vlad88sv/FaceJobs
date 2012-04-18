@@ -19,17 +19,17 @@ class ui
 {
     public static function ObtenerImagen($archivo,$ancho,$alto,$crop)
     {
+	error_log('Archivo :: ' . $archivo);
+	
         $ruta = 'pool/img/'.$archivo;
         
-		$prefijo = $crop ? 'crop' : 'imagen';
+	$prefijo = $crop ? 'crop' : 'imagen';
         
         if (empty($archivo) || !file_exists($ruta))
-		{
-            $ruta = $prefijo.'_'.$ancho.'_'.$alto.'_sinfoto.jpg';
-		} else {
-			$ruta = $prefijo.'_'.$ancho.'_'.$alto.'_'.$archivo.'.jpg';
-		}
-
+	    $archivo = 'sinfoto';
+        
+	$ruta = $prefijo.'_'.$ancho.'_'.$alto.'_'.$archivo.'.jpg';
+	
         return $ruta;
     }
     
