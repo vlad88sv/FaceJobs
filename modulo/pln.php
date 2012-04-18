@@ -172,15 +172,11 @@ class pln
            if (!$r) continue;
            
            $f = mysql_fetch_assoc($r);
-           if (!$f) continue;
         
            foreach($campos as $campo)
            {
-            if (isset($f[$campo]))
-            {
-            self::EstablecerCampo($tabla.'.'.$campo,$f[$campo]);
+            self::EstablecerCampo($tabla.'.'.$campo,@$f[$campo]);
             if (self::$debug) error_log('reemplazarValores.EstablecerCampo :: ' . $tabla.'.'.$campo . '[ '. strlen(self::$pln) . ' ]');
-            }
            }
         }
         
