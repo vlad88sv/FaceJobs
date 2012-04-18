@@ -144,7 +144,7 @@ if (!sesion::iniciado())
     $r = db::consultar($c);
     while ($f = mysql_fetch_assoc($r) )
     {
-      $retorno .= '<div class="'.($virtual ? 'lazoVistaVirtual' : 'lazoVista').' '.@campos::$deflazo[$lazo]['vista']['class'].'">';
+      $retorno .= '<div hijos="'.mysql_num_rows($r).'" class="'.($virtual ? 'lazoVistaVirtual' : 'lazoVista').' '.@campos::$deflazo[$lazo]['vista']['class'].'">';
       if (!$virtual) $retorno .= '<span class="lazoVistaBolita">•</span>';
       $retorno .= '<span class="lazoVistaControles"><a rel="'.$f['ID_'.$_POST['VistaLazo']].'" class="lazoVistaControlesEditar" href="#"><img src="img/boton_editar.gif" /></a><br /><a rel="'.$f['ID_'.$_POST['VistaLazo']].'" class="lazoVistaControlesEliminar" href="#"><img src="img/boton_borrar.gif" /></a></span>';
       $retorno .= '<table><tr>';
