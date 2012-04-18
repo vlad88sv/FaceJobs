@@ -13,7 +13,7 @@ general::registrarEstiloCSS('facebook.sesion.iniciar','facebook.sesion.iniciar')
       <p>Las empresas no podrán ver tu perfil de facebook ni tus fotos, solo tu curriculum; se comunicarán contigo únicamente a traves de los medios que tu especifiques.</p>
       <p>Entrevistas en línea, cuestionarios personalizados, video resumenes y miles de empresas te esperan.</p>
       
-      <a href="javascript:return false" class="registrate" onClick="top.location = 'https://www.facebook.com/dialog/oauth?client_id=<?php echo general::$config['appId']; ?>&redirect_uri=<?php echo PROY_URL; ?>gotofacebook&scope=email,user_location'"><img src="<?php echo PROY_URL; ?>img/boton_normal.jpg" />&nbsp;<?php echo _('INGRESAR CURRICULUM'); ?></a>
+      <a href="javascript:return false" class="registrate" onClick="top.location = 'https://www.facebook.com/dialog/oauth?client_id=<?php echo general::$config['appId']; ?>&redirect_uri=<?php echo PROY_URL; ?>&scope=email,user_location'"><img src="<?php echo PROY_URL; ?>img/boton_normal.jpg" />&nbsp;<?php echo _('INGRESAR CURRICULUM'); ?></a>
     </td>
   </tr>
 </table>
