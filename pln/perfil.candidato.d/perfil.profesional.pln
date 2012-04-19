@@ -6,3 +6,4 @@ Ingresa aquí una descripción de tu perfil profesional, basado en tu carrera, o
 [campo]paso0.perfil_profesional_titulo[/campo]
 [campo]paso0.perfil_profesional_descripcion[/campo]
 [campo]paso0.ID_expectativa_salarial[/campo]
+<hr /><div style="text-align: center;"><a href="#" style="margin:auto;" class="boton_importante cerrar_facebox">Guardar</a></div>

@@ -4,3 +4,4 @@
 [subtitulo]Ingresa las áreas de interés en las cúales desearías desempeñarte.<br />Puedes agregar un máximo de 5.[/subtitulo]
 [lazo]paso4_expectativa_laboral[/lazo]
 [/grupo]
+<hr /><div style="text-align: center;"><a href="#" style="margin:auto;" class="boton_importante cerrar_facebox">Guardar</a></div>

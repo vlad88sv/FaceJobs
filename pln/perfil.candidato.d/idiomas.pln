@@ -4,3 +4,4 @@
 [subtitulo]Ingresa todos los idiomas de los que tengas algún conocimiento, pulsando el botón agregar cada ves que desees.[/subtitulo]
 [lazo]paso2_idiomas[/lazo]
 [/grupo]
+<hr /><div style="text-align: center;"><a href="#" style="margin:auto;" class="boton_importante cerrar_facebox">Guardar</a></div>
